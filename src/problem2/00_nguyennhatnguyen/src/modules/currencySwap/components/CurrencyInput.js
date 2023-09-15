@@ -53,7 +53,7 @@ const PriceInput = ({ title = '', value = {}, currencies, onChange }) => {
         });
     };
     return (
-        <StyledCard title={<Title level={5}>You pay</Title>}>
+        <StyledCard title={<Title level={5}>{title}</Title>}>
             <Input
                 value={value.amount || amount}
                 onChange={onAmountChange}
