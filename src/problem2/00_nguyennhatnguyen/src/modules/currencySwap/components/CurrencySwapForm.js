@@ -37,8 +37,8 @@ const CurrencySwapForm = ({ currencies }) => {
         console.log(payPrice);
         console.log(receivePrice);
 
-        form.setFieldsValue({ payPrice: [...payPrice, receivePrice] });
-        form.setFieldsValue({ receivePrice: [...receivePrice, payPrice] });
+        form.setFieldsValue({ payPrice: {...payPrice, ...receivePrice} });
+        form.setFieldsValue({ receivePrice: {...receivePrice, ...payPrice} });
     }
 
     return (

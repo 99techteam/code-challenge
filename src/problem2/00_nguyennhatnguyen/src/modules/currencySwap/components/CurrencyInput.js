@@ -73,7 +73,7 @@ const PriceInput = ({ title = '', value = {}, currencies, onChange }) => {
                 placeholder="Select a token"
             >
                 {currencies.map((cur, idx) => {
-                    return <Option value={cur.value}>{cur.title}</Option>;
+                    return <Option key={cur} value={cur}>{cur}</Option>;
                 })}
             </Select>
         </StyledCard>

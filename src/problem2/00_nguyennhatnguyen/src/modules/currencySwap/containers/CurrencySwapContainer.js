@@ -11,9 +11,9 @@ const CurrencySwapContainer = () => {
             `https://interview.switcheo.com/prices.json`)
             .then((res) => {
                 setPrices(res.data);
-                setCurrencies(res.data.map((pr) => {
-                    return {value: pr.currency, title: pr.currency};
-                }));
+                setCurrencies([...new Set(res.data.map((pr) => {
+                    return pr.currency;
+                }))]);
             })
     }, [prices, currencies]);
 
