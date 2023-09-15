@@ -1,7 +1,26 @@
 import React from 'react';
-import { Form, Card, Button } from 'antd';
+import {Form, Card, Button, Typography} from 'antd';
 import {SyncOutlined} from '@ant-design/icons';
 import PriceInput from './CurrencyInput';
+import styled from "styled-components";
+
+const { Text, Title } = Typography;
+
+const StyledCard = styled(Card)`
+  border: 1px solid #ddd;
+  box-shadow: ${(props) => props.theme.boxShadow};
+  border-radius: ${(props) => props.theme.borderRadiusBase};
+  overflow: hidden;
+  margin: 20px;
+  
+  .ant-card-head {
+    border: none;
+    .ant-card-head-title {
+      text-align: left;
+      padding: 0 10px;
+    }
+  }
+`;
 
 const CurrencySwapForm = ({ currencies }) => {
     const [form] = Form.useForm();
@@ -23,16 +42,14 @@ const CurrencySwapForm = ({ currencies }) => {
     }
 
     return (
-        <Card
-            title="Currency Swap"
+        <StyledCard
+            title={<Title level={3}>Currency Swap</Title>}
             bordered={false}
             style={{ width: 600 }}>
             <Form form={form} layout="vertical" autoComplete="off">
-                <Card title="You pay">
-                    <Form.Item name="payPrice" help=""  rules={[{validator: checkPrice}]} >
-                        <PriceInput currencies={currencies} />
-                    </Form.Item>
-                </Card>
+                <Form.Item name="payPrice" help=""  rules={[{validator: checkPrice}]} style={{marginBottom: 0}}>
+                    <PriceInput title="You pay" currencies={currencies} />
+                </Form.Item>
                 <Button shape="circle"
                         type="primary"
                         style={{
@@ -45,13 +62,11 @@ const CurrencySwapForm = ({ currencies }) => {
                             boxShadow: '0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%), 0 9px 28px 8px rgb(0 0 0 / 5%)',
                         }}
                         icon={<SyncOutlined rotate="90" style={{ fontSize: '25px' }} />} onClick={onSwapPayReceive} />
-                <Card title="You receive">
-                    <Form.Item name="receivePrice" help="" rules={[{validator: checkPrice}]} >
-                        <PriceInput currencies={currencies} />
-                    </Form.Item>
-                </Card>
+                <Form.Item name="receivePrice" help="" rules={[{validator: checkPrice}]} style={{marginBottom: 0}}>
+                    <PriceInput title="You receive" currencies={currencies} />
+                </Form.Item>
             </Form>
-        </Card>
+        </StyledCard>
     )
 };
 

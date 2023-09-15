@@ -1,9 +1,27 @@
 import React, {useState} from 'react';
-import { Input, Select } from 'antd';
+import {Card, Input, Select, Typography} from 'antd';
+import styled from "styled-components";
 
 const { Option } = Select;
+const { Text, Title } = Typography;
 
-const PriceInput = ({ value = {}, currencies, onChange }) => {
+const StyledCard = styled(Card)`
+  border: 1px solid #ddd;
+  box-shadow: ${(props) => props.theme.boxShadow};
+  border-radius: ${(props) => props.theme.borderRadiusBase};
+  overflow: hidden;
+  margin-bottom: 0;
+  
+  .ant-card-head {
+    border: none;
+    .ant-card-head-title {
+      text-align: left;
+      padding: 0 10px;
+    }
+  }
+`;
+
+const PriceInput = ({ title = '', value = {}, currencies, onChange }) => {
     const [amount, setAmount] = useState(0);
     const [currency, setCurrency] = useState();
     const triggerChange = (changedValue) => {
@@ -35,7 +53,7 @@ const PriceInput = ({ value = {}, currencies, onChange }) => {
         });
     };
     return (
-        <div>
+        <StyledCard title={<Title level={5}>You pay</Title>}>
             <Input
                 value={value.amount || amount}
                 onChange={onAmountChange}
@@ -58,7 +76,7 @@ const PriceInput = ({ value = {}, currencies, onChange }) => {
                     return <Option value={cur.value}>{cur.title}</Option>;
                 })}
             </Select>
-        </div>
+        </StyledCard>
     );
 };
 
