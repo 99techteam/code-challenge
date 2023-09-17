@@ -12,12 +12,17 @@ const StyledCard = styled(Card)`
   border-radius: ${(props) => props.theme.borderRadiusBase};
   overflow: hidden;
   margin: 20px;
+  background-color: #131313;
   
   .ant-card-head {
     border: none;
     .ant-card-head-title {
       text-align: left;
       padding: 0 10px;
+
+      h3.ant-typography {
+        color: #9b9b9b !important;
+      }
     }
   }
 `;
@@ -61,7 +66,9 @@ const CurrencySwapForm = ({ prices }) => {
                         type="primary"
                         style={{
                             position: 'relative',
-                            border: 'none',
+                            backgroundColor: '#131313',
+                            border: '1px solid rgba(255, 255, 255, 0.07)',
+                            borderRadius: '16px',
                             width: '50px',
                             height: '50px',
                             zIndex: 2,

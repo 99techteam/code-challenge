@@ -8,17 +8,37 @@ const { Option } = Select;
 const { Text, Title } = Typography;
 
 const StyledCard = styled(Card)`
-  border: 1px solid #ddd;
+  border: none;
   box-shadow: ${(props) => props.theme.boxShadow};
   border-radius: ${(props) => props.theme.borderRadiusBase};
   overflow: hidden;
   margin-bottom: 0;
+  background-color: #1b1b1b;
   
   .ant-card-head {
     border: none;
+    
     .ant-card-head-title {
       text-align: left;
       padding: 0 10px;
+
+      h4.ant-typography {
+        color: #9b9b9b !important;
+      }
+    }
+  }
+`;
+
+const StyledSelect = styled(Select)`
+  width: 30% !important;
+  margin: 0 8px;
+
+  &.slcToken {
+    .ant-select-selector {
+      background-color: #131313 ;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      color: #fff;
     }
   }
 `;
@@ -56,24 +76,25 @@ const PriceInput = ({ title = '', value = {}, prices, onChange }) => {
     };
 
     return (
-        <StyledCard title={<Title level={5}>{title}</Title>}>
+        <StyledCard title={<Title level={4}>{title}</Title>}>
             <Input
                 value={value.amount || amount}
                 onChange={onAmountChange}
                 style={{
                     width: '60%',
+                    color: '#9b9b9b',
+                    background: 'none',
+                    border: 'none',
+                    fontSize: '25px'
                 }}
                 name="amount"
             />
-            <Select
+            <StyledSelect
                 name="currency"
                 value={value.currency || currency}
-                style={{
-                    width: '30%',
-                    margin: '0 8px',
-                }}
                 onChange={onCurrencyChange}
                 placeholder="Select a token"
+                className="slcToken"
             >
                 {prices.map((cur, idx) => {
                     return (
@@ -92,7 +113,7 @@ const PriceInput = ({ title = '', value = {}, prices, onChange }) => {
                         </Option>
                     );
                 })}
-            </Select>
+            </StyledSelect>
         </StyledCard>
     );
 };
