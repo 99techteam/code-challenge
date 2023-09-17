@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
-import {Card, Input, Select, Typography} from 'antd';
+import React, {useCallback, useState} from 'react';
+import {Card, Input, Select, Tag, Typography} from 'antd';
 import styled from "styled-components";
+import CustomSvgIcon from "../../core/components/CustomSvgIcon";
+import CustomSelect from "../../core/components/CustomSelect";
 
 const { Option } = Select;
 const { Text, Title } = Typography;
@@ -21,7 +23,7 @@ const StyledCard = styled(Card)`
   }
 `;
 
-const PriceInput = ({ title = '', value = {}, currencies, onChange }) => {
+const PriceInput = ({ title = '', value = {}, prices, onChange }) => {
     const [amount, setAmount] = useState(0);
     const [currency, setCurrency] = useState();
     const triggerChange = (changedValue) => {
@@ -52,6 +54,7 @@ const PriceInput = ({ title = '', value = {}, currencies, onChange }) => {
             currency: newCurrency,
         });
     };
+
     return (
         <StyledCard title={<Title level={5}>{title}</Title>}>
             <Input
@@ -72,8 +75,22 @@ const PriceInput = ({ title = '', value = {}, currencies, onChange }) => {
                 onChange={onCurrencyChange}
                 placeholder="Select a token"
             >
-                {currencies.map((cur, idx) => {
-                    return <Option key={cur} value={cur}>{cur}</Option>;
+                {prices.map((cur, idx) => {
+                    return (
+                        <Option key={cur.currency} value={cur.currency}>
+                            <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
+                                <div style={{marginRight: '10px', display: 'flex', alignItems: 'center'}}>
+                                    <CustomSvgIcon
+                                        name={cur.currency}
+                                        location="tokens"
+                                        onCompleted={(iconName) => console.log(`${iconName} successfully loaded`)}
+                                        onError={(err) => console.error(err.message)}
+                                    />
+                                </div>
+                                <div>{cur.currency}</div>
+                            </div>
+                        </Option>
+                    );
                 })}
             </Select>
         </StyledCard>

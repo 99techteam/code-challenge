@@ -10,14 +10,15 @@ const CurrencySwapContainer = () => {
         Axios.get(
             `https://interview.switcheo.com/prices.json`)
             .then((res) => {
-                setPrices(res.data);
+                const prs = [...new Map(res.data.map((m) => [m.currency, m])).values()];;
+                setPrices(prs);
                 setCurrencies([...new Set(res.data.map((pr) => {
                     return pr.currency;
                 }))]);
-            })
-    }, [prices, currencies]);
+            });
+    }, []);
 
-    return <CurrencySwapForm currencies={currencies}/>
+    return <CurrencySwapForm prices={prices}/>
 };
 
 export default CurrencySwapContainer;

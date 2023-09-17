@@ -22,33 +22,40 @@ const StyledCard = styled(Card)`
   }
 `;
 
-const CurrencySwapForm = ({ currencies }) => {
+const CurrencySwapForm = ({ prices }) => {
     const [form] = Form.useForm();
 
     const checkPrice = (_, { amount, currency }) => {
         if (amount > 0 && currency) {
             return Promise.resolve();
         }
-        return Promise.reject(new Error('Please choose both amount and currency!'));
+        if (amount <= 0) {
+            return Promise.reject(new Error('Please enter amount!'));
+        }
+        if (!currency) {
+            return Promise.reject(new Error('Please select a currency!'));
+        }
+
+        return Promise.reject(new Error('Please enter amount and select a currency!'))
     };
 
     const onSwapPayReceive = () => {
         const {payPrice, receivePrice} = form.getFieldsValue(['payPrice', 'receivePrice']);
-        console.log(payPrice);
-        console.log(receivePrice);
 
-        form.setFieldsValue({ payPrice: {...payPrice, ...receivePrice} });
-        form.setFieldsValue({ receivePrice: {...receivePrice, ...payPrice} });
-    }
+        if (payPrice && receivePrice) {
+            form.setFieldsValue({ payPrice: {...payPrice, ...receivePrice} });
+            form.setFieldsValue({ receivePrice: {...receivePrice, ...payPrice} });
+        }
+    };
 
     return (
         <StyledCard
             title={<Title level={3}>Currency Swap</Title>}
             bordered={false}
             style={{ width: 600 }}>
-            <Form form={form} layout="vertical" autoComplete="off">
-                <Form.Item name="payPrice" help=""  rules={[{validator: checkPrice}]} style={{marginBottom: 0}}>
-                    <PriceInput title="You pay" currencies={currencies} />
+            <Form form={form} layout="vertical" autoComplete="off" onFinish={onSwapPayReceive}>
+                <Form.Item name="payPrice" rules={[{ validator: checkPrice }]} style={{marginBottom: 0}}>
+                    <PriceInput title="You pay" prices={prices} />
                 </Form.Item>
                 <Button shape="circle"
                         type="primary"
@@ -61,9 +68,10 @@ const CurrencySwapForm = ({ currencies }) => {
                             margin: '-18px auto',
                             boxShadow: '0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%), 0 9px 28px 8px rgb(0 0 0 / 5%)',
                         }}
-                        icon={<SyncOutlined rotate="90" style={{ fontSize: '25px' }} />} onClick={onSwapPayReceive} />
-                <Form.Item name="receivePrice" help="" rules={[{validator: checkPrice}]} style={{marginBottom: 0}}>
-                    <PriceInput title="You receive" currencies={currencies} />
+                        htmlType="submit"
+                        icon={<SyncOutlined rotate="90" style={{ fontSize: '25px' }} />} />
+                <Form.Item name="receivePrice" rules={[{ validator: checkPrice }]} style={{marginBottom: 0}}>
+                    <PriceInput title="You receive" prices={prices} />
                 </Form.Item>
             </Form>
         </StyledCard>
