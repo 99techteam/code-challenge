@@ -30,7 +30,11 @@ const StyledCard = styled(Card)`
 const CurrencySwapForm = ({ prices }) => {
     const [form] = Form.useForm();
 
-    const checkPrice = (_, { amount, currency }) => {
+    const checkPrice = (_, values) => {
+        if (!values) {
+            return Promise.reject(new Error('Please enter amount and select a currency!'));
+        }
+        const { amount, currency } = values;
         if (amount > 0 && currency) {
             return Promise.resolve();
         }
@@ -41,16 +45,20 @@ const CurrencySwapForm = ({ prices }) => {
             return Promise.reject(new Error('Please select a currency!'));
         }
 
-        return Promise.reject(new Error('Please enter amount and select a currency!'))
+        return Promise.reject(new Error('Please enter amount and select a currency!'));
     };
 
     const onSwapPayReceive = () => {
-        const {payPrice, receivePrice} = form.getFieldsValue(['payPrice', 'receivePrice']);
+        form.validateFields()
+            .then((values) => {
+                const { payPrice, receivePrice } = values;
 
-        if (payPrice && receivePrice) {
-            form.setFieldsValue({ payPrice: {...payPrice, ...receivePrice} });
-            form.setFieldsValue({ receivePrice: {...receivePrice, ...payPrice} });
-        }
+                if (payPrice && receivePrice) {
+                    form.setFieldsValue({ payPrice: {...payPrice, ...receivePrice} });
+                    form.setFieldsValue({ receivePrice: {...receivePrice, ...payPrice} });
+                }
+            })
+            .catch((errorInfo) => {});
     };
 
     return (
@@ -69,8 +77,8 @@ const CurrencySwapForm = ({ prices }) => {
                             backgroundColor: '#131313',
                             border: '1px solid rgba(255, 255, 255, 0.07)',
                             borderRadius: '16px',
-                            width: '50px',
-                            height: '50px',
+                            width: '60px',
+                            height: '60px',
                             zIndex: 2,
                             margin: '-18px auto',
                             boxShadow: '0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%), 0 9px 28px 8px rgb(0 0 0 / 5%)',

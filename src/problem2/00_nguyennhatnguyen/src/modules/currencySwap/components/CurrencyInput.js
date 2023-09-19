@@ -39,6 +39,17 @@ const StyledSelect = styled(Select)`
       border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 16px;
       color: #fff;
+      margin: 10px 0;
+
+      .placeholder-item {
+        color: #fff;
+      }
+      .ant-select-selection-placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+    .ant-select-arrow {
+      color: rgba(255, 255, 255, 0.6);
     }
   }
 `;
@@ -93,9 +104,10 @@ const PriceInput = ({ title = '', value = {}, prices, onChange }) => {
                 name="currency"
                 value={value.currency || currency}
                 onChange={onCurrencyChange}
-                placeholder="Select a token"
                 className="slcToken"
+                placeholder="Select a token"
             >
+                {/*<option className="placeholder-item" value="" disabled selected></option>*/}
                 {prices.map((cur, idx) => {
                     return (
                         <Option key={cur.currency} value={cur.currency}>
@@ -114,6 +126,7 @@ const PriceInput = ({ title = '', value = {}, prices, onChange }) => {
                     );
                 })}
             </StyledSelect>
+
         </StyledCard>
     );
 };
