@@ -1,0 +1,53 @@
+.header {
+  padding: 0 20px;
+}
+
+.header p {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.line {
+  border-color: rgba(255, 255, 255, 0.07);
+  margin-top: 20px;
+}
+
+.tokenItem {
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+.tokenItem:hover {
+  background: rgba(152, 161, 192, 0.08);
+}
+
+.tokenItem svg {
+  width: 36px;
+  height: 36px;
+}
+
+.currencyName {
+  font-size: 14px;
+  font-weight: 700;
+  padding-left: 10px;
+}
+
+.input {
+  background: rgb(27, 27, 27);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  outline: none;
+  padding: 12px 16px;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 16px;
+}
+
+.spinnerWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 150px 0;
+}

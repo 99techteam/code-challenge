@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0d111c;
+  color: #fff;
+  height: 100vh;
+}
+
+.blockSwapWrapper {
+  width: 500px;
+  height: 400px;
+  background: "#000";
+  border-radius: 30px;
+  box-shadow: rgba(252, 114, 255, 0.08) 0px 0px 10px 0px,
+    rgba(252, 114, 255, 0.18) 0px 40px 120px 0px;
+  padding: 25px 10px 10px 10px;
+}
+
+.title {
+  padding: 0 0 15px 15px;
+}
+
+.buttonSwap {
+  width: 100%;
+  color: rgb(252, 114, 255);
+  background: rgb(49, 28, 49);
+  border: none;
+  font-size: 20px;
+  font-weight: 535;
+  padding: 16px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background ease-in-out 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonSwap:hover {
+  background: rgb(56, 37, 56);
+}

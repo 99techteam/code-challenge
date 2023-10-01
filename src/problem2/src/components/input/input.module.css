@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background: rgb(27, 27, 27);
+  border-radius: 16px;
+  padding: 16px 16px 35px 16px;
+  outline: 0 solid rgb(65, 65, 65);
+  transition: outline 0.1s linear;
+  margin-bottom: 5px;
+}
+
+.container:hover {
+  outline-width: 1px;
+}
+
+.container label {
+  color: rgb(155, 155, 155);
+  font-size: 14px;
+}
+
+.inputWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input {
+  background: rgb(27, 27, 27);
+  border: none;
+  color: #fff;
+  font-size: 36px;
+  width: 90%;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.currencyWrapper {
+  display: flex;
+  align-items: center;
+  background: rgb(19, 19, 19);
+  padding: 5px;
+  padding-right: 10px;
+  border-radius: 50px;
+  user-select: none;
+  cursor: pointer;
+  transition: background 0.1s linear;
+}
+
+.currencyWrapper:hover {
+  background: rgb(65, 65, 65);
+}
+
+.currencyWrapper .currencyName {
+  font-size: 18px;
+  padding: 0 10px 0 5px;
+  font-weight: 700;
+}
+
+.selectTokenWrapper {
+  border-radius: 16px;
+  background: rgb(252, 114, 255);
+  display: flex;
+  align-items: center;
+  padding: 6px 14px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.selectTokenWrapper .text {
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 700;
+  padding-right: 8px;
+}
+
+.price {
+  font-size: 14px;
+  color: rgb(155, 155, 155);
+}
