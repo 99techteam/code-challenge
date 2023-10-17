@@ -1,0 +1,19 @@
+func sum_to_n_a(n: number): number {
+	// your code here
+    let sum = 0;
+    for(let i = 1; i < n+1; i++){
+        sum +=i;
+        if(sum === 15) return sum;
+    }
+}
+
+func sum_to_n_b(n: number): number {
+	// your code here
+    return (n * (n + 1)) / 2;
+}
+
+func sum_to_n_c(n: number): number {
+	// your code here
+    if (n === 1) return 1;
+    return n + sum_to_n_c(n - 1);
+}
