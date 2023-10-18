@@ -1,0 +1,19 @@
+First, the undefined of variable lhsPriority make wrap app.
+And I think necessary to refactor the code. For example:
+
+const sortedBalances = useMemo(() => {
+  return balances
+    .filter((balance: WalletBalance) => {
+      return getPriority(balance.blockchain) > -99 && balance.amount > 0;
+    })
+    .sort((lhs: WalletBalance, rhs: WalletBalance) => {
+      const leftPriority = getPriority(lhs.blockchain);
+      const rightPriority = getPriority(rhs.blockchain);
+      return rightPriority - leftPriority;
+    });
+}, [balances, prices]);
+
+To make function useMemo is readable and not throw error.
+Also the if condition make logic is not optimize and slow logic.
+
+Finally, We need clean variables and functions not use.
