@@ -1,20 +1,20 @@
 import { model, Schema } from "mongoose";
 import { MODELS_NAME } from "../constant";
-const ProductSchema = new Schema(
+const UserSchema = new Schema(
   {
-    product_name: {
+    User_name: {
       type: String,
       required: true,
     },
-    product_price: {
+    User_price: {
       type: Number,
       required: true,
     },
-    product_origin: {
+    User_origin: {
       type: String,
       required: true,
     },
-    product_color: {
+    User_color: {
       type: String,
       required: true,
     },
@@ -22,4 +22,4 @@ const ProductSchema = new Schema(
   { timestamps: true }
 );
 
-export default model(MODELS_NAME.product, ProductSchema);
+export default model(MODELS_NAME.User, UserSchema);

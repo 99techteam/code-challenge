@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "rootDir": "src",
+    "noEmit": true,
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "target": "ES2017",
+    "module": "esnext",
+    "alwaysStrict": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": false,
+    "lib": ["dom", "dom.iterable", "esnext", "ES2017"],
+    "plugins": [
+      { "transform": "transformer-module" },
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+      // "@sliceReducer/*": ["src/sliceReducer/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

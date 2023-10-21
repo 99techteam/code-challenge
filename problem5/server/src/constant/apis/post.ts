@@ -1,12 +1,12 @@
-const API_V1_PRODUCT = {
-  mainPath: "/api/v1/product",
+const API_V1_User = {
+  mainPath: "/api/v1/User",
   feature: {
-    createProduct: "/createProduct",
-    getProduct: "/getProduct",
-    getAllProducts: "/getAllProducts",
-    updateProduct: "/updateProduct",
-    deleteProduct: "/deleteProduct",
+    createUser: "/createUser",
+    getUser: "/getUser",
+    getAllUsers: "/getAllUsers",
+    updateUser: "/updateUser",
+    deleteUser: "/deleteUser",
   },
 };
 
-export default API_V1_PRODUCT;
+export default API_V1_User;

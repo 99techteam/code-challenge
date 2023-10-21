@@ -1,3 +1,3 @@
-import API_V1_PRODUCT from "./post";
+import API_V1_User from "./post";
 
-export { API_V1_PRODUCT };
+export { API_V1_User };

@@ -1,37 +1,37 @@
-import { ProductService } from "../services";
+import { UserService } from "../services";
 import { Request, Response } from "express";
 import { CREATED, OK } from "../core/success.response";
 
-export default class ProductController {
-  static async createProduct(req: Request, res: Response) {
+export default class UserController {
+  static async createUser(req: Request, res: Response) {
     new CREATED({
-      message: "Create product successfully",
-      metadata: await ProductService.createProduct(req, res),
+      message: "Create User successfully",
+      metadata: await UserService.createUser(req, res),
     }).send(res);
   }
-  static async getProduct(req: Request, res: Response) {
+  static async getUser(req: Request, res: Response) {
     new OK({
-      message: "Get product successfully",
-      metadata: await ProductService.getProduct(req, res),
+      message: "Get User successfully",
+      metadata: await UserService.getUser(req, res),
     }).send(res);
   }
-  static async getAllProducts(req: Request, res: Response) {
+  static async getAllUsers(req: Request, res: Response) {
     new OK({
-      message: "Get all products successfully",
-      metadata: await ProductService.getAllProducts(req, res),
+      message: "Get all Users successfully",
+      metadata: await UserService.getAllUsers(req, res),
     }).send(res);
   }
 
-  static async updateProduct(req: Request, res: Response) {
+  static async updateUser(req: Request, res: Response) {
     new OK({
-      message: "Update product successfully",
-      metadata: await ProductService.updateProduct(req, res),
+      message: "Update User successfully",
+      metadata: await UserService.updateUser(req, res),
     }).send(res);
   }
-  static async deleteProduct(req: Request, res: Response) {
+  static async deleteUser(req: Request, res: Response) {
     new OK({
-      message: "Delete product successfully",
-      metadata: await ProductService.deleteProduct(req, res),
+      message: "Delete User successfully",
+      metadata: await UserService.deleteUser(req, res),
     }).send(res);
   }
 }
