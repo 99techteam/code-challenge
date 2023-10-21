@@ -1,35 +1,35 @@
 import { skipPage } from "../utils";
-import { UserModel } from "../models";
+import { productModel } from "../models";
 
-export default class UserRepository {
-  static async getUser(UserId: string) {
-    return await UserModel.findById(UserId).lean().exec();
+export default class ProductRepository {
+  static async getProduct(productId: string) {
+    return await productModel.findById(productId).lean().exec();
   }
-  static async getAllUsers(limit: number, page: number) {
-    return await UserModel
+  static async getAllProducts(limit: number, page: number) {
+    return await productModel
       .find()
       .limit(limit)
       .skip(skipPage({ limit, page }))
       .lean()
       .exec();
   }
-  static async searchUsers(limit: number, page: number, keySearch: string) {
+  static async searchProducts(limit: number, page: number, keySearch: string) {
     // const regSearch = new RegExp(keySearch, "i");
-    return await UserModel
+    return await productModel
       .find({ $text: { $search: keySearch } })
       .limit(limit)
       .skip(skipPage({ limit, page }))
       .lean()
       .exec();
   }
-  static async updateUser(UserId: string, payload: any) {
-    return await UserModel
-      .findByIdAndUpdate(UserId, payload, { new: true })
+  static async updateProduct(productId: string, payload: any) {
+    return await productModel
+      .findByIdAndUpdate(productId, payload, { new: true })
       .lean()
       .exec();
   }
 
-  static async deleteUser(UserId: string) {
-    return await UserModel.findByIdAndDelete(UserId).lean().exec();
+  static async deleteProduct(productId: string) {
+    return await productModel.findByIdAndDelete(productId).lean().exec();
   }
 }

@@ -1,10 +1,10 @@
 import express from "express";
 const router = express.Router();
 
-import UserRouter from "./User.route";
+import productRouter from "./product.route";
 
-import { API_V1_User } from "../constant/apis";
+import { API_V1_PRODUCT } from "../constant/apis";
 
-router.use(API_V1_User.mainPath, UserRouter);
+router.use(API_V1_PRODUCT.root, productRouter);
 
 export default router;

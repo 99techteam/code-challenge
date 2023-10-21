@@ -1,3 +1,3 @@
-import UserModel from "./User.model";
+import productModel from "./product.model";
 
-export { UserModel };
+export { productModel };

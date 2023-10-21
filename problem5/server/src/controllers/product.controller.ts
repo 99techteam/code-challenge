@@ -1,37 +1,37 @@
-import { UserService } from "../services";
+import { ProductService } from "../services";
 import { Request, Response } from "express";
 import { CREATED, OK } from "../core/success.response";
 
-export default class UserController {
-  static async createUser(req: Request, res: Response) {
+export default class ProductController {
+  static async createProduct(req: Request, res: Response) {
     new CREATED({
-      message: "Create User successfully",
-      metadata: await UserService.createUser(req, res),
+      message: "Create Product successfully",
+      metadata: await ProductService.createProduct(req, res),
     }).send(res);
   }
-  static async getUser(req: Request, res: Response) {
+  static async getProduct(req: Request, res: Response) {
     new OK({
-      message: "Get User successfully",
-      metadata: await UserService.getUser(req, res),
+      message: "Get Product successfully",
+      metadata: await ProductService.getProduct(req, res),
     }).send(res);
   }
-  static async getAllUsers(req: Request, res: Response) {
+  static async getAllProducts(req: Request, res: Response) {
     new OK({
-      message: "Get all Users successfully",
-      metadata: await UserService.getAllUsers(req, res),
+      message: "Get all Products successfully",
+      metadata: await ProductService.getAllProducts(req, res),
     }).send(res);
   }
 
-  static async updateUser(req: Request, res: Response) {
+  static async updateProduct(req: Request, res: Response) {
     new OK({
-      message: "Update User successfully",
-      metadata: await UserService.updateUser(req, res),
+      message: "Update Product successfully",
+      metadata: await ProductService.updateProduct(req, res),
     }).send(res);
   }
-  static async deleteUser(req: Request, res: Response) {
+  static async deleteProduct(req: Request, res: Response) {
     new OK({
-      message: "Delete User successfully",
-      metadata: await UserService.deleteUser(req, res),
+      message: "Delete Product successfully",
+      metadata: await ProductService.deleteProduct(req, res),
     }).send(res);
   }
 }

@@ -1,2 +1,2 @@
-import IUser from "./IUser.interface";
-export { IUser };
+import IProduct from "./IProduct.interface";
+export { IProduct };

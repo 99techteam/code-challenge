@@ -68,13 +68,17 @@ export default function Header() {
 
   const isLogging = !!userAT || !!user.userId;
 
+  const logo =
+    LogoWeb ||
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyvt0lMGpXJvUhHtl6-TSMPfYKR-yno3nYwQ&usqp=CAU";
+
   return (
     <HeaderStyled>
       <Nav>
         <NavItem>
           <Link to={"/"}>
             <div className="box--logo">
-              <img src={LogoWeb} alt="LogoWeb" />
+              <img src={logo} alt="LogoWeb" />
             </div>
           </Link>
         </NavItem>

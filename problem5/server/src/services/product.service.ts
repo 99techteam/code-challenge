@@ -1,48 +1,46 @@
-import { UserModel } from "../models";
+import { productModel } from "../models";
 import { Request, Response } from "express";
-import { IUser, IQuery } from "../interface";
-import { UserRepository } from "../repositories";
-import { BadRequestError, NotFoundError } from "../core/error.response";
+import { IProduct, IQuery } from "../interface";
+import { ProductRepository } from "../repositories";
+import { NotFoundError } from "../core/error.response";
 
-export default class UserService {
-  static async createUser(req: Request, res: Response) {
-    const payload = req.body as IUser;
-    const newUser = await UserModel.create(payload);
-    return newUser;
+export default class ProductService {
+  static async createProduct(req: Request, res: Response) {
+    const payload = req.body as IProduct;
+    const newProduct = await productModel.create(payload);
+    return newProduct;
   }
 
-  static async getUser(req: Request, res: Response) {
-    const { UserId } = req.params;
-    const User = await UserRepository.getUser(UserId);
-    if (!User) throw new NotFoundError("Sản phẩm không tồn tại");
-    return User;
+  static async getProduct(req: Request, res: Response) {
+    const { productId } = req.params;
+    const Product = await ProductRepository.getProduct(productId);
+    if (!Product) throw new NotFoundError("Sản phẩm không tồn tại");
+    return Product;
   }
 
-  static async getAllUsers(req: Request, res: Response) {
+  static async getAllProducts(req: Request, res: Response) {
     const { limit, page } = req.query as unknown as IQuery;
-    const Users = await UserRepository.getAllUsers(limit, page);
-    return Users;
+    const Products = await ProductRepository.getAllProducts(limit, page);
+    return Products;
   }
 
-  static async updateUser(req: Request, res: Response) {
-    const { UserId } = req.params;
+  static async updateProduct(req: Request, res: Response) {
+    const { productId } = req.params;
     const payload = req.body;
-    const UserUpdated = await UserRepository.updateUser(
-      UserId,
+    const ProductUpdated = await ProductRepository.updateProduct(
+      productId,
       payload
     );
-    if (!UserUpdated)
+    if (!ProductUpdated)
       throw new NotFoundError("Không tìm thấy sản phẩm để cập nhật");
-    return UserUpdated;
+    return ProductUpdated;
   }
 
-  static async deleteUser(req: Request, res: Response) {
-    const { UserId } = req.params;
-    const UserDeleted = await UserRepository.deleteUser(UserId);
-    if (!UserDeleted)
+  static async deleteProduct(req: Request, res: Response) {
+    const { productId } = req.params;
+    const ProductDeleted = await ProductRepository.deleteProduct(productId);
+    if (!ProductDeleted)
       throw new NotFoundError("Không tìm thấy sản phẩm để xóa");
-    return UserDeleted;
+    return ProductDeleted;
   }
 }
-
-// module.exports = UserService;

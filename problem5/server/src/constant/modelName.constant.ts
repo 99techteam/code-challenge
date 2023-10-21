@@ -1,5 +1,5 @@
 const MODELS_NAME = {
-  User: "Users",
+  product: "product",
 };
 
 export default MODELS_NAME;
