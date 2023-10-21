@@ -1,0 +1,186 @@
+import { randomKey } from "@/utils";
+
+const questionsList = [
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+  {
+    id: randomKey(),
+    question: "",
+    answerList: [""],
+    answerCorrect: 1,
+  },
+];
+
+export default questionsList
