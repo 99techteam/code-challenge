@@ -1,8 +1,6 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The statements are incorrect or ineffective in the above code
+- The "interface" data type should be placed in a separate interfaces folder
+- Put "getPriority" in the mocks folder if you need to test data
+- Avoid writing "nested if statements"
+- The "sort" method is missing "return 0"
+- Separate "Wallet Row" into a separate component then import it
