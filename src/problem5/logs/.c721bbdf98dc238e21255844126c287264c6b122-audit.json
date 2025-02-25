@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\SAVE.VSCODE\\StandardLord\\code-challenge\\src\\problem5\\logs\\.c721bbdf98dc238e21255844126c287264c6b122-audit.json",
+    "files": [
+        {
+            "date": 1740501612741,
+            "name": "D:\\SAVE.VSCODE\\StandardLord\\code-challenge\\src\\problem5\\logs\\2025-02-25.log",
+            "hash": "908e7e90708dfe50adcc3c690d51091b08b0d6d28261bafb7b259806793ac67f"
+        }
+    ],
+    "hashType": "sha256"
+}

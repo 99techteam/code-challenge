@@ -1,0 +1,49 @@
+{
+  "name": "problem5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "npm run build && node build/server.js",
+    "build": "npm run clean && tsc && tsc-alias",
+    "clean": "rimraf ./build",
+    "typeorm": "ts-node ./node_modules/typeorm/cli",
+    "migration:apply": "npm run typeorm -- -d ./src/database/index.ts migration:run",
+    "drop-db": "npm run typeorm -- -d ./src/database/index.ts schema:drop",
+    "sync-db": "npm run typeorm -- -d ./src/database/index.ts schema:sync",
+    "migration:create": "npm run typeorm -- migration:create ./src/database/migrations/%npm_config_name%",
+    "migration:generate": "npm run typeorm -- -d ./src/database/index.ts migration:generate ./src/database/migrations/%npm_config_name%",
+    "migration:revert": "npm run typeorm -- -d ./src/database/index.ts migration:revert",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.5",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "express": "^4.21.2",
+    "moment-timezone": "^0.5.47",
+    "mysql2": "^3.12.0",
+    "reflect-metadata": "^0.2.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsyringe": "^4.8.0",
+    "typeorm": "^0.3.20",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "nodemon": "^3.1.9",
+    "rimraf": "^6.0.1",
+    "tsc-alias": "^1.8.10",
+    "typescript": "^5.7.3"
+  }
+}

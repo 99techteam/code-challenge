@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    // Import non-ES modules as default imports.
+    "esModuleInterop": true,
+    // Target latest version of ECMAScript.
+    "target": "ES2022",
+    // Process & infer types from .js files.
+    "allowJs": true,
+    // Enable strictNullChecks & noImplicitAny.
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noImplicitThis": false,
+    // Search under node_modules for non-relative imports.
+    "moduleResolution": "node",
+    // Import .json files
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "outDir": "build",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build"],
+}
