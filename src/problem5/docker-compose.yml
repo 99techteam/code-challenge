@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=example
+      - DB_NAME=mydatabase
+    depends_on:
+      - db
+    env_file:
+      - .env.local
+    networks:
+      - app-network
+
+  db:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: node_db
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
