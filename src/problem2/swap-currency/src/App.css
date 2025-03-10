@@ -1,0 +1,10 @@
+#root {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  place-content: center;
+}
+
+body {
+  background-color: #b5aeae;
+}
