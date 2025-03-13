@@ -1,0 +1,10 @@
+{
+  "name": "problem2",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "includedScripts": [],
+  "sourceRoot": ".",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project problem2 --web",
+  "targets": {}
+}
