@@ -1,8 +1,494 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  min-width: 360px;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+}
+
+/* Main swap card */
+.swap-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Header */
+.card-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.title i {
+  color: #667eea;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Token sections */
+.token-section {
+  margin-bottom: 16px;
+}
+
+.section-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.token-input-container {
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.token-input-container:hover {
+  border-color: #dee2e6;
+}
+
+.token-input-container:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Token selector */
+.token-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+  border: 1px solid #e9ecef;
+}
+
+.token-selector:hover {
+  background: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.token-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: none;
+}
+
+.token-icon.visible {
+  display: block;
+}
+
+.token-symbol {
+  font-weight: 600;
+  font-size: 16px;
+  flex: 1;
+  color: #333;
+}
+
+.dropdown-icon {
+  color: #666;
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.token-selector:hover .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+/* Amount input */
+.amount-input-container {
+  position: relative;
+}
+
+.amount-input {
+  width: 100%;
+  font-size: 24px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #1a1a1a;
+  padding: 8px 0;
+}
+
+.amount-input::placeholder {
+  color: #adb5bd;
+}
+
+.amount-input:disabled {
+  color: #6c757d;
+}
+
+/* Balance info */
+.balance-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.balance-label {
+  color: #666;
+}
+
+.balance-amount {
+  color: #333;
+  font-weight: 500;
+}
+
+.max-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.max-button:hover {
+  background: #5a6fd8;
+  transform: translateY(-1px);
+}
+
+/* Swap direction button */
+.swap-direction {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+  position: relative;
+}
+
+.swap-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #e9ecef;
+  background: white;
+  color: #667eea;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.swap-btn:hover {
+  background: #667eea;
+  color: white;
+  transform: scale(1.1) rotate(180deg);
+  border-color: #667eea;
+}
+
+/* Exchange info */
+.exchange-info {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  border: 1px solid #e9ecef;
+}
+
+.rate-display, .price-impact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.price-impact {
+  margin-bottom: 0;
+}
+
+.rate-label, .impact-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.rate-value, .impact-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Error messages */
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+  font-size: 14px;
+  border: 1px solid #f5c6cb;
+}
+
+/* Submit button */
+.swap-submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.swap-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.swap-submit-btn:disabled {
+  background: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.swap-submit-btn .loading-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #666;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: #f8f9fa;
+  color: #333;
+}
+
+/* Search input */
+.token-search {
+  margin-bottom: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Token list */
+.token-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.token-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.token-item:hover {
+  background: #f8f9fa;
+  border-color: #e9ecef;
+}
+
+.token-item img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.token-details {
+  flex: 1;
+}
+
+.token-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+}
+
+.token-price {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Success modal */
+.success-content {
+  text-align: center;
+}
+
+.success-icon {
+  font-size: 64px;
+  color: #28a745;
+  margin-bottom: 20px;
+}
+
+.success-content h3 {
+  margin-bottom: 12px;
+  color: #1a1a1a;
+}
+
+.success-content p {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.success-content .close-btn {
+  background: #28a745;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.success-content .close-btn:hover {
+  background: #218838;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .swap-card {
+    padding: 24px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .amount-input {
+    font-size: 20px;
+  }
+}
+
+/* Loading animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fa-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Smooth transitions */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
