@@ -1,0 +1,86 @@
+.conSelectTrigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  font-weight: 500;
+  border-radius: 999px;
+  border: none;
+  background: #f8f9fb;
+  font-size: 0.875rem;
+  height: 36px;
+  cursor: pointer;
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background: #f1f3f5;
+  }
+}
+
+.conSelectContent {
+  background: white;
+  border: 1px solid var(--gray-6);
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.conSelectViewport {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.conSelectItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border-radius: 6px;
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background: #f1f3f5;
+  }
+}
+
+.summary-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.token-select-option {
+  display: flex;
+  align-items: center;
+  padding: 9px 10px;
+  cursor: pointer;
+
+  img {
+    margin-right: 6px;
+  }
+}
+
+.token-select-trigger {
+  display: flex;
+  align-items: center;
+  // padding: 3px 5px;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}

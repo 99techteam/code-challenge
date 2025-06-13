@@ -1,0 +1,132 @@
+.swapContainer {
+	height: 100vh;
+	background: #f5f5f5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.swapCard {
+	background: #fff;
+	padding: 24px;
+	border-radius: 26px;
+	width: 440px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+.swapField {
+	display: flex;
+	gap: 8px;
+	padding: 16px;
+	border-radius: 12px;
+	border: 1px solid var(--border);
+}
+
+.tokenInput {
+	font-size: 1.5rem;
+	font-weight: 600;
+	border: none;
+	outline: none;
+	background: transparent;
+	width: 100%;
+}
+
+.tokenMeta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 0.875rem;
+	color: #888;
+}
+
+.tokenButton {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 999px;
+	padding: 6px 12px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 500;
+	font-size: 0.875rem;
+}
+
+.swapContent {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+
+	.swapDivider {
+		position: absolute;
+		bottom: 32%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+.arrowBtn {
+	background: var(--background);
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	padding: 8px 12px;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+
+.exchangeRate {
+	text-align: center;
+	color: #888;
+	font-size: 0.875rem;
+}
+
+.summary {
+	border-top: 1px solid #eee;
+	padding-top: 12px;
+	font-size: 0.875rem;
+	color: #444;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.info {
+	cursor: help;
+	font-size: 0.75rem;
+	vertical-align: middle;
+}
+
+.convertButton {
+	background: var(--primary);
+	color: var(--primary-foreground);
+	font-weight: 500;
+	padding: 24px;
+	border-radius: 999px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.swapFrom {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 14px;
+	padding: 6px 0;
+}
+
+.swapTo {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 14px;
+	padding: 6px 0;
+
+}
