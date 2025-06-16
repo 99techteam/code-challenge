@@ -1,0 +1,15 @@
+version: "3"
+services:
+    app:
+        build:
+            context: .
+        expose:
+            - ${VITE_DEV_PORT:-5173}
+        ports:
+            - ${VITE_DEV_PORT:-5173}:${VITE_DEV_PORT:-5173}
+        volumes:
+            - ./src:/app/src
+            - ./.env:/app/.env
+        command: pnpm run dev
+        tty: true
+        env_file: ./.env

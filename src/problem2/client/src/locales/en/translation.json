@@ -1,0 +1,9 @@
+{
+    "pageNotFound": {
+        "title": "Page Not Found",
+        "content": "Page Not Found",
+        "page not found": "Page Not Found",
+        "reload page": "Reload Page"
+    },
+    "loading": "Loading..."
+}
