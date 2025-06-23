@@ -1,0 +1,18 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+
+
+	background: radial-gradient(circle at center, rgba(60, 1, 60, 0.3), #000000 0%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
+
+#root {
+	width: 100%;
+}
