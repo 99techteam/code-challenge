@@ -1,0 +1,12 @@
+{
+    "workspaces": [
+        "."
+    ],
+    "scripts": {
+        "test:problem4": "ts-node solve_4.ts"
+    },
+    "devDependencies": {
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.3"
+    }
+}
