@@ -1,10 +1,22 @@
-# 99Tech Code Challenge #1 #
 
-Note that if you fork this repository, your responses may be publicly linked to this repo.  
-Please submit your application along with the solutions attached or linked.   
+## Problems and Solutions ##
 
-It is important that you minimally attempt the problems, even if you do not arrive at a working solution.
+### Problem 1: Sum to N Implementation ###
+This problem requires implementing three different algorithms to calculate the sum of integers from 1 to n:
+- Solution A: Recursive approach
+- Solution B: Iterative (loop-based) approach
+- Solution C: Mathematical formula approach (n*(n+1)/2)
 
-## Submission ##
-You can either provide a link to an online repository, attach the solution in your application, or whichever method you prefer.
-We're cool as long as we can view your solution without any pain.
+### Problem 2: Token Swap Interface ###
+This problem involves building a React-based token swap interface using:
+- React components with proper state management
+- TailwindCSS for styling
+- Clean architecture with separation of concerns (Models, ViewModels, Views)
+- Currency selection functionality with search and dropdown features
+
+### Problem 3: TypeScript Wallet Component Refactoring ###
+This problem focuses on refactoring a TypeScript React component (Wallet.tsx) to:
+- Fix type definitions and interface implementations
+- Correct logical errors in the filtering and sorting of wallet balances
+- Improve variable naming and code organization
+- Properly implement missing interfaces and type definitions
