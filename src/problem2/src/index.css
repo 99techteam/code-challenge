@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+    @apply bg-[#DEE3FA] text-gray-900;
+}
+
+.custom-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    background: #1E1F2F;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #3B3D4E;
+    border-radius: 10px;
+}
+
+/* Ẩn spinner input type=number trên Chrome, Safari, Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Ẩn spinner trên Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
