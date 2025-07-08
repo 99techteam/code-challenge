@@ -1,0 +1,277 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: #1a1a1a;
+  min-height: 100vh;
+  color: white;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.swap-container {
+  width: 500px;
+  background: linear-gradient(135deg, #2d1b3d 0%, #4a2c5a 50%, #6b3d7a 100%);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.swap-section {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.max-amount {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.section-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.currency-selector {
+  flex: 1;
+}
+
+.currency-select {
+  width: 100%;
+}
+
+.select__control {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-height: auto !important;
+}
+
+.select__value-container {
+  padding: 0 !important;
+}
+
+.select__single-value {
+  color: white !important;
+  margin: 0 !important;
+}
+
+.select__indicator-separator {
+  display: none !important;
+}
+
+.select__dropdown-indicator {
+  color: white !important;
+  padding: 0 0 0 8px !important;
+}
+
+.select__menu {
+  background: #2a2a2a !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  border: none !important;
+  overflow: hidden !important;
+}
+
+.select__option {
+  padding: 12px 16px !important;
+  cursor: pointer !important;
+  color: white !important;
+}
+
+.select__option:hover {
+  background: #3a3a3a !important;
+}
+
+.select__option--is-selected {
+  background: #007bff !important;
+}
+
+.currency-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+}
+
+.currency-selected {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+}
+
+.currency-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #333;
+  padding: 8px;
+}
+
+.currency-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.currency-amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.currency-rate {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.amount-input-section {
+  flex: 1;
+  margin: 15px 16px 0;
+}
+
+.amount-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.amount-input:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.amount-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.amount-input::-webkit-outer-spin-button,
+.amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.amount-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.amount-info {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.usd-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.wallet-info {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 120px;
+  line-height: 1.3;
+}
+
+.swap-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.swap-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ffa500, #ff1493);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.swap-action-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #ff6b6b, #ffa500);
+  border: none;
+  border-radius: 16px;
+  padding: 18px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.swap-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+@media (max-width: 480px) {
+  .swap-container {
+    margin: 10px;
+    padding: 20px;
+  }
+  
+  .section-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .amount-info {
+    text-align: left;
+    width: 100%;
+  }
+}
