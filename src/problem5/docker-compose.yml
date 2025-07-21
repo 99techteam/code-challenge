@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: resources_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-resources_db}
+      MYSQL_USER: ${MYSQL_USER:-appuser}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-password}"]
+      timeout: 20s
+      retries: 10
+
+  # Express App
+  app:
+    build: .
+    container_name: resources_app
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${MYSQL_USER:-appuser}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-password}
+      DB_NAME: ${MYSQL_DATABASE:-resources_db}
+      PORT: 3000
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - app-network
+    volumes:
+      # Mount source for development (uncomment for dev mode)
+      # - ./src:/app/src
+      # - ./package.json:/app/package.json
+      # - ./tsconfig.json:/app/tsconfig.json
+      - app_logs:/app/logs
+
+  # E2E Test Service
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: resources_test
+    environment:
+      NODE_ENV: test
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${MYSQL_USER:-appuser}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-password}
+      DB_NAME: resources_test_db
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - app-network
+    volumes:
+      - test_logs:/app/logs
+    profiles:
+      - test
+
+volumes:
+  mysql_data:
+    driver: local
+  app_logs:
+    driver: local
+  test_logs:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge 

@@ -1,0 +1,31 @@
+# Test Dockerfile - keeps dev dependencies for testing
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install curl for health checks (optional)
+RUN apk add --no-cache curl
+
+# Copy package files first (for better Docker caching)
+COPY package*.json ./
+COPY tsconfig.json ./
+
+# Install ALL dependencies (including dev dependencies for testing)
+RUN npm ci && npm cache clean --force
+
+# Copy source code and tests
+COPY src/ ./src/
+
+# Copy test configuration files
+COPY jest.config.js ./
+COPY jest.e2e.config.js ./
+
+# Build the application (needed for TypeScript compilation)
+RUN npm run build
+
+# Expose the port (for health checks if needed)
+EXPOSE 3000
+
+# Default command runs e2e tests
+CMD ["npm", "run", "test:e2e"] 
