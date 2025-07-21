@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0.26
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-config.cnf:/etc/mysql/conf.d/custom.cnf
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - app-network
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=prod
+      - DATABASE_URL=${DATABASE_URL}
+      - LOG_LEVEL=info
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - app-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: >
+      sh -c "
+        npx prisma migrate deploy &&
+        npm start
+      "
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
