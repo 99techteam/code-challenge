@@ -1,0 +1,5 @@
+node_modules
+dist
+
+# AI folder
+memory_bank

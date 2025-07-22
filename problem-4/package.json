@@ -1,0 +1,14 @@
+{
+  "name": "problem-4",
+  "version": "1.0.0",
+  "main": "three-way-to-sum.js",
+  "scripts": {
+    "test": "mocha three-way-to-sum.spec.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "mocha": "^11.7.1"
+  }
+}
