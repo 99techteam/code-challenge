@@ -1,0 +1,62 @@
+.selectToken {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+  }
+}
+
+.selectToken svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.tokenList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 20rem;
+  margin-top: 1rem;
+  overflow-y: auto;
+}
+
+.tokenItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.tokenItem svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.tokenItem:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.tokenItem.selected {
+  background-color: var(--color-primary-light);
+}
+
+.tokenItemLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tokenItemRight {
+  display: flex;
+  align-items: center;
+}

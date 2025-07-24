@@ -1,0 +1,7 @@
+.button {
+  background-color: var(--color-primary);
+}
+
+.button.fullWidth {
+  width: 100%;
+}

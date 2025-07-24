@@ -1,0 +1,23 @@
+.primary {
+  color: var(--color-text-primary);
+}
+
+.secondary {
+  color: var(--color-text-secondary);
+}
+
+.highlight {
+  color: var(--color-text-highlight);
+}
+
+.success {
+  color: var(--color-text-success);
+}
+
+.error {
+  color: var(--color-text-error);
+}
+
+.warning {
+  color: var(--color-text-warning);
+}

@@ -1,0 +1,89 @@
+@font-face {
+  font-family: 'Kanit';
+  src: url('/src/assets/fonts/Kanit-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kanit';
+  src: url('/src/assets/fonts/Kanit-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kanit';
+  src: url('/src/assets/fonts/Kanit-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kanit';
+  src: url('/src/assets/fonts/Kanit-SemiBold.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kanit';
+  src: url('/src/assets/fonts/Kanit-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Kanit', sans-serif;
+  transition:
+    background-color 0.2s linear,
+    color 0.2s linear;
+}
+
+:root {
+  /* Light theme variables (default) */
+  --color-bg: linear-gradient(to top, #e0f4ff, #ebf8ff, #f5fbff, #ffffff);
+  --color-surface-primary: #f9fafb;
+  --color-surface-secondary: #f2fbff;
+  --color-surface-contrast: #1e1e1e;
+  --color-surface-hover: #f5f5f5;
+  --color-border: #d2def7;
+
+  --color-primary: #66a9e0;
+  --color-primary-light: #1976d214;
+  --color-primary-dark: #1d4ed8;
+
+  --color-text-highlight: #66a9e0;
+  --color-text-primary: #000000de;
+  --color-text-secondary: #00000099;
+  --color-text-success: #008000;
+  --color-text-error: #ff0000;
+  --color-text-warning: #ffa500;
+}
+
+.radix-themes {
+  --cursor-button: pointer;
+  --accent-9: #66a9e0;
+  --accent-10: #4d94d1;
+}
+
+[data-theme='dark'] {
+  /* Dark theme variables */
+  --color-bg: #160f1e;
+  --color-surface-primary: #27262c; /* dark blue-gray */
+  --color-surface-secondary: #273549; /* slightly lighter */
+  --color-surface-contrast: #fff;
+  --color-surface-hover: #33425a;
+  --color-border: #3a4a6d;
+
+  --color-primary: #4d94d1; /* lighter blue */
+  --color-primary-light: #4d94d114; /* translucent */
+  --color-primary-dark: #1565c0; /* darker blue */
+
+  --color-text-highlight: #fff;
+  --color-text-primary: #fff; /* light gray with some transparency */
+  --color-text-secondary: #e0e0e0cc; /* lighter gray */
+  --color-text-success: #4caf50;
+  --color-text-error: #f44336;
+  --color-text-warning: #ffb300;
+}

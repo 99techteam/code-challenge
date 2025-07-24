@@ -1,0 +1,36 @@
+.wrapper {
+  border: 2px solid var(--color-border);
+  padding: 8px;
+  border-radius: 1rem;
+  display: inline-flex;
+  align-items: center;
+  transition: border-color 0.3s;
+  gap: 0.5rem;
+}
+
+.wrapper.focused {
+  border-color: var(--color-primary);
+}
+
+.wrapper.error {
+  border-color: #ef4444;
+}
+
+.wrapper.fullWidth {
+  width: 100%;
+}
+
+.input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 1rem;
+  background-color: transparent;
+  width: 100%;
+}
+
+.errorMessage {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}

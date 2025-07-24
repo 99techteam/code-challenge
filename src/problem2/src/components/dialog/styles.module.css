@@ -1,0 +1,14 @@
+.dialogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dialogHeader svg {
+  cursor: pointer;
+}
+
+.dialogContent {
+  top: 5rem;
+}
