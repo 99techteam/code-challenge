@@ -1,0 +1,55 @@
+<svg width="800" height="420" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="white" />
+  <style>
+    .actor { font-family: sans-serif; font-size: 14px; text-anchor: middle; }
+    .lifeline { stroke: #333; stroke-width: 1; stroke-dasharray: 4 2; }
+    .activation { fill: #F28C28; stroke: #333; stroke-width: 1; }
+    .arrow { stroke: #000; stroke-width: 1.5; marker-end: url(#arrowhead); }
+    .dashed-arrow { stroke: #000; stroke-width: 1; stroke-dasharray: 4 2; marker-end:
+    url(#arrowhead); }
+    .label { font-family: sans-serif; font-size: 12px; text-anchor: start; fill: #000; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    </marker>
+  </defs>
+
+  <!-- Headers -->
+  <text x="100" y="30" class="actor">Client</text>
+  <text x="280" y="30" class="actor">API Server</text>
+  <text x="460" y="30" class="actor">Database</text>
+  <text x="640" y="30" class="actor">WebSocket Broker</text>
+
+  <!-- Lifelines -->
+  <line x1="100" y1="40" x2="100" y2="400" class="lifeline" />
+  <line x1="280" y1="40" x2="280" y2="400" class="lifeline" />
+  <line x1="460" y1="40" x2="460" y2="400" class="lifeline" />
+  <line x1="640" y1="40" x2="640" y2="400" class="lifeline" />
+
+  <!-- Activations -->
+  <rect x="272" y="60" width="16" height="290" class="activation" />
+  <rect x="452" y="160" width="16" height="70" class="activation" />
+  <rect x="632" y="200" width="16" height="40" class="activation" />
+
+  <!-- Arrows and Labels -->
+  <line x1="100" y1="70" x2="272" y2="70" class="arrow" />
+  <text x="110" y="65" class="label">1. POST /api/score/update</text>
+
+  <path d="M288,90 C318,100 318,105 288,110" stroke="#000" stroke-width="1.5" fill="none"
+    marker-end="url(#arrowhead)" />
+  <text x="290" y="85" class="label">2. Verify JWT / Signature</text>
+
+  <path d="M288,135 C318,145 318,150 288,155" stroke="#000" stroke-width="1.5" fill="none"
+    marker-end="url(#arrowhead)" />
+  <text x="290" y="130" class="label">3. Rate-limit &amp; Log Request</text>
+
+  <line x1="288" y1="190" x2="452" y2="190" class="arrow" />
+  <text x="290" y="185" class="label">4. Validate &amp; Update Score</text>
+
+  <line x1="468" y1="230" x2="632" y2="230" class="arrow" />
+  <text x="470" y="225" class="label">5. Push updated Top 10</text>
+
+  <line x1="640" y1="270" x2="100" y2="270" class="dashed-arrow" />
+  <text x="300" y="265" class="label">6. Broadcast Top 10 to clients</text>
+</svg>

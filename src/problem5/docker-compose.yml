@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: clean_arch_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: clean_arch_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data/simple_e_commerce/postgres:/var/lib/postgresql/data
+    networks:
+      - clean_arch_network
+  redis:
+    image: redis:7-alpine
+    container_name: clean_arch_redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./data/simple_e_commerce/redis:/data
+    networks:
+      - clean_arch_network
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: clean_arch_app
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - clean_arch_network
+
+networks:
+  clean_arch_network:
+    driver: bridge

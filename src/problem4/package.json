@@ -1,0 +1,16 @@
+{
+  "name": "sum-to-n-benchmark",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "benchmark": "tsx benchmark/benchmark.ts"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.5"
+  }
+}

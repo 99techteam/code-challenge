@@ -1,0 +1,31 @@
+# Node modules
+node_modules/
+
+# TypeScript build output
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test coverage
+coverage/
+
+# Jest cache
+.jest-cache/
+.jest/
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Env files
+.env
+.env.local
