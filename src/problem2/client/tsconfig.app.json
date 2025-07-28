@@ -1,0 +1,61 @@
+{
+  "compilerOptions": {
+    // Specifies the ECMAScript version to compile to.
+    "target": "ES2020",
+    // Ensures that TypeScript will use 'define' statements for class fields.
+    "useDefineForClassFields": true,
+    // Allows TypeScript to compile JavaScript files.
+    "allowJs": true,
+    // Specifies the libraries to include in the compilation.
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable",
+      "esnext"
+    ],
+    // Specifies the module system to use.
+    "module": "ESNext",
+    // Skips type checking of declaration files to speed up the build.
+    "skipLibCheck": true,
+    // Allows synthetic default imports from modules without default exports.
+    "allowSyntheticDefaultImports": true,
+    // Sets the base directory for resolving non-relative module names.
+    "baseUrl": "./src",
+    // Specifies path mappings for module resolution.
+    "paths": {
+      "src/*": [
+        "src/*"
+      ]
+    },
+    // Disables strict type checking for 'any' types.
+    "noImplicitAny": false,
+    /* Bundler mode settings */
+    // Specifies the module resolution strategy for bundling.
+    "moduleResolution": "bundler",
+    // Allows importing TypeScript modules using '.ts' extensions.
+    "allowImportingTsExtensions": true,
+    // Enables importing JSON modules directly in TypeScript.
+    "resolveJsonModule": true,
+    // Treats each file as a separate module.
+    "isolatedModules": true,
+    // Prevents TypeScript from emitting output files.
+    "noEmit": true,
+    // Specifies the JSX mode for React.
+    "jsx": "react-jsx",
+    /* Linting settings */
+    // Enables strict type-checking options.
+    "strict": true,
+    // Reports unused local variables as errors.
+    "noUnusedLocals": true,
+    // Reports unused parameters as errors.
+    "noUnusedParameters": true,
+    // Reports fallthrough cases in switch statements as errors.
+    "noFallthroughCasesInSwitch": true,
+    // Enables TypeScript's composite feature for managing project references.
+    "composite": true,
+  },
+  // Specifies which files to include in the compilation.
+  "include": [
+    "src",
+  ],
+}
