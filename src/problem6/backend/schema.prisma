@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  username     String   @db.VarChar(100)
+  score        Int      @default(0)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  actions UserAction[]
+
+  @@index([score(sort: Desc)], name: "idx_users_score")
+  @@index([email], name: "idx_users_email")
+  @@map("users")
+}
+
+model UserAction {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @map("user_id")
+  actionType   String   @map("action_type") @db.VarChar(50)
+  operand1     Int?
+  operand2     Int?
+  result       Int?
+  pointsEarned Int      @default(1) @map("points_earned")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([userId], name: "idx_user_actions_user_id")
+  @@index([createdAt(sort: Desc)], name: "idx_user_actions_created_at")
+  @@map("user_actions")
+}

@@ -1,0 +1,31 @@
+{
+  "name": "code-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:lnanhkhoa/code-challenge.git",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.1.0",
+    "@types/supertest": "^6.0.3",
+    "@types/uuid": "^10.0.0",
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "dayjs": "1.11.13",
+    "express": "^5.1.0",
+    "uuid": "^11.1.0"
+  },
+  "scripts": {
+    "problem4:test": "bun test src/problem4/sum_to_n.test.ts",
+    "problem5:start": "ts-node src/problem5/server.ts",
+    "problem5:test": "jest src/problem5/*.test.ts"
+  }
+}

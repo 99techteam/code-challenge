@@ -1,0 +1,60 @@
+{
+  "name": "live-scoreboard-api",
+  "version": "1.0.0",
+  "description": "Real-time scoreboard API service with Express.js and Socket.io",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "prisma:generate": "prisma generate",
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "dev:watch": "nodemon --exec ts-node src/app.ts",
+    "format": "prettier --write src/**/*.ts",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@prisma/client": "6.12.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.11.0",
+    "prisma": "^6.12.0",
+    "redis": "^4.6.0",
+    "socket.io": "^4.7.0",
+    "zod": "^4.0.10"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.0",
+    "@types/cors": "^2.8.0",
+    "@types/express": "^4.17.0",
+    "@types/jest": "^29.5.0",
+    "@types/jsonwebtoken": "^9.0.0",
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.10.0",
+    "@types/supertest": "^2.0.0",
+    "jest": "^29.5.0",
+    "nodemon": "^3.0.0",
+    "prettier": "^3.4.2",
+    "supertest": "^6.3.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "express",
+    "socket.io",
+    "postgresql",
+    "redis",
+    "real-time",
+    "scoreboard"
+  ],
+  "author": "Backend Engineering Team",
+  "license": "MIT"
+}
