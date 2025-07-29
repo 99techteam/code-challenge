@@ -1,0 +1,45 @@
+sequenceDiagram
+    participant Worker
+    participant Redis_Streams
+    participant MongoDB_Cluster
+    participant Redis_SortedSet
+    participant SSE_Broker
+    participant Other_Clients
+
+    Note over Worker,Other_Clients: Asynchronous Score Processing Flow
+    Worker->>Redis_Streams: XREADGROUP consume message
+    Note over Worker,Redis_Streams: COUNT N for batch processing
+    Redis_Streams-->>Worker: Message batch with IDs
+    
+    Note over Worker: Process each message in batch
+    Worker->>Worker: Parse message: { userId, scoreIncrement, timestamp }
+    
+    Worker->>MongoDB_Cluster: Update user score using $inc
+    Note over Worker,MongoDB_Cluster: Atomic document update
+    Note over Worker,MongoDB_Cluster: db.users.updateOne({ _id: userId }, { $inc: { score: scoreIncrement } })
+    MongoDB_Cluster-->>Worker: Score updated successfully
+    
+    Worker->>Redis_SortedSet: ZADD leaderboard:global
+    Note over Worker,Redis_SortedSet: Update or add user to leaderboard
+    Note over Worker,Redis_SortedSet: ZADD leaderboard:global score userId
+    Redis_SortedSet-->>Worker: Leaderboard updated
+    
+    Worker->>Redis_SortedSet: ZREVRANK for user rank
+    Note over Worker,Redis_SortedSet: Get user's new rank position
+    Note over Worker,Redis_SortedSet: ZREVRANK leaderboard:global userId
+    Redis_SortedSet-->>Worker: User rank (optional)
+    
+    Worker->>Redis_SortedSet: Update user score cache
+    Note over Worker,Redis_SortedSet: Cache individual user score
+    Note over Worker,Redis_SortedSet: SET user:userId:score newScore
+    Redis_SortedSet-->>Worker: Cache updated
+    
+    Worker->>SSE_Broker: Broadcast via Redis Pub/Sub
+    Note over Worker,SSE_Broker: scoreboard_update event
+    Note over Worker,SSE_Broker: { eventType, leaderboard, affectedUserId, newScore, newRank }
+    SSE_Broker->>Other_Clients: SSE: scoreboard_update event
+    Note over Other_Clients: Update UI with new leaderboard data
+    
+    Worker->>Redis_Streams: XACK message(s) processed
+    Note over Worker,Redis_Streams: Acknowledge successful processing
+    Note over Worker: Continue to next batch 

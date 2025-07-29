@@ -1,0 +1,19 @@
+{
+  "name": "problem4-sum-to-n",
+  "version": "1.0.0",
+  "description": "Three implementations of sum to n function",
+  "main": "dist/sum_to_n.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/sum_to_n.js",
+    "dev": "ts-node index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.2"
+  },
+  "keywords": ["typescript", "algorithm", "sum"],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,36 @@
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API_Gateway
+    participant Auth_Service
+    participant Score_Service
+    participant Redis_Streams
+    participant Worker
+    participant MongoDB_Cluster
+    participant Redis_SortedSet
+    participant SSE_Broker
+    participant Other_Clients
+
+    Note over User,Other_Clients: Score Update Flow
+    User->>Frontend: Performs action (e.g., completes task)
+    Frontend->>API_Gateway: POST /api/v1/scores/update
+    API_Gateway->>Auth_Service: Validate JWT token
+    Auth_Service-->>API_Gateway: User authenticated
+    API_Gateway->>Score_Service: Process score update request
+    Score_Service->>Score_Service: Validate score increment (e.g., positive, within bounds)
+    Score_Service->>Redis_Streams: XADD score_updates message (userId, scoreIncrement, timestamp)
+    Redis_Streams-->>Score_Service: Message queued with ID
+    Score_Service-->>API_Gateway: Immediate acknowledgment
+    API_Gateway-->>Frontend: 200 OK with request ID
+    Frontend-->>User: Score update queued
+
+    Note over Worker,Redis_SortedSet: Asynchronous Processing
+    Worker->>Redis_Streams: XREADGROUP consume message (e.g., COUNT N for batch)
+    Worker->>MongoDB_Cluster: Update user score using $inc (atomic document update)
+    MongoDB_Cluster-->>Worker: Score updated
+    Worker->>Redis_SortedSet: ZADD leaderboard:global (updates score or adds new user)
+    Worker->>Redis_SortedSet: ZREVRANK for user rank (optional, for individual user update context)
+    Worker->>Redis_SortedSet: Update user score cache (optional, e.g., user:<id>:score)
+    Worker->>SSE_Broker: Broadcast via Redis Pub/Sub (scoreboard_update event)
+    SSE_Broker->>Other_Clients: SSE: scoreboard_update event
+    Worker->>Redis_Streams: XACK message(s) processed 

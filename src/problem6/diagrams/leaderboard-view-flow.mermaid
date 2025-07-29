@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API_Gateway
+    participant Auth_Service
+    participant Redis_SortedSet
+    participant SSE_Broker
+    participant Other_Clients
+
+    Note over User,Other_Clients: Leaderboard View Flow
+    User->>Frontend: Visit scoreboard page
+    Frontend->>API_Gateway: GET /api/v1/scores/leaderboard
+    API_Gateway->>Auth_Service: Validate JWT token
+    Auth_Service-->>API_Gateway: User authenticated
+    API_Gateway->>Redis_SortedSet: ZREVRANGE 0-9 WITHSCORES (get top 10)
+    Redis_SortedSet-->>API_Gateway: Top 10 leaderboard data
+    API_Gateway-->>Frontend: Leaderboard data
+    Frontend-->>User: Display scoreboard
+    
+    Note over Frontend,Other_Clients: SSE Connection for Real-time Updates
+    Frontend->>SSE_Broker: GET /api/v1/scores/events (SSE)
+    SSE_Broker->>Auth_Service: Validate JWT token
+    Auth_Service-->>SSE_Broker: User authenticated
+    SSE_Broker-->>Frontend: SSE connection established
+    Note over Frontend,Other_Clients: Client handles reconnection automatically
+    
+    Note over SSE_Broker,Other_Clients: Real-time Updates
+    SSE_Broker->>Frontend: SSE: scoreboard_update event
+    Frontend->>Frontend: Update UI with new leaderboard data
+    Frontend-->>User: Scoreboard updated in real-time 

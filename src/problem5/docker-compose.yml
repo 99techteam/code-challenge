@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: book-crud-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres_password
+      - DB_NAME=crud_server
+      - LOG_LEVEL=info
+      - ENABLE_OPENAPI=true
+      - ENABLE_SWAGGER_UI=true
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - book-api-network
+    volumes:
+      - app-logs:/app/logs
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: book-crud-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=crud_server
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - book-api-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d crud_server"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:
+    driver: local
+  app-logs:
+    driver: local
+
+networks:
+  book-api-network:
+    driver: bridge 

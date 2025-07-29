@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API_Gateway
+    participant Auth_Service
+    participant Score_Service
+    participant Redis_Streams
+
+    Note over User,Redis_Streams: Score Validation & Queuing Flow
+    User->>Frontend: Performs action (e.g., completes task)
+    Frontend->>API_Gateway: POST /api/v1/scores/update
+    Note over Frontend,API_Gateway: Request: { scoreIncrement: 10 }
+    
+    API_Gateway->>Auth_Service: Validate JWT token
+    Auth_Service-->>API_Gateway: User authenticated
+    Note over API_Gateway: Extract userId from JWT
+    
+    API_Gateway->>Score_Service: Process score update request
+    Note over Score_Service: Validate score increment
+    Score_Service->>Score_Service: Check if scoreIncrement > 0
+    Score_Service->>Score_Service: Check if scoreIncrement <= MAX_ALLOWED
+    Score_Service->>Score_Service: Validate user exists and active
+    
+    Score_Service->>Redis_Streams: XADD score_updates message
+    Note over Score_Service,Redis_Streams: Message: { userId, scoreIncrement, timestamp, requestId }
+    Redis_Streams-->>Score_Service: Message queued with ID
+    Note over Score_Service: Return message ID for tracking
+    
+    Score_Service-->>API_Gateway: Immediate acknowledgment
+    Note over API_Gateway: Return 200 OK with request ID
+    API_Gateway-->>Frontend: 200 OK with request ID
+    Note over Frontend: Show "Score update queued" message
+    Frontend-->>User: Score update queued 

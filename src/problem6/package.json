@@ -1,0 +1,31 @@
+{
+  "name": "scoreboard-api-specification",
+  "version": "1.0.0",
+  "description": "Real-time scoreboard API module specification with system design and architecture",
+  "main": "generate-diagram.js",
+  "scripts": {
+    "install-deps": "yarn install",
+    "generate-diagram": "node generate-diagram.js",
+    "generate-html": "node generate-html.js",
+    "view-docs": "yarn generate-html && open docs/index.html",
+    "setup": "yarn install --force && yarn generate-diagram && yarn generate-html"
+  },
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^11.6.0",
+    "highlight.js": "^11.11.1",
+    "marked": "^16.1.1",
+    "puppeteer": "^24.15.0"
+  },
+  "keywords": [
+    "scoreboard",
+    "api",
+    "system-design",
+    "redis",
+    "postgresql",
+    "sse",
+    "websocket"
+  ],
+  "author": "Jack Tran",
+  "license": "MIT",
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

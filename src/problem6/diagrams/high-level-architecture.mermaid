@@ -1,0 +1,51 @@
+graph TB
+    subgraph "Client Layer"
+        User[User]
+        Frontend[Frontend App]
+    end
+
+    subgraph "API Layer"
+        API_Gateway[API Gateway]
+        Auth_Service[Auth Service]
+    end
+
+    subgraph "Business Logic"
+        Score_Service[Score Service]
+        SSE_Broker[SSE Broker]
+    end
+
+    subgraph "Data Layer"
+        Redis_Streams[Redis Streams<br/>Message Queue]
+        MongoDB[MongoDB<br/>User Scores]
+        Redis_SortedSet[Redis Sorted Set<br/>Leaderboard Cache]
+        Redis_PubSub[Redis Pub/Sub<br/>Real-time Events]
+    end
+
+    subgraph "Processing"
+        Worker[Worker<br/>Async Processor]
+    end
+
+    %% Client connections
+    User --> Frontend
+    Frontend --> API_Gateway
+    Frontend --> SSE_Broker
+
+    %% API Gateway connections
+    API_Gateway --> Auth_Service
+    API_Gateway --> Score_Service
+
+    %% Score Service connections
+    Score_Service --> Redis_Streams
+
+    %% Worker connections
+    Worker --> Redis_Streams
+    Worker --> MongoDB
+    Worker --> Redis_SortedSet
+    Worker --> Redis_PubSub
+
+    %% SSE connections
+    SSE_Broker --> Auth_Service
+    SSE_Broker --> Redis_PubSub
+
+    %% Data flow
+    API_Gateway --> Redis_SortedSet 
