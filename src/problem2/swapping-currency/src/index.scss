@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  min-height: 100vh;
+}
+* {
+  scroll-margin-top: var(--nav-height);
+  --bottom-fixed-btn-height: 70px;
+}
+body {
+  font-family: "Inter", sans-serif !important;
+  background-color: black;
+  font-size: 14px !important;
+  color: white;
+  overflow-x: hidden;
+}

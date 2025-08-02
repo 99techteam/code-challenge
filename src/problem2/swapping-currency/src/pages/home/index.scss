@@ -1,0 +1,38 @@
+/* =======  COLORS you see on the mock-up  ======= */
+$from: #b6b454;
+$to  : #ff0fbc;
+
+/* ----- chữ “A SWAP” ----- */
+.boxed-style {
+  position:relative;
+  display:inline-block;
+  background:linear-gradient(90deg, $from, $to);
+  -webkit-background-clip:text;
+          background-clip:text;
+  color:transparent;
+  text-shadow:0 0 6px rgba($to, .45);
+
+  &:before {
+    content:"";
+    position:absolute;
+    inset:-.4em;
+    padding:2px;
+    border-radius: 6px;
+    background:linear-gradient(90deg, $from, $to);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    pointer-events:none;
+  }
+}
+
+.swap-button {
+  background: linear-gradient(to right, #b6b454 1%,#ff0fbc 100%);
+}
+
+.swap-form {
+
+
+}
