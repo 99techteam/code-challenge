@@ -84,18 +84,6 @@ const TokenSwap: React.FC = () => {
     }
   }, [tokens])
 
-
-  // useEffect(() => {
-  //   if (searchTerm) {
-  //     const filtered = tokens.filter(token =>
-  //       token.currency.toLowerCase().includes(searchTerm.toLowerCase())
-  //     );
-  //     setFilteredTokens(filtered);
-  //   } else {
-  //     setFilteredTokens(tokens);
-  //   }
-  // }, [searchTerm, tokens]);
-
   const handleSwap = () => {
     if (fromToken?.currency === toToken?.currency) {
       const errorMessage = 'Cannot swap the same token.';
