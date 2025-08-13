@@ -1,0 +1,29 @@
+sequenceDiagram
+  participant Client
+  participant Gateway
+  participant Auth Service
+  participant Action Producer
+  participant Primary Database
+  participant Message Broker
+  participant Action Consumer
+  participant R as Redis (SortedSet)
+  participant WS as WebSocket Server
+
+  Client ->> Gateway: Send authenticated request
+  Gateway ->> Auth Service: Validate JWT & permissions
+  Auth Service -->> Gateway: Auth result (success/failure)
+  alt Auth success
+    Gateway ->> Action Producer: Forward request to create action
+    Action Producer ->> Primary Database: Insert/Update score record
+    Primary Database -->> Action Producer: DB transaction success
+    Action Producer ->> Message Broker: Publish ActionCreated event
+  else Auth fail
+    Gateway -->> Client: Return 401 Unauthorized
+  end
+  Message Broker ->> Action Consumer: Consume ActionCreated event
+  Action Consumer ->> R: ZINCRBY update leaderboard score
+  Action Consumer ->> WS: Emit leaderboard updated message
+  WS ->> Client: Push updated leaderboard
+  Note over R: Redis stores leaderboard using SortedSet
+
+

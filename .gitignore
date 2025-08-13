@@ -1,0 +1,5 @@
+node_modules
+.env
+dist
+# yes beside using nvim as my main editor, I also use vscode for debugging, use the right tool for the right task XD 
+.vscode
