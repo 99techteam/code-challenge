@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* ---------- THEME TOKENS ---------- */
+
+:root{
+  --bg:#f6f8ff;
+  --surface:rgba(0,0,0,0.04);
+  --border:rgba(0,0,0,0.12);
+  --text:#0f172a;
+  --muted:#64748b;
+  --accent:#7c5cff;
+  --accent-2:#14b8a6;
+  --danger:#ef4444;
+
+  --select-bg:#f1f5f9;
+  --switch-track:linear-gradient(180deg,#edf2ff,#e7ecfd);
+  --knob-bg:#ffffff;
+  --knob-fg:#0f172a;
+
+  --shadow:0 20px 60px -20px rgba(0,0,0,.15);
+}
+
+html[data-theme="dark"]{
+  --bg:#0b0f19;
+  --surface:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.14);
+  --text:#e8eefb;
+  --muted:#a8b2c6;
+  --accent:#7c5cff;
+  --accent-2:#47e1a8;
+  --danger:#ff6b6b;
+
+  --select-bg:#0b1222cc;
+  --switch-track:linear-gradient(180deg,#1f2838,#111827);
+  --knob-bg:#0f172a;
+  --knob-fg:#e5e7eb;
+
+  --shadow:0 20px 60px -20px rgba(0,0,0,.45);
+}
+
+/* ---------- BASE ---------- */
+@layer base{
+  html,body,#root{ @apply h-full; }
+
+  body{
+    @apply m-0 font-sans;
+    color: var(--text);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, #6b8cff33, transparent 60%),
+      radial-gradient(1000px 500px at 110% 10%, #47e1a822, transparent 55%),
+      var(--bg);
+  }
+}
