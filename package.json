@@ -6,8 +6,10 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\"",
-    "format:check": "prettier --check \"src/**/*.ts\""
-
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "test": "node dist/problem4/test.js",
+    "test:problem4": "node dist/problem4/test.js",
+    "clean": "rm -rf dist"
   },
   "author": "",
   "license": "MIT",

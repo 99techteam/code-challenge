@@ -1,10 +1,19 @@
-# 99Tech Code Challenge #1 #
+# 99Tech Code Challenge
 
-Note that if you fork this repository, your responses may be publicly linked to this repo.  
-Please submit your application along with the solutions attached or linked.   
+## Problem 4: Sum from 1 to n
 
-It is important that you minimally attempt the problems, even if you do not arrive at a working solution.
+Three different ways to calculate sum from 1 to n:
 
-## Submission ##
-You can either provide a link to an online repository, attach the solution in your application, or whichever method you prefer.
-We're cool as long as we can view your solution without any pain.
+- `sum_to_n_a` - Math formula (fastest) - O(1)
+- `sum_to_n_b` - Basic loop - O(n) time, O(1) space
+- `sum_to_n_c` - Recursive - O(n) time and space
+
+## Running
+
+```bash
+npm install
+npm run build
+npm run test:problem4
+```
+
+See [src/problem4/](./src/problem4/) for the implementation.
