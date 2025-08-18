@@ -64,3 +64,35 @@ curl http://localhost:3000/api/resources
 - **Full Documentation**: [src/problem5/README.md](./src/problem5/README.md)
 - **API Testing**: Use [src/problem5/api-test.http](./src/problem5/api-test.http) with REST clients
 - **Project Structure**: Modern TypeScript/Express.js architecture with Sequelize ORM
+
+## Problem 6: Real-Time Scoreboard API Specification
+
+A comprehensive API specification for a real-time scoreboard system that displays top 10 user scores with live updates.
+
+### Features
+
+- **Real-time Updates**: WebSocket-based live scoreboard updates
+- **Secure Score Management**: JWT authentication with action verification
+- **Top 10 Leaderboard**: Public API endpoint for scoreboard display
+- **Anti-Cheat Protection**: Action replay prevention and rate limiting
+- **Database Design**: PostgreSQL schema with optimized indexing
+
+### Key Requirements
+
+1. **Scoreboard Display**: API endpoint to serve top 10 user scores
+2. **Live Updates**: Real-time scoreboard updates via WebSocket
+3. **Score Submission**: Secure API for updating user scores after actions
+4. **Authorization**: JWT-based authentication to prevent unauthorized score manipulation
+5. **Performance**: Caching and database optimization for high concurrency
+
+### API Endpoints
+
+- `GET /api/scoreboard` - Get top 10 scores (public)
+- `POST /api/scores` - Submit score update (authenticated)
+- `WS /ws/scoreboard` - WebSocket for real-time updates
+
+### Documentation
+
+- **Complete Specification**: [src/problem6/README.md](./src/problem6/README.md)
+- **API Testing**: Use [src/problem6/api-test.http](./src/problem6/api-test.http) with REST clients
+- **Architecture Diagram**: Visual flow diagram included in specification
