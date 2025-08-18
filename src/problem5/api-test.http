@@ -1,0 +1,229 @@
+###
+# Problem 5 API Test Suite
+# Use this file with REST clients like VS Code REST Client extension, IntelliJ HTTP Client, or Postman
+###
+
+@baseUrl = http://localhost:3000/api
+@contentType = application/json
+
+###
+# Health Check
+GET {{baseUrl}}/health
+
+###
+# Get All Resources (with pagination)
+GET {{baseUrl}}/resources?page=1&limit=10
+
+###
+# Get All Resources (with search and filters)
+GET {{baseUrl}}/resources?search=user&category=software&status=active&sort_by=created_at&sort_order=desc
+
+###
+# Get Resource by ID
+GET {{baseUrl}}/resources/1
+
+###
+# Create New Resource - Software
+POST {{baseUrl}}/resources
+Content-Type: {{contentType}}
+
+{
+  "name": "New Software Tool",
+  "description": "A comprehensive software development tool for modern applications",
+  "category": "software",
+  "status": "active",
+  "metadata": {
+    "version": "1.0.0",
+    "language": "TypeScript",
+    "framework": "Express.js"
+  }
+}
+
+###
+# Create New Resource - Hardware
+POST {{baseUrl}}/resources
+Content-Type: {{contentType}}
+
+{
+  "name": "Development Laptop",
+  "description": "High-performance laptop for software development",
+  "category": "hardware",
+  "status": "active",
+  "metadata": {
+    "brand": "Apple",
+    "model": "MacBook Pro",
+    "year": 2024,
+    "specs": {
+      "cpu": "M3 Pro",
+      "ram": "32GB",
+      "storage": "1TB SSD"
+    }
+  }
+}
+
+###
+# Create New Resource - Facility
+POST {{baseUrl}}/resources
+Content-Type: {{contentType}}
+
+{
+  "name": "Meeting Room B",
+  "description": "Large conference room with video conferencing capabilities",
+  "category": "facility",
+  "status": "active",
+  "metadata": {
+    "capacity": 20,
+    "equipment": ["projector", "whiteboard", "video_conference"],
+    "location": "2nd Floor"
+  }
+}
+
+###
+# Create New Resource - Document
+POST {{baseUrl}}/resources
+Content-Type: {{contentType}}
+
+{
+  "name": "API Documentation",
+  "description": "Comprehensive API documentation for the resource management system",
+  "category": "document",
+  "status": "active",
+  "metadata": {
+    "format": "markdown",
+    "pages": 50,
+    "last_updated": "2024-01-15"
+  }
+}
+
+###
+# Update Resource - Change Status
+PUT {{baseUrl}}/resources/1
+Content-Type: {{contentType}}
+
+{
+  "status": "inactive"
+}
+
+###
+# Update Resource - Full Update
+PUT {{baseUrl}}/resources/2
+Content-Type: {{contentType}}
+
+{
+  "name": "Updated Conference Room A",
+  "description": "Renovated conference room with new equipment",
+  "category": "facility",
+  "status": "active",
+  "metadata": {
+    "capacity": 15,
+    "equipment": ["4K projector", "smart whiteboard", "video_conference", "wireless_presentation"],
+    "location": "1st Floor",
+    "renovated": "2024-01-15"
+  }
+}
+
+###
+# Update Resource - Partial Update
+PUT {{baseUrl}}/resources/3
+Content-Type: {{contentType}}
+
+{
+  "description": "Updated description for the development server with enhanced specifications",
+  "metadata": {
+    "cpu": "Intel Xeon E5-2690",
+    "ram": "64GB DDR4",
+    "storage": "2TB NVMe SSD",
+    "os": "Ubuntu 22.04 LTS",
+    "updated": "2024-01-15"
+  }
+}
+
+###
+# Delete Resource
+DELETE {{baseUrl}}/resources/5
+
+###
+# Test Error Cases
+
+# Get Non-existent Resource (404)
+GET {{baseUrl}}/resources/999
+
+###
+# Create Resource with Invalid Data (400)
+POST {{baseUrl}}/resources
+Content-Type: {{contentType}}
+
+{
+  "name": "",
+  "description": "Missing name should cause validation error"
+}
+
+###
+# Create Resource with Invalid Status (400)
+POST {{baseUrl}}/resources
+Content-Type: {{contentType}}
+
+{
+  "name": "Test Resource",
+  "description": "Test description",
+  "category": "test",
+  "status": "invalid_status"
+}
+
+###
+# Create Resource with Missing Required Fields (400)
+POST {{baseUrl}}/resources
+Content-Type: {{contentType}}
+
+{
+  "name": "Incomplete Resource"
+}
+
+###
+# Update Non-existent Resource (404)
+PUT {{baseUrl}}/resources/999
+Content-Type: {{contentType}}
+
+{
+  "name": "This should fail"
+}
+
+###
+# Delete Non-existent Resource (404)
+DELETE {{baseUrl}}/resources/999
+
+###
+# Advanced Search Examples
+
+# Search by name
+GET {{baseUrl}}/resources?search=management
+
+###
+# Filter by category
+GET {{baseUrl}}/resources?category=software
+
+###
+# Filter by status
+GET {{baseUrl}}/resources?status=active
+
+###
+# Combined filters
+GET {{baseUrl}}/resources?category=facility&status=active&limit=5
+
+###
+# Sorting examples
+GET {{baseUrl}}/resources?sort_by=name&sort_order=asc
+
+###
+GET {{baseUrl}}/resources?sort_by=created_at&sort_order=desc
+
+###
+# Pagination examples
+GET {{baseUrl}}/resources?page=1&limit=3
+
+###
+GET {{baseUrl}}/resources?page=2&limit=3
+
+###
+# Complex query combining all parameters
+GET {{baseUrl}}/resources?search=system&category=software&status=active&sort_by=created_at&sort_order=desc&page=1&limit=5

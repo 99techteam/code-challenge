@@ -17,3 +17,50 @@ npm run test:problem4
 ```
 
 See [src/problem4/](./src/problem4/) for the implementation.
+
+## Problem 5: Modern ExpressJS v5 CRUD API
+
+A production-ready RESTful API built with ExpressJS v5, TypeScript, Sequelize ORM, and PostgreSQL.
+
+### Features
+
+- **Modern ExpressJS v5** with TypeScript
+- **Sequelize ORM** with PostgreSQL database
+- **Complete CRUD operations** for resource management
+- **Input validation** with Joi schemas
+- **Comprehensive error handling** with custom error classes
+- **Structured logging** with Pino
+- **Docker** containerization for easy deployment
+- **Automatic database initialization** with migrations and seeding
+- **Full type safety** with zero `any` types
+
+### Quick Start
+
+**One-command setup:**
+
+```bash
+cd src/problem5 && docker-compose up -d
+```
+
+The API will be available at `http://localhost:3000/api` with database automatically initialized.
+
+**Test the API:**
+
+```bash
+# Health check
+curl http://localhost:3000/api/health
+
+# Create a resource
+curl -X POST http://localhost:3000/api/resources \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Test Resource", "description": "Test", "category": "software", "status": "active"}'
+
+# List resources
+curl http://localhost:3000/api/resources
+```
+
+### Documentation
+
+- **Full Documentation**: [src/problem5/README.md](./src/problem5/README.md)
+- **API Testing**: Use [src/problem5/api-test.http](./src/problem5/api-test.http) with REST clients
+- **Project Structure**: Modern TypeScript/Express.js architecture with Sequelize ORM
