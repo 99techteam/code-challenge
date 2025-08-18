@@ -1,0 +1,19 @@
+{
+  "name": "99tech-code-challenge",
+  "version": "1.0.0",
+  "description": "99Tech Code Challenge Solutions",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\""
+
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "prettier": "^3.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
