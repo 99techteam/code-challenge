@@ -1,0 +1,47 @@
+{
+  "name": "problem5-express-api",
+  "version": "1.0.0",
+  "description": "Modern ExpressJS v5 CRUD API with PostgreSQL",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "db:migrate": "node dist/scripts/database.migrate.js",
+    "db:seed": "node dist/scripts/database.seed.js",
+    "db:setup": "node dist/scripts/database.setup.js",
+    "db:setup:force": "node dist/scripts/database.setup.js --force",
+    "db:init": "node dist/scripts/database.init.js"
+  },
+  "dependencies": {
+    "express": "^5.0.0",
+    "pg": "^8.11.3",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "joi": "^17.11.0",
+    "dotenv": "^16.3.1",
+    "compression": "^1.7.4",
+    "pino": "^8.17.0",
+    "pino-http": "^8.5.0",
+    "uuid": "^9.0.1",
+    "sequelize": "^6.35.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.0",
+    "@types/pg": "^8.10.9",
+    "@types/cors": "^2.8.17",
+    "@types/compression": "^1.7.5",
+    "@types/uuid": "^9.0.7",
+    "typescript": "^5.3.0",
+    "tsx": "^4.6.0",
+    "pino-pretty": "^10.3.0",
+    "@types/sequelize": "^4.28.20"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

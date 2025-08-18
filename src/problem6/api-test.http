@@ -1,0 +1,98 @@
+###
+# Scoreboard API Test Suite
+###
+
+@baseUrl = http://localhost:3000/api
+@contentType = application/json
+
+# Variables for authentication
+@accessToken = {{login.response.body.data.accessToken}}
+
+###
+# User Login
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "player1@example.com",
+  "password": "password123"
+}
+
+###
+# Get Leaderboard (Public)
+GET {{baseUrl}}/scoreboard
+
+###
+# Submit Score (Authenticated)
+POST {{baseUrl}}/scores
+Content-Type: {{contentType}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "score": 100,
+  "actionId": "action_123"
+}
+
+###
+# Submit Higher Score
+POST {{baseUrl}}/scores
+Content-Type: {{contentType}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "score": 250,
+  "actionId": "action_456"
+}
+
+###
+# Test Rate Limiting - Submit Multiple Scores
+POST {{baseUrl}}/scores
+Content-Type: {{contentType}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "score": 50,
+  "actionId": "action_789"
+}
+
+###
+# Error Testing - Invalid Score
+POST {{baseUrl}}/scores
+Content-Type: {{contentType}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "score": -100,
+  "actionId": "invalid_score"
+}
+
+###
+# Error Testing - Missing Action ID
+POST {{baseUrl}}/scores
+Content-Type: {{contentType}}
+Authorization: Bearer {{accessToken}}
+
+{
+  "score": 100
+}
+
+###
+# Error Testing - Unauthorized Access
+POST {{baseUrl}}/scores
+Content-Type: {{contentType}}
+
+{
+  "score": 100,
+  "actionId": "no_auth"
+}
+
+###
+# WebSocket Connection Test
+# Connect to: ws://localhost:3000/ws/scoreboard
+#
+# Example messages:
+# {"type": "subscribe", "channel": "leaderboard"}
+# {"type": "ping"}
+
+###
