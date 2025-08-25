@@ -1,0 +1,43 @@
+{
+  "name": "crude-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "nodemon",
+    "migration:create": "node scripts/database-cli.js migration",
+    "migration:run": "typeorm-ts-node-commonjs migration:run -d src/databases/datasource.ts",
+    "migration:revert": "typeorm-ts-node-commonjs migration:revert -d src/databases/datasource.ts",
+    "migration:show": "typeorm-ts-node-commonjs migration:show -d src/databases/datasource.ts",
+    "seed:create": "node scripts/database-cli.js seed",
+    "seed:run": "node scripts/database-cli.js seed-run",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.3.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "bcryptjs": "^3.0.2",
+    "class-transformer": "^0.5.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.26",
+    "typeorm-extension": "^3.7.1"
+  }
+}
