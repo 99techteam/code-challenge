@@ -62,7 +62,7 @@ export default function CurrencySelect({ tokens, value, onChange, label }: Props
               }}
             >
               <img
-                src={`./assets/icons/${t.currency}.svg`}
+                src={`${TOKEN_ICON_URL}${t.currency}.svg`}
                 alt={t.currency}
                 className="w-5 h-5"
               />
