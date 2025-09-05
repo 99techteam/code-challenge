@@ -1,0 +1,1004 @@
+{
+  "info": {
+    "name": "CRUD Server API",
+    "description": "Complete CRUD operations for User management with ExpressJS and TypeScript",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "apiVersion",
+      "value": "v1",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set base URL if not already set",
+          "if (!pm.environment.get('baseUrl')) {",
+          "    pm.environment.set('baseUrl', 'http://localhost:3000');",
+          "}",
+          "",
+          "// Set API version if not already set",
+          "if (!pm.environment.get('apiVersion')) {",
+          "    pm.environment.set('apiVersion', 'v1');",
+          "}"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the server is running and get basic information"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Server is running\",\n  \"timestamp\": \"2024-01-01T00:00:00.000Z\",\n  \"uptime\": 123.456,\n  \"version\": \"v1\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "API Info",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        },
+        "description": "Get API information and available endpoints"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Welcome to CRUD Server API\",\n  \"version\": \"v1\",\n  \"endpoints\": {\n    \"health\": \"/health\",\n    \"users\": \"/api/v1/users\"\n  },\n  \"features\": [\n    \"Create, Read, Update, Delete operations\",\n    \"User management with filters and pagination\",\n    \"SQLite database for data persistence\",\n    \"TypeScript for type safety\",\n    \"Input validation and error handling\"\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"age\": 30\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "{{apiVersion}}", "users"]
+            },
+            "description": "Create a new user with name, email, and age"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"age\": 30\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"User created successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"age\": 30,\n    \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n    \"updatedAt\": \"2024-01-01T00:00:00.000Z\"\n  }\n}"
+            },
+            {
+              "name": "Validation Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"J\",\n  \"email\": \"invalid-email\",\n  \"age\": 150\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Validation error\",\n  \"error\": \"Name must be at least 2 characters long\"\n}"
+            },
+            {
+              "name": "Email Already Exists",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"age\": 25\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Failed to create user\",\n  \"error\": \"Email already exists\"\n}"
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Extract user ID from response for use in other requests",
+                  "if (pm.response.code === 201) {",
+                  "    const responseJson = pm.response.json();",
+                  "    if (responseJson.data && responseJson.data.id) {",
+                  "        pm.environment.set('userId', responseJson.data.id);",
+                  "        console.log('User ID saved:', responseJson.data.id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "{{apiVersion}}", "users"]
+            },
+            "description": "Get all users with optional filters and pagination"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Users retrieved successfully\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"john.doe@example.com\",\n      \"age\": 30,\n      \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n      \"updatedAt\": \"2024-01-01T00:00:00.000Z\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1,\n    \"limit\": 10,\n    \"total\": 1,\n    \"totalPages\": 1\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Users with Filters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/{{apiVersion}}/users?name=John&minAge=25&maxAge=35&page=1&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "{{apiVersion}}", "users"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "John",
+                  "description": "Filter by name (partial match)"
+                },
+                {
+                  "key": "minAge",
+                  "value": "25",
+                  "description": "Minimum age filter"
+                },
+                {
+                  "key": "maxAge",
+                  "value": "35",
+                  "description": "Maximum age filter"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Items per page"
+                }
+              ]
+            },
+            "description": "Get users with filters: name, minAge, maxAge, and pagination"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users?name=John&minAge=25&maxAge=35&page=1&limit=5",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users"],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "John"
+                    },
+                    {
+                      "key": "minAge",
+                      "value": "25"
+                    },
+                    {
+                      "key": "maxAge",
+                      "value": "35"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Users retrieved successfully\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"john.doe@example.com\",\n      \"age\": 30,\n      \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n      \"updatedAt\": \"2024-01-01T00:00:00.000Z\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1,\n    \"limit\": 5,\n    \"total\": 1,\n    \"totalPages\": 1\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/{{apiVersion}}/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "{{apiVersion}}", "users", "{{userId}}"]
+            },
+            "description": "Get a specific user by their ID"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"User retrieved successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"age\": 30,\n    \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n    \"updatedAt\": \"2024-01-01T00:00:00.000Z\"\n  }\n}"
+            },
+            {
+              "name": "User Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/999",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "999"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"User not found\",\n  \"error\": \"No user found with the provided ID\"\n}"
+            },
+            {
+              "name": "Invalid ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/invalid",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "invalid"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Invalid user ID\",\n  \"error\": \"User ID must be a number\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Smith\",\n  \"age\": 31\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/{{apiVersion}}/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "{{apiVersion}}", "users", "{{userId}}"]
+            },
+            "description": "Update a user's information (partial update allowed)"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"John Smith\",\n  \"age\": 31\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"User updated successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"John Smith\",\n    \"email\": \"john.doe@example.com\",\n    \"age\": 31,\n    \"createdAt\": \"2024-01-01T00:00:00.000Z\",\n    \"updatedAt\": \"2024-01-01T12:00:00.000Z\"\n  }\n}"
+            },
+            {
+              "name": "User Not Found",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"John Smith\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/999",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "999"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"User not found\",\n  \"error\": \"No user found with the provided ID\"\n}"
+            },
+            {
+              "name": "Email Already Exists",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"existing@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "1"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Failed to update user\",\n  \"error\": \"Email already exists\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/{{apiVersion}}/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "{{apiVersion}}", "users", "{{userId}}"]
+            },
+            "description": "Delete a user by their ID"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"User deleted successfully\"\n}"
+            },
+            {
+              "name": "User Not Found",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/999",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "999"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"User not found\",\n  \"error\": \"No user found with the provided ID\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Test Scenarios",
+      "item": [
+        {
+          "name": "Complete CRUD Flow",
+          "item": [
+            {
+              "name": "1. Create User",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"age\": 25\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users"]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('User created successfully', function () {",
+                      "    pm.response.to.have.status(201);",
+                      "    const jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.success).to.be.true;",
+                      "    pm.expect(jsonData.data).to.have.property('id');",
+                      "    pm.environment.set('testUserId', jsonData.data.id);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "2. Get Created User",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/{{testUserId}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "{{testUserId}}"]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('User retrieved successfully', function () {",
+                      "    pm.response.to.have.status(200);",
+                      "    const jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.success).to.be.true;",
+                      "    pm.expect(jsonData.data.id).to.eql(parseInt(pm.environment.get('testUserId')));",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "3. Update User",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Test User\",\n  \"age\": 26\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/{{testUserId}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "{{testUserId}}"]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('User updated successfully', function () {",
+                      "    pm.response.to.have.status(200);",
+                      "    const jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.success).to.be.true;",
+                      "    pm.expect(jsonData.data.name).to.eql('Updated Test User');",
+                      "    pm.expect(jsonData.data.age).to.eql(26);",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "4. Delete User",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/{{testUserId}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "{{testUserId}}"]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('User deleted successfully', function () {",
+                      "    pm.response.to.have.status(200);",
+                      "    const jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.success).to.be.true;",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "5. Verify User Deleted",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users/{{testUserId}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users", "{{testUserId}}"]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('User not found after deletion', function () {",
+                      "    pm.response.to.have.status(404);",
+                      "    const jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.success).to.be.false;",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Validation Tests",
+          "item": [
+            {
+              "name": "Invalid Name (Too Short)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"J\",\n  \"email\": \"test@example.com\",\n  \"age\": 25\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users"]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Validation error for short name', function () {",
+                      "    pm.response.to.have.status(400);",
+                      "    const jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.success).to.be.false;",
+                      "    pm.expect(jsonData.error).to.include('Name must be at least 2 characters');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid Email Format",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"invalid-email\",\n  \"age\": 25\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users"]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Validation error for invalid email', function () {",
+                      "    pm.response.to.have.status(400);",
+                      "    const jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.success).to.be.false;",
+                      "    pm.expect(jsonData.error).to.include('valid email address');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid Age (Too High)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"test@example.com\",\n  \"age\": 150\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/{{apiVersion}}/users",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "{{apiVersion}}", "users"]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Validation error for invalid age', function () {",
+                      "    pm.response.to.have.status(400);",
+                      "    const jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.success).to.be.false;",
+                      "    pm.expect(jsonData.error).to.include('Age must not exceed 120');",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
