@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem 1: Three ways to sum to n</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .method {
+        background: #f8f9fa;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        border-left: 4px solid #007bff;
+      }
+      .method h3 {
+        margin-top: 0;
+        color: #007bff;
+      }
+      .code {
+        background: #2d3748;
+        color: #e2e8f0;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        margin: 10px 0;
+      }
+      .test-section {
+        margin-top: 30px;
+        padding: 20px;
+        background: #e8f5e8;
+        border-radius: 8px;
+      }
+      .test-input {
+        margin: 10px 0;
+      }
+      .test-input input {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-right: 10px;
+      }
+      .test-input button {
+        padding: 8px 16px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .test-input button:hover {
+        background: #0056b3;
+      }
+      .result {
+        margin: 10px 0;
+        padding: 10px;
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        border-radius: 4px;
+      }
+      .performance {
+        margin-top: 20px;
+        padding: 15px;
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 4px;
+      }
+      .complexity {
+        font-size: 0.9em;
+        color: #666;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Problem 1: Three ways to sum to n</h1>
+
+      <div class="method">
+        <h3>Method A: Iterative Approach (For Loop)</h3>
+        <div class="code">
+          var sum_to_n_a = function(n) { let sum = 0; for (let i = 1; i <= n;
+          i++) { sum += i; } return sum; };
+        </div>
+        <div class="complexity">
+          Time Complexity: O(n) | Space Complexity: O(1)
+        </div>
+      </div>
+
+      <div class="method">
+        <h3>Method B: Mathematical Formula (Most Efficient)</h3>
+        <div class="code">
+          var sum_to_n_b = function(n) { return n * (n + 1) / 2; };
+        </div>
+        <div class="complexity">
+          Time Complexity: O(1) | Space Complexity: O(1)
+        </div>
+      </div>
+
+      <div class="method">
+        <h3>Method C: Recursive Approach</h3>
+        <div class="code">
+          var sum_to_n_c = function(n) { if (n <= 0) return 0; if (n === 1)
+          return 1; return n + sum_to_n_c(n - 1); };
+        </div>
+        <div class="complexity">
+          Time Complexity: O(n) | Space Complexity: O(n)
+        </div>
+      </div>
+
+      <div class="test-section">
+        <h3>Test the Functions</h3>
+        <div class="test-input">
+          <label for="testValue">Enter a number (n):</label>
+          <input type="number" id="testValue" value="5" min="0" max="10000" />
+          <button onclick="testFunction()">Test All Methods</button>
+          <button onclick="runAllTests()">Run All Test Cases</button>
+        </div>
+        <div id="testResult"></div>
+      </div>
+
+      <div class="performance">
+        <h3>Performance Comparison</h3>
+        <button onclick="runPerformanceTest()">Run Performance Test</button>
+        <div id="performanceResult"></div>
+      </div>
+    </div>
+
+    <script src="solution.js"></script>
+    <script>
+      function testFunction() {
+        const n = parseInt(document.getElementById("testValue").value);
+        const resultDiv = document.getElementById("testResult");
+
+        if (isNaN(n) || n < 0) {
+          resultDiv.innerHTML =
+            '<div class="result" style="background: #f8d7da; border-color: #f5c6cb;">Please enter a valid non-negative number.</div>';
+          return;
+        }
+
+        const startTime = performance.now();
+        const resultA = sum_to_n_a(n);
+        const timeA = performance.now() - startTime;
+
+        const startTimeB = performance.now();
+        const resultB = sum_to_n_b(n);
+        const timeB = performance.now() - startTimeB;
+
+        let resultC, timeC;
+        if (n <= 10000) {
+          const startTimeC = performance.now();
+          resultC = sum_to_n_c(n);
+          timeC = performance.now() - startTimeC;
+        } else {
+          resultC = "Stack overflow (n too large)";
+          timeC = "N/A";
+        }
+
+        const html = `
+                <div class="result">
+                    <strong>Input: n = ${n}</strong><br>
+                    <strong>Expected: 1 + 2 + ... + ${n} = ${
+          (n * (n + 1)) / 2
+        }</strong><br><br>
+                    Method A (Iterative): ${resultA} (${timeA.toFixed(4)}ms)<br>
+                    Method B (Mathematical): ${resultB} (${timeB.toFixed(
+          4
+        )}ms)<br>
+                    Method C (Recursive): ${resultC} ${
+          timeC !== "N/A" ? `(${timeC.toFixed(4)}ms)` : ""
+        }<br><br>
+                    ${
+                      resultA === resultB &&
+                      (resultC === resultA ||
+                        resultC === "Stack overflow (n too large)")
+                        ? '<span style="color: green;">✅ All methods produce the same result!</span>'
+                        : '<span style="color: red;">❌ Results don\'t match!</span>'
+                    }
+                </div>
+            `;
+
+        resultDiv.innerHTML = html;
+      }
+
+      function runAllTests() {
+        const testCases = [0, 1, 5, 10, 100, 1000];
+        const resultDiv = document.getElementById("testResult");
+
+        let html = '<div class="result"><strong>Test Results:</strong><br><br>';
+        html += '<table style="width: 100%; border-collapse: collapse;">';
+        html +=
+          '<tr style="background: #f8f9fa;"><th style="border: 1px solid #ddd; padding: 8px;">n</th><th style="border: 1px solid #ddd; padding: 8px;">Method A</th><th style="border: 1px solid #ddd; padding: 8px;">Method B</th><th style="border: 1px solid #ddd; padding: 8px;">Method C</th><th style="border: 1px solid #ddd; padding: 8px;">Status</th></tr>';
+
+        testCases.forEach((n) => {
+          const resultA = sum_to_n_a(n);
+          const resultB = sum_to_n_b(n);
+          let resultC;
+          if (n <= 10000) {
+            resultC = sum_to_n_c(n);
+          } else {
+            resultC = "N/A";
+          }
+
+          const allMatch =
+            resultA === resultB && (resultC === resultA || resultC === "N/A");
+          const status = allMatch ? "✅" : "❌";
+
+          html += `<tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">${n}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">${resultA}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">${resultB}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">${resultC}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">${status}</td>
+                </tr>`;
+        });
+
+        html += "</table></div>";
+        resultDiv.innerHTML = html;
+      }
+
+      function runPerformanceTest() {
+        const resultDiv = document.getElementById("performanceResult");
+        const n = 100000;
+        const iterations = 1000;
+
+        resultDiv.innerHTML =
+          '<div class="result">Running performance test...</div>';
+
+        setTimeout(() => {
+          let html = '<div class="result">';
+          html += `<strong>Performance Test (n=${n}, ${iterations} iterations):</strong><br><br>`;
+
+          // Test Method A
+          const startA = performance.now();
+          for (let i = 0; i < iterations; i++) {
+            sum_to_n_a(n);
+          }
+          const timeA = performance.now() - startA;
+
+          // Test Method B
+          const startB = performance.now();
+          for (let i = 0; i < iterations; i++) {
+            sum_to_n_b(n);
+          }
+          const timeB = performance.now() - startB;
+
+          html += `Method A (Iterative): ${timeA.toFixed(2)}ms<br>`;
+          html += `Method B (Mathematical): ${timeB.toFixed(2)}ms<br>`;
+          html += `Method C (Recursive): Skipped (would cause stack overflow)<br><br>`;
+          html += `<strong>Winner: Method B is ${(timeA / timeB).toFixed(
+            1
+          )}x faster!</strong>`;
+          html += "</div>";
+
+          resultDiv.innerHTML = html;
+        }, 100);
+      }
+    </script>
+  </body>
+</html>

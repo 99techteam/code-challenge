@@ -1,0 +1,484 @@
+{
+  "info": {
+    "name": "Live Scoreboard API",
+    "description": "Complete API collection for Live Scoreboard System with Real-time Updates and Security",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "username",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health"]
+        },
+        "description": "Check if the scoreboard server is running"
+      },
+      "response": []
+    },
+    {
+      "name": "Root Endpoint",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        },
+        "description": "Get API information and available endpoints"
+      },
+      "response": []
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.success && response.data.token) {",
+                  "        pm.collectionVariables.set('token', response.data.token);",
+                  "        pm.collectionVariables.set('userId', response.data.user.id);",
+                  "        pm.collectionVariables.set('username', response.data.user.username);",
+                  "        console.log('Token saved:', response.data.token);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Register a new user account"
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.success && response.data.token) {",
+                  "        pm.collectionVariables.set('token', response.data.token);",
+                  "        pm.collectionVariables.set('userId', response.data.user.id);",
+                  "        pm.collectionVariables.set('username', response.data.user.username);",
+                  "        console.log('Token saved:', response.data.token);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Login with existing user credentials"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "profile"]
+            },
+            "description": "Get current user profile (requires authentication)"
+          },
+          "response": []
+        }
+      ],
+      "description": "User authentication endpoints"
+    },
+    {
+      "name": "Scoreboard",
+      "item": [
+        {
+          "name": "Get Scoreboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/scores/scoreboard",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "scores", "scoreboard"]
+            },
+            "description": "Get top 10 scores (public endpoint)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/scores/statistics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "scores", "statistics"]
+            },
+            "description": "Get score statistics (public endpoint)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Score",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"completed_mission\",\n  \"scoreIncrement\": 100,\n  \"timestamp\": {{timestamp}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/scores/update",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "scores", "update"]
+            },
+            "description": "Update user score (requires authentication)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Score",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/scores/my-score",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "scores", "my-score"]
+            },
+            "description": "Get current user's score and rank"
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Recent Scores",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/scores/my-recent?limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "scores", "my-recent"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            },
+            "description": "Get user's recent score history"
+          },
+          "response": []
+        }
+      ],
+      "description": "Scoreboard and score management endpoints"
+    },
+    {
+      "name": "WebSocket Testing",
+      "item": [
+        {
+          "name": "WebSocket Connection Test",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            },
+            "description": "Test WebSocket connection at ws://localhost:3000"
+          },
+          "response": []
+        }
+      ],
+      "description": "WebSocket testing endpoints"
+    },
+    {
+      "name": "Sample Data",
+      "item": [
+        {
+          "name": "Create Test Users",
+          "item": [
+            {
+              "name": "Register User 1",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"player1\",\n  \"email\": \"player1@example.com\",\n  \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "register"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register User 2",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"player2\",\n  \"email\": \"player2@example.com\",\n  \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "register"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register User 3",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"player3\",\n  \"email\": \"player3@example.com\",\n  \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "register"]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "Create test users for scoreboard"
+        }
+      ],
+      "description": "Sample data creation for testing"
+    },
+    {
+      "name": "Error Examples",
+      "item": [
+        {
+          "name": "Register - Validation Error",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"ab\",\n  \"email\": \"invalid-email\",\n  \"password\": \"123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Example of validation errors"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Score - Unauthorized",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"test_action\",\n  \"scoreIncrement\": 50,\n  \"timestamp\": {{timestamp}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/scores/update",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "scores", "update"]
+            },
+            "description": "Example of unauthorized score update"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Score - Invalid Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"test_action\",\n  \"scoreIncrement\": -50,\n  \"timestamp\": {{timestamp}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/scores/update",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "scores", "update"]
+            },
+            "description": "Example of invalid score data"
+          },
+          "response": []
+        }
+      ],
+      "description": "Examples of error responses"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set timestamp for score updates",
+          "pm.globals.set('timestamp', Date.now());",
+          "console.log('Timestamp set:', pm.globals.get('timestamp'));"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Basic response validation",
+          "pm.test('Response time is less than 2000ms', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+          "});",
+          "",
+          "pm.test('Response has success field', function () {",
+          "    const jsonData = pm.response.json();",
+          "    pm.expect(jsonData).to.have.property('success');",
+          "});",
+          "",
+          "// Log response for debugging",
+          "console.log('Response:', pm.response.json());"
+        ]
+      }
+    }
+  ]
+}

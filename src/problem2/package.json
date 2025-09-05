@@ -1,0 +1,22 @@
+{
+  "name": "switcheo-swap",
+  "version": "1.0.0",
+  "description": "Fancy Currency Swap Form",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.19"
+  },
+  "keywords": [
+    "swap",
+    "crypto",
+    "tokens",
+    "defi"
+  ],
+  "author": "Switcheo",
+  "license": "MIT"
+}
