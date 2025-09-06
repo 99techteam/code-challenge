@@ -1,0 +1,9 @@
+{
+  "name": "product",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/product/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project product --web",
+  "targets": {}
+}

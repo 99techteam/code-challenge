@@ -1,0 +1,22 @@
+{
+  "output": {
+    "filePath": "repomix-output.txt",
+    "style": "plain",
+    "headerText": "Custom header information for the packed file.",
+    "removeComments": false,
+    "removeEmptyLines": false,
+    "showLineNumbers": false,
+    "copyToClipboard": true,
+    "topFilesLength": 5,
+    "includeEmptyDirectories": false
+  },
+  "include": ["**/*"],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": ["additional-folder", "**/*.log", "prisma/migrations"]
+  },
+  "security": {
+    "enableSecurityCheck": true
+  }
+}
