@@ -1,0 +1,30 @@
+{
+  "name": "problem4-sum-to-n",
+  "version": "1.0.0",
+  "description": "Problem 4: Three implementations to compute sum to n - arithmetic formula, iteration, and recursion",
+  "main": "solution.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "dev": "ts-node solution.ts"
+  },
+  "keywords": [
+    "algorithms",
+    "mathematics",
+    "recursion",
+    "iteration"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.3.3",
+    "jest": "^30.1.3",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}

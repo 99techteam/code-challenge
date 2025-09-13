@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database Option
+  postgres:
+    image: postgres:15-alpine
+    container_name: crud-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-crud_api}
+      POSTGRES_USER: ${POSTGRES_USER:-crud_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-crud_password}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/init-postgres.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-crud_user} -d ${POSTGRES_DB:-crud_api}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MySQL Database Option
+  mysql:
+    image: mysql:8.0
+    container_name: crud-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-crud_api}
+      MYSQL_USER: ${MYSQL_USER:-crud_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-crud_password}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql/init-mysql.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root_password}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis for Caching (Optional)
+  redis:
+    image: redis:7-alpine
+    container_name: crud-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Admin Tools
+  adminer:
+    image: adminer:latest
+    container_name: crud-adminer
+    restart: unless-stopped
+    ports:
+      - "${ADMINER_PORT:-8080}:8080"
+    depends_on:
+      - postgres
+      - mysql
+
+volumes:
+  postgres_data:
+    driver: local
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
