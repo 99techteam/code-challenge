@@ -1,0 +1,25 @@
+.form-section {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.swap-button {
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  background-color: #646cff;
+  color: white;
+  cursor: pointer;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
