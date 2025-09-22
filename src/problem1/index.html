@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summation Methods Demo</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main Container Card -->
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-2xl">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-extrabold text-white mb-2">#Prolem 1: Demo</h1>
+            <p class="text-gray-400">Comparing three unique ways to calculate the sum of integers up to N.</p>
+        </header>
+
+        <!-- Input and Button Section -->
+        <div class="flex flex-col items-center gap-4 mb-8">
+            <label for="number-input" class="text-lg font-medium text-gray-300">Enter an integer (N):</label>
+            <input
+                id="number-input"
+                type="number"
+                value="5"
+                class="w-full max-w-xs px-4 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+            />
+            <button
+                id="calculate-btn"
+                class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full shadow-md transition-all duration-200 transform hover:scale-105"
+            >
+                Calculate Sums
+            </button>
+        </div>
+
+        <!-- Results Display Grid -->
+        <div id="results-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            
+            <!-- Result Block A (Iterative) -->
+            <div class="bg-gray-700 p-6 rounded-xl shadow-md">
+                <h3 class="text-xl font-semibold text-white mb-2">Method A (Iterative approach)</h3>
+                <p class="text-gray-400 mb-4">Uses a simple `for` loop.</p>
+                <div class="text-3xl font-bold text-blue-400" id="result-a"></div>
+            </div>
+
+            <!-- Result Block B (Recursive) -->
+            <div class="bg-gray-700 p-6 rounded-xl shadow-md">
+                <h3 class="text-xl font-semibold text-white mb-2">Method B (Formulaic approach)</h3>
+                <p class="text-gray-400 mb-4">Arithmetic series formula.</p>
+                <div class="text-3xl font-bold text-green-400" id="result-b"></div>
+            </div>
+
+            <!-- Result Block C (Formulaic) -->
+            <div class="bg-gray-700 p-6 rounded-xl shadow-md">
+                <h3 class="text-xl font-semibold text-white mb-2">Method C (Functional approach)</h3>
+                <p class="text-gray-400 mb-4">Using Array reduce method.</p>
+                <div class="text-3xl font-bold text-purple-400" id="result-c"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./3waysofsum.js"></script>
+</body>
+</html>
