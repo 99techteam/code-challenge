@@ -1,4 +1,4 @@
-<h1 align="center">Crypo Exchange</h1>
+# Problem 2: Crypo Exchange
 
 # Usage
 Based on your package manager:
