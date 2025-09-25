@@ -1,0 +1,24 @@
+{
+  "name": "99t",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haipv2/test-99t.git"
+  },
+  "author": "HG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haipv2/test-99t/issues"
+  },
+  "homepage": "https://github.com/haipv2/test-99t#readme",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.2"
+  }
+}
