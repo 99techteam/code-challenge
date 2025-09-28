@@ -1,0 +1,33 @@
+@startuml
+
+title User Complete Action Flow
+
+actor Client
+
+Client -> Controller : Complete action
+alt Token is invalid
+Authorizer --> Client : 401 Unauthorized
+else Token is valid
+Authorizer --> Controller : Token Validated
+Controller -> Controller: Validate action_id and data
+Controller -> Service : Process action
+Service -> Database : Validate and fetch required data
+Database --> Service : Data validation result
+
+alt Action is invalid
+Service --> Controller : 400 Bad Request
+else Action is valid
+alt Transaction
+Service -> Database : Add user action hisroty
+Service -> Database : Increase user score
+Database --> Service : Update success
+end
+Service -> SQS_FIFO : Dispatch refresh board
+Service --> Controller : Action processed successfully
+
+end
+
+Controller --> Client : Response (Success or Error)
+end
+
+@enduml

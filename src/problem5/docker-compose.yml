@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  postgres_db:
+    image: postgres:13.5
+    container_name: nhan99tech_postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=nhan99tech
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  postgres_db:
+    driver: local

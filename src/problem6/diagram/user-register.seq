@@ -1,0 +1,22 @@
+@startuml
+title User Registration Flow
+
+actor Client
+
+Client -> Controller : POST /auth/register
+Controller -> Controller: Validate inputs
+Controller -> Service : Register new user
+Service -> Database: Check if user already exists
+
+alt User already exists
+Service --> Controller: 409 Conflict
+else User does not exist
+Service -> Service: Hash password
+Service -> Database: Save new user info
+Database --> Service: Success
+Service --> Controller: Registration successful
+end
+
+Controller --> Client: Response (Success or Error)
+
+@enduml

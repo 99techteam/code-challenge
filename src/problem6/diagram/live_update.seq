@@ -1,0 +1,19 @@
+@startuml
+
+title Live Update Scoreboard
+
+actor Client
+
+Client -> Websocket_API : Connect to WebSocket
+Websocket_API -> Connect_Lambda : Handle Connect/Disconnect Event
+Connect_Lambda -> Connections_DynamoDB : Update Active Connections
+
+== Notification Flow ==
+SQS --> Message_Lambda : Receive Notification Message
+Message_Lambda -> Scoreboard_Dynamodb : Retrieve top 10 users
+Message_Lambda -> Connections_DynamoDB : Get Active Connections
+Connections_DynamoDB --> Message_Lambda : Active Connections
+Message_Lambda --> Websocket_API : Send Updates to Connected Clients
+Websocket_API --> Client : Push Live Score Updates
+
+@enduml

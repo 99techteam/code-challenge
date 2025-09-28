@@ -1,0 +1,13 @@
+@startuml
+title Refresh Scoreboard Flow
+
+
+SQS -> Service : notify changes (with user_id)
+Service -> RDS: Get user scrore
+RDS --> Service: User info
+Service -> Dynamodb : Upsert user score
+Dynamodb --> Service: response
+
+
+@enduml
+

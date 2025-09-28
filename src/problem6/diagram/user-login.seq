@@ -1,0 +1,21 @@
+@startuml
+title User Login Flow to Get JWT Token
+
+actor Client
+
+Client -> Controller : GET /auth/login
+Controller -> Controller: Validate inputs
+Controller -> Service : login
+Service -> Database: Get user by email
+Database --> Service: User info
+
+alt User does not exist or password validation fails
+   Service --> Controller: 401 Unauthorized
+else User exists and password is valid
+   Service --> Controller: User JWT token
+end
+
+Controller --> Client: User JWT token
+
+@enduml
+
