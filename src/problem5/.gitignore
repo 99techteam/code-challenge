@@ -1,0 +1,37 @@
+# OS X
+.DS_Store*
+Icon?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+*~
+
+
+# npm
+node_modules
+package-lock.json
+*.lock
+*.log
+*.gz
+
+.env.development
+
+
+# Coveralls
+coverage
+
+# Benchmarking
+benchmarks/graphs
+
+docker/.localstack
+.husky
+
+#bundle
+dist
+docker/config

@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_DB: crude
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "15432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
