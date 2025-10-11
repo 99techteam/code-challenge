@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Swap</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔄 Swap</h1>
+
+      <form id="swapForm">
+        <div class="swap-card" id="fromCard">
+          <div class="card-header">
+            <span class="card-label">You pay</span>
+            <span class="balance">Balance: <span>100.00</span></span>
+          </div>
+          <div class="card-body">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                class="amount-input"
+                id="fromAmount"
+                placeholder="0.0"
+                autocomplete="off"
+              />
+            </div>
+            <div class="token-selector">
+              <div class="token-icon" id="fromIcon">
+                <img
+                  src="/tokens/ETH.svg"
+                  width="20px"
+                  height="20px"
+                  alt="ETH"
+                />
+              </div>
+              <span class="token-symbol" id="fromSymbol">ETH</span>
+              <span class="chevron">▼</span>
+            </div>
+          </div>
+          <div class="error-message" id="fromError"></div>
+        </div>
+
+        <div class="swap-divider">
+          <div class="swap-button">⇅</div>
+        </div>
+
+        <div class="swap-card" id="toCard">
+          <div class="card-header">
+            <span class="card-label">You receive</span>
+            <span class="balance">Balance: 0.00</span>
+          </div>
+          <div class="card-body">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                class="amount-input"
+                id="toAmount"
+                placeholder="0.0"
+                readonly
+              />
+            </div>
+            <div class="token-selector">
+              <div class="token-icon" id="toIcon">
+                <img
+                  src="/tokens/USDC.svg"
+                  width="20px"
+                  height="20px"
+                  alt="USDC"
+                />
+              </div>
+              <span class="token-symbol" id="toSymbol">USDC</span>
+              <span class="chevron">▼</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exchange-info" id="exchangeInfo">
+          <div class="info-row">
+            <span class="info-label">Exchange rate</span>
+            <span class="info-value" id="exchangeRate">-</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Price impact</span>
+            <span class="info-value" id="priceImpact">&lt; 0.01%</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Network fee</span>
+            <span class="info-value">~$2.50</span>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="confirm-button"
+          id="confirmButton"
+          disabled
+        >
+          Enter an amount
+        </button>
+      </form>
+    </div>
+
+    <div class="modal" id="tokenModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">Select a token</span>
+          <button class="close-button">×</button>
+        </div>
+        <input
+          type="text"
+          class="search-input"
+          id="tokenSearch"
+          placeholder="Search name or symbol"
+        />
+        <div class="token-list" id="tokenList">
+          <div class="loading">Loading tokens...</div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
