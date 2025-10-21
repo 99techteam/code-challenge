@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .tokenSelect {
+    width: 100%;
+  }
+
+  @media (min-width: 512px) {
+    flex-direction: row;
+
+    .tokenSelect {
+      width: 200px;
+    }
+  }
+
+  .input {
+    flex: 1;
+    width: 100%;
+  }
+}

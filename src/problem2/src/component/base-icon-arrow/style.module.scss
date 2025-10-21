@@ -1,0 +1,33 @@
+.container {
+  width: 10px;
+  height: 10px;
+  position: relative;
+  transition: transform 0.35s ease-in-out;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #c1c2c3;
+  }
+
+  &::before {
+    left: 4px;
+    transform: rotate(90deg);
+    top: 4px;
+  }
+
+  &::after {
+    bottom: 0;
+  }
+
+  &.direction-up {
+    transform: rotate(225deg);
+  }
+
+  &.direction-down {
+    transform: rotate(45deg);
+  }
+}
