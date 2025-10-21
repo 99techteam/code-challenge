@@ -1,0 +1,52 @@
+select,
+input {
+  outline: none;
+  border: 1px solid rgb(57, 57, 172, .5);
+  border-radius: 12px;
+  padding: 8px 12px;
+  width: fit-content;
+}
+
+select:focus,
+input:focus {
+  outline: 2px solid rgba(57, 57, 172, .5);
+}
+
+.input-container {
+  max-width: 768px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.submit-button {
+  text-align: start;
+}
+
+.swap-button,
+.submit-button {
+  border-radius: 8px;
+  padding: 12px;
+  width: fit-content;
+  color: white;
+  border: none;
+  cursor: pointer;
+  background: rgb(57, 57, 172, .5);
+}
+
+.currency-picker-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.currency-picker-container img {
+  width: 40px;
+  height: 40px;
+}
+
+.image-container-start,
+.image-container-end {
+  height: 40px;
+}
