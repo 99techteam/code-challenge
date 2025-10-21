@@ -1,0 +1,22 @@
+.container {
+  &.type-heading {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 800;
+    color: #202426;
+    margin-bottom: 16px;
+  }
+
+  &.type-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 4px;
+  }
+
+  &.type-subTitle {
+    font-size: 10px;
+    font-weight: 400;
+    color: #445566;
+  }
+}
