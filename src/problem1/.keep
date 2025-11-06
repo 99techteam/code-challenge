@@ -1,0 +1,30 @@
+var sum_to_n_a = function(n) {
+  n = Number(n);
+  if (!Number.isFinite(n)) return 0;
+  n = Math.trunc(n);
+  if (n <= 0) return 0;
+  return (n * (n + 1)) / 2;
+};
+
+var sum_to_n_b = function(n) {
+  n = Number(n);
+  if (!Number.isFinite(n)) return 0;
+  n = Math.trunc(n);
+  if (n <= 0) return 0;
+  var sum = 0;
+  for (var i = 1; i <= n; i++) {
+    sum += i;
+  }
+  return sum;
+};
+
+var sum_to_n_c = function(n) {
+  n = Number(n);
+  if (!Number.isFinite(n)) return 0;
+  n = Math.trunc(n);
+  if (n <= 0) return 0;
+  return Array.from({ length: n }, function(_, i) { return i + 1; })
+    .reduce(function(accumulator, value) { return accumulator + value; }, 0);
+};
+
+

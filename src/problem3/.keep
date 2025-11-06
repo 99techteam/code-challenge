@@ -1,0 +1,130 @@
+### Computational inefficiencies and anti-patterns
+
+- **Type errors / unsafe types**
+  - `WalletBalance` lacks `blockchain`, but code reads `balance.blockchain`.
+  - `getPriority(blockchain: any)` uses `any` instead of a typed union.
+  - `rows` maps over `sortedBalances` yet types each item as `FormattedWalletBalance`; also reads `balance.formatted` before it exists.
+- **Broken filter predicate**
+  - Uses undefined `lhsPriority` instead of `balancePriority`.
+  - Returns items with `amount <= 0`; typically you want strictly positive balances.
+  - Multiple nested `if`/early returns reduce clarity and correctness.
+- **Sort comparator defects**
+  - Does not return `0` for equal priority; has code paths with no return value.
+  - Recomputes priority repeatedly inside comparator; compute once per item or cache.
+- **Incorrect memoization dependencies**
+  - `useMemo(..., [balances, prices])` even though `prices` are not used in the memo.
+- **Formatting issues**
+  - `toFixed()` default (0 dp) is poor for token balances; prefer `toLocaleString` with a sensible max fraction digits.
+- **Keys**
+  - Uses `key={index}`; prefer a stable identifier like `currency`.
+- **Null/undefined safety**
+  - `prices[balance.currency]` may be `undefined` -> NaN computations. Use `?? 0` or filter by priced tokens.
+- **Dead/unnecessary code**
+  - Destructures `children` but never uses it.
+  - References `classes.row` without a defined `classes`.
+- **Magic numbers scattered**
+  - Priority scores hardcoded in a `switch`; prefer a typed constant map.
+
+### Refactored (typed, safe, efficient)
+
+```typescript
+import React, { useMemo } from 'react';
+
+type Blockchain = 'Osmosis' | 'Ethereum' | 'Arbitrum' | 'Zilliqa' | 'Neo';
+
+interface WalletBalance {
+  currency: string;
+  amount: number;
+  blockchain: Blockchain;
+}
+
+interface FormattedWalletBalance extends WalletBalance {
+  formatted: string;
+}
+
+type Prices = Record<string, number>;
+
+interface Props {
+  // extend with BoxProps if needed
+}
+
+const PRIORITY_BY_CHAIN: Record<Blockchain, number> = {
+  Osmosis: 100,
+  Ethereum: 50,
+  Arbitrum: 30,
+  Zilliqa: 20,
+  Neo: 20,
+};
+
+function getPriority(blockchain: Blockchain): number {
+  return PRIORITY_BY_CHAIN[blockchain] ?? -99;
+}
+
+// Replace with your actual hooks
+declare function useWalletBalances(): WalletBalance[];
+declare function usePrices(): Prices;
+
+const WalletPage: React.FC<Props> = (props) => {
+  const { /* children, */ ...rest } = props;
+
+  const balances = useWalletBalances();
+  const prices = usePrices();
+
+  const sortedBalances = useMemo(() => {
+    const filtered = balances.filter((b) => b.amount > 0 && getPriority(b.blockchain) > -99);
+    return [...filtered].sort((lhs, rhs) => {
+      const lp = getPriority(lhs.blockchain);
+      const rp = getPriority(rhs.blockchain);
+      if (lp > rp) return -1;
+      if (lp < rp) return 1;
+      return 0;
+    });
+  }, [balances]);
+
+  const formattedBalances: FormattedWalletBalance[] = useMemo(() => {
+    return sortedBalances.map((b) => ({
+      ...b,
+      formatted: b.amount.toLocaleString(undefined, { maximumFractionDigits: 6 }),
+    }));
+  }, [sortedBalances]);
+
+  const rows = useMemo(() => {
+    return formattedBalances.map((balance) => {
+      const price = prices[balance.currency] ?? 0;
+      const usdValue = price * balance.amount;
+      return (
+        <WalletRow
+          key={balance.currency}
+          amount={balance.amount}
+          usdValue={usdValue}
+          formattedAmount={balance.formatted}
+        />
+      );
+    });
+  }, [formattedBalances, prices]);
+
+  return <div {...rest}>{rows}</div>;
+};
+
+// Example row component for completeness
+interface WalletRowProps {
+  amount: number;
+  usdValue: number;
+  formattedAmount: string;
+  className?: string;
+}
+const WalletRow: React.FC<WalletRowProps> = ({ amount, usdValue, formattedAmount, className }) => {
+  return (
+    <div className={className}>
+      <div>{formattedAmount}</div>
+      <div>
+        ${usdValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+      </div>
+    </div>
+  );
+};
+
+export default WalletPage;
+```
+
+

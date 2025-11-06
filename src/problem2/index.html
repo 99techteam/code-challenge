@@ -1,26 +1,80 @@
 <html>
 
 <head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
-
-  <!-- You may add more stuff here -->
+  <title>Swap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="style.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://raw.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
 </head>
 
 <body>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+  <div class="page">
+    <div class="card">
+      <div class="card-header">
+        <div class="title">Swap</div>
+        <div class="subtitle">Swap one asset to another using live prices</div>
+      </div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+      <form id="swap-form" novalidate>
+        <div class="row">
+          <label class="row-label">You pay</label>
+          <div class="input-group">
+            <button type="button" class="token-select" id="from-token-btn">
+              <img id="from-token-icon" alt="" />
+              <span id="from-token-symbol">—</span>
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"></path></svg>
+            </button>
+            <input id="from-amount" inputmode="decimal" autocomplete="off" placeholder="0.0" />
+          </div>
+          <div class="help-row">
+            <div class="balance" id="from-balance">Balance: —</div>
+            <button type="button" class="link" id="set-max">Max</button>
+          </div>
+        </div>
 
-    <button>CONFIRM SWAP</button>
-  </form>
+        <div class="switcher">
+          <button type="button" id="switch-btn" aria-label="Switch tokens">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11v2H7v3L2 8l5-4v3zm10 7H6v-2h11v-3l5 4-5 4v-3z"></path></svg>
+          </button>
+        </div>
+
+        <div class="row">
+          <label class="row-label">You receive</label>
+          <div class="input-group">
+            <button type="button" class="token-select" id="to-token-btn">
+              <img id="to-token-icon" alt="" />
+              <span id="to-token-symbol">—</span>
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"></path></svg>
+            </button>
+            <input id="to-amount" inputmode="decimal" autocomplete="off" placeholder="0.0" />
+          </div>
+        </div>
+
+        <div class="info">
+          <div class="info-row"><span>Rate</span><span id="rate">—</span></div>
+          <div class="info-row"><span>Estimated fee</span><span id="fee">—</span></div>
+          <div class="info-row">
+            <label for="slippage">Slippage</label>
+            <div class="slippage">
+              <input id="slippage" type="number" min="0" max="5" step="0.1" value="0.5" />
+              <span>%</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="errors" class="errors" role="alert" aria-live="assertive"></div>
+
+        <button id="submit" type="submit" class="primary">
+          <span class="btn-label">Confirm Swap</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
 
