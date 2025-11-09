@@ -1,0 +1,165 @@
+### CRUD API Examples
+### You can use this file with VS Code REST Client extension or similar tools
+
+@baseUrl = http://localhost:3000
+@apiUrl = {{baseUrl}}/api/resources
+@apiKey = test-api-key-12345
+
+### Health Check (No authentication required)
+GET {{baseUrl}}/health
+
+### Create a new resource
+POST {{apiUrl}}
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "Laptop",
+  "description": "High-performance laptop",
+  "category": "electronics",
+  "status": "active"
+}
+
+### Create another resource
+POST {{apiUrl}}
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "TypeScript Handbook",
+  "description": "Learn TypeScript from scratch",
+  "category": "books",
+  "status": "active"
+}
+
+### Create resource with minimal data
+POST {{apiUrl}}
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "Wireless Mouse"
+}
+
+### List all resources
+GET {{apiUrl}}
+x-api-key: {{apiKey}}
+
+### List resources with filters - by category
+GET {{apiUrl}}?category=electronics
+x-api-key: {{apiKey}}
+
+### List resources with filters - by name (partial match)
+GET {{apiUrl}}?name=Type
+x-api-key: {{apiKey}}
+
+### List resources with filters - by status
+GET {{apiUrl}}?status=active
+x-api-key: {{apiKey}}
+
+### List resources with pagination
+GET {{apiUrl}}?limit=10&offset=0
+x-api-key: {{apiKey}}
+
+### Combined filters
+GET {{apiUrl}}?category=electronics&status=active&limit=5
+x-api-key: {{apiKey}}
+
+### Get resource by ID (change ID to actual ID)
+GET {{apiUrl}}/1
+x-api-key: {{apiKey}}
+
+### Update resource (change ID to actual ID)
+PUT {{apiUrl}}/1
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "Updated Laptop",
+  "description": "Ultra high-performance laptop",
+  "status": "inactive"
+}
+
+### Partial update - only status
+PUT {{apiUrl}}/1
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "status": "archived"
+}
+
+### Delete resource (change ID to actual ID)
+DELETE {{apiUrl}}/1
+x-api-key: {{apiKey}}
+
+### Error Examples
+
+### Error: Missing API key
+POST {{apiUrl}}
+Content-Type: application/json
+
+{
+  "name": "This will fail without API key"
+}
+
+### Error: Invalid API key
+POST {{apiUrl}}
+Content-Type: application/json
+x-api-key: wrong-api-key
+
+{
+  "name": "This will fail with wrong API key"
+}
+
+### Error: Missing required field (name)
+POST {{apiUrl}}
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "description": "This will fail"
+}
+
+### Error: Invalid status value
+POST {{apiUrl}}
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "Test",
+  "status": "invalid-status"
+}
+
+### Error: Empty name
+POST {{apiUrl}}
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": ""
+}
+
+### Error: Name too long (>255 chars)
+POST {{apiUrl}}
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
+
+### Error: Resource not found
+GET {{apiUrl}}/99999
+x-api-key: {{apiKey}}
+
+### Error: Invalid resource ID
+GET {{apiUrl}}/invalid
+x-api-key: {{apiKey}}
+
+### Error: Update with no fields
+PUT {{apiUrl}}/1
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{}

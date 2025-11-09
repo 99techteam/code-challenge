@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+*.sqlite
+*.log
+.DS_Store
+
+# Winston logs
+logs/
+*.log.*
