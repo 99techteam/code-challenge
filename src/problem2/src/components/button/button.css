@@ -1,0 +1,79 @@
+/* Button Component Styles */
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  flex: 1;
+
+  /* Default (Outline) Variant */
+  background-color: transparent;
+  color: #666;
+  border: 1px solid #ccc;
+}
+
+.btn:hover {
+  background-color: #f5f5f5;
+  border-color: #999;
+  color: #333;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  background-color: transparent;
+  border-color: #eee;
+  color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Primary Variant */
+.btn-primary {
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid #4caf50;
+}
+
+.btn-primary:hover {
+  background-color: #45a049;
+  border-color: #45a049;
+  color: white;
+}
+
+.btn-primary:disabled {
+  background-color: #cccccc;
+  border-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary:disabled:hover {
+  background-color: #cccccc;
+  border-color: #cccccc;
+}
+
+/* Responsive Styles */
+
+/* Tablets (portrait) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .btn {
+    padding: 14px;
+    font-size: 17px;
+    min-height: 48px;
+  }
+}
+
+/* Small desktops and tablets (landscape) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .btn {
+    padding: 13px;
+    font-size: 16px;
+  }
+}

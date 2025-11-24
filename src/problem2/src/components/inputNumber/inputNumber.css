@@ -1,0 +1,180 @@
+/* InputNumber Component Styles */
+
+.input-number-container {
+  margin-bottom: 15px;
+}
+
+.input-number-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.input-number-wrapper {
+  position: relative;
+}
+
+.input-container {
+  display: flex;
+  position: relative;
+}
+
+.input-number-field {
+  flex: 1;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s ease-in-out;
+  background-color: white;
+}
+
+.input-container .input-number-field {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+
+.max-button {
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 45px;
+}
+
+.max-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-1px);
+}
+
+.max-button:active:not(:disabled) {
+  transform: translateY(0);
+  background: linear-gradient(135deg, #4e5bb8 0%, #5d3a7e 100%);
+}
+
+.max-button:disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.input-number-field:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.input-number-field:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.input-number-field:read-only {
+  background-color: #f9f9f9;
+  color: #555;
+  cursor: default;
+}
+
+/* Validation styles */
+.input-number-field.valid {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.input-number-field.invalid {
+  border-color: #f44336;
+  box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.2);
+}
+
+.input-number-error {
+  color: #f44336;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  display: block;
+  font-weight: normal;
+}
+
+/* Hide number input spinner arrows */
+.input-number-field::-webkit-outer-spin-button,
+.input-number-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-number-field[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Responsive Styles */
+
+/* Mobile phones (portrait) */
+@media screen and (max-width: 480px) {
+  .input-number-field {
+    padding: 12px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px; /* Touch-friendly size */
+  }
+
+  .max-button {
+    padding: 12px 10px;
+    font-size: 11px;
+    min-width: 40px;
+    min-height: 44px; /* Match input height */
+  }
+
+  .input-number-label {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .input-number-error {
+    font-size: 13px;
+    margin-top: 6px;
+  }
+}
+
+/* Tablets (portrait) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .input-number-field {
+    padding: 10px;
+    font-size: 15px;
+    min-height: 40px;
+  }
+
+  .input-number-label {
+    font-size: 14px;
+  }
+
+  .input-number-error {
+    font-size: 12px;
+  }
+}
+
+/* Small desktops and tablets (landscape) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .input-number-field {
+    padding: 9px;
+    font-size: 14px;
+  }
+
+  .input-number-label {
+    font-size: 14px;
+  }
+}

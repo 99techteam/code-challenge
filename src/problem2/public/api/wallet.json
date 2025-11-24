@@ -1,0 +1,101 @@
+{
+  "success": true,
+  "data": {
+    "userId": "user_123456789",
+    "totalBalance": {
+      "usd": 9726.74,
+      "btc": 0.37414
+    },
+    "holdings": [
+      {
+        "currency": "WBTC",
+        "symbol": "WBTC",
+        "name": "Wrapped Bitcoin",
+        "amount": 0.25430000,
+        "usdValue": 6612.52,
+        "avgBuyPrice": 25800.00,
+        "totalInvested": 6560.94,
+        "profit": 51.58,
+        "profitPercent": 0.0079,
+        "lastUpdated": "2023-08-29T07:10:52Z"
+      },
+      {
+        "currency": "ETH",
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "amount": 1.75600000,
+        "usdValue": 2891.04,
+        "avgBuyPrice": 1680.00,
+        "totalInvested": 2950.08,
+        "profit": -59.04,
+        "profitPercent": -0.0200,
+        "lastUpdated": "2023-08-29T07:10:52Z"
+      },
+      {
+        "currency": "USDC",
+        "symbol": "USDC",
+        "name": "USD Coin",
+        "amount": 230.00000000,
+        "usdValue": 223.18,
+        "avgBuyPrice": 1.00,
+        "totalInvested": 230.00,
+        "profit": -6.82,
+        "profitPercent": -0.0297,
+        "lastUpdated": "2023-08-29T07:10:40Z"
+      }
+    ],
+    "transactions": [
+      {
+        "id": "tx_001",
+        "type": "buy",
+        "currency": "WBTC",
+        "amount": 0.05000000,
+        "price": 26002.82,
+        "usdValue": 1300.14,
+        "timestamp": "2023-08-29T05:30:00Z",
+        "status": "completed",
+        "fee": 3.90
+      },
+      {
+        "id": "tx_002",
+        "type": "swap",
+        "fromCurrency": "ETH",
+        "toCurrency": "USDC",
+        "fromAmount": 0.25000000,
+        "toAmount": 403.31,
+        "exchangeRate": 1645.93,
+        "timestamp": "2023-08-29T04:45:00Z",
+        "status": "completed",
+        "fee": 1.39
+      },
+      {
+        "id": "tx_003",
+        "type": "buy",
+        "currency": "ETH",
+        "amount": 1.00000000,
+        "price": 1645.93,
+        "usdValue": 1645.93,
+        "timestamp": "2023-08-29T03:20:00Z",
+        "status": "completed",
+        "fee": 5.48
+      }
+    ],
+    "performance": {
+      "totalProfitLoss": -14.28,
+      "totalProfitLossPercent": -0.0015,
+      "dayChange": {
+        "usd": -125.45,
+        "percent": -1.27
+      },
+      "weekChange": {
+        "usd": 234.56,
+        "percent": 2.47
+      },
+      "monthChange": {
+        "usd": -445.23,
+        "percent": -4.38
+      }
+    },
+    "lastUpdated": "2023-08-29T07:10:52Z"
+  }
+}

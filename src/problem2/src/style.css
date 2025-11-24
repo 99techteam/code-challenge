@@ -1,0 +1,125 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+#fancy-form {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-item-group {
+  margin-bottom: 15px;
+}
+
+.form-item-group .label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-item-group .select-field {
+  background-color: white;
+  background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 20px;
+  padding-right: 40px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-item-group .select-field:focus {
+  background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234caf50'><path d='M7 10l5 5 5-5z'/></svg>");
+}
+
+.input-component {
+  position: relative;
+}
+
+.input-component .label {
+  color: #333;
+  font-size: 14px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Media Queries for Responsive Design */
+
+/* Mobile phones (portrait) */
+@media screen and (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  #fancy-form {
+    padding: 15px;
+    margin: 0;
+    min-width: unset;
+    width: calc(100vw - 20px);
+    max-width: 400px;
+    box-sizing: border-box;
+  }
+
+  .form-item-group .label {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+}
+
+/* Tablets (portrait) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  #fancy-form {
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-sizing: border-box;
+  }
+}
+
+/* Small desktops and tablets (landscape) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  body {
+    padding: 20px;
+  }
+
+  #fancy-form {
+    padding: 25px;
+    max-width: 600px;
+    width: 80%;
+  }
+}
+
+/* Large screens */
+@media screen and (min-width: 1025px) {
+  #fancy-form {
+    padding: 20px;
+    width: 400px;
+    max-width: 400px;
+  }
+}

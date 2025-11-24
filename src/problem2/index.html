@@ -1,27 +1,82 @@
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fancy Form</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link
+      rel="stylesheet"
+      href="/src/components/customDropdown/customDropdown.css"
+    />
+    <link rel="stylesheet" href="/src/components/inputNumber/inputNumber.css" />
+    <link rel="stylesheet" href="/src/components/button/button.css" />
+    <link rel="stylesheet" href="/src/components/dashboard/dashboard.css" />
+  </head>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
+  <body>
+    <!-- User Dashboard Section -->
+    <div id="user-dashboard" class="dashboard">
+      <div class="user-info">
+        <div class="user-avatar">
+          <img id="user-avatar" src="" alt="User Avatar" />
+        </div>
+        <div class="user-details">
+          <h3 id="user-name">Loading...</h3>
+          <p id="user-email"></p>
+        </div>
+      </div>
 
-  <!-- You may add more stuff here -->
-  <link href="style.css" rel="stylesheet" />
-</head>
+      <div class="portfolio-summary">
+        <div class="portfolio-value">
+          <p>Total</p>
+          <h2 id="total-value">$0.00</h2>
+        </div>
+        <div class="performance-metrics">
+          <div class="performance-item">
+            <span class="performance-label">24h Change</span>
+            <span id="day-change" class="performance-value">$0.00 (0.00%)</span>
+          </div>
+          <div class="performance-item">
+            <span class="performance-label">Total P&L</span>
+            <span id="total-pnl" class="performance-value">$0.00 (0.00%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<body>
+    <form id="fancy-form" onsubmit="return !1">
+      <div class="form-item-group">
+        <label for="input-currency" class="label">From Currency</label>
+        <div id="input-currency" class="custom-select">
+          <div class="select-trigger">
+            <span class="select-placeholder">Select currency...</span>
+            <div class="arrow"></div>
+          </div>
+          <div class="select-options"></div>
+        </div>
+      </div>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+      <div id="input-amount"></div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+      <div class="form-item-group">
+        <label for="output-currency" class="label">To Currency</label>
+        <div id="output-currency" class="custom-select">
+          <div class="select-trigger">
+            <span class="select-placeholder">Select currency...</span>
+            <div class="arrow"></div>
+          </div>
+          <div class="select-options"></div>
+        </div>
+      </div>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
-</body>
+      <div id="output-amount"></div>
 
+      <div class="button-group">
+        <button id="cancel-swap" type="button" class="btn" disabled>
+          CANCEL
+        </button>
+        <button id="confirm-swap" class="btn btn-primary">CONFIRM SWAP</button>
+      </div>
+    </form>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

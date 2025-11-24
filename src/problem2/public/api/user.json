@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "data": {
+    "userId": "user_123456789",
+    "username": "hong_ngo_crypto",
+    "email": "hong.ngo@example.com",
+    "firstName": "Hong",
+    "lastName": "Ngo",
+    "avatar": "/images/avatar.jpg",
+    "dateJoined": "2024-03-15T10:30:00Z",
+    "lastLogin": "2024-11-21T08:45:22Z",
+    "preferences": {
+      "currency": "USD",
+      "theme": "light",
+      "notifications": {
+        "email": true,
+        "push": true,
+        "priceAlerts": true
+      },
+      "language": "en"
+    },
+    "verification": {
+      "email": true,
+      "phone": false,
+      "kyc": "verified"
+    },
+    "accountLevel": "premium"
+  }
+}

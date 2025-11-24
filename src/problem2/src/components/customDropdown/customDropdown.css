@@ -1,0 +1,200 @@
+/* Custom Dropdown Component Styles */
+
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.select-trigger:hover {
+  border-color: #4caf50;
+}
+
+.select-trigger.open {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.select-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.select-placeholder.has-selection {
+  color: #333;
+}
+
+.currency-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.arrow {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #666;
+  border-bottom: 2px solid #666;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.select-trigger.open .arrow {
+  transform: rotate(-135deg);
+}
+
+.select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.select-options.open {
+  display: block;
+}
+
+.select-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.select-option:hover {
+  background-color: #f5f5f5;
+}
+
+.loading-option {
+  padding: 12px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  animation: pulse 2s infinite;
+}
+
+.loading-option:hover {
+  background-color: transparent;
+  cursor: default;
+}
+
+.select-option.selected {
+  background-color: #e8f5e8;
+}
+
+.option-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.currency-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.currency-price {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Disabled State Styles */
+
+.custom-select.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.custom-select.disabled .select-trigger {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Responsive Styles */
+
+/* Mobile phones (portrait) */
+@media screen and (max-width: 480px) {
+  .select-trigger {
+    padding: 12px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  .select-option {
+    padding: 12px;
+  }
+
+  .currency-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .currency-name {
+    font-size: 16px;
+  }
+
+  .currency-price {
+    font-size: 14px;
+  }
+}
+
+/* Tablets (portrait) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .select-trigger {
+    padding: 10px;
+    font-size: 15px;
+    min-height: 40px;
+  }
+
+  .currency-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .currency-name {
+    font-size: 15px;
+  }
+
+  .currency-price {
+    font-size: 13px;
+  }
+}
+
+/* Small desktops and tablets (landscape) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .select-trigger {
+    padding: 9px;
+    font-size: 14px;
+  }
+
+  .currency-icon {
+    width: 21px;
+    height: 21px;
+  }
+}

@@ -1,0 +1,299 @@
+/* Dashboard Styles */
+.dashboard {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.user-avatar {
+  margin-right: 15px;
+}
+
+.user-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  object-fit: cover;
+}
+
+.user-details h3 {
+  margin: 0 0 5px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.user-details p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.portfolio-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.portfolio-value h2 {
+  margin: 0 0 5px 0;
+  font-size: 36px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-value p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.performance-metrics {
+  text-align: right;
+}
+
+.performance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  min-width: 200px;
+}
+
+.performance-label {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-right: 15px;
+}
+
+.performance-value {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.performance-value.positive {
+  color: #4ade80;
+}
+
+.performance-value.negative {
+  color: #f87171;
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+/* Tablets (portrait) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .dashboard {
+    padding: 20px;
+    margin-bottom: 15px;
+    max-width: 500px;
+    width: 90%;
+  }
+
+  .user-info {
+    flex-direction: row;
+    text-align: left;
+    margin-bottom: 18px;
+    align-items: center;
+  }
+
+  .user-avatar {
+    margin-right: 12px;
+    margin-bottom: 0;
+  }
+
+  .portfolio-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .portfolio-value {
+    margin-bottom: 18px;
+    width: 100%;
+  }
+
+  .portfolio-value h2 {
+    font-size: 32px;
+  }
+
+  .performance-metrics {
+    text-align: left;
+    width: 100%;
+  }
+
+  .performance-item {
+    justify-content: space-between;
+    min-width: auto;
+    width: 100%;
+  }
+
+  .performance-label {
+    margin-right: 10px;
+  }
+}
+
+/* Mobile phones (portrait) */
+@media screen and (max-width: 480px) {
+  .dashboard {
+    padding: 15px;
+    margin: 0;
+    width: calc(100vw - 20px);
+    margin-bottom: 12px;
+  }
+
+  .user-avatar img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .user-details h3 {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  .user-details p {
+    font-size: 13px;
+  }
+
+  .portfolio-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .portfolio-value {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .portfolio-value h2 {
+    font-size: 28px;
+    margin-bottom: 3px;
+  }
+
+  .portfolio-value p {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .performance-metrics {
+    width: 100%;
+    text-align: left;
+  }
+
+  .performance-item {
+    width: 100%;
+    min-width: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .performance-label {
+    font-size: 12px;
+    margin-right: 10px;
+    flex: 0 auto;
+  }
+
+  .performance-value {
+    font-size: 13px;
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  .performance-metrics {
+    margin-top: 5px;
+  }
+}
+
+/* Small desktops and tablets (landscape) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .dashboard {
+    padding: 25px;
+    max-width: 652px;
+    width: 100%;
+  }
+}
+
+/* Large screens */
+@media screen and (min-width: 1025px) {
+  .dashboard {
+    padding: 20px;
+    width: 442px;
+  }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 360px) {
+  .dashboard {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .user-info {
+    margin-bottom: 15px;
+  }
+
+  .user-avatar img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .user-details h3 {
+    font-size: 16px;
+  }
+
+  .portfolio-value h2 {
+    font-size: 24px;
+  }
+
+  .portfolio-value {
+    margin-bottom: 15px;
+  }
+
+  .performance-item {
+    padding: 6px 0;
+    margin-bottom: 8px;
+  }
+
+  .performance-label {
+    font-size: 11px;
+  }
+
+  .performance-value {
+    font-size: 12px;
+  }
+}
