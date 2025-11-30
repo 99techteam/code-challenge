@@ -1,27 +1,114 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
-
-  <!-- You may add more stuff here -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orbit Swap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
   <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <main class="app-shell">
+    <section class="swap-card" id="swapCard" data-loading="true">
+      <header class="swap-card__header">
+        <div>
+          <p class="eyebrow">Asset swap</p>
+          <h1>Trade instantly</h1>
+          <p class="subhead">Pick any priced token to simulate a swap with real-time quotes.</p>
+        </div>
+        <button class="ghost-btn" id="refreshButton" type="button" aria-label="Refresh prices">
+          <span class="ghost-btn__icon" aria-hidden="true">⟳</span>
+          Refresh
+        </button>
+      </header>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+      <div class="rate-banner" id="rateBanner" role="status" aria-live="polite"></div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+      <div class="swap-panel">
+        <div class="swap-input" data-panel="from">
+          <div class="swap-input__top">
+            <div>
+              <span class="label">You pay</span>
+              <p class="helper" id="fromUsd">≈ $0.00</p>
+            </div>
+            <button class="link-btn" id="maxButton" type="button">MAX</button>
+          </div>
+          <div class="swap-input__row">
+            <input id="fromAmount" type="text" inputmode="decimal" autocomplete="off" placeholder="0.0"
+              aria-label="Amount to send" />
+            <button class="token-btn" id="fromTokenButton" type="button" aria-haspopup="dialog"
+              aria-controls="tokenModal">
+              <span class="token-btn__content">
+                <img alt="" class="token-icon" id="fromTokenIcon" />
+                <span id="fromTokenSymbol">---</span>
+              </span>
+              <span class="chevron" aria-hidden="true">⌄</span>
+            </button>
+          </div>
+          <p class="helper" id="fromBalance">Balance — 0</p>
+        </div>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
+        <button class="flip-btn" id="flipButton" type="button" aria-label="Flip tokens">
+          <span aria-hidden="true">⇅</span>
+        </button>
+
+        <div class="swap-input" data-panel="to">
+          <div class="swap-input__top">
+            <div>
+              <span class="label">You receive (estimated)</span>
+              <p class="helper" id="toUsd">≈ $0.00</p>
+            </div>
+          </div>
+          <div class="swap-input__row">
+            <input id="toAmount" type="text" inputmode="decimal" autocomplete="off" placeholder="0.0"
+              aria-label="Amount to receive" />
+            <button class="token-btn" id="toTokenButton" type="button" aria-haspopup="dialog"
+              aria-controls="tokenModal">
+              <span class="token-btn__content">
+                <img alt="" class="token-icon" id="toTokenIcon" />
+                <span id="toTokenSymbol">---</span>
+              </span>
+              <span class="chevron" aria-hidden="true">⌄</span>
+            </button>
+          </div>
+          <p class="helper" id="toBalance">Balance — 0</p>
+        </div>
+      </div>
+
+      <p class="error" id="errorText" role="alert"></p>
+
+      <button class="primary-btn" id="swapButton" type="button" disabled>Confirm swap</button>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="assertive"></div>
+
+  <div class="token-modal hidden" id="tokenModal" role="dialog" aria-modal="true" aria-label="Select a token">
+    <div class="token-modal__backdrop" id="modalBackdrop"></div>
+    <div class="token-modal__body" role="document">
+      <div class="token-modal__header">
+        <div>
+          <p class="eyebrow" id="modalTitle">Select token</p>
+          <p class="helper">Only tokens with live prices are listed.</p>
+        </div>
+        <button class="ghost-btn" id="closeModal" type="button" aria-label="Close token list">✕</button>
+      </div>
+      <div class="search-field">
+        <span aria-hidden="true">🔍</span>
+        <input id="tokenSearch" type="search" placeholder="Search by name or symbol" autocomplete="off" />
+      </div>
+      <div class="token-list" id="tokenList" role="listbox"></div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
 </body>
 
 </html>
