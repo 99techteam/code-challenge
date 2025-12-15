@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { authAPI, TokenBalance } from "../services/api";
 import Navbar from "../components/Navbar";
+import TransferConfirmationDialog from "../components/TransferConfirmationDialog";
 import { getTokenByCurrency } from "../data/tokens";
 
 const Transfer = () => {
@@ -15,6 +16,8 @@ const Transfer = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [isConfirmLoading, setIsConfirmLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
@@ -61,7 +64,8 @@ const Transfer = () => {
     }
   };
 
-  const handleTransfer = async (e: React.FormEvent) => {
+  // Handle transfer button click - show confirmation dialog
+  const handleTransfer = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -83,6 +87,21 @@ const Transfer = () => {
       return;
     }
 
+    // Show confirmation dialog
+    setShowConfirmDialog(true);
+  };
+
+  // Execute the actual transfer after confirmation
+  const executeTransfer = async () => {
+    setIsConfirmLoading(true);
+    setError("");
+    setSuccess("");
+
+    // Add 1 second delay before processing
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const amountNum = parseFloat(amount);
+
     try {
       setLoading(true);
       const response = await authAPI.transfer({
@@ -90,6 +109,10 @@ const Transfer = () => {
         tokenSymbol: selectedToken,
         amount: amountNum,
       });
+
+      // Close dialog
+      setShowConfirmDialog(false);
+      setIsConfirmLoading(false);
 
       setSuccess(response.message);
       setBalances(response.newBalance);
@@ -103,6 +126,8 @@ const Transfer = () => {
         fetchBalances();
       }, 1000);
     } catch (err: any) {
+      setShowConfirmDialog(false);
+      setIsConfirmLoading(false);
       setError(
         err.response?.data?.message || "Transfer failed. Please try again."
       );
@@ -422,6 +447,17 @@ const Transfer = () => {
             </div>
           )}
         </div>
+
+        {/* Confirmation Dialog */}
+        <TransferConfirmationDialog
+          isOpen={showConfirmDialog}
+          onClose={() => setShowConfirmDialog(false)}
+          onConfirm={executeTransfer}
+          recipientWallet={recipientWallet}
+          tokenSymbol={selectedToken}
+          amount={amount}
+          isLoading={isConfirmLoading}
+        />
       </div>
     </>
   );

@@ -7,6 +7,7 @@ import {
 } from "../data/tokens";
 import TokenSelector from "./TokenSelector";
 import SwapButton from "./SwapButton";
+import ConfirmationDialog from "./ConfirmationDialog";
 import { authAPI } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -20,12 +21,13 @@ const SwapForm = () => {
   );
   const [fromAmount, setFromAmount] = useState<string>("");
   const [toAmount, setToAmount] = useState<string>("");
-  const [slippageTolerance, setSlippageTolerance] = useState<number>(0.5);
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
   const [isFromFocused, setIsFromFocused] = useState<boolean>(true);
   const [isSwapping, setIsSwapping] = useState<boolean>(false);
   const [userBalances, setUserBalances] = useState<Record<string, number>>({});
+  const [showConfirmDialog, setShowConfirmDialog] = useState<boolean>(false);
+  const [isConfirmLoading, setIsConfirmLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // Fetch user balances
@@ -150,8 +152,8 @@ const SwapForm = () => {
     setToAmount(fromAmount);
   };
 
-  // Handle swap
-  const handleSwap = async () => {
+  // Handle swap button click - show confirmation dialog
+  const handleSwap = () => {
     if (!fromAmount || parseFloat(fromAmount) === 0) {
       setError("Please enter an amount to swap");
       return;
@@ -164,16 +166,30 @@ const SwapForm = () => {
       return;
     }
 
-    setIsSwapping(true);
+    // Show confirmation dialog
+    setShowConfirmDialog(true);
+  };
+
+  // Execute the actual swap after confirmation
+  const executeSwap = async () => {
+    setIsConfirmLoading(true);
     setError("");
     setSuccess("");
 
+    // Add 1 second delay before processing
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     try {
+      setIsSwapping(true);
       const response = await authAPI.swap({
         fromToken: fromToken.symbol,
         toToken: toToken.symbol,
         amount: parseFloat(fromAmount),
       });
+
+      // Close dialog
+      setShowConfirmDialog(false);
+      setIsConfirmLoading(false);
 
       // Show success message
       setSuccess(
@@ -194,6 +210,8 @@ const SwapForm = () => {
         navigate("/balances");
       }, 2000);
     } catch (err: any) {
+      setShowConfirmDialog(false);
+      setIsConfirmLoading(false);
       setError(err.response?.data?.message || "Swap failed. Please try again.");
     } finally {
       setIsSwapping(false);
@@ -206,35 +224,6 @@ const SwapForm = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-xl sm:text-2xl font-bold text-white">Swap</h2>
-          <button
-            onClick={() =>
-              setSlippageTolerance(slippageTolerance === 0.5 ? 1.0 : 0.5)
-            }
-            className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-crypto-darker border border-crypto-cardHover hover:border-crypto-accent transition-colors"
-          >
-            <svg
-              className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            <span className="text-xs sm:text-sm text-gray-400">
-              {slippageTolerance}%
-            </span>
-          </button>
         </div>
 
         {/* From Section */}
@@ -336,14 +325,6 @@ const SwapForm = () => {
                 {toToken.symbol}
               </span>
             </div>
-            <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-              <span className="text-xs sm:text-sm text-gray-400">
-                Slippage Tolerance
-              </span>
-              <span className="text-xs sm:text-sm text-white">
-                {slippageTolerance}%
-              </span>
-            </div>
             <div className="flex items-center justify-between">
               <span className="text-xs sm:text-sm text-gray-400">
                 Network Fee
@@ -403,6 +384,18 @@ const SwapForm = () => {
           toToken={toToken}
         />
       </div>
+
+      {/* Confirmation Dialog */}
+      <ConfirmationDialog
+        isOpen={showConfirmDialog}
+        onClose={() => setShowConfirmDialog(false)}
+        onConfirm={executeSwap}
+        fromToken={fromToken}
+        toToken={toToken}
+        fromAmount={fromAmount}
+        toAmount={toAmount}
+        isLoading={isConfirmLoading}
+      />
     </div>
   );
 };
