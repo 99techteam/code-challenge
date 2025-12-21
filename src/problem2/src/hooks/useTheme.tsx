@@ -8,33 +8,19 @@ export const useTheme = () => {
 		return false;
 	});
 
-	// Lắng nghe thay đổi theme hệ thống
 	useEffect(() => {
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-		const handleChange = (e: MediaQueryListEvent) => {
-			setIsDarkMode(e.matches);
-		};
+		const handleChange = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
 
 		mediaQuery.addEventListener('change', handleChange);
 		return () => mediaQuery.removeEventListener('change', handleChange);
 	}, []);
 
-	// Đồng bộ class 'dark' vào <html> để Tailwind nhận diện
 	useEffect(() => {
-		const root = window.document.documentElement;
-		if (isDarkMode) {
-			root.classList.add('dark');
-		} else {
-			root.classList.remove('dark');
-		}
+		document.documentElement.classList.toggle('dark', isDarkMode);
 	}, [isDarkMode]);
 
-	// Hàm toggle thủ công
-	const toggleTheme = () => {
-		setIsDarkMode((prev) => !prev);
-	};
+	const toggleTheme = () => setIsDarkMode((prev) => !prev);
 
-	// TRẢ VỀ CẢ TOGGLETHEME
 	return { isDarkMode, toggleTheme };
 };

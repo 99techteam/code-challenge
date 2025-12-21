@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { ExchangeRates, TokenPriceItem } from '../types/token';
 
 const API_URL = 'https://interview.switcheo.com/prices.json';
@@ -9,39 +9,34 @@ export const useTokenPrices = () => {
 	const [error, setError] = useState<string>('');
 
 	useEffect(() => {
-		const fetchExchangeRates = async () => {
+		const fetchPrices = async () => {
 			try {
 				setLoading(true);
-				setError('');
 				const response = await fetch(API_URL);
 				const data: TokenPriceItem[] = await response.json();
-				
-				const latestRates = data.reduce(
-					(acc: ExchangeRates, item: TokenPriceItem) => {
-						const { currency: curr, date, price } = item;
-						const currentDate = new Date(date);
-						if (!acc[curr] || new Date(acc[curr].date) < currentDate) {
-							acc[curr] = { price, date };
-						}
-						return acc;
-					},
-					{}
-				);
+
+				const latestRates = data.reduce((acc: ExchangeRates, item) => {
+					const { currency, date, price } = item;
+					const existing = acc[currency];
+
+					if (!existing || new Date(existing.date) < new Date(date)) {
+						acc[currency] = { price, date };
+					}
+					return acc;
+				}, {});
+
 				setExchangeRates(latestRates);
-			} catch (err) {
-				console.error('Error fetching exchange rates:', err);
+			} catch {
 				setError('Failed to fetch exchange rates.');
 			} finally {
 				setLoading(false);
 			}
 		};
 
-		fetchExchangeRates();
+		fetchPrices();
 	}, []);
 
-	const currencies = Object.keys(exchangeRates).filter(
-		(curr) => exchangeRates[curr]?.price
-	);
+	const currencies = useMemo(() => Object.keys(exchangeRates), [exchangeRates]);
 
 	return { exchangeRates, currencies, loading, error };
 };

@@ -34,14 +34,15 @@ import React, { memo } from 'react';
 
 interface TokenIconProps {
 	currency: string;
+	className?: string;
 }
 
 const icons: Record<string, string> = {
-	AMPLUNA: AmpLunaIcon,
+	ampLUNA: AmpLunaIcon,
 	ATOM: AtomIcon,
-	AXLUSDC: AxlUsdcIcon,
+	axlUSDC: AxlUsdcIcon,
 	BLUR: BlurIcon,
-	BNEO: BneoIcon,
+	bNEO: BneoIcon,
 	BUSD: BusdIcon,
 	ETH: EthIcon,
 	EVMOS: EvmosIcon,
@@ -54,29 +55,67 @@ const icons: Record<string, string> = {
 	OKB: OkbIcon,
 	OKT: OktIcon,
 	OSMO: OsmoIcon,
-	RATOM: RAtomIcon,
-	RSWTH: RswthIcon,
-	STATOM: StatomIcon,
-	STEVMOS: StEvmosIcon,
-	STLUNA: StLunaIcon,
-	STOSMO: StOsmoIcon,
 	STRD: StRdIcon,
 	SWTH: SwthIcon,
 	USC: UscIcon,
 	USD: UsdIcon,
 	USDC: UsdcIcon,
 	WBTC: WbtcIcon,
-	WSTETH: WstethIcon,
-	YIELDUSD: YieldusdIcon,
+	YieldUSD: YieldusdIcon,
 	ZIL: ZilIcon,
+
+	RATOM: RAtomIcon, 
+	rATOM: RAtomIcon, 
+
+	RSWTH: RswthIcon, 
+	rSWTH: RswthIcon,
+
+	STATOM: StatomIcon, 
+	stATOM: StatomIcon,
+
+	STEVMOS: StEvmosIcon,
+	stEVMOS: StEvmosIcon,
+
+	STLUNA: StLunaIcon, 
+	stLUNA: StLunaIcon,
+
+	STOSMO: StOsmoIcon, 
+	stOSMO: StOsmoIcon,
+
+	WSTETH: WstethIcon, 
+	wstETH: WstethIcon,
+
+	AXLUSDC: AxlUsdcIcon, 
+	BNEO: BneoIcon,
+	AMPLUNA: AmpLunaIcon, 
 };
 
-export const TokenIcon = React.memo(({ currency }: TokenIconProps) => {
-	const key = currency.toUpperCase();
-	const iconSrc = icons[key];
-	return iconSrc ? (
-		<img src={iconSrc} alt={currency} className="w-6 h-6" />
-	) : (
-		<div className="w-6 h-6 bg-gray-400 rounded" />
-	);
-});
+export const TokenIcon = React.memo(
+	({ currency, className = 'w-6 h-6' }: TokenIconProps) => {
+		const iconSrc = icons[currency] || icons[currency.toUpperCase()];
+
+		if (iconSrc) {
+			return (
+				<img
+					src={iconSrc}
+					alt={currency}
+					className={`${className} rounded-full object-cover shadow-sm`}
+				/>
+			);
+		}
+
+		return (
+			<div
+				className={`
+          ${className} 
+          rounded-full 
+          bg-gradient-to-br from-gray-700 to-gray-600 border border-gray-500/50
+          flex items-center justify-center 
+          text-xs font-bold text-white shadow-sm
+        `}
+			>
+				{currency[0]?.toUpperCase()}
+			</div>
+		);
+	}
+);
