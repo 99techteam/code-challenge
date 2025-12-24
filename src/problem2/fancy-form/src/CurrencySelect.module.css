@@ -1,0 +1,91 @@
+.currencyPicker {
+  position: relative;
+}
+.currencyToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.currencyToggle:focus {
+  box-shadow: 0 8px 30px rgba(100,108,255,0.12);
+  border-color: rgba(100,108,255,0.6);
+}
+.currencyOptions {
+  position: absolute;
+  margin-top: 0;
+  z-index: 60;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  background: rgba(10,10,10,0.9);
+  border-radius: 10px;
+  max-height: 240px;
+  overflow: auto;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  padding: 0.4rem;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.currencyOptionsWrapper {
+  position: absolute; /* ensure popup (.currencyOptions) is positioned against .currencyPicker */
+  /* width: 100%; */
+}
+.searchWrapper {
+  position: relative;
+  padding: 0.6rem 0 0;
+}
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  /* margin-bottom: 0.4rem; */
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  /* background: rgba(255,255,255,0.02); */
+  color: inherit;
+  outline: none;
+}
+.searchInput:focus {
+  box-shadow: 0 8px 30px rgba(100,108,255,0.08);
+  border-color: rgba(100,108,255,0.4);
+}
+.currencyOption {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.48rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.currencyOption:hover,
+.selected {
+  background: linear-gradient(90deg, rgba(100,108,255,0.12), rgba(85,104,242,0.06));
+}
+.highlighted {
+  background: rgba(100,108,255,0.08);
+}
+.tokenIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.tokenPlaceholder {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.currencyLabel {
+  flex: 1 1 auto;
+  text-align: left;
+}
+.chev {
+  opacity: 0.8;
+}
