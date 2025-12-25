@@ -1,0 +1,40 @@
+@import 'tailwindcss';
+
+/* Custom component classes using Tailwind utilities */
+.wallet-page {
+  @apply w-full min-h-screen bg-gray-50 p-4;
+}
+
+.wallet-page-title {
+  @apply text-4xl font-bold text-gray-900 mb-4 text-center my-8;
+}
+
+.wallet-empty-state {
+  @apply text-center text-gray-500 py-8;
+}
+
+.wallet-row {
+  @apply flex items-center justify-between p-4 bg-white rounded-lg shadow-sm mb-2 transition-shadow hover:shadow-md;
+}
+.wallet-cell-start {
+  @apply flex flex-col flex-1;
+}
+.wallet-cell-end {
+  @apply flex flex-col items-end;
+}
+
+.wallet-currency {
+  @apply font-semibold text-gray-900 text-lg;
+}
+
+.wallet-amount {
+  @apply text-gray-700 text-base;
+}
+
+.wallet-usd-value {
+  @apply text-blue-600 font-medium text-sm;
+}
+
+.wallet-formatted-amount {
+  @apply text-gray-500 text-sm;
+}
