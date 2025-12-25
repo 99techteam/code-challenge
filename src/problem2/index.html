@@ -1,27 +1,197 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Swap - Exchange Rate Calculator</title>
+    <meta
+      name="description"
+      content="Convert currencies with real-time exchange rates"
+    />
+    <link href="style.css" rel="stylesheet" />
+  </head>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
+  <body>
+    <main class="container">
+      <header>
+        <h1>
+          <span aria-hidden="true">💱</span>
+          <span class="sr-only">Currency Exchange</span>
+          Currency Swap
+        </h1>
+      </header>
 
-  <!-- You may add more stuff here -->
-  <link href="style.css" rel="stylesheet" />
-</head>
+      <form id="swapForm" novalidate aria-label="Currency swap form">
+        <fieldset class="input-group" id="inputGroup">
+          <legend class="sr-only">Input currency and amount</legend>
+          <label for="input-amount">You Send</label>
+          <div class="input-wrapper">
+            <input
+              type="number"
+              id="input-amount"
+              name="input-amount"
+              placeholder="0.00"
+              step="0.01"
+              min="0"
+              aria-describedby="inputError input-currency-label"
+              aria-invalid="false"
+              aria-required="true"
+            />
+            <div class="currency-select">
+              <label
+                for="input-currency"
+                class="sr-only"
+                id="input-currency-label"
+              >
+                Select source currency
+              </label>
+              <span class="currency-icon" aria-hidden="true">🇺🇸</span>
+              <select
+                id="input-currency"
+                name="input-currency"
+                aria-label="Source currency"
+              >
+                <option value="USD" data-icon="🇺🇸">USD - US Dollar</option>
+                <option value="EUR" data-icon="🇪🇺">EUR - Euro</option>
+                <option value="GBP" data-icon="🇬🇧">GBP - British Pound</option>
+                <option value="JPY" data-icon="🇯🇵">JPY - Japanese Yen</option>
+                <option value="AUD" data-icon="🇦🇺">
+                  AUD - Australian Dollar
+                </option>
+                <option value="CAD" data-icon="🇨🇦">
+                  CAD - Canadian Dollar
+                </option>
+                <option value="CHF" data-icon="🇨🇭">CHF - Swiss Franc</option>
+                <option value="CNY" data-icon="🇨🇳">CNY - Chinese Yuan</option>
+              </select>
+              <span class="select-arrow" aria-hidden="true">▼</span>
+            </div>
+          </div>
+          <div
+            class="error-message"
+            id="inputError"
+            role="alert"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <span aria-hidden="true">⚠️</span>
+            <span id="inputErrorText"></span>
+          </div>
+        </fieldset>
 
-<body>
+        <div class="swap-button-wrapper">
+          <button
+            type="button"
+            class="swap-icon-btn"
+            id="swapBtn"
+            aria-label="Swap currencies between input and output fields"
+          >
+            <span class="sr-only">Swap currencies</span>
+            <svg
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M7 10l5 5 5-5H7z" />
+              <path d="M7 14l5-5 5 5H7z" />
+            </svg>
+          </button>
+        </div>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+        <fieldset class="input-group" id="outputGroup">
+          <legend class="sr-only">Output currency and amount</legend>
+          <label for="output-amount">You Receive</label>
+          <div class="input-wrapper">
+            <input
+              type="number"
+              id="output-amount"
+              name="output-amount"
+              placeholder="0.00"
+              step="0.01"
+              min="0"
+              readonly
+              aria-describedby="outputError output-currency-label rateInfo"
+              aria-invalid="false"
+              aria-label="Converted amount (read-only)"
+            />
+            <div class="currency-select">
+              <label
+                for="output-currency"
+                class="sr-only"
+                id="output-currency-label"
+              >
+                Select target currency
+              </label>
+              <span class="currency-icon" aria-hidden="true">🇪🇺</span>
+              <select
+                id="output-currency"
+                name="output-currency"
+                aria-label="Target currency"
+              >
+                <option value="EUR" data-icon="🇪🇺">EUR - Euro</option>
+                <option value="USD" data-icon="🇺🇸">USD - US Dollar</option>
+                <option value="GBP" data-icon="🇬🇧">GBP - British Pound</option>
+                <option value="JPY" data-icon="🇯🇵">JPY - Japanese Yen</option>
+                <option value="AUD" data-icon="🇦🇺">
+                  AUD - Australian Dollar
+                </option>
+                <option value="CAD" data-icon="🇨🇦">
+                  CAD - Canadian Dollar
+                </option>
+                <option value="CHF" data-icon="🇨🇭">CHF - Swiss Franc</option>
+                <option value="CNY" data-icon="🇨🇳">CNY - Chinese Yuan</option>
+              </select>
+              <span class="select-arrow" aria-hidden="true">▼</span>
+            </div>
+          </div>
+          <div
+            class="error-message"
+            id="outputError"
+            role="alert"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <span aria-hidden="true">⚠️</span>
+            <span id="outputErrorText"></span>
+          </div>
+        </fieldset>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+        <section
+          class="rate-info"
+          id="rateInfo"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span class="rate-info-icon" aria-hidden="true">ℹ️</span>
+          <div class="rate-text" id="rateText"></div>
+        </section>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
-</body>
+        <button
+          type="submit"
+          class="submit-btn"
+          id="submitBtn"
+          aria-busy="false"
+          aria-label="Confirm and process currency swap"
+        >
+          <span class="btn-text">Confirm Swap</span>
+          <span class="sr-only" aria-live="polite" id="submit-status"></span>
+          <div class="spinner" aria-hidden="true"></div>
+        </button>
 
+        <div
+          class="success-message"
+          id="successMessage"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span class="success-icon" aria-hidden="true">✅</span>
+          <div class="success-text">Swap completed successfully!</div>
+        </div>
+      </form>
+    </main>
+    <script src="script.js"></script>
+  </body>
 </html>
