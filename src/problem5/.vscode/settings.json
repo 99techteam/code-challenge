@@ -1,0 +1,19 @@
+{
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "prettier.useTabs": true,
+  "prettier.tabWidth": 2,
+  "prettier.singleQuote": true,
+  "editor.snippetSuggestions": "top"
+}

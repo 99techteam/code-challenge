@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2016", 
+    "module": "commonjs", 
+    "esModuleInterop": true,  
+    "forceConsistentCasingInFileNames": true,  
+    "strict": true, 
+    "baseUrl": "./",
+    "allowJs": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictFunctionTypes": false,
+  },
+  "include": [
+    "./src/*.ts",
+    "./src/**/*.ts"
+  ],
+}
