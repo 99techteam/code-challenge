@@ -1,0 +1,26 @@
+### Create a Resource
+POST http://localhost:3000/resources
+Content-Type: application/json
+
+{
+  "name": "My Test Resource",
+  "description": "Hello REST Client"
+}
+
+### List Resources
+GET http://localhost:3000/resources?page=1&limit=5
+
+### Get a single Resource
+GET http://localhost:3000/resources/890ae7b9-9c96-406f-b64b-2b24efeeedeb
+
+### Update a Resource
+PUT http://localhost:3000/resources/890ae7b9-9c96-406f-b64b-2b24efeeedeb
+Content-Type: application/json
+
+{
+  "name": "Updated Resource",
+  "description": "Updated description"
+}
+
+### Delete a Resource
+DELETE http://localhost:3000/resources/1
