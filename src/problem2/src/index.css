@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: linear-gradient(120deg, #101820, #1c2b3a);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swap-card {
+  width: 420px;
+  background: #121c29;
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+  color: white;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.subtitle {
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  align-items: center;
+}
+
+input {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+select {
+  padding: 0.7rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+}
+
+.swap-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: cyan;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.submit {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 14px;
+  border: none;
+  background: cyan;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #ff6666;
+  font-size: 0.9rem;
+}
