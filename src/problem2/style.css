@@ -1,8 +1,111 @@
 body {
+  min-height: 100vh;
+  min-width: 360px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+.card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.card-body {
+  background: #ffffff;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #6c757d;
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+}
+
+.btn {
+  background-color: #212529;
+  color: #ffffff;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #212529;
+  color: #ffffff;
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-right: none;
+  padding: 0.5rem 0.75rem;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  min-width: 360px;
-  font-family: Arial, Helvetica, sans-serif;
+  min-width: 40px;
+  /* Match the height of form-control (default/medium size) */
+  height: calc(1.5em + 0.5rem + 2px);
+}
+
+.form-select:focus+.input-group-text,
+.input-group:focus-within .input-group-text {
+  border-color: #6c757d;
+}
+
+#input-currency-icon,
+#output-currency-icon {
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#input-currency-icon svg,
+#output-currency-icon svg {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Validation styles */
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #dc3545;
+}
+
+.invalid-feedback.show {
+  display: block;
+}
+
+.form-control.is-invalid~.invalid-feedback,
+.input-group+.invalid-feedback.show {
+  display: block;
+}
+
+.is-valid {
+  border-color: #198754;
+}
+
+.is-invalid {
+  border-color: #dc3545;
+}
+
+.is-valid:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }

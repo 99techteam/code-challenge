@@ -1,27 +1,97 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fancy Form</title>
 
-  <!-- You may add more stuff here -->
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <!-- Custom CSS -->
   <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="card shadow-lg mt-5">
+          <div class="card-body p-4">
+            <h4 class="card-title text-center mb-4">Swap</h4>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+            <form id="swap-form">
+              <div class="mb-3">
+                <label for="input-currency" class="form-label fw-semibold">From</label>
+                <div class="input-group mb-2">
+                  <span class="input-group-text" id="input-currency-icon"></span>
+                  <select class="form-select" id="input-currency" aria-describedby="input-currency-icon">
+                    <option value="">Loading currencies...</option>
+                  </select>
+                </div>
+                <div class="invalid-feedback" id="input-currency-error"></div>
+                <label for="input-amount" class="form-label fw-semibold">Amount to send</label>
+                <input type="number" class="form-control" id="input-amount" placeholder="0.00" step="0.01" min="0">
+                <div class="invalid-feedback" id="input-amount-error"></div>
+              </div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+              <div class="mb-4">
+                <label for="output-currency" class="form-label fw-semibold">To</label>
+                <div class="input-group mb-2">
+                  <span class="input-group-text" id="output-currency-icon"></span>
+                  <select class="form-select" id="output-currency" aria-describedby="output-currency-icon">
+                    <option value="">Loading currencies...</option>
+                  </select>
+                </div>
+                <div class="invalid-feedback" id="output-currency-error"></div>
+                <label for="output-amount" class="form-label fw-semibold">Amount to receive</label>
+                <input type="number" class="form-control" id="output-amount" placeholder="0.00" step="0.01" min="0"
+                  readonly>
+              </div>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
+              <button type="submit" class="btn btn-lg w-100">Confirm swap</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swap Confirmation Modal -->
+  <div class="modal fade" id="swapConfirmationModal" tabindex="-1" aria-labelledby="swapConfirmationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="swapConfirmationModalLabel">Swap Confirmed</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <h6 class="fw-semibold mb-2">Sending:</h6>
+            <p class="mb-0" id="modal-sending-details"></p>
+          </div>
+          <div class="mb-3">
+            <h6 class="fw-semibold mb-2">Receiving:</h6>
+            <p class="mb-0" id="modal-receiving-details"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+  <!-- Custom Script -->
+  <script src="script.js" type="module"></script>
 </body>
 
 </html>
