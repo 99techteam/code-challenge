@@ -1,0 +1,40 @@
+.amount-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 12px 0;
+  outline: none;
+}
+
+.amount-input::placeholder {
+  color: var(--text-dim);
+}
+
+.amount-input:disabled {
+  opacity: 0.85;
+  cursor: default;
+}
+
+.amount-input--error {
+  color: var(--error);
+}
+
+/* Tablet: max-width 720px */
+@media (max-width: 720px) {
+  .amount-input {
+    font-size: 1.125rem;
+    padding: 10px 0;
+  }
+}
+
+/* Mobile: max-width 480px */
+@media (max-width: 480px) {
+  .amount-input {
+    font-size: 1rem;
+    padding: 8px 0;
+  }
+}
