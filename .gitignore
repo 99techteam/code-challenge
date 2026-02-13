@@ -1,0 +1,17 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Build output
+dist/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Optional: lock file (depends on team policy)
+package-lock.jsons
+.env
