@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
   root: '.',
+  server: { port: 3000 },
   esbuild: {
     drop: mode === 'production' ? ['console', 'debugger'] : undefined,
   },
