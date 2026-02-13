@@ -4,6 +4,20 @@ Token exchange at best rates — convert between tokens with live prices.
 
 **Demo:** https://fe-code-challenge-9ixy.onrender.com/
 
+## Screenshots
+
+**Desktop (light)**
+
+![Desktop](src/assets/imgs/problem2-pc.png)
+
+**Dark mode**
+
+![Dark mode](src/assets/imgs/problem2-darkmode.png)
+
+**Mobile**
+
+![Mobile](src/assets/imgs/problem2-mb.png)
+
 ## Tech
 
 - React 18 + TypeScript
