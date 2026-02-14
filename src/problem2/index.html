@@ -1,26 +1,123 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
-
-  <!-- You may add more stuff here -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Swap Form</title>
   <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h1>Currency Swap</h1>
+        <p class="subtitle">Exchange rates updated in real-time</p>
+      </div>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+      <form id="swap-form" onsubmit="return handleSwap(event)">
+        <!-- From Currency Section -->
+        <div class="form-group">
+          <label for="from-currency">From</label>
+          <div class="input-wrapper">
+            <div class="currency-selector">
+              <select id="from-currency" aria-label="Select currency to send">
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="CHF">CHF - Swiss Franc</option>
+                <option value="CNY">CNY - Chinese Yuan</option>
+                <option value="SEK">SEK - Swedish Krona</option>
+                <option value="NZD">NZD - New Zealand Dollar</option>
+                <option value="VND">VND - Vietnamese Dong</option>
+              </select>
+            </div>
+            <input 
+              id="input-amount" 
+              type="number"
+              inputmode="decimal"
+              placeholder="0.00"
+              min="0"
+              step="0.01"
+              aria-label="Amount to send"
+              required
+            />
+          </div>
+          <div class="error-message" id="from-error"></div>
+        </div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+        <!-- Swap Button -->
+        <button type="button" id="swap-btn" class="swap-button" title="Swap currencies">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="19 12 12 19 5 12"></polyline>
+          </svg>
+        </button>
 
-    <button>CONFIRM SWAP</button>
-  </form>
+        <!-- To Currency Section -->
+        <div class="form-group">
+          <label for="to-currency">To</label>
+          <div class="input-wrapper">
+            <div class="currency-selector">
+              <select id="to-currency" aria-label="Select currency to receive">
+                <option value="EUR">EUR - Euro</option>
+                <option value="USD">USD - US Dollar</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="CHF">CHF - Swiss Franc</option>
+                <option value="CNY">CNY - Chinese Yuan</option>
+                <option value="SEK">SEK - Swedish Krona</option>
+                <option value="NZD">NZD - New Zealand Dollar</option>
+                <option value="VND">VND - Vietnamese Dong</option>
+              </select>
+            </div>
+            <input 
+              id="output-amount" 
+              type="number"
+              inputmode="decimal"
+              placeholder="0.00"
+              min="0"
+              step="0.01"
+              aria-label="Amount to receive"
+              readonly
+            />
+          </div>
+          <div class="error-message" id="to-error"></div>
+        </div>
+
+        <!-- Exchange Rate Info -->
+        <div class="exchange-info" id="exchange-info" style="display: none;">
+          <div class="rate-display">
+            <span id="rate-text">1 USD = 0.92 EUR</span>
+            <span class="last-updated" id="last-updated">Updated just now</span>
+          </div>
+        </div>
+
+        <!-- Loading and Error States -->
+        <div class="loading-spinner" id="loading-spinner" style="display: none;"></div>
+        
+        <div class="alert alert-error" id="error-alert" style="display: none;"></div>
+        <div class="alert alert-success" id="success-alert" style="display: none;"></div>
+
+        <!-- Confirmation Button -->
+        <button type="submit" class="btn btn-primary" id="confirm-btn">
+          CONFIRM SWAP
+        </button>
+      </form>
+
+      <!-- Footer -->
+      <div class="footer">
+        <small>Exchange rates are provided for informational purposes only. Actual rates may vary.</small>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 
