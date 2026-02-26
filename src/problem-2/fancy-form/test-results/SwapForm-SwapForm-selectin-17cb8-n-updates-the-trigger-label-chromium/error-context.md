@@ -1,0 +1,48 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - heading "Swap" [level=1] [ref=e8]
+        - paragraph [ref=e9]: Trade tokens instantly
+      - generic [ref=e10]:
+        - img
+        - text: Live rates
+    - generic [ref=e11]:
+      - paragraph [ref=e12]: You Pay
+      - generic [ref=e13]:
+        - combobox [expanded] [ref=e14]:
+          - img "ETH" [ref=e15]
+          - generic [ref=e16]: ETH
+          - img
+        - spinbutton [ref=e17]
+      - paragraph [ref=e18]: ≈ $0.00 USD
+      - button [ref=e20]:
+        - img
+      - paragraph [ref=e21]: You Receive
+      - generic [ref=e22]:
+        - combobox [ref=e23]:
+          - img "USDC" [ref=e24]
+          - generic [ref=e25]: USDC
+          - img
+        - spinbutton [ref=e26]
+      - paragraph [ref=e27]: ≈ $0.00 USD
+      - generic [ref=e28]:
+        - generic [ref=e29]: Rate
+        - generic [ref=e30]: 1 ETH = 1662.841510 USDC
+      - button "Swap Now" [ref=e31]
+      - paragraph [ref=e32]: Powered by Switcheo · No fees · Best rate guaranteed
+  - dialog [ref=e34]:
+    - generic [ref=e35]:
+      - generic [ref=e37]:
+        - img [ref=e38]
+        - combobox [expanded] [active] [ref=e41]: BTC
+      - listbox "Suggestions" [ref=e42]:
+        - group [ref=e44]:
+          - option "WBTC WBTC $26,002.822" [selected] [ref=e45] [cursor=pointer]:
+            - img "WBTC" [ref=e46]
+            - generic [ref=e47]: WBTC
+            - generic [ref=e48]: $26,002.822
+```
