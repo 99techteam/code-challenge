@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { TokenIcon } from './TokenIcon';
 import { formatDisplayAmount, formatRelativeTime } from '../utils/format';
@@ -25,16 +25,23 @@ export const TokenSelectModal = ({
 }: TokenSelectModalProps) => {
   const [search, setSearch] = useState('');
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
 
-  const filteredTokens = search.trim()
-    ? tokens.filter((s) => s.toLowerCase().includes(search.toLowerCase().trim()))
-    : tokens;
+  const filteredTokens = useMemo(() => {
+    const trimmedSearch = search.trim();
+    if (trimmedSearch) {
+      return tokens.filter((s) =>
+        s.toLowerCase().includes(trimmedSearch.toLowerCase())
+      );
+    }
+    return tokens;
+  }, [search, tokens]);
 
   useEffect(() => {
     if (isOpen) {
       setSearch('');
-      setTimeout(() => searchInputRef.current?.focus(), 80);
+      requestAnimationFrame(() => {
+        searchInputRef.current?.focus();
+      });
     }
   }, [isOpen]);
 
@@ -103,7 +110,6 @@ export const TokenSelectModal = ({
         </div>
 
         <ul
-          ref={listRef}
           className="token-select-modal-list"
           role="listbox"
           aria-label="Token list"
