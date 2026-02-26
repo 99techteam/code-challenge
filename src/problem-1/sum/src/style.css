@@ -1,0 +1,93 @@
+:root {
+  font-family: system-ui, Arial, sans-serif;
+  background: #1e1e1e;
+  color: #fff;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 900px;
+  padding: 40px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+}
+
+.input-section {
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  width: 250px;
+}
+
+.buttons {
+  margin: 20px 0;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#btnA {
+  background: #4caf50;
+}
+
+#btnB {
+  background: #2196f3;
+}
+
+#btnC {
+  background: #ff5722;
+}
+
+.results {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.result-card {
+  background: #2c2c2c;
+  padding: 20px;
+  border-radius: 10px;
+  width: 28%;
+}
+
+.result-card h3 {
+  margin-bottom: 10px;
+}
+
+.result-card p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.result-card span {
+  font-size: 0.9rem;
+  color: #aaa;
+}
