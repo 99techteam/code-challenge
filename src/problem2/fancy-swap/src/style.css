@@ -1,0 +1,34 @@
+
+body {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #2b0054 0%, #7d007d 50%, #0080ff 100%);
+  color: #fff;
+}
+
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border-radius: 32px;
+  padding: 2rem;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #ff6b00 0%, #e64a19 100%);
+  transition: all 0.3s ease;
+}
+.btn-gradient:hover {
+  box-shadow: 0 0 30px rgba(255, 107, 0, 0.6);
+  filter: brightness(1.1);
+}
+
+.active {
+  background: #e0e7ff;
+}
