@@ -1,0 +1,39 @@
+# Dependencies (do not commit)
+node_modules/
+
+# Build output (do not commit)
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# Env / secrets (do not commit)
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs & debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+logs/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*~
+
+# Optional: uncomment below to exclude lock files from commit
+# package-lock.json
+# pnpm-lock.yaml
+# yarn.lock

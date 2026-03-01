@@ -1,0 +1,43 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "select": "Select"
+  },
+  "swap": {
+    "title": "Swap",
+    "youPay": "You pay",
+    "youReceive": "You receive",
+    "balance": "Balance",
+    "max": "MAX",
+    "selectTokens": "Select tokens",
+    "selectDifferentTokens": "Select different tokens",
+    "enterAmount": "Enter an amount",
+    "swap": "Swap",
+    "rate": "Rate",
+    "priceImpact": "Price Impact",
+    "slippage": "Slippage",
+    "minReceived": "Min. Received",
+    "maxSlippage": "Max Slippage",
+    "tryAgain": "Try Again",
+    "loadingTokensAndPrices": "Loading tokens and prices…",
+    "selectDifferentToken": "Select a different token.",
+    "selectToken": "Select a token",
+    "searchPlaceholder": "Search by token name...",
+    "popularTokens": "Popular tokens",
+    "noTokensFound": "No tokens found.",
+    "confirmSwap": "Confirm Swap",
+    "swapping": "Swapping...",
+    "slippageTolerance": "Slippage Tolerance",
+    "custom": "Custom",
+    "highSlippageWarning": "High slippage may result in an unfavorable trade.",
+    "successMessage": "Swapped {{fromAmount}} {{fromCurrency}} for {{toAmount}} {{toCurrency}}",
+    "amountError": {
+      "invalidNumber": "Enter a valid number",
+      "positiveRequired": "Enter amount greater than 0"
+    },
+    "errors": {
+      "fetchPricesFailed": "Failed to load token prices. Please try again.",
+      "noTokensAvailable": "No tokens with prices available."
+    }
+  }
+}
