@@ -115,6 +115,7 @@ const SwapPage = () => {
             status: false,
             modalType: "",
         });
+        setSearchTokenValue("");
     };
 
     const handleSelectToken = (token: TokenPriceInfo) => {

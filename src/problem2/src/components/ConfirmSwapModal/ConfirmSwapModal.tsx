@@ -56,7 +56,7 @@ const ConfirmSwapModal = (props: ConfirmSwapModalProps) => {
                 return (
                     <>
                         <Loading />
-                        <Description>Confirm Swap</Description>
+                        <Description>Swapping...</Description>
                     </>
                 );
 

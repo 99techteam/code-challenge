@@ -70,8 +70,8 @@ const SwapSection = ({
                                 <SelectTokenButtonImage>
                                     <TokenImage
                                         currency={selectedToken?.currency}
-                                        width="20px"
-                                        height="20px"
+                                        width={30}
+                                        height={30}
                                     />
                                 </SelectTokenButtonImage>
                             )}

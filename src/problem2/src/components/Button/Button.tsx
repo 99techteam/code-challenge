@@ -30,6 +30,12 @@ const ButtonContainer = styled.button<Omit<ButtonProps, "title">>`
 
     margin-top: 16px;
 
+    @media screen and (max-width: 768px) {
+        height: 48px;
+        font-size: 16px;
+        margin-top: 8px;
+    }
+
     ${({ variant }) =>
         variant === "primary" &&
         `

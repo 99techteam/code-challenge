@@ -19,7 +19,6 @@ const SelectTokensModalInner = styled.div`
 `;
 
 const SelectTokensModalHeader = styled.div`
-    // padding-left: 24px;
     padding: 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
@@ -47,19 +46,29 @@ const SelectTokenModalSearchInput = styled.input`
     font-size: 15px;
     font-weight: 500;
     width: 100%;
-    // margin-top: 16px;
     margin-left: 8px;
+
+    @media screen and (max-width: 768px) {
+        font-size: 13px;
+    }
 `;
 
 const SearchInputIcon = styled.img`
     width: 20px;
     height: 20px;
+    @media screen and (max-width: 768px) {
+        width: 16px;
+        height: 16px;
+    }
 `;
 
 const Title = styled.h2`
     font-size: 24px;
     font-weight: 700;
     color: rgb(34, 34, 34);
+    @media screen and (max-width: 768px) {
+        font-size: 16px;
+    }
 `;
 
 const CloseModalIcon = styled.img`
@@ -79,6 +88,10 @@ const SubTitle = styled.h3`
     color: rgb(155, 155, 155);
     width: 100%;
     margin: 16px;
+
+    @media screen and (max-width: 768px) {
+        font-size: 12px;
+    }
 `;
 
 const TokenImageItem = styled.div`
@@ -93,6 +106,7 @@ const TokenImageItem = styled.div`
     &:hover {
         background-color: #d2d9ee60;
     }
+
 `;
 
 const Currency = styled.div`
@@ -102,6 +116,9 @@ const Currency = styled.div`
     width: 100%;
     width: 100%;
     height: 100%;
+    @media screen and (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export {

@@ -13,12 +13,17 @@ const Title = styled.h3`
     color: rgb(34, 34, 34);
     margin-bottom: 16px;
     width: 100%;
+    @media screen and (max-width: 768px) {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
 `;
 
 const InputContent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 `;
 
 const TextInput = styled.input`
@@ -34,6 +39,11 @@ const TextInput = styled.input`
     font-weight: 700;
     margin-right: 32px;
     width: 60%;
+    @media screen and (max-width: 768px) {
+        font-size: 20px;
+        margin-right: 16px;
+        width: 40%;
+    }
 `;
 
 const PriceInUSD = styled.p`
@@ -42,6 +52,11 @@ const PriceInUSD = styled.p`
     margin-top: 16px;
     width: 100%;
     font-weight: 600;
+    @media screen and (max-width: 768px) {
+        font-size: 12px;
+        margin-top: 12px;
+        margin-bottom: 4px;
+    }
 `;
 
 const SelectTokenButton = styled.div`
@@ -57,11 +72,16 @@ const SelectTokenButton = styled.div`
     &:hover {
         opacity: 0.6;
     }
+    @media screen and (max-width: 768px) {
+        padding: 8px 12px;
+        border-radius: 24px;
+    }
 `;
 
 const SelectTokenButtonContent = styled.div`
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 `;
 
 const SelectTokenButtonTitle = styled.p`
@@ -69,6 +89,9 @@ const SelectTokenButtonTitle = styled.p`
     font-size: 14px;
     font-weight: 700;
     margin-right: 8px;
+    @media screen and (max-width: 768px) {
+        font-size: 11px;
+    }
 `;
 
 const SelectTokenButtonImage = styled.div`
@@ -78,6 +101,10 @@ const SelectTokenButtonImage = styled.div`
 const SelectTokenButtonIcon = styled.img`
     width: 16px;
     height: 16px;
+    @media screen and (max-width: 768px) {
+        width: 10px;
+        height: 10px;
+    }
 `;
 
 export {

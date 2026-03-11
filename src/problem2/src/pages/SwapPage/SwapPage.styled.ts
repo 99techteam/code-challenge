@@ -18,6 +18,9 @@ const SwapPageInner = styled.div`
     border-radius: 32px;
     border: 1px solid #d2d9ee;
     padding: 12px;
+    @media screen and (max-width: 768px) {
+        padding: 8px;
+    }
 `;
 
 const Heading = styled.h1`
@@ -27,6 +30,11 @@ const Heading = styled.h1`
     color: rgb(34, 34, 34);
     text-align: center;
     width: 100%;
+
+    @media screen and (max-width: 768px) {
+        font-size: 36px;
+        margin-bottom: 24px;
+    }
 `;
 
 const SwapInputArrowButton = styled.div`
@@ -41,11 +49,20 @@ const SwapInputArrowButton = styled.div`
     position: relative;
     z-index: 1;
     cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+        padding: 8px;
+        margin: -18px;
+    }
 `;
 
 const SwapArrowIcon = styled.img`
     width: 20px;
     height: 20px;
+    @media screen and (max-width: 768px) {
+        width: 14px;
+        height: 14px;
+    }
 `;
 
 export {

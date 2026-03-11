@@ -5,14 +5,14 @@ import { TokenImageContainer } from "./TokenImage.styled";
 
 interface TokenImageProps {
     currency: string;
-    width?: string;
-    height?: string;
+    width?: number;
+    height?: number;
 }
 
 const TokenImage = ({
     currency,
-    width = "44px",
-    height = "44px",
+    width = 44,
+    height = 44,
 }: TokenImageProps) => {
     return (
         <TokenImageContainer

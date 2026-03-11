@@ -33,6 +33,11 @@ const Title = styled.h2`
     margin-bottom: 16px;
     color: black;
     margin-top: 16px;
+    @media screen and (max-width: 768px) {
+        font-size: 16px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
 `;
 
 const Description = styled.p`
@@ -40,6 +45,9 @@ const Description = styled.p`
     color: #6e6e6e;
     text-align: center;
     line-height: 1.5;
+    @media screen and (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 const TokenSwapInformation = styled.div`
@@ -48,6 +56,9 @@ const TokenSwapInformation = styled.div`
     justify-content: center;
     gap: 16px;
     margin: 32px 0;
+    @media screen and (max-width: 768px) {
+        margin: 24px 0;
+    }
 `;
 
 const CloseModalIcon = styled.img`
@@ -56,6 +67,12 @@ const CloseModalIcon = styled.img`
     padding: 16px 8px 16px;
     top: 16px;
     right: 16px;
+    @media screen and (max-width: 768px) {
+        padding: 12px 4px 12px;
+        top: 12px;
+        right: 12px;
+        width: 12px;
+    }
 `;
 
 export {
