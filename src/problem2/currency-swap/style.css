@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 body {
   display: flex;
   flex-direction: row;
@@ -5,4 +7,9 @@ body {
   justify-content: center;
   min-width: 360px;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@theme {
+  --color-border: #0000001a;
+  --color-foreground: #0a0a0a;
 }
