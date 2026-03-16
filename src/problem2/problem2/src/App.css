@@ -1,0 +1,194 @@
+.form-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  font-family: sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.rate-info {
+  background-color: #e7f6ea;
+  color: #246b3a;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 16px;
+}
+
+.currency {
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.error {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Viền input khi có lỗi */
+.error-input {
+  border-color: #d32f2f;
+  outline: none;
+  box-shadow: 0 0 0 1px #d32f2f;
+}
+
+.paying-with {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.change-btn {
+  background: none;
+  border: none;
+  color: #1d6eea;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.fee-box {
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.fee-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.fee-line.total {
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.info-text {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.info-text strong {
+  color: #137333;
+}
+
+.arrival-time {
+  color: #333;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn.secondary {
+  background-color: #fff;
+  border-color: #ccc;
+  color: #333;
+}
+
+.btn.secondary:hover {
+  background-color: #f1f1f1;
+}
+
+.btn.primary {
+  background-color: #32c866;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background-color: #29b05b;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal {
+  background-color: white;
+  padding: 24px 32px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  margin-bottom: 10px;
+  color: #4caf50;
+}
+
+.modal .btn.close {
+  margin-top: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal .btn.close:hover {
+  background-color: #45a049;
+}

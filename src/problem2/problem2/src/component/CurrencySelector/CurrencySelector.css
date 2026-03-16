@@ -1,0 +1,80 @@
+.currency-selector {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.selected-currency {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #fff;
+  width: 100%;
+}
+
+.selected-currency .arrow {
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 110%;
+  width: 200px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 20;
+  padding: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown input {
+  width: 178px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.currency-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.currency-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.currency-option:hover {
+  background-color: #f1f1f1;
+}
+
+.currency-option.selected {
+  background-color: #e6f5e8;
+}
+
+.currency-details {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.currency-details strong {
+  display: block;
+}
+
+.check {
+  color: green;
+  font-size: 14px;
+}
