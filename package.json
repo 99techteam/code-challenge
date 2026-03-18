@@ -1,0 +1,28 @@
+{
+  "name": "99tech-problems",
+  "version": "1.0.0",
+  "npm": "10.9.0",
+  "scripts": {
+    "dev-4": "ts-node ./src/problem4/index.ts",
+    "test-4": "jest --config ./src/problem4/jest.config.js",
+    "dev-5": "ts-node ./src/problem5/app.ts",
+    "test-5": "jest --config ./src/problem5/jest.config.js"
+  },
+  "dependencies": {
+    "@types/sqlite3": "^3.1.11",
+    "express": "^5.2.1",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.5.0",
+    "jest": "^30.3.0",
+    "jest-util": "^30.3.0",
+    "ts-jest": "^29.4.6"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

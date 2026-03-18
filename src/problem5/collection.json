@@ -1,0 +1,160 @@
+{
+  "info": {
+    "_postman_id": "fa1c55f7-bbab-49b7-a6e6-c4e6eef2209b",
+    "name": "CRUD User Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43373642",
+    "_collection_link": "https://go.postman.co/collection/43373642-fa1c55f7-bbab-49b7-a6e6-c4e6eef2209b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Find user by",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/users?name=abc&email=a@gmail.com",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "users"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "abc"
+            },
+            {
+              "key": "email",
+              "value": "a@gmail.com"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add user",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"name\": \"user1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/users",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get user by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/users/5968eeee-2730-47e9-9021-556a6305f2e2",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "users",
+            "5968eeee-2730-47e9-9021-556a6305f2e2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update user",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"name\": \"user1(updated)\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/users/5968eeee-2730-47e9-9021-556a6305f2e2",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "users",
+            "5968eeee-2730-47e9-9021-556a6305f2e2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete user",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/users/5968eeee-2730-47e9-9021-556a6305f2e2",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "users",
+            "5968eeee-2730-47e9-9021-556a6305f2e2"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "localhost:3000"
+    }
+  ]
+}
