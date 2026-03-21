@@ -1,0 +1,235 @@
+{
+  "info": {
+    "name": "Problem 5 - CRUD API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Resources",
+      "item": [
+        {
+          "name": "List Resources",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/resources?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "name", "value": "", "disabled": true },
+                { "key": "minPrice", "value": "", "disabled": true },
+                { "key": "maxPrice", "value": "", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Resources - Filter by Name",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/resources?name=laptop&page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources"],
+              "query": [
+                { "key": "name", "value": "laptop" },
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Resources - Filter by Price Range",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/resources?minPrice=100&maxPrice=1000&page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources"],
+              "query": [
+                { "key": "minPrice", "value": "100" },
+                { "key": "maxPrice", "value": "1000" },
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Resource",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/resources",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Laptop\",\n  \"description\": \"High performance laptop\",\n  \"price\": 999.99\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create Resource - Validation Error",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/resources",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"price\": -10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Resource by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/resources/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Resource by ID - Not Found",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/resources/9999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources", "9999"]
+            }
+          }
+        },
+        {
+          "name": "Update Resource",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/resources/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources", "1"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 899.99\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update Resource - Not Found",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/resources/9999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources", "9999"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 899.99\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Resource",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/resources/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Resource - Not Found",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/resources/9999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "resources", "9999"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
