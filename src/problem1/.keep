@@ -1,0 +1,21 @@
+// Way 1: Use loop to sum from 1 to n
+var sum_to_n_a = function (n) {
+    let sum = 0;
+    for (let i = 1; i <= n; i++) {
+        sum += i;
+    }
+    return sum;
+};
+
+// Way 2: Use formula n(n+1)/2 to calculate the sum from 1 to n
+var sum_to_n_b = function (n) {
+    return n * (n + 1) / 2;
+};
+
+// Way 3: Use recursion to sum from 1 to n
+var sum_to_n_c = function (n) {
+    if (n === 1) {
+        return 1;
+    }
+    return n + sum_to_n_c(n - 1);
+};
