@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fancy Form - Currency Swap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/src/style.scss" as="style">
+  </head>
+  <body>
+    <div id="app">
+      <div class="currency-swap-form">
+        <!-- From Section -->
+        <div class="currency-swap-form__section">
+          <div class="currency-swap-form__input-container">
+            <div class="currency-swap-form__input-wrapper">
+              <input type="number" id="from-amount" class="currency-swap-form__amount-input" placeholder="0,00" />
+              <div class="currency-swap-form__spinner-controls">
+                <button type="button" class="currency-swap-form__spinner-button currency-swap-form__spinner-button--up" data-input="from-amount">
+                  <svg viewBox="0 0 8 8" fill="none">
+                    <path d="M4 2L6 5H2L4 2Z" fill="currentColor"/>
+                  </svg>
+                </button>
+                <button type="button" class="currency-swap-form__spinner-button currency-swap-form__spinner-button--down" data-input="from-amount">
+                  <svg viewBox="0 0 8 8" fill="none">
+                    <path d="M4 6L2 3H6L4 6Z" fill="currentColor"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="currency-swap-form__balance">Balance: <span id="from-balance">100 EVMOS</span></div>
+          </div>
+          <div id="from-currency-dropdown" class="currency-swap-form__token-selector">
+            <div class="currency-swap-form__dropdown-selected" data-currency="">
+              <img src="" alt="" class="currency-swap-form__token-icon" />
+              <span class="currency-swap-form__token-name">Select Token</span>
+            </div>
+            <div class="currency-swap-form__dropdown-options">
+            </div>
+          </div>
+        </div>
+
+        <!-- Swap Button -->
+        <div class="currency-swap-form__swap-section">
+          <button id="swap-currencies" class="currency-swap-form__swap-button">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M8 2L8 14M8 14L12 10M8 14L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 14L8 2M8 2L4 6M8 2L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- To Section -->
+        <div class="currency-swap-form__section">
+          <div class="currency-swap-form__input-container">
+            <div class="currency-swap-form__input-wrapper">
+              <input type="number" id="to-amount" class="currency-swap-form__amount-input" placeholder="0,00" readonly />
+              <div class="currency-swap-form__spinner-controls">
+                <button type="button" class="currency-swap-form__spinner-button currency-swap-form__spinner-button--up" data-input="to-amount" disabled>
+                  <svg viewBox="0 0 8 8" fill="none">
+                    <path d="M4 2L6 5H2L4 2Z" fill="currentColor"/>
+                  </svg>
+                </button>
+                <button type="button" class="currency-swap-form__spinner-button currency-swap-form__spinner-button--down" data-input="to-amount" disabled>
+                  <svg viewBox="0 0 8 8" fill="none">
+                    <path d="M4 6L2 3H6L4 6Z" fill="currentColor"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="currency-swap-form__balance">Balance: <span id="to-balance">0 BUSD</span></div>
+          </div>
+          <div id="to-currency-dropdown" class="currency-swap-form__token-selector">
+            <div class="currency-swap-form__dropdown-selected" data-currency="">
+              <img src="" alt="" class="currency-swap-form__token-icon" />
+              <span class="currency-swap-form__token-name">Select Token</span>
+            </div>
+            <div class="currency-swap-form__dropdown-options">
+            </div>
+          </div>
+        </div>
+
+        <!-- Exchange Rate -->
+        <div class="currency-swap-form__exchange-rate">
+          <span id="exchange-rate">1 EVMOS ≈ 0.0625 BUSD</span>
+        </div>
+
+        <!-- Transaction Details -->
+        <div class="currency-swap-form__details">
+          <div class="currency-swap-form__detail-row">
+            <span class="currency-swap-form__detail-label">You will pay</span>
+            <div class="currency-swap-form__detail-value">
+              <img src="" alt="" class="currency-swap-form__detail-icon" id="pay-icon" />
+              <span id="pay-currency">EVMOS</span>
+            </div>
+          </div>
+          <div class="currency-swap-form__detail-row">
+            <span class="currency-swap-form__detail-label">You will receive</span>
+            <div class="currency-swap-form__detail-value">
+              <img src="" alt="" class="currency-swap-form__detail-icon" id="receive-icon" />
+              <span id="receive-currency">BUSD</span>
+            </div>
+          </div>
+          <div class="currency-swap-form__detail-row">
+            <span class="currency-swap-form__detail-label">Fees <span class="currency-swap-form__info-icon">ⓘ</span></span>
+            <span class="currency-swap-form__detail-value">1.2%</span>
+          </div>
+        </div>
+
+        <!-- Convert Button -->
+        <button id="swap-button" class="currency-swap-form__convert-button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 8px;">
+            <path d="M8 2L14 8L8 14M14 8L2 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Convert
+        </button>
+
+        <div id="loading-indicator" class="currency-swap-form__loading-indicator">Processing transaction...</div>
+        <div id="error-message" class="currency-swap-form__error-message"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
