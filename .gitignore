@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# SQLite database files
+*.sqlite
+*.sqlite3
+data/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Test coverage
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# BullMQ / Redis dump (if running locally)
+dump.rdb
+
+.claude/
+.playwright-mcp/
