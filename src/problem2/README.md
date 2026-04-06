@@ -20,6 +20,16 @@ Token Swap UI built with React, TypeScript, Vite, and Tailwind CSS.
 - Zustand for swap history state
 - Zod for form validation
 
+## Limitations / improvements
+
+- Balances shown in the UI are static demo values and not fetched from a real wallet.
+- USD equivalents displayed in the card are static examples and can be wired to live price data.
+- Swap flow is fully simulated; there is no wallet connection or on-chain transaction submission.
+- Slippage tolerance, fee percentage, and network fee values are hard-coded and not derived from live quotes or network conditions.
+- Validation uses a fixed example balance (2.14 ETH) and does not handle per-token balances or real portfolio data.
+- Swap history is stored only in in-memory Zustand state and is lost on page reload; it can be persisted to local storage or a backend.
+- Token icons are fetched directly from GitHub at runtime; in production these could be cached or served from a dedicated asset CDN.
+
 ## Setup and usage
 
 From `src/problem2`:

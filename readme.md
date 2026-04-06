@@ -1,4 +1,4 @@
-Monorepo containing multiple independent problems under `src/`.
+# 99Tech Code Challenge #1
 
 ## Problems overview
 
@@ -8,7 +8,7 @@ Monorepo containing multiple independent problems under `src/`.
 
 ### Problem 2: Fancy Form.
 
-    Please find setup in Readme in /problem2
+    Please find setup in Readme and room for improvements section in /problem2/README.md
 
     ## Tech used
     - React 18, TypeScript, Vite
