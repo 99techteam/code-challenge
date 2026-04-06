@@ -1,10 +1,22 @@
-# 99Tech Code Challenge #1 #
+Monorepo containing multiple independent problems under `src/`.
 
-Note that if you fork this repository, your responses may be publicly linked to this repo.  
-Please submit your application along with the solutions attached or linked.   
+## Problems overview
 
-It is important that you minimally attempt the problems, even if you do not arrive at a working solution.
+### Problem 1: Three ways to sum to n
 
-## Submission ##
-You can either provide a link to an online repository, attach the solution in your application, or whichever method you prefer.
-We're cool as long as we can view your solution without any pain.
+    Please find the code in `index.js` with some notes.
+
+### Problem 2: Fancy Form.
+
+    Please find setup in Readme in /problem2
+
+    ## Tech used
+    - React 18, TypeScript, Vite
+    - Tailwind CSS (default utility classes only)
+    - TanStack React Query for price fetching and caching
+    - Zustand for swap history state, and for scaling with global state
+    - Zod for form validation
+
+### Problem 3: Messy React
+
+    Please find the answer and refactored code in the markdown file.
