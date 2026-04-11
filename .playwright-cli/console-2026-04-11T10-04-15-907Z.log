@@ -1,0 +1,50 @@
+[     102ms] [INFO] Resource Sentinel initialized... @ https://s5tech.notion.site/Code-Challenge-05cdb9e0d1ce432a843f763b5d5f7497:0
+[     811ms] [INFO] 2026-04-11T10:04:16.718Z [info] FeatureFlagTransactionQueue: preferIndexedDB {team: no-team-specified} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[     845ms] [WARNING] Ignoring inability to install OPFS sqlite3_vfs: Cannot install OPFS: Missing SharedArrayBuffer and/or Atomics. The server must emit the COOP/COEP response headers to enable those. See https://sqlite.org/wasm/doc/trunk/persistence.md#coop-coep @ https://s5tech.notion.site/_assets/wasm-sqlite-worker-48bb2a0a3433bfae.js:0
+[    1383ms] [INFO] 2026-04-11T10:04:17.289Z [info] appHelpers: shouldShowError {data: Object} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[    1386ms] [INFO] 2026-04-11T10:04:17.292Z [info] appHelpers: shouldShowError {data: Object} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[    1390ms] [INFO] 2026-04-11T10:04:17.297Z [error] statsig: initialize {error: Object, data: Object} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[    1392ms] [LOG] %c
+	nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+	nnnn                         nnnn
+	nnnnnnn                          nnnn
+	nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+	nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+	nnnnnnnn                           nnn
+	nnnnnnnn    nnnnnnnn     nnnnnnn   nnn
+	nnnnnnnn      nnnnnnn      nnn     nnn
+	nnnnnnnn      nnnnnnnn     nnn     nnn
+	nnnnnnnn      nnnnnnnnnn   nnn     nnn
+	nnnnnnnn      nnn nnnnnnn  nnn     nnn
+	nnnnnnnn      nnn  nnnnnnnnnnn     nnn
+	nnnnnnnn      nnn   nnnnnnnnnn     nnn
+	nnnnnnnn      nnn     nnnnnnnn     nnn
+	nnnnnnnn      nnn      nnnnnnn     nnn
+	nnnnnnnn    nnnnnnnn    nnnnnn     nnn
+	  nnnnnn                           nnn
+		nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn		We're hiring!
+		  nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn		notion.so/careers
+
+	“yeah, I would probably eat a lemon for one hundred dollars” -- Ivan Zhao (2023-07-14)
+				  font-family: monospace @ https://s5tech.notion.site/_assets/mainApp-87f2b93ddb7b9702.js:0
+[    1527ms] [INFO] 2026-04-11T10:04:17.433Z [info] syncRecordValuesBatched: recordPointerMissingSpaceId {actor: Object, data: Object} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[    1562ms] [INFO] 2026-04-11T10:04:17.469Z [info] PageLoader: loserAborted {data: Object} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[    1649ms] [WARNING] Amplitude Logger [Warn]: Event not tracked, no destination plugins on the instance @ https://s5tech.notion.site/_assets/transport-support-ba721c6e8ff031b7.js:0
+[    1649ms] [INFO] 2026-04-11T10:04:17.556Z [error] eventTrailApiHelpers: trackFailure {error: Object} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[    1710ms] [INFO] 2026-04-11T10:04:17.616Z [error] handleRestrictedStateForResponse: callApi {data: Object} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[    1730ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://cdn.metadata.io/pixel/config/1127.json:0
+[    1781ms] [INFO] 2026-04-11T10:04:17.687Z [error] handleRestrictedStateForResponse: callApi {data: Object} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[    2328ms] [INFO] 2026-04-11T10:04:18.235Z [info] useExpPingPolling: exp_ping_success {data: Object} @ https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:67
+[    2481ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://s5tech.notion.site/api/v3/getSubscriptionBanner:0
+[    2483ms] [ERROR] HttpRequestError: Received HTTP 401
+    at u (https://s5tech.notion.site/_assets/ClientFramework-a8eba548fd2afda9.js:1:47941)
+    at async m (https://s5tech.notion.site/_assets/ClientFramework-a8eba548fd2afda9.js:1:50014)
+    at async a (https://s5tech.notion.site/_assets/app-d36ccfcf1c28c621.js:1:183634)
+    at async l (https://s5tech.notion.site/_assets/6360-c2b1fe4ca63549ff.js:6:372420)
+    at async n (https://s5tech.notion.site/_assets/6360-c2b1fe4ca63549ff.js:47:206309)
+    at async https://s5tech.notion.site/_assets/6360-c2b1fe4ca63549ff.js:9:30596
+    at async fetchingStore.U.dontCacheUndefined [as fetchFn] (https://s5tech.notion.site/_assets/16579-f5b789b9b27760bc.js:1:2856)
+    at async r.fetch (https://s5tech.notion.site/_assets/ClientFramework-a8eba548fd2afda9.js:1:77600) @ https://s5tech.notion.site/_assets/18763-ac619dd144d51998.js:472
+[    2483ms] [INFO] 2026-04-11T10:04:18.389Z [error] api: httpTrigger401 {data: Object} @ https://s5tech.notion.site/_assets/18763-ac619dd144d51998.js:472
+[   32331ms] [INFO] 2026-04-11T10:04:48.237Z [info] useExpPingPolling: exp_ping_success {data: Object} @ https://s5tech.notion.site/_assets/18763-ac619dd144d51998.js:472
+[   62470ms] [INFO] 2026-04-11T10:05:18.376Z [info] useExpPingPolling: exp_ping_success {data: Object} @ https://s5tech.notion.site/_assets/18763-ac619dd144d51998.js:472

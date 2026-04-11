@@ -1,0 +1,104 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - link "Skip to content" [ref=e8] [cursor=pointer]:
+        - /url: "#main"
+        - generic [ref=e9]:
+          - text: Skip to content
+          - img [ref=e10]
+      - generic [ref=e12]:
+        - banner [ref=e13]:
+          - generic [ref=e15]:
+            - button "🚀 Code Challenge" [disabled] [ref=e17]:
+              - generic [ref=e20]: 🚀
+              - generic [ref=e21]: Code Challenge
+            - generic [ref=e22]:
+              - button "Close panel" [ref=e24] [cursor=pointer]:
+                - img [ref=e25]
+              - generic [ref=e28]:
+                - button [ref=e29] [cursor=pointer]:
+                  - img [ref=e30]
+                - button "Share site to socials" [ref=e34] [cursor=pointer]:
+                  - img [ref=e35]
+                - button "More actions" [ref=e39] [cursor=pointer]:
+                  - img [ref=e40]
+                - button "Get Notion free" [ref=e42] [cursor=pointer]
+        - main [ref=e43]:
+          - group [disabled] [ref=e46]:
+            - generic [ref=e48]:
+              - generic [ref=e58]:
+                - img "Page icon" [ref=e63]: 🚀
+                - heading "Code Challenge" [level=1] [ref=e68]
+              - generic [ref=e70]:
+                - heading "Instruction" [level=2] [ref=e75]
+                - generic [ref=e79]:
+                  - generic [ref=e81]: "1."
+                  - generic [ref=e84]: Please submit your application along with the solutions attached or linked.
+                - generic [ref=e88]:
+                  - generic [ref=e90]: "2."
+                  - generic [ref=e93]: Each problem provides sufficient information for you to attempt the challenge. If you have any uncertainties, you can note them in your solution and declare any assumptions if necessary.
+                - generic [ref=e97]:
+                  - generic [ref=e99]: "3."
+                  - generic [ref=e102]: It is important that you minimally attempt the problems, even if you do not arrive at a working solution.
+                - generic [ref=e106]:
+                  - generic [ref=e108]: "4."
+                  - generic [ref=e111]: With the advent of ChatGPT, the challenge is designed with broader scope and more freeform, so feel free to exercise your creativity where constraints are not clear.
+                - note [ref=e113]:
+                  - generic [ref=e114]:
+                    - img "Callout icon" [ref=e120]: 💡
+                    - generic [ref=e122]: Start with the skeletal template in the GitHub repo linked below. 1. You can either provide a link to an online repository, attach the solution in your application, or whichever method you prefer. 2. We're cool as long as we can view your solution without any pain (having to unzip a file is considered painful). 3. Depending on the role you are applying for, you may need to attempt only selected problems indicated below.
+                - figure [ref=e124]:
+                  - link "GitHub - 99techteam/code-challenge Contribute to 99techteam/code-challenge development by creating an account on GitHub. https://github.com/99techteam/code-challenge" [disabled] [ref=e126] [cursor=pointer]:
+                    - /url: https://github.com/99techteam/code-challenge
+                    - generic [ref=e127]:
+                      - generic [ref=e128]: GitHub - 99techteam/code-challenge
+                      - generic [ref=e129]: Contribute to 99techteam/code-challenge development by creating an account on GitHub.
+                      - generic [ref=e130]:
+                        - img [ref=e131]
+                        - generic [ref=e132]: https://github.com/99techteam/code-challenge
+                - heading "Problems" [level=2] [ref=e140]
+                - note [ref=e142]:
+                  - generic [ref=e143]:
+                    - img "Callout icon" [ref=e149]: ⚠️
+                    - generic [ref=e151]: Select the appropriate tab below for the role you are applying. Depending on the role you are applying for, you may not need to attempt all the questions.
+                - generic [ref=e155]:
+                  - button "Open" [disabled] [ref=e157] [cursor=pointer]:
+                    - img [ref=e158]
+                  - generic [ref=e162]: 💡 If you are applying as a Full-Stack Engineer to “try the role” or “do some backend stuff”.
+                - generic [ref=e164]:
+                  - generic [ref=e167]:
+                    - tablist [disabled] [ref=e168]:
+                      - generic [ref=e169]:
+                        - tab "Frontend" [disabled] [selected] [ref=e173] [cursor=pointer]:
+                          - img [ref=e174]
+                          - generic [ref=e176]: Frontend
+                        - tab "Backend" [disabled] [ref=e180] [cursor=pointer]:
+                          - img [ref=e181]
+                          - generic [ref=e183]: Backend
+                        - tab "Fullstack" [disabled] [ref=e187] [cursor=pointer]:
+                          - img [ref=e188]
+                          - generic [ref=e190]: Fullstack
+                        - tab "All Problems" [disabled] [ref=e194] [cursor=pointer]:
+                          - img [ref=e195]
+                          - generic [ref=e197]: All Problems
+                    - generic [ref=e199]:
+                      - button "Filter" [disabled] [ref=e203] [cursor=pointer]:
+                        - img [ref=e204]
+                      - button "Sort" [disabled] [ref=e209] [cursor=pointer]:
+                        - img [ref=e210]
+                      - button "Search" [disabled] [ref=e213] [cursor=pointer]:
+                        - img [ref=e214]
+                  - generic [ref=e222]:
+                    - button "Name" [disabled] [ref=e233]:
+                      - generic [ref=e234]:
+                        - img [ref=e240]
+                        - generic [ref=e242]: Name
+                    - button "Edit filters" [disabled] [ref=e247] [cursor=pointer]:
+                      - img [ref=e248]
+                      - text: Edit filters
+        - region [ref=e257]
+    - status [ref=e258]
+    - alert [ref=e259]
+  - generic: All Problems
+  - iframe [ref=e260]:
+    

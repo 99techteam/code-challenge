@@ -1,0 +1,624 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - link "Skip to content" [ref=e8] [cursor=pointer]:
+        - /url: "#main"
+        - generic [ref=e9]:
+          - text: Skip to content
+          - img [ref=e10]
+      - generic [ref=e12]:
+        - banner [ref=e13]:
+          - generic [ref=e15]:
+            - button "🚀 AI Full-Stack Code Challenge" [disabled] [ref=e17]:
+              - generic [ref=e20]: 🚀
+              - generic [ref=e21]: AI Full-Stack Code Challenge
+            - generic [ref=e22]:
+              - button "Close panel" [ref=e24] [cursor=pointer]:
+                - img [ref=e25]
+              - generic [ref=e28]:
+                - button [ref=e29] [cursor=pointer]:
+                  - img [ref=e30]
+                - button "Share site to socials" [ref=e34] [cursor=pointer]:
+                  - img [ref=e35]
+                - button [ref=e39] [cursor=pointer]:
+                  - img [ref=e40]
+                - button "More actions" [ref=e43] [cursor=pointer]:
+                  - img [ref=e44]
+                - button "Get Notion free" [ref=e46] [cursor=pointer]
+        - main [ref=e47]:
+          - group [disabled] [ref=e50]:
+            - generic [ref=e52]:
+              - generic [ref=e110]:
+                - img "Page icon" [ref=e115]: 🚀
+                - heading "AI Full-Stack Code Challenge" [level=1] [ref=e120]
+              - generic [ref=e122]:
+                - heading "Overview" [level=3] [ref=e127]
+                - generic [ref=e133]: Build a full-stack Mini Campaign Manager — a simplified MarTech tool that lets marketers create, manage, and track email campaigns.
+                - generic [ref=e137]:
+                  - generic [ref=e139]: •
+                  - generic [ref=e142]: "Time estimate: 4–8 hours"
+                - generic [ref=e146]:
+                  - generic [ref=e148]: •
+                  - generic [ref=e151]: "Deliverable: Public GitHub repository link and written walkthrough"
+                - generic [ref=e155]:
+                  - generic [ref=e157]: •
+                  - generic [ref=e160]: "AI usage: You are encouraged to use Claude Code (or similar). We will evaluate how you use it."
+                - separator [disabled] [ref=e163]
+                - heading "Part 1 — Backend (Node.js + PostgreSQL)" [level=3] [ref=e168]
+                - heading "1) Schema design" [level=4] [ref=e173]
+                - generic [ref=e179]: "Design and implement a PostgreSQL schema for:"
+                - generic [ref=e183]:
+                  - generic [ref=e185]: •
+                  - generic [ref=e188]: User — id, email, name, created_at
+                - generic [ref=e192]:
+                  - generic [ref=e194]: •
+                  - generic [ref=e197]:
+                    - text: Campaign — id, name, subject, body (text), status (
+                    - generic [ref=e198]: draft
+                    - text: "|"
+                    - generic [ref=e199]: scheduled
+                    - text: "|"
+                    - generic [ref=e200]: sent
+                    - text: ), scheduled_at, created_by (FK → User), created_at, updated_at
+                - generic [ref=e204]:
+                  - generic [ref=e206]: •
+                  - generic [ref=e209]: Recipient — id, email, name, created_at
+                - generic [ref=e213]:
+                  - generic [ref=e215]: •
+                  - generic [ref=e218]:
+                    - text: CampaignRecipient — campaign_id, recipient_id, sent_at (nullable), opened_at (nullable), status (
+                    - generic [ref=e219]: pending
+                    - text: "|"
+                    - generic [ref=e220]: sent
+                    - text: "|"
+                    - generic [ref=e221]: failed
+                    - text: )
+                - generic [ref=e227]: "Indexing: Include indexes you believe are necessary. Be ready to explain why."
+                - heading "2) API endpoints (REST)" [level=4] [ref=e232]
+                - generic [ref=e238]: "Build a REST API with these endpoints:"
+                - generic [ref=e242]:
+                  - generic [ref=e244]: •
+                  - generic [ref=e247]:
+                    - generic [ref=e248]: POST /auth/register
+                    - text: — Register a new user
+                - generic [ref=e252]:
+                  - generic [ref=e254]: •
+                  - generic [ref=e257]:
+                    - generic [ref=e258]: POST /auth/login
+                    - text: — Login, return JWT
+                - generic [ref=e262]:
+                  - generic [ref=e264]: •
+                  - generic [ref=e267]:
+                    - generic [ref=e268]: GET /campaigns
+                    - text: — List campaigns (auth required)
+                - generic [ref=e272]:
+                  - generic [ref=e274]: •
+                  - generic [ref=e277]:
+                    - generic [ref=e278]: POST /campaigns
+                    - text: — Create campaign (auth required)
+                - generic [ref=e282]:
+                  - generic [ref=e284]: •
+                  - generic [ref=e287]:
+                    - generic [ref=e288]: GET /campaigns/:id
+                    - text: — Campaign details + recipient stats (auth required)
+                - generic [ref=e292]:
+                  - generic [ref=e294]: •
+                  - generic [ref=e297]:
+                    - generic [ref=e298]: PATCH /campaigns/:id
+                    - text: — Update campaign (only if status is
+                    - generic [ref=e299]: draft
+                    - text: )
+                - generic [ref=e303]:
+                  - generic [ref=e305]: •
+                  - generic [ref=e308]:
+                    - generic [ref=e309]: DELETE /campaigns/:id
+                    - text: — Delete a draft campaign
+                - generic [ref=e313]:
+                  - generic [ref=e315]: •
+                  - generic [ref=e318]:
+                    - generic [ref=e319]: POST /campaigns/:id/schedule
+                    - text: — Schedule a campaign (set
+                    - generic [ref=e320]: scheduled_at
+                    - text: )
+                - generic [ref=e324]:
+                  - generic [ref=e326]: •
+                  - generic [ref=e329]:
+                    - generic [ref=e330]: POST /campaigns/:id/send
+                    - text: — Simulate sending (mark recipients as
+                    - generic [ref=e331]: sent
+                    - text: ", record"
+                    - generic [ref=e332]: sent_at
+                    - text: ", set campaign status"
+                    - generic [ref=e333]: sent
+                    - text: )
+                - generic [ref=e337]:
+                  - generic [ref=e339]: •
+                  - generic [ref=e342]:
+                    - generic [ref=e343]: GET /campaigns/:id/stats
+                    - text: — Return rates and counts
+                - heading "3) Business rules (enforce server-side)" [level=4] [ref=e348]
+                - generic [ref=e352]:
+                  - generic [ref=e354]: •
+                  - generic [ref=e357]:
+                    - text: A campaign can only be edited or deleted when status is
+                    - generic [ref=e358]: draft
+                    - text: .
+                - generic [ref=e362]:
+                  - generic [ref=e364]: •
+                  - generic [ref=e367]:
+                    - generic [ref=e368]: scheduled_at
+                    - text: must be a future timestamp.
+                - generic [ref=e372]:
+                  - generic [ref=e374]: •
+                  - generic [ref=e377]:
+                    - text: Sending transitions status to
+                    - generic [ref=e378]: sent
+                    - text: and cannot be undone.
+                - generic [ref=e382]:
+                  - generic [ref=e384]: •
+                  - generic [ref=e387]:
+                    - generic [ref=e388]: /stats
+                    - text: "should return:"
+                - figure [ref=e391]:
+                  - generic [ref=e395]: "{ \"total\": 0, \"sent\": 0, \"failed\": 0, \"opened\": 0, \"open_rate\": 0, \"send_rate\": 0 }"
+                - heading "4) Tech requirements" [level=4] [ref=e400]
+                - generic [ref=e404]:
+                  - generic [ref=e406]: •
+                  - generic [ref=e409]: Node.js with Express or Fastify
+                - generic [ref=e413]:
+                  - generic [ref=e415]: •
+                  - generic [ref=e418]:
+                    - text: PostgreSQL with raw SQL or a lightweight query builder (e.g.,
+                    - generic [ref=e419]: postgres
+                    - text: ","
+                    - generic [ref=e420]: knex
+                    - text: ) — no heavy ORMs like Prisma
+                - generic [ref=e424]:
+                  - generic [ref=e426]: •
+                  - generic [ref=e429]: JWT authentication middleware
+                - generic [ref=e433]:
+                  - generic [ref=e435]: •
+                  - generic [ref=e438]: Input validation (zod or joi)
+                - generic [ref=e442]:
+                  - generic [ref=e444]: •
+                  - generic [ref=e447]: Migrations (SQL files or knex migrations)
+                - generic [ref=e451]:
+                  - generic [ref=e453]: •
+                  - generic [ref=e456]: At least 3 meaningful tests for critical business logic (unit or integration)
+                - separator [disabled] [ref=e459]
+                - heading "Part 2 — Frontend (React + TypeScript)" [level=3] [ref=e464]
+                - generic [ref=e470]: Build a simple but functional UI.
+                - heading "Pages" [level=4] [ref=e475]
+                - generic [ref=e479]:
+                  - generic [ref=e481]: •
+                  - generic [ref=e484]:
+                    - generic [ref=e485]: /login
+                    - text: — Login form, store JWT in memory or httpOnly cookie
+                - generic [ref=e489]:
+                  - generic [ref=e491]: •
+                  - generic [ref=e494]:
+                    - generic [ref=e495]: /campaigns
+                    - text: — List campaigns with status badges, pagination or infinite scroll
+                - generic [ref=e499]:
+                  - generic [ref=e501]: •
+                  - generic [ref=e504]:
+                    - generic [ref=e505]: /campaigns/new
+                    - text: — Create campaign form (name, subject, body, recipient emails)
+                - generic [ref=e509]:
+                  - generic [ref=e511]: •
+                  - generic [ref=e514]:
+                    - generic [ref=e515]: /campaigns/:id
+                    - text: "— Campaign detail: stats, recipient list, action buttons"
+                - heading "UI features" [level=4] [ref=e520]
+                - generic [ref=e524]:
+                  - generic [ref=e526]: •
+                  - generic [ref=e527]:
+                    - generic [ref=e529]: "Campaign status badge (color-coded):"
+                    - generic [ref=e533]:
+                      - generic [ref=e535]: ◦
+                      - generic [ref=e538]:
+                        - generic [ref=e539]: draft
+                        - text: = grey
+                    - generic [ref=e543]:
+                      - generic [ref=e545]: ◦
+                      - generic [ref=e548]:
+                        - generic [ref=e549]: scheduled
+                        - text: = blue
+                    - generic [ref=e553]:
+                      - generic [ref=e555]: ◦
+                      - generic [ref=e558]:
+                        - generic [ref=e559]: sent
+                        - text: = green
+                - generic [ref=e563]:
+                  - generic [ref=e565]: •
+                  - generic [ref=e568]: "Action buttons: Schedule, Send, Delete (conditionally shown based on status)"
+                - generic [ref=e572]:
+                  - generic [ref=e574]: •
+                  - generic [ref=e577]: "Stats display: open rate and send rate (progress bar or simple chart)"
+                - generic [ref=e581]:
+                  - generic [ref=e583]: •
+                  - generic [ref=e586]: "Error handling: show API errors meaningfully"
+                - generic [ref=e590]:
+                  - generic [ref=e592]: •
+                  - generic [ref=e595]: "Loading states: skeleton loaders or spinners while fetching"
+                - heading "Tech requirements" [level=4] [ref=e600]
+                - generic [ref=e604]:
+                  - generic [ref=e606]: •
+                  - generic [ref=e609]: React 18+ with TypeScript
+                - generic [ref=e613]:
+                  - generic [ref=e615]: •
+                  - generic [ref=e618]: React Query or SWR for data fetching
+                - generic [ref=e622]:
+                  - generic [ref=e624]: •
+                  - generic [ref=e627]: Any component library is fine (shadcn/ui, Chakra, MUI, or Tailwind)
+                - generic [ref=e631]:
+                  - generic [ref=e633]: •
+                  - generic [ref=e636]: Redux required
+                - separator [disabled] [ref=e639]
+                - heading "Part 3 — AI usage showcase (required)" [level=3] [ref=e644]
+                - generic [ref=e650]:
+                  - text: In your
+                  - generic [ref=e651]: README.md
+                  - text: ", include a section titled “How I Used Claude Code” that covers:"
+                - generic [ref=e655]:
+                  - generic [ref=e657]: "1."
+                  - generic [ref=e660]: What tasks you delegated to Claude Code
+                - generic [ref=e664]:
+                  - generic [ref=e666]: "2."
+                  - generic [ref=e669]: 2–3 real prompts you used
+                - generic [ref=e673]:
+                  - generic [ref=e675]: "3."
+                  - generic [ref=e678]: Where Claude Code was wrong or needed correction
+                - generic [ref=e682]:
+                  - generic [ref=e684]: "4."
+                  - generic [ref=e687]: What you would not let Claude Code do — and why
+                - separator [disabled] [ref=e690]
+                - heading "Evaluation criteria" [level=3] [ref=e695]
+                - generic [ref=e699]:
+                  - generic [ref=e701]: •
+                  - generic [ref=e704]: Backend correctness (business rules enforced, efficient SQL)
+                - generic [ref=e708]:
+                  - generic [ref=e710]: •
+                  - generic [ref=e713]: API design (REST conventions, error codes, response shapes)
+                - generic [ref=e717]:
+                  - generic [ref=e719]: •
+                  - generic [ref=e722]: Frontend quality (UX polish, error/loading states)
+                - generic [ref=e726]:
+                  - generic [ref=e728]: •
+                  - generic [ref=e731]: Code quality (readability, separation of concerns)
+                - generic [ref=e735]:
+                  - generic [ref=e737]: •
+                  - generic [ref=e740]: AI collaboration (judgment, transparency)
+                - generic [ref=e744]:
+                  - generic [ref=e746]: •
+                  - generic [ref=e749]: Testing (meaningful coverage)
+                - separator [disabled] [ref=e752]
+                - heading "Submission instructions" [level=3] [ref=e757]
+                - generic [ref=e761]:
+                  - generic [ref=e763]: "1."
+                  - generic [ref=e766]: Push code to a public GitHub repo
+                - generic [ref=e770]:
+                  - generic [ref=e772]: "2."
+                  - generic [ref=e773]:
+                    - generic [ref=e775]:
+                      - text: Include
+                      - generic [ref=e776]: README.md
+                      - text: "with:"
+                    - generic [ref=e780]:
+                      - generic [ref=e782]: •
+                      - generic [ref=e785]:
+                        - text: Local setup (ideally
+                        - generic [ref=e786]: docker compose up
+                        - text: )
+                    - generic [ref=e790]:
+                      - generic [ref=e792]: •
+                      - generic [ref=e795]: Seed data or a demo script
+                    - generic [ref=e799]:
+                      - generic [ref=e801]: •
+                      - generic [ref=e804]: “How I Used Claude Code” section
+                - generic [ref=e808]:
+                  - generic [ref=e810]: "3."
+                  - generic [ref=e813]: Send repo link + walkthrough summary
+                - link "🧪 Mini Campaign Manager — Full-Stack Code Challenge (1)" [disabled] [ref=e817] [cursor=pointer]:
+                  - /url: /Mini-Campaign-Manager-Full-Stack-Code-Challenge-1-32548905ea77805e982cd805c3860e1c?pvs=25
+                  - generic [ref=e820]:
+                    - generic [ref=e824]: 🧪
+                    - generic [ref=e826]: Mini Campaign Manager — Full-Stack Code Challenge (1)
+                - link "🧪 Mini Campaign Manager — Full-Stack Code Challenge (1)" [disabled] [ref=e830] [cursor=pointer]:
+                  - /url: /Mini-Campaign-Manager-Full-Stack-Code-Challenge-1-32548905ea7780638d51d3c5a1ca7ced?pvs=25
+                  - generic [ref=e833]:
+                    - generic [ref=e837]: 🧪
+                    - generic [ref=e839]: Mini Campaign Manager — Full-Stack Code Challenge (1)
+                - heading "Overview" [level=3] [ref=e844]
+                - generic [ref=e850]: Build a full-stack Mini Campaign Manager — a simplified MarTech tool that lets marketers create, manage, and track email campaigns.
+                - generic [ref=e854]:
+                  - generic [ref=e856]: •
+                  - generic [ref=e859]: "Time estimate: 4–8 hours"
+                - generic [ref=e863]:
+                  - generic [ref=e865]: •
+                  - generic [ref=e868]: "Deliverable: Public GitHub repository link and written walkthrough"
+                - generic [ref=e872]:
+                  - generic [ref=e874]: •
+                  - generic [ref=e877]: "AI usage: You are encouraged to use Claude Code (or similar). We will evaluate how you use it."
+                - separator [disabled] [ref=e880]
+                - heading "Part 1 — Backend (Node.js + PostgreSQL)" [level=3] [ref=e885]
+                - heading "1) Schema design" [level=4] [ref=e890]
+                - generic [ref=e896]: "These are mandatory tables, should allow the creation of more tables if necessar:"
+                - generic [ref=e900]:
+                  - generic [ref=e902]: •
+                  - generic [ref=e905]: User — id, email, name, created_at
+                - generic [ref=e909]:
+                  - generic [ref=e911]: •
+                  - generic [ref=e914]:
+                    - text: Campaign — id, name, subject, body (text), status (
+                    - generic [ref=e915]: draft
+                    - text: "|"
+                    - generic [ref=e916]: sending
+                    - text: "|"
+                    - generic [ref=e917]: scheduled
+                    - text: "|"
+                    - generic [ref=e918]: sent
+                    - text: ), scheduled_at, created_by (FK → User), created_at, updated_at
+                - generic [ref=e922]:
+                  - generic [ref=e924]: •
+                  - generic [ref=e927]: Recipient — id, email, name, created_at
+                - generic [ref=e931]:
+                  - generic [ref=e933]: •
+                  - generic [ref=e936]:
+                    - text: CampaignRecipient — campaign_id, recipient_id, sent_at (nullable), opened_at (nullable), status (
+                    - generic [ref=e937]: pending
+                    - text: "|"
+                    - generic [ref=e938]: sent
+                    - text: "|"
+                    - generic [ref=e939]: failed
+                    - text: )
+                - generic [ref=e945]: "Indexing: Include indexes you believe are necessary. Be ready to explain why."
+                - heading "2) API endpoints (REST)" [level=4] [ref=e950]
+                - generic [ref=e956]: "Build a REST API with these endpoints:"
+                - generic [ref=e960]:
+                  - generic [ref=e962]: •
+                  - generic [ref=e965]:
+                    - generic [ref=e966]: POST /auth/register
+                    - text: — Register a new user
+                - generic [ref=e970]:
+                  - generic [ref=e972]: •
+                  - generic [ref=e975]:
+                    - generic [ref=e976]: POST /auth/login
+                    - text: — Login, return JWT
+                - generic [ref=e980]:
+                  - generic [ref=e982]: •
+                  - generic [ref=e985]:
+                    - generic [ref=e986]: GET /campaigns
+                    - text: — List campaigns (auth required)
+                - generic [ref=e990]:
+                  - generic [ref=e992]: •
+                  - generic [ref=e995]:
+                    - generic [ref=e996]: POST /campaigns
+                    - text: — Create campaign (auth required)
+                - generic [ref=e1000]:
+                  - generic [ref=e1002]: •
+                  - generic [ref=e1005]:
+                    - generic [ref=e1006]: GET /recipients
+                    - text: — Get Recipients (auth required)
+                - generic [ref=e1010]:
+                  - generic [ref=e1012]: •
+                  - generic [ref=e1015]:
+                    - generic [ref=e1016]: POST /recipient
+                    - text: — Create recipient (auth required)
+                - generic [ref=e1020]:
+                  - generic [ref=e1022]: •
+                  - generic [ref=e1025]:
+                    - generic [ref=e1026]: GET /campaigns/:id
+                    - text: — Campaign details + recipient stats (auth required)
+                - generic [ref=e1030]:
+                  - generic [ref=e1032]: •
+                  - generic [ref=e1035]:
+                    - generic [ref=e1036]: PATCH /campaigns/:id
+                    - text: — Update campaign (only if status is
+                    - generic [ref=e1037]: draft
+                    - text: )
+                - generic [ref=e1041]:
+                  - generic [ref=e1043]: •
+                  - generic [ref=e1046]:
+                    - generic [ref=e1047]: DELETE /campaigns/:id
+                    - text: — Delete a draft campaign
+                - generic [ref=e1051]:
+                  - generic [ref=e1053]: •
+                  - generic [ref=e1056]:
+                    - generic [ref=e1057]: POST /campaigns/:id/schedule
+                    - text: — Schedule a campaign (set
+                    - generic [ref=e1058]: scheduled_at
+                    - text: )
+                - generic [ref=e1062]:
+                  - generic [ref=e1064]: •
+                  - generic [ref=e1067]:
+                    - generic [ref=e1068]: POST /campaigns/:id/send
+                    - text: — Simulate asynchronous sending process, recipient can be marked as
+                    - generic [ref=e1069]: sent
+                    - text: or
+                    - generic [ref=e1070]: failed
+                    - text: randomly
+                - heading "3) Business rules (enforce server-side)" [level=4] [ref=e1075]
+                - generic [ref=e1079]:
+                  - generic [ref=e1081]: •
+                  - generic [ref=e1084]:
+                    - text: A campaign can only be edited or deleted when status is
+                    - generic [ref=e1085]: draft
+                    - text: .
+                - generic [ref=e1089]:
+                  - generic [ref=e1091]: •
+                  - generic [ref=e1094]:
+                    - generic [ref=e1095]: scheduled_at
+                    - text: must be a future timestamp.
+                - generic [ref=e1099]:
+                  - generic [ref=e1101]: •
+                  - generic [ref=e1104]:
+                    - text: Sending transitions status to
+                    - generic [ref=e1105]: sent
+                    - text: and cannot be undone.
+                - generic [ref=e1109]:
+                  - generic [ref=e1111]: •
+                  - generic [ref=e1114]:
+                    - generic [ref=e1115]: /stats
+                    - text: "should return:"
+                - figure [ref=e1118]:
+                  - generic [ref=e1122]: "{ \"total\": 0, \"sent\": 0, \"failed\": 0, \"opened\": 0, \"open_rate\": 0, \"send_rate\": 0 }"
+                - heading "4) Tech requirements" [level=4] [ref=e1127]
+                - generic [ref=e1131]:
+                  - generic [ref=e1133]: •
+                  - generic [ref=e1136]: Node.js with Express
+                - generic [ref=e1140]:
+                  - generic [ref=e1142]: •
+                  - generic [ref=e1145]: PostgreSQL with Sequelize
+                - generic [ref=e1149]:
+                  - generic [ref=e1151]: •
+                  - generic [ref=e1154]: JWT authentication middleware
+                - generic [ref=e1158]:
+                  - generic [ref=e1160]: •
+                  - generic [ref=e1163]: Input validation (zod or joi)
+                - generic [ref=e1167]:
+                  - generic [ref=e1169]: •
+                  - generic [ref=e1172]: Migrations (SQL files or knex migrations)
+                - generic [ref=e1176]:
+                  - generic [ref=e1178]: •
+                  - generic [ref=e1181]: At least 3 meaningful tests for critical business logic (unit or integration)
+                - separator [disabled] [ref=e1184]
+                - heading "Part 2 — Frontend (React + TypeScript)" [level=3] [ref=e1189]
+                - generic [ref=e1195]: Build a simple but functional UI.
+                - generic [ref=e1201]: Both backend and frontend should be in the same monorepo, using yarn workspace
+                - heading "Pages" [level=4] [ref=e1206]
+                - generic [ref=e1210]:
+                  - generic [ref=e1212]: •
+                  - generic [ref=e1215]:
+                    - generic [ref=e1216]: /login
+                    - text: — Login form, store JWT in memory or httpOnly cookie
+                - generic [ref=e1220]:
+                  - generic [ref=e1222]: •
+                  - generic [ref=e1225]:
+                    - generic [ref=e1226]: /campaigns
+                    - text: — List campaigns with status badges, pagination or infinite scroll
+                - generic [ref=e1230]:
+                  - generic [ref=e1232]: •
+                  - generic [ref=e1235]:
+                    - generic [ref=e1236]: /campaigns/new
+                    - text: — Create campaign form (name, subject, body, recipient emails)
+                - generic [ref=e1240]:
+                  - generic [ref=e1242]: •
+                  - generic [ref=e1245]:
+                    - generic [ref=e1246]: /campaigns/:id
+                    - text: "— Campaign detail: stats, recipient list, action buttons"
+                - heading "UI features" [level=4] [ref=e1251]
+                - generic [ref=e1255]:
+                  - generic [ref=e1257]: •
+                  - generic [ref=e1258]:
+                    - generic [ref=e1260]: "Campaign status badge (color-coded):"
+                    - generic [ref=e1264]:
+                      - generic [ref=e1266]: ◦
+                      - generic [ref=e1269]:
+                        - generic [ref=e1270]: draft
+                        - text: = grey
+                    - generic [ref=e1274]:
+                      - generic [ref=e1276]: ◦
+                      - generic [ref=e1279]:
+                        - generic [ref=e1280]: scheduled
+                        - text: = blue
+                    - generic [ref=e1284]:
+                      - generic [ref=e1286]: ◦
+                      - generic [ref=e1289]:
+                        - generic [ref=e1290]: sent
+                        - text: = green
+                - generic [ref=e1294]:
+                  - generic [ref=e1296]: •
+                  - generic [ref=e1299]: "Action buttons: Schedule, Send, Delete (conditionally shown based on status)"
+                - generic [ref=e1303]:
+                  - generic [ref=e1305]: •
+                  - generic [ref=e1308]: "Stats display: open rate and send rate (progress bar or simple chart)"
+                - generic [ref=e1312]:
+                  - generic [ref=e1314]: •
+                  - generic [ref=e1317]: "Error handling: show API errors meaningfully"
+                - generic [ref=e1321]:
+                  - generic [ref=e1323]: •
+                  - generic [ref=e1326]: "Loading states: skeleton loaders or spinners while fetching"
+                - heading "Tech requirements" [level=4] [ref=e1331]
+                - generic [ref=e1335]:
+                  - generic [ref=e1337]: •
+                  - generic [ref=e1340]: React 18+ with TypeScript (Vite)
+                - generic [ref=e1344]:
+                  - generic [ref=e1346]: •
+                  - generic [ref=e1349]: React Query or SWR for data fetching
+                - generic [ref=e1353]:
+                  - generic [ref=e1355]: •
+                  - generic [ref=e1358]: Any component library is fine (shadcn/ui, Chakra, MUI, or Tailwind)
+                - generic [ref=e1362]:
+                  - generic [ref=e1364]: •
+                  - generic [ref=e1367]: Zustand or Redux required
+                - separator [disabled] [ref=e1370]
+                - heading "Part 3 — AI usage showcase (required)" [level=3] [ref=e1375]
+                - generic [ref=e1381]:
+                  - text: In your
+                  - generic [ref=e1382]: README.md
+                  - text: ", include a section titled “How I Used Claude Code” that covers:"
+                - generic [ref=e1386]:
+                  - generic [ref=e1388]: "1."
+                  - generic [ref=e1391]: What tasks you delegated to Claude Code
+                - generic [ref=e1395]:
+                  - generic [ref=e1397]: "2."
+                  - generic [ref=e1400]: 2–3 real prompts you used
+                - generic [ref=e1404]:
+                  - generic [ref=e1406]: "3."
+                  - generic [ref=e1409]: Where Claude Code was wrong or needed correction
+                - generic [ref=e1413]:
+                  - generic [ref=e1415]: "4."
+                  - generic [ref=e1418]: What you would not let Claude Code do — and why
+                - separator [disabled] [ref=e1421]
+                - heading "Evaluation criteria" [level=3] [ref=e1426]
+                - generic [ref=e1430]:
+                  - generic [ref=e1432]: •
+                  - generic [ref=e1435]: Backend correctness (business rules enforced, efficient SQL)
+                - generic [ref=e1439]:
+                  - generic [ref=e1441]: •
+                  - generic [ref=e1444]: API design (REST conventions, error codes, response shapes)
+                - generic [ref=e1448]:
+                  - generic [ref=e1450]: •
+                  - generic [ref=e1453]: Frontend quality (UX polish, error/loading states)
+                - generic [ref=e1457]:
+                  - generic [ref=e1459]: •
+                  - generic [ref=e1462]: Code quality (readability, separation of concerns)
+                - generic [ref=e1466]:
+                  - generic [ref=e1468]: •
+                  - generic [ref=e1471]: AI collaboration (judgment, transparency)
+                - generic [ref=e1475]:
+                  - generic [ref=e1477]: •
+                  - generic [ref=e1480]: Testing (meaningful coverage)
+                - separator [disabled] [ref=e1483]
+                - heading "Submission instructions" [level=3] [ref=e1488]
+                - generic [ref=e1492]:
+                  - generic [ref=e1494]: "1."
+                  - generic [ref=e1497]: Push code to a public GitHub repo
+                - generic [ref=e1501]:
+                  - generic [ref=e1503]: "2."
+                  - generic [ref=e1504]:
+                    - generic [ref=e1506]:
+                      - text: Include
+                      - generic [ref=e1507]: README.md
+                      - text: "with:"
+                    - generic [ref=e1511]:
+                      - generic [ref=e1513]: •
+                      - generic [ref=e1516]:
+                        - text: Local setup (ideally
+                        - generic [ref=e1517]: docker compose up
+                        - text: )
+                    - generic [ref=e1521]:
+                      - generic [ref=e1523]: •
+                      - generic [ref=e1526]: Seed data or a demo script
+                    - generic [ref=e1530]:
+                      - generic [ref=e1532]: •
+                      - generic [ref=e1535]: “How I Used Claude Code” section
+                - generic [ref=e1539]:
+                  - generic [ref=e1541]: "3."
+                  - generic [ref=e1544]: Send repo link + walkthrough summary
+        - region [ref=e1552]
+    - status [ref=e1553]
+    - alert [ref=e1554]
+  - iframe [ref=e1555]:
+    

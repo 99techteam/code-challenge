@@ -1,0 +1,37 @@
+[    2729ms] [INFO] Resource Sentinel initialized... @ https://s5tech.notion.site/AI-Full-Stack-Code-Challenge-32248905ea7780cd8796c1961de759ec:0
+[    3468ms] [INFO] 2026-04-11T14:03:08.962Z [info] FeatureFlagTransactionQueue: preferIndexedDB {team: no-team-specified} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    4057ms] [INFO] 2026-04-11T14:03:09.548Z [info] appHelpers: shouldShowError {data: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    4062ms] [INFO] 2026-04-11T14:03:09.556Z [info] appHelpers: shouldShowError {data: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    4068ms] [INFO] 2026-04-11T14:03:09.562Z [error] statsig: initialize {error: Object, data: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    4070ms] [LOG] %c
+	nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+	nnnn                         nnnn
+	nnnnnnn                          nnnn
+	nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+	nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+	nnnnnnnn                           nnn
+	nnnnnnnn    nnnnnnnn     nnnnnnn   nnn
+	nnnnnnnn      nnnnnnn      nnn     nnn
+	nnnnnnnn      nnnnnnnn     nnn     nnn
+	nnnnnnnn      nnnnnnnnnn   nnn     nnn
+	nnnnnnnn      nnn nnnnnnn  nnn     nnn
+	nnnnnnnn      nnn  nnnnnnnnnnn     nnn
+	nnnnnnnn      nnn   nnnnnnnnnn     nnn
+	nnnnnnnn      nnn     nnnnnnnn     nnn
+	nnnnnnnn      nnn      nnnnnnn     nnn
+	nnnnnnnn    nnnnnnnn    nnnnnn     nnn
+	  nnnnnn                           nnn
+		nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn		We're hiring!
+		  nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn		notion.so/careers
+
+	“yeah, I would probably eat a lemon for one hundred dollars” -- Ivan Zhao (2023-07-14)
+				  font-family: monospace @ https://s5tech.notion.site/_assets/mainApp-87f2b93ddb7b9702.js:0
+[    4119ms] [INFO] 2026-04-11T14:03:09.614Z [info] PageLoader: loserAborted {data: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    4144ms] [WARNING] Ignoring inability to install OPFS sqlite3_vfs: Cannot install OPFS: Missing SharedArrayBuffer and/or Atomics. The server must emit the COOP/COEP response headers to enable those. See https://sqlite.org/wasm/doc/trunk/persistence.md#coop-coep @ https://s5tech.notion.site/_assets/wasm-sqlite-worker-48bb2a0a3433bfae.js:0
+[    4484ms] [INFO] 2026-04-11T14:03:09.979Z [error] handleRestrictedStateForResponse: callApi {data: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    4636ms] [INFO] 2026-04-11T14:03:10.131Z [info] useExpPingPolling: exp_ping_success {data: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    4990ms] [INFO] 2026-04-11T14:03:10.484Z [error] handleRestrictedStateForResponse: callApi {data: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    5585ms] [WARNING] Amplitude Logger [Warn]: Event not tracked, no destination plugins on the instance @ https://s5tech.notion.site/_assets/transport-support-ba721c6e8ff031b7.js:0
+[    5586ms] [INFO] 2026-04-11T14:03:11.080Z [error] eventTrailApiHelpers: trackFailure {error: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    5608ms] [INFO] 2026-04-11T14:03:11.103Z [info] sqliteSchemaHelpers: attemptFastForwardMigration {data: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
+[    5635ms] [INFO] 2026-04-11T14:03:11.130Z [info] sqliteSchemaHelpers: successfulFastForwardMigration {data: Object} @ https://s5tech.notion.site/_assets/app-f9e8f6eaa5180aa4.js:67
