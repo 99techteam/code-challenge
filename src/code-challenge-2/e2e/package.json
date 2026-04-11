@@ -1,0 +1,13 @@
+{
+  "name": "campaign-manager-e2e",
+  "version": "1.0.0",
+  "description": "E2E tests for Mini Campaign Manager — verifies all ACs",
+  "scripts": {
+    "test": "PLAYWRIGHT_HTML_OPEN=never npx playwright test",
+    "test:headed": "PLAYWRIGHT_HTML_OPEN=never npx playwright test --headed",
+    "test:debug": "PLAYWRIGHT_HTML_OPEN=never npx playwright test --debug=cli"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1"
+  }
+}

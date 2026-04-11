@@ -27,7 +27,8 @@ export function CampaignDetailPage() {
   }
 
   const scheduleMutation = useMutation({
-    mutationFn: () => campaignsApi.schedule(id!, scheduleAt),
+    // convert datetime-local value (YYYY-MM-DDTHH:MM) to full ISO string
+    mutationFn: () => campaignsApi.schedule(id!, new Date(scheduleAt).toISOString()),
     onSuccess: () => { invalidate(); setShowSchedule(false); setActionError(''); },
     onError: (err: unknown) => {
       const msg = (err as { response?: { data?: { error?: string; details?: { message: string }[] } } })?.response?.data;
