@@ -1,0 +1,109 @@
+:root {
+  --accent: #6c47ff;
+  --accent-subtle: rgba(108, 71, 255, 0.1);
+  --accent-glow: rgba(108, 71, 255, 0.25);
+  --text: #1a1a2e;
+  --text-muted: #8b8fa8;
+  --bg: #f0f2ff;
+  --card-bg: #ffffff;
+  --input-bg: #f7f8ff;
+  --border: #e4e6f0;
+  --hover-bg: #f0f2ff;
+  --icon-bg: #f0f2ff;
+  --error: #e53e3e;
+  --success: #38a169;
+  --success-bg: rgba(56, 161, 105, 0.12);
+  --shadow-lg:
+    0 20px 60px rgba(108, 71, 255, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #7c5cff;
+    --accent-subtle: rgba(124, 92, 255, 0.15);
+    --accent-glow: rgba(124, 92, 255, 0.3);
+    --text: #e8eaf6;
+    --text-muted: #6b6f8a;
+    --bg: #0d0e1a;
+    --card-bg: #13141f;
+    --input-bg: #1a1b2a;
+    --border: #252636;
+    --hover-bg: #1f2030;
+    --icon-bg: #1f2030;
+    --error: #fc8181;
+    --success: #68d391;
+    --success-bg: rgba(104, 211, 145, 0.12);
+    --shadow-lg:
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100svh;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.app-bg {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--shadow-lg);
+  border: 1.5px solid var(--border);
+}
+
+.card-loading,
+.card-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 0;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.card-error {
+  color: var(--error);
+}
+
+.card-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

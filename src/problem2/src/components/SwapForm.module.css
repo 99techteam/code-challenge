@@ -1,0 +1,249 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.rate {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.panel {
+  background: var(--input-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.15s;
+}
+
+.panel:focus-within {
+  border-color: var(--accent);
+}
+
+.panelRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.amountWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.amountLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.amountInput {
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  outline: none;
+  width: 100%;
+  padding: 0;
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+}
+
+.amountInput::-webkit-outer-spin-button,
+.amountInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.amountInput::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.amountInput.inputError {
+  color: var(--error);
+}
+
+.tokenSelectWrapper {
+  flex-shrink: 0;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.usdValue {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.errorMsg {
+  font-size: 12px;
+  color: var(--error);
+  margin-top: 2px;
+}
+
+.swapBtnRow {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  margin: -4px 0;
+}
+
+.swapDirectionBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--card-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: border-color 0.15s, color 0.15s, transform 0.2s;
+}
+
+.swapDirectionBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: rotate(180deg);
+}
+
+.swapDirectionBtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.submitBtn {
+  margin-top: 8px;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* success state */
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 0;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--success-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--success);
+}
+
+.successIcon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.success h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.success p {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.resetBtn {
+  margin-top: 8px;
+  padding: 12px 32px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.resetBtn:hover {
+  opacity: 0.9;
+}
