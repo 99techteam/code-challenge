@@ -43,5 +43,104 @@ The prompt also states that the result will always be less than
 ```bash
 npm install
 npm run build
+npm run problem4
+```
+
+## Problem 5
+
+File: `src/problem5/server.ts`
+
+The task is to develop an ExpressJS backend server with TypeScript, CRUD APIs,
+basic filters, and simple data persistence.
+
+This solution uses a `Book` resource and stores data in `data/books.json`.
+The JSON file acts as a simple file-based database, so data remains after the
+server restarts.
+
+### Book Resource
+
+```ts
+type Book = {
+  id: string;
+  title: string;
+  author: string;
+  status: "available" | "borrowed" | "archived";
+  description?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+```
+
+### Run Server
+
+```bash
+npm install
+npm run dev
+```
+
+The server starts on:
+
+```txt
+http://localhost:3000
+```
+
+You can change the port with:
+
+```bash
+PORT=4000 npm run dev
+```
+
+### API Endpoints
+
+Health check:
+
+```bash
+curl http://localhost:3000/health
+```
+
+Create a book:
+
+```bash
+curl -X POST http://localhost:3000/books \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Clean Code","author":"Robert C. Martin","status":"available","description":"A book about writing readable code."}'
+```
+
+List books:
+
+```bash
+curl "http://localhost:3000/books"
+```
+
+List books with filters:
+
+```bash
+curl "http://localhost:3000/books?status=available&author=robert&q=clean&limit=10&offset=0"
+```
+
+Get book details:
+
+```bash
+curl http://localhost:3000/books/<book-id>
+```
+
+Update a book:
+
+```bash
+curl -X PATCH http://localhost:3000/books/<book-id> \
+  -H "Content-Type: application/json" \
+  -d '{"status":"borrowed"}'
+```
+
+Delete a book:
+
+```bash
+curl -X DELETE http://localhost:3000/books/<book-id>
+```
+
+### Build And Run Compiled Code
+
+```bash
+npm run build
 npm start
 ```

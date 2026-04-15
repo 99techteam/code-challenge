@@ -5,10 +5,16 @@
   "description": "Backend assessment solutions for 99Tech.",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/problem4.js",
-    "dev": "ts-node src/problem4.ts"
+    "start": "node dist/problem5/server.js",
+    "dev": "ts-node src/problem5/server.ts",
+    "problem4": "ts-node src/problem4.ts",
+    "start:problem4": "node dist/problem4.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.25",
     "@types/node": "^22.10.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
