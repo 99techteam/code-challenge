@@ -1,0 +1,16 @@
+{
+  "name": "99tech-backend-assessment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend assessment solutions for 99Tech.",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/problem4.js",
+    "dev": "ts-node src/problem4.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
