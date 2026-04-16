@@ -1,0 +1,34 @@
+@startuml
+title High-Level Architecture
+
+skinparam componentStyle rectangle
+
+actor User
+rectangle "Client" {
+  component "Web App" as WebApp
+}
+
+rectangle "Application Server" {
+  component "Auth Service" as Auth
+  component "Score Service" as Score
+}
+
+database "MySQL" as DB
+collections "Redis" as Redis
+queue "WebSocket" as WS
+
+User --> WebApp
+WebApp --> Auth : Login / JWT
+WebApp --> Score : REST API
+WebApp <--> WS : Live events
+
+Auth --> DB : Users
+Auth --> Redis : Rate limit/session data
+
+Score --> DB : Users / Tasks / UserTasks
+Score --> Redis : Top 10 cache / rate limit
+Score --> WS : Broadcast updates
+
+Auth --> Score : Verified user context
+
+@enduml

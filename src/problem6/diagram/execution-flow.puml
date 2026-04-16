@@ -1,0 +1,53 @@
+@startuml
+title Live Leaderboard Score Update Flow
+
+actor User
+participant "Web Client" as Client
+participant "Auth Service" as Auth
+participant "Score Service" as Score
+database "MySQL" as DB
+collections "Redis Cache" as Redis
+queue "WebSocket Gateway" as WS
+
+User -> Client: Login
+Client -> Auth: POST /auth/login
+Auth -> DB: Validate user credentials
+DB --> Auth: User row
+Auth --> Client: JWT access token
+
+User -> Client: Open task list
+Client -> Score: GET /tasks\nAuthorization: Bearer JWT
+Score -> Auth: Verify JWT
+Auth --> Score: Authenticated user context
+Score -> DB: Query active tasks not yet requested
+DB --> Score: Task rows
+Score --> Client: Available tasks
+
+User -> Client: Start task
+Client -> Score: POST /task/request-action/:task_id
+Score -> Auth: Verify JWT
+Auth --> Score: Authenticated user context
+Score -> DB: Validate task + upsert user_tasks
+DB --> Score: user_tasks row (inprogress)
+Score --> Client: user_tasks payload
+Score --> WS: Emit user_task:event
+
+User -> Client: Submit completion
+Client -> Score: POST /task/submit-action/:user_task_id
+Score -> Auth: Verify JWT
+Auth --> Score: Authenticated user context
+Score -> DB: Validate ownership + status
+Score -> DB: Atomic transaction\nupdate user_tasks + user.score
+DB --> Score: Updated task + user
+Score -> Redis: Refresh cached top 10 leaderboard
+Redis --> Score: Previous vs current top 10
+
+alt Top 10 changed
+  Score --> WS: Broadcast leaderboard:event
+end
+
+Score --> WS: Emit user:event
+Score --> WS: Emit user_task:event
+Score --> Client: Updated user task + user score
+
+@enduml
