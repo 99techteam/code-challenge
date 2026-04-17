@@ -1,3 +1,13 @@
 {
-  "books": []
+  "books": [
+    {
+      "id": "846c1e8d-dc2e-45ad-b444-274f03df7aa2",
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "status": "available",
+      "description": "A book about writing readable code.",
+      "createdAt": "2026-04-17T07:55:08.185Z",
+      "updatedAt": "2026-04-17T07:55:08.185Z"
+    }
+  ]
 }

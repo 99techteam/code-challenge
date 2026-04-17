@@ -7,8 +7,8 @@
     "build": "tsc",
     "start": "node dist/problem5/server.js",
     "dev": "ts-node src/problem5/server.ts",
-    "problem4": "ts-node src/problem4.ts",
-    "start:problem4": "node dist/problem4.js"
+    "problem4": "ts-node src/problem4/index.ts",
+    "start:problem4": "node dist/problem4/index.js"
   },
   "dependencies": {
     "express": "^4.21.2"

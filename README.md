@@ -144,3 +144,11 @@ curl -X DELETE http://localhost:3000/books/<book-id>
 npm run build
 npm start
 ```
+
+## Problem 6
+
+File: `problem6/README.md`
+
+The task is to write an architecture specification for a live scoreboard module.
+The documentation includes API contracts, data model, security requirements,
+execution flow, realtime update strategy, and improvement notes.
