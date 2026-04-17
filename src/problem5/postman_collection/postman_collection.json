@@ -1,0 +1,189 @@
+{
+  "info": {
+    "_postman_id": "3c5bc72b-22b0-45c0-b241-b4bf6e722b2f",
+    "name": "99Tech Problem 5 - Book API",
+    "description": "Postman collection for the Problem 5 Express book management API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "bookId",
+      "value": "846c1e8d-dc2e-45ad-b444-274f03df7aa2"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Check whether the server is running."
+      },
+      "response": []
+    },
+    {
+      "name": "Create Book",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Clean Code\",\n  \"author\": \"Robert C. Martin\",\n  \"status\": \"available\",\n  \"description\": \"A book about writing readable code.\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books"
+          ]
+        },
+        "description": "Create a new book."
+      },
+      "response": []
+    },
+    {
+      "name": "List Books",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books"
+          ]
+        },
+        "description": "List books without filters."
+      },
+      "response": []
+    },
+    {
+      "name": "List Books With Filters",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?status=available&author=robert&q=clean&limit=10&offset=0",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "available"
+            },
+            {
+              "key": "author",
+              "value": "robert"
+            },
+            {
+              "key": "q",
+              "value": "clean"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "offset",
+              "value": "0"
+            }
+          ]
+        },
+        "description": "List books with status, author, search, pagination filters."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Book By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/{{bookId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books",
+            "{{bookId}}"
+          ]
+        },
+        "description": "Get a single book by ID. Set the collection variable `bookId` first."
+      },
+      "response": []
+    },
+    {
+      "name": "Update Book",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"borrowed\",\n  \"description\": \"Checked out by a reader.\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/{{bookId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books",
+            "{{bookId}}"
+          ]
+        },
+        "description": "Update fields of an existing book. Set the collection variable `bookId` first."
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Book",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/{{bookId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "books",
+            "{{bookId}}"
+          ]
+        },
+        "description": "Delete a book by ID. Set the collection variable `bookId` first."
+      },
+      "response": []
+    }
+  ]
+}
