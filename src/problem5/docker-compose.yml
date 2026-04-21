@@ -1,0 +1,13 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: 99problem5-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: 99problem5
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

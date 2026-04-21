@@ -1,0 +1,1079 @@
+{
+  "info": {
+    "_postman_id": "1b6a0f00-b0ae-4b6d-a99c-12d873365b8d",
+    "name": "99prob5",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "16604169"
+  },
+  "item": [
+    {
+      "name": "list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/books/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "books",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 - successful",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/books/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "2729"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"aa9-jUySqSw1KHjcx57Y8Yy/2E9EgwI\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:06:11 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"List books successfully!\",\n    \"data\": {\n        \"total\": 20,\n        \"page\": 1,\n        \"limit\": 10,\n        \"data\": [\n            {\n                \"_id\": \"507f1f77bcf86cd799439001\",\n                \"title\": \"Clean Code\",\n                \"author\": \"Robert C. Martin\",\n                \"publisher\": \"Prentice Hall\",\n                \"publishedDate\": \"2008-08-01T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.557Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.557Z\"\n            },\n            {\n                \"_id\": \"507f1f77bcf86cd799439002\",\n                \"title\": \"The Pragmatic Programmer\",\n                \"author\": \"Andrew Hunt\",\n                \"publisher\": \"Addison-Wesley\",\n                \"publishedDate\": \"1999-10-20T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.558Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.558Z\"\n            },\n            {\n                \"_id\": \"507f1f77bcf86cd799439003\",\n                \"title\": \"Design Patterns\",\n                \"author\": \"Erich Gamma\",\n                \"publisher\": \"Addison-Wesley\",\n                \"publishedDate\": \"1994-11-10T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.558Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.558Z\"\n            },\n            {\n                \"_id\": \"507f1f77bcf86cd799439004\",\n                \"title\": \"The Mythical Man-Month\",\n                \"author\": \"Frederick P. Brooks Jr.\",\n                \"publisher\": \"Addison-Wesley\",\n                \"publishedDate\": \"1975-01-01T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.558Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.558Z\"\n            },\n            {\n                \"_id\": \"507f1f77bcf86cd799439005\",\n                \"title\": \"Code Complete\",\n                \"author\": \"Steve McConnell\",\n                \"publisher\": \"Microsoft Press\",\n                \"publishedDate\": \"2004-06-09T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.558Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.558Z\"\n            },\n            {\n                \"_id\": \"507f1f77bcf86cd799439006\",\n                \"title\": \"Refactoring\",\n                \"author\": \"Martin Fowler\",\n                \"publisher\": \"Addison-Wesley\",\n                \"publishedDate\": \"1999-07-08T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.558Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.558Z\"\n            },\n            {\n                \"_id\": \"507f1f77bcf86cd799439007\",\n                \"title\": \"Introduction to Algorithms\",\n                \"author\": \"Thomas H. Cormen\",\n                \"publisher\": \"MIT Press\",\n                \"publishedDate\": \"1990-07-12T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.558Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.558Z\"\n            },\n            {\n                \"_id\": \"507f1f77bcf86cd799439008\",\n                \"title\": \"The Clean Coder\",\n                \"author\": \"Robert C. Martin\",\n                \"publisher\": \"Prentice Hall\",\n                \"publishedDate\": \"2011-05-13T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.558Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.558Z\"\n            },\n            {\n                \"_id\": \"507f1f77bcf86cd799439009\",\n                \"title\": \"Working Effectively with Legacy Code\",\n                \"author\": \"Michael Feathers\",\n                \"publisher\": \"Prentice Hall\",\n                \"publishedDate\": \"2004-10-02T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.558Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.558Z\"\n            },\n            {\n                \"_id\": \"507f1f77bcf86cd799439010\",\n                \"title\": \"Domain-Driven Design\",\n                \"author\": \"Eric Evans\",\n                \"publisher\": \"Addison-Wesley\",\n                \"publishedDate\": \"2003-08-30T00:00:00.000Z\",\n                \"country\": \"US\",\n                \"__v\": 0,\n                \"createdAt\": \"2026-04-21T13:06:10.558Z\",\n                \"updatedAt\": \"2026-04-21T13:06:10.558Z\"\n            }\n        ]\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "random-api-key",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"publisher\": \"J. B. Lippincott & Co.\",\n    \"publishedDate\": \"1960-07-11\",\n    \"country\": \"US\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/books/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "books",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "201 - successful",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"publisher\": \"J. B. Lippincott & Co.\",\n    \"publishedDate\": \"1960-07-11\",\n    \"country\": \"US\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "317"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"13d-Wf+pzoal/bHmBfyqOZn7W0l7JC8\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:09:25 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Book created successfully!\",\n    \"data\": {\n        \"title\": \"To Kill a Mockingbird\",\n        \"author\": \"Harper Lee\",\n        \"publisher\": \"J. B. Lippincott & Co.\",\n        \"publishedDate\": \"1960-07-11T00:00:00.000Z\",\n        \"country\": \"US\",\n        \"_id\": \"69e77705effa371223de38ef\",\n        \"createdAt\": \"2026-04-21T13:09:25.361Z\",\n        \"updatedAt\": \"2026-04-21T13:09:25.361Z\",\n        \"__v\": 0\n    }\n}"
+        },
+        {
+          "name": "400 - empty body",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                ""
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "35"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"23-/BOcvHYU7ROHI/frnLxyUMeBJ54\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:06:45 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"errors\": [\n        \"Invalid request.body\"\n    ]\n}"
+        },
+        {
+          "name": "400 - invalid body",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                ""
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "187"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"bb-OB8efZubIiU6FiVHP6FwfA3VDOc\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:07:10 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"errors\": [\n        \"title is required and must be a string.\",\n        \"author is required and must be a string.\",\n        \"publisher is required and must be a string.\",\n        \"country is required and must be a string.\"\n    ]\n}"
+        },
+        {
+          "name": "400 - duplicated resource",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Structure and Interpretation of Computer Programs\",\n    \"author\": \"Harold Abelson\",\n    \"publisher\": \"MIT Press\",\n    \"publishedDate\": \"1996-09-01T00:00:00.000Z\",\n    \"country\": \"US\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                ""
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "75"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"4b-mZ0moxSeMJHFI+0tG37EReaHsm0\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:07:38 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"[createBook] Book with the same title and author already exists\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "random-api-key",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/books/69e77705effa371223de38ef?",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "books",
+            "69e77705effa371223de38ef"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": null
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 - succesful",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"publisher\": \"J. B. Lippincott & Co.\",\n    \"publishedDate\": \"1960-07-11\",\n    \"country\": \"US\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/69e77705effa371223de38ef",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                "69e77705effa371223de38ef"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "40"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"28-Mk/nuNFZqcaXhEZBPwag4KIpGPY\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:10:27 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Book deleted successfully!\"\n}"
+        },
+        {
+          "name": "404 - not found",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"publisher\": \"J. B. Lippincott & Co.\",\n    \"publishedDate\": \"1960-07-11\",\n    \"country\": \"US\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/69e77705effa371223de38ef",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                "69e77705effa371223de38ef"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "39"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"27-Ptpx238v1EBSMArWXUzJAesBCtE\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:10:41 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"[deleteBook] Book not found\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "update",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "random-api-key",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"publisher\": \"J. B. Lippincott & Co.\",\n    \"publishedDate\": \"1960-07-11\",\n    \"country\": \"US\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/books/123123",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "books",
+            "123123"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 - updated succesful",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"publisher\": \"J. B. Lippincott & Co.\",\n    \"publishedDate\": \"1960-07-11\",\n    \"country\": \"US\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/507f1f77bcf86cd799439001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                "507f1f77bcf86cd799439001"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "317"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"13d-WSnrJ+86zlBlrDmoasU73DLAAWk\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:15:58 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Book updated successfully!\",\n    \"data\": {\n        \"_id\": \"507f1f77bcf86cd799439001\",\n        \"title\": \"To Kill a Mockingbird\",\n        \"author\": \"Harper Lee\",\n        \"publisher\": \"J. B. Lippincott & Co.\",\n        \"publishedDate\": \"1960-07-11T00:00:00.000Z\",\n        \"country\": \"US\",\n        \"__v\": 0,\n        \"createdAt\": \"2026-04-21T13:12:59.681Z\",\n        \"updatedAt\": \"2026-04-21T13:15:58.444Z\"\n    }\n}"
+        },
+        {
+          "name": "400 - invalid id",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"publisher\": \"J. B. Lippincott & Co.\",\n    \"publishedDate\": \"1960-07-11\",\n    \"country\": \"US\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/123123",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                "123123"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "54"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"36-vHl1B0TTs13WDNPBwQkFDSrXGm4\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:13:14 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Bad Request\",\n    \"errors\": [\n        \"Invalid book ID\"\n    ]\n}"
+        },
+        {
+          "name": "400 - duplicated resource",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"publisher\": \"J. B. Lippincott & Co.\",\n    \"publishedDate\": \"1960-07-11\",\n    \"country\": \"US\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/507f1f77bcf86cd799439001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                "507f1f77bcf86cd799439001"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "75"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"4b-mZ0moxSeMJHFI+0tG37EReaHsm0\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:18:30 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"[createBook] Book with the same title and author already exists\"\n}"
+        },
+        {
+          "name": "404 - not found",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "random-api-key",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"publisher\": \"J. B. Lippincott & Co.\",\n    \"publishedDate\": \"1960-07-11\",\n    \"country\": \"US\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/books/507f1f77bcf86cd79943900a",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                "507f1f77bcf86cd79943900a"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "39"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"27-3nxHF8DbRgjhxrtc4Z4kSYT3T3Y\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:15:43 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"[updateBook] Book not found\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "get",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/books/507f1f77bcf86cd79943900a",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "books",
+            "507f1f77bcf86cd79943900a"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 - successful",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/books/507f1f77bcf86cd799439001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                "507f1f77bcf86cd799439001"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "301"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"12d-kphg4s9ML9tSO/rn0PZD+HrNVw8\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:19:29 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Book found successfully!\",\n    \"data\": {\n        \"_id\": \"507f1f77bcf86cd799439001\",\n        \"title\": \"Clean Code\",\n        \"author\": \"Robert C. Martin\",\n        \"publisher\": \"Prentice Hall\",\n        \"publishedDate\": \"2008-08-01T00:00:00.000Z\",\n        \"country\": \"US\",\n        \"__v\": 0,\n        \"createdAt\": \"2026-04-21T13:19:00.594Z\",\n        \"updatedAt\": \"2026-04-21T13:19:00.594Z\"\n    }\n}"
+        },
+        {
+          "name": "400 - invalid id",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/books/507f1f77bcf86cd",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                "507f1f77bcf86cd"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "54"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"36-vHl1B0TTs13WDNPBwQkFDSrXGm4\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:20:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Bad Request\",\n    \"errors\": [\n        \"Invalid book ID\"\n    ]\n}"
+        },
+        {
+          "name": "404 - not found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/books/507f1f77bcf86cd79943900a",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "books",
+                "507f1f77bcf86cd79943900a"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "40"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"28-UPbQeuHdXUpALMJCUZdY59A4ghw\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 21 Apr 2026 13:19:46 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"[getBookById] Book not found\"\n}"
+        }
+      ]
+    }
+  ]
+}
