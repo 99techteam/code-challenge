@@ -1,0 +1,25 @@
+{
+  "name": "code-challenge",
+  "version": "1.0.0",
+  "scripts": {
+    "problem4:test": "node --require ts-node/register --test src/problem4/main.test.ts",
+    "problem5:start": "yarn ts-node src/problem5/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.9.0",
+    "express": "^5.2.1",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.28",
+    "zod": "^4.3.6"
+  }
+}
