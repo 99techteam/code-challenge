@@ -1,0 +1,10 @@
+{
+    "name": "sum-to-n-challenge",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Three TypeScript implementations for summation to n.",
+    "scripts": {
+        "build": "tsc -p tsconfig.json --pretty false",
+        "test": "npm run build && node dist/test/sum-to-n.test.js"
+    }
+}
