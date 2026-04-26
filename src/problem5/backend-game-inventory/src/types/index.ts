@@ -1,0 +1,1 @@
+export * from "@/types/validated-request"

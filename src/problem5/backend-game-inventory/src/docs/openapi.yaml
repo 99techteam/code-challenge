@@ -1,0 +1,172 @@
+openapi: 3.0.0
+info:
+  title: Game API
+  version: 1.0.0
+  description: API for managing games
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /games:
+    get:
+      summary: Get all games
+      parameters:
+        - in: query
+          name: title
+          schema:
+            type: string
+        - in: query
+          name: genre
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+      responses:
+        200:
+          description: List of games
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameListResponse'
+
+    post:
+      summary: Create a game
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGame'
+      responses:
+        201:
+          description: Created
+
+  /games/{id}:
+    get:
+      summary: Get game by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Game found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+
+        404:
+          description: Not found
+
+    put:
+      summary: Update game
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGame'
+      responses:
+        200:
+          description: Updated
+
+    delete:
+      summary: Delete game
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Deleted
+
+components:
+  schemas:
+    Game:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        genre:
+          type: string
+        platform:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateGame:
+      type: object
+      required: [title, genre, platform, quantity, price]
+      properties:
+        title:
+          type: string
+        genre:
+          type: string
+        platform:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+
+    UpdateGame:
+      type: object
+      properties:
+        title:
+          type: string
+        genre:
+          type: string
+        platform:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+
+    GameListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Game'
+        meta:
+          type: object
+          properties:
+            total:
+              type: integer
+            page:
+              type: integer
+            limit:
+              type: integer
+            totalPages:
+              type: integer

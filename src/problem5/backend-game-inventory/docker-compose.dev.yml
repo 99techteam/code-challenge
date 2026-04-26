@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  db:
+    image: mongo:7
+    container_name: game-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  app:
+    build:
+      context: . 
+      dockerfile: docker/Dockerfile.dev
+    container_name: game-api
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    command: sh -c "npm run seed && npm run dev"
+
+volumes:
+  mongo_data:
