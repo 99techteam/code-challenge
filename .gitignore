@@ -1,0 +1,18 @@
+# Node Dependencies
+node_modules/
+npm-debug.log
+
+# Compiled TypeScript Output
+dist/
+build/
+
+# Local SQLite Database (from Problem 5)
+app.db
+*.db
+
+# Environment Variables
+.env
+
+# OS/Editor Generated Files
+.DS_Store
+.vscode/
