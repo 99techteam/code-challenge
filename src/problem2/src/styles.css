@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply m-0 min-h-screen min-w-[360px] bg-slate-100 font-sans text-slate-950 antialiased;
+    background-image:
+      radial-gradient(620px 320px at 50% 0%, rgba(37, 99, 235, 0.12), transparent 60%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0));
+  }
+
+  button,
+  input,
+  select {
+    font: inherit;
+  }
+
+  ::selection {
+    background: rgba(37, 99, 235, 0.22);
+  }
+}
+
+@layer components {
+  .surface {
+    @apply rounded-2xl border border-slate-200/80 bg-white shadow-swap;
+  }
+
+  .surface-outline {
+    @apply ring-1 ring-slate-900/5;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/20;
+  }
+
+  .subtle-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-ink/10 to-transparent;
+  }
+}
