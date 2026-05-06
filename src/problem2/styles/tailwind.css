@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Toast enter/exit — defined here (not via `motion-safe:*` utilities) so keyframes
+ * always apply: Tailwind nests `motion-safe:animate-*` inside a media query, which
+ * can prevent mount animations from running consistently.
+ */
+@layer utilities {
+  @keyframes app-toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes app-toast-out {
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(8px) scale(0.985);
+    }
+  }
+  @keyframes app-toast-in-reduce {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes app-toast-out-reduce {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .toast-motion-in {
+    animation: app-toast-in 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .toast-motion-out {
+    animation: app-toast-out 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toast-motion-in {
+      animation: app-toast-in-reduce 220ms ease-out forwards;
+    }
+    .toast-motion-out {
+      animation: app-toast-out-reduce 220ms ease-in forwards;
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply m-0 min-h-screen font-sans text-slate-900 transition-[background,color] duration-500 ease-out;
+    background-color: #f1f5f9;
+    background-image:
+      radial-gradient(ellipse 90% 70% at 50% -40%, rgba(99, 102, 241, 0.2), transparent 55%),
+      radial-gradient(ellipse 55% 50% at 100% 30%, rgba(34, 211, 238, 0.12), transparent 50%),
+      linear-gradient(180deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    background-attachment: fixed;
+  }
+
+  html.dark body {
+    @apply text-slate-100;
+    background-color: #060a10;
+    background-image:
+      radial-gradient(ellipse 100% 85% at 50% -35%, rgba(99, 102, 241, 0.42), transparent 55%),
+      radial-gradient(ellipse 55% 55% at 105% 35%, rgba(34, 211, 238, 0.18), transparent 50%),
+      radial-gradient(ellipse 55% 50% at -5% 75%, rgba(244, 114, 182, 0.2), transparent 50%),
+      linear-gradient(165deg, #060a10 0%, #0c1220 38%, #0f172a 72%, #020617 100%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-indigo-400/35 text-inherit dark:bg-indigo-500/40 dark:text-white;
+  }
+}
