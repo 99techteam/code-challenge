@@ -1,0 +1,7 @@
+node_modules/
+package-lock.json
+yarn.lock
+src/problem2/.env
+src/problem2/.env.local
+dist/
+settings.json
