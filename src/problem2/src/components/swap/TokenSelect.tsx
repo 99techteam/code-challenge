@@ -35,13 +35,15 @@ export function TokenSelect({
   }, [tokens, query])
 
   // Scroll the active option into view when navigating with the keyboard.
+  // Also re-runs after `filtered` changes so the highlighted row is visible
+  // immediately after a search refines the list.
   useEffect(() => {
     if (!open) return
     const node = listRef.current?.querySelector<HTMLLIElement>(
       `[data-index="${activeIndex}"]`
     )
     node?.scrollIntoView({ block: "nearest" })
-  }, [activeIndex, open])
+  }, [activeIndex, open, filtered])
 
   const handleOpenChange = (next: boolean) => {
     setOpen(next)
@@ -80,14 +82,14 @@ export function TokenSelect({
     <Popover.Root open={open} onOpenChange={handleOpenChange}>
       <Popover.Trigger
         className={cn(
-          "group inline-flex h-10 items-center gap-2 rounded-full border border-border bg-card px-2 pr-3 text-sm font-medium transition-all",
+          "group inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full border border-border bg-card px-2 pr-2.5 text-sm font-medium transition-all sm:gap-2 sm:pr-3",
           "hover:bg-muted/60 focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none",
           "data-[state=open]:bg-muted/60"
         )}
       >
         {value ? (
           <>
-            <TokenIcon token={value} size={26} />
+            <TokenIcon token={value} size={24} />
             <span className="tracking-wide">{value.symbol}</span>
           </>
         ) : (
@@ -95,7 +97,7 @@ export function TokenSelect({
         )}
         <HugeiconsIcon
           icon={ArrowDown01Icon}
-          size={16}
+          size={14}
           className="text-muted-foreground transition-transform group-data-[state=open]:rotate-180"
         />
       </Popover.Trigger>
@@ -103,8 +105,9 @@ export function TokenSelect({
         <Popover.Content
           align="end"
           sideOffset={8}
+          collisionPadding={12}
           className={cn(
-            "z-50 w-[300px] origin-[var(--radix-popover-content-transform-origin)] rounded-xl border border-border bg-popover p-2 text-popover-foreground shadow-2xl",
+            "z-50 w-[min(300px,calc(100vw-24px))] origin-[var(--radix-popover-content-transform-origin)] rounded-xl border border-border bg-popover p-2 text-popover-foreground shadow-2xl",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
             "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95"

@@ -5,6 +5,12 @@ Switcheo's public price feed. The "to" amount is computed live from the
 `priceFrom / priceTo` ratio, and submitting simulates a backend swap with a
 loading state and a success summary.
 
+## Screenshots
+
+| Form | Submitting | Complete |
+| :--: | :--------: | :------: |
+| ![Swap form](./image-swap-form.png) | ![Swapping](./image-swapping.png) | ![Swap completed](./image-swap-completed.png) |
+
 ## Tech stack
 
 - [Vite](https://vitejs.dev/) + React 19 + TypeScript
@@ -41,11 +47,34 @@ picks the next free port if it's already taken).
 - Searchable token combobox with keyboard navigation (up/down/enter)
 - Auto-computed "you receive" amount from live prices
 - Direction-swap button with subtle rotate animation
-- Inline validation: missing/zero/non-numeric amount, same-token pair
+- Inline validation with specific messages for empty / zero / negative /
+  non-numeric / same-token cases. Invalid keystrokes (letters, multiple dots,
+  minus signs, scientific notation) are filtered out before reaching state.
 - Loading skeleton while prices fetch, retry panel on failure
 - Simulated submit with spinner and success summary
 - Light/dark theme (press `d` to toggle)
-- Responsive layout, mobile-friendly hit targets
+- Responsive down to **320px** viewport width: card padding, font sizes, and
+  the token-picker popover all collapse to fit small screens without
+  horizontal scroll
+
+## Code layout
+
+```
+src/
+  components/swap/
+    SwapForm.tsx           # Presentational form, ~130 lines
+    SwapStatusPanels.tsx   # Skeleton / Error / Success panels
+    TokenAmountField.tsx   # Single amount input + token select
+    TokenSelect.tsx        # Searchable combobox built on Radix Popover
+    TokenIcon.tsx          # SVG icon with initials fallback
+  hooks/
+    useSwapForm.ts         # All form state, derivation, and actions
+    useTokens.ts           # Async fetch + reload via reducer
+  lib/
+    format.ts              # Number formatting + permissive parsing
+    validation.ts          # Pure amount validator + onChange sanitiser
+    prices.ts              # Live Switcheo price endpoint adapter
+```
 
 ## Data sources
 
