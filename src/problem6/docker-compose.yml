@@ -1,0 +1,10 @@
+services:
+  nats:
+    image: nats:2.10.24-alpine
+    command: ["-c", "/etc/nats/nats.conf"]
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+      - "8080:8080"
+    volumes:
+      - ./nats.local.conf:/etc/nats/nats.conf:ro

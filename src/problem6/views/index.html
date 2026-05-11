@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Live Scoreboard — Top 10</title>
+    <style>
+      :root {
+        --bg: #f6f7fb;
+        --panel: #ffffff;
+        --panel-2: #f1f3f8;
+        --border: #e3e6ee;
+        --text: #1c2230;
+        --muted: #6b7385;
+        --accent: #3a6df0;
+        --ok: #15a34a;
+        --err: #d6354c;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font: 14px/1.5 system-ui, -apple-system, sans-serif;
+        color: var(--text);
+        background: radial-gradient(1200px 600px at 50% -200px, #dde5ff 0%, var(--bg) 60%);
+        min-height: 100vh;
+      }
+      .wrap { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+      header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.25rem; }
+      h1 { margin: 0; font-size: 1.75rem; letter-spacing: -0.02em; }
+      .sub { color: var(--muted); font-size: 13px; }
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 0;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1rem;
+      }
+      .row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+      .row > input { flex: 1 1 200px; min-width: 0; }
+      input, button {
+        font: inherit;
+        color: var(--text);
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        border-radius: 0;
+        padding: 0.55rem 0.75rem;
+      }
+      input:focus { outline: none; border-color: var(--accent); }
+      button {
+        cursor: pointer;
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+        font-weight: 600;
+      }
+      button:disabled { opacity: 0.5; cursor: not-allowed; }
+      button:hover:not(:disabled) { filter: brightness(1.08); }
+
+      .status { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 12px; color: var(--muted); }
+      .dot { width: 8px; height: 8px; background: var(--muted); }
+      .status.ok .dot { background: var(--ok); box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.15); }
+      .status.err .dot { background: var(--err); box-shadow: 0 0 0 4px rgba(255, 92, 92, 0.15); }
+
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 0.65rem 0.5rem; text-align: left; border-bottom: 1px solid var(--border); }
+      th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+      tbody tr.bump { background: rgba(91, 140, 255, 0.12); }
+      td.rank { width: 3rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+      td.user { font-weight: 600; }
+      td.score { width: 5rem; text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; color: var(--accent); }
+      td.action { width: 5rem; text-align: right; }
+      td.action button {
+        padding: 0.35rem 0.7rem;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      tr.gold td.rank { color: #d4a017; }
+      tr.silver td.rank { color: #8a93a6; }
+      tr.bronze td.rank { color: #b06a25; }
+      .empty { color: var(--muted); text-align: center; padding: 1.5rem 0; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div>
+          <h1>Live Scoreboard</h1>
+          <div class="sub">Top 10 users — updates in real time</div>
+        </div>
+        <span id="status" class="status"><span class="dot"></span><span id="statusText">connecting…</span></span>
+      </header>
+
+      <div class="panel">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:3rem">#</th>
+              <th>User</th>
+              <th style="width:5rem; text-align:right">Score</th>
+              <th style="width:5rem"></th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <tr><td colspan="4" class="empty">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
