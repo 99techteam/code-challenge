@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexNode | Swap Assets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#a078ff",
+                        "on-primary-container": "#340080",
+                        "on-primary-fixed": "#23005c",
+                        "secondary-fixed": "#acedff",
+                        "on-error": "#690005",
+                        "tertiary-container": "#e364a7",
+                        "surface-container": "#211e27",
+                        "on-secondary": "#003640",
+                        "error-container": "#93000a",
+                        "surface-bright": "#3b3742",
+                        "surface-container-high": "#2c2832",
+                        "background": "#15121b",
+                        "outline": "#958ea0",
+                        "surface-container-lowest": "#0f0d15",
+                        "on-primary": "#3c0091",
+                        "inverse-on-surface": "#322f39",
+                        "surface-dim": "#15121b",
+                        "on-background": "#e7e0ed",
+                        "surface-container-highest": "#37333d",
+                        "primary-fixed-dim": "#d0bcff",
+                        "inverse-surface": "#e7e0ed",
+                        "tertiary-fixed": "#ffd8e7",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#d0bcff",
+                        "outline-variant": "#494454",
+                        "on-surface": "#e7e0ed",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "secondary-container": "#03b5d3",
+                        "on-tertiary": "#620040",
+                        "inverse-primary": "#6d3bd7",
+                        "secondary": "#4cd7f6",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "tertiary": "#ffafd3",
+                        "surface-variant": "#37333d",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#85145a",
+                        "on-primary-fixed-variant": "#5516be",
+                        "primary-fixed": "#e9ddff",
+                        "surface": "#15121b",
+                        "on-surface-variant": "#cbc3d7",
+                        "surface-tint": "#d0bcff",
+                        "on-tertiary-fixed": "#3d0026",
+                        "on-secondary-container": "#00424e",
+                        "tertiary-fixed-dim": "#ffafd3",
+                        "surface-container-low": "#1d1a23",
+                        "on-tertiary-container": "#560038",
+                        "on-secondary-fixed": "#001f26"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-margin": "48px",
+                        "base": "4px",
+                        "max-width-desktop": "1200px",
+                        "stack-gap": "16px",
+                        "container-padding": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "numeric-data": ["Sora"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "numeric-data": ["20px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mesh-gradient {
+            background: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, rgba(76, 215, 246, 0.15) 0px, transparent 50%);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #a078ff 0%, #4cd7f6 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col mesh-gradient">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/60 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+<nav class="flex justify-between items-center w-full px-container-padding py-4 max-w-max-width-desktop mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary tracking-tight">NexNode</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-caps text-label-caps active:scale-95 transition-transform" href="#">Swap</a>
+<a class="text-on-surface-variant font-medium hover:text-on-surface font-label-caps text-label-caps transition-all duration-300 active:scale-95" href="#">Pools</a>
+<a class="text-on-surface-variant font-medium hover:text-on-surface font-label-caps text-label-caps transition-all duration-300 active:scale-95" href="#">Stake</a>
+<a class="text-on-surface-variant font-medium hover:text-on-surface font-label-caps text-label-caps transition-all duration-300 active:scale-95" href="#">Governance</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:text-on-surface transition-all duration-300 active:scale-95">account_balance_wallet</button>
+<button class="material-symbols-outlined text-primary hover:text-on-surface transition-all duration-300 active:scale-95">notifications</button>
+<button class="material-symbols-outlined text-primary hover:text-on-surface transition-all duration-300 active:scale-95">settings</button>
+</div>
+</nav>
+</header>
+<!-- Main Content: Swap Canvas -->
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-container-padding">
+<div class="w-full max-w-[480px]">
+<!-- Swap Card -->
+<div class="glass-card rounded-[32px] p-8 shadow-2xl relative overflow-hidden">
+<div class="flex items-center justify-between mb-8">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Swap</h1>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-white/5">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(76,215,246,0.5)] animate-pulse"></span>
+<span class="text-label-caps font-label-caps text-secondary">Ethereum Mainnet</span>
+</div>
+</div>
+<!-- Input Section: Pay -->
+<div class="space-y-2 mb-2">
+<div class="flex justify-between items-center px-1">
+<span class="text-label-caps font-label-caps text-on-surface-variant">You Pay</span>
+<span class="text-label-caps font-label-caps text-on-surface-variant">Balance: 1.42 ETH</span>
+</div>
+<div class="bg-surface-container-low border border-white/5 rounded-2xl p-4 flex items-center justify-between transition-all focus-within:border-primary/50 focus-within:shadow-[0_0_20px_rgba(208,188,255,0.1)]">
+<input class="bg-transparent border-none text-display-lg font-display-lg w-full focus:ring-0 p-0 text-on-surface placeholder:text-outline-variant" placeholder="0.0" type="text" value="1.0"/>
+<button class="flex items-center gap-2 bg-surface-container-highest hover:bg-surface-bright transition-colors rounded-xl px-3 py-2 border border-white/10 shrink-0">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-primary-fixed">
+<img alt="ETH Logo" class="w-full h-full" data-alt="A stylized, minimalist 3D icon representing a digital cryptocurrency asset. The icon is rendered with high-fidelity glass-like textures and soft purple and blue refractions. It is set against a dark, tech-oriented backdrop that complements the overall futuristic blockchain UI aesthetic. The lighting is focused and cinematic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwVxDVYBwmAZhxQi-d7m6TABB7Hn65XLEFbUObX2_uaVSnnKVBGe4PXIw6jhkYNWhZoKdvXEIpRvd-8EH--UN5RXmRXyMfsTcJ1vbnNlVFQDHzBVOekRyE7Q-SMbIjH7Q7gqviWhYgWtJQQY0xSAOcx4il8sg948lwYuXRRlVtooQvpXZfNjf4zrJFvqAGbfutqJ8e5LHAydfHWYsPRcjAsJMBFWjA9Gx1GidVN8rZUf2IV9APWruX9jRoHOjfD1hq5K-D-fnjkSnG"/>
+</div>
+<span class="font-headline-md text-numeric-data">ETH</span>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Middle: Swap Divider -->
+<div class="relative h-4 flex justify-center items-center z-10">
+<button class="absolute bg-surface-container-highest border-4 border-surface-container-low rounded-xl p-2.5 text-secondary hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95 shadow-xl">
+<span class="material-symbols-outlined font-bold text-[24px]">south</span>
+</button>
+</div>
+<!-- Input Section: Receive -->
+<div class="space-y-2 mt-2 mb-8">
+<div class="flex justify-between items-center px-1">
+<span class="text-label-caps font-label-caps text-on-surface-variant">You Receive</span>
+<span class="text-label-caps font-label-caps text-on-surface-variant">Balance: 0 USDC</span>
+</div>
+<div class="bg-surface-container-low border border-white/5 rounded-2xl p-4 flex items-center justify-between transition-all focus-within:border-primary/50 focus-within:shadow-[0_0_20px_rgba(208,188,255,0.1)]">
+<div class="text-display-lg font-display-lg text-secondary-fixed-dim">2,412.50</div>
+<button class="flex items-center gap-2 bg-surface-container-highest hover:bg-surface-bright transition-colors rounded-xl px-3 py-2 border border-white/10 shrink-0">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-secondary-container">
+<img alt="USDC Logo" class="w-full h-full" data-alt="A premium 3D digital asset icon for a stablecoin currency. The design features a sleek circular emblem with a cyan glowing outline and a matte metallic finish. It sits in a high-contrast environment with soft shadows and sharp highlights, evoking a sense of security and modern financial technology. The visual style is clean and high-end." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbf8E5VTccJiNnQZaRPTsq2esMKhaRKnR60-aXcd4gF8P7SCIq1x-uSpY4GHzPuY1YxVJ2dS-ZEaiZ8AwtxVO96JK4ei86EtewMdjrv8ry2EQOaTvMjUgEEHRHhv1aMj0RYQ560W1QlB4YxWEJnSj0ymk2j_KDspCVz2s05UWsELBoRtFlTsCU9N6t8S4oKvi5aYXzrBFpPGWe_Ggbz4GO3xZg5LW61MlDWznNsYSVxmXqi4FYWvFWcEwoYiUqxDKej4_9LZSHvBRU"/>
+</div>
+<span class="font-headline-md text-numeric-data">USDC</span>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Exchange Info -->
+<div class="flex flex-col gap-3 mb-8 px-1">
+<div class="flex justify-between items-center">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Exchange Rate</span>
+<span class="text-body-md font-body-md text-on-surface">1 ETH = 2,412.50 USDC <span class="text-secondary ml-1">(+$2.12)</span></span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Slippage Tolerance</span>
+<span class="text-body-md font-body-md text-on-surface">0.5%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-caps font-label-caps text-on-surface-variant">Network Fee</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-label-caps text-on-surface-variant">local_gas_station</span>
+<span class="text-body-md font-body-md text-on-surface">$4.12</span>
+</div>
+</div>
+</div>
+<!-- Main Action Button -->
+<button class="accent-gradient w-full py-5 rounded-2xl font-headline-md text-headline-md text-white shadow-[0_8px_32px_rgba(160,120,255,0.3)] hover:shadow-[0_12px_48px_rgba(160,120,255,0.4)] transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3">
+                    Swap Assets
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+</div>
+<!-- Additional Quick Info -->
+<div class="mt-6 flex justify-between gap-4">
+<div class="glass-card flex-1 rounded-2xl p-4 text-center">
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1">Volume 24h</p>
+<p class="text-numeric-data font-numeric-data text-primary">$1.2B</p>
+</div>
+<div class="glass-card flex-1 rounded-2xl p-4 text-center">
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1">TVL</p>
+<p class="text-numeric-data font-numeric-data text-secondary">$842.1M</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto bg-surface-container-lowest/80 backdrop-blur-md border-t border-white/5">
+<div class="flex flex-wrap justify-between items-center w-full px-container-padding py-6 max-w-max-width-desktop mx-auto">
+<div class="text-label-caps font-label-caps text-on-surface-variant">© 2024 NexNode Protocol. All assets secured on-chain.</div>
+<div class="flex flex-wrap items-center gap-6 mt-4 md:mt-0">
+<span class="text-secondary-fixed-dim font-bold font-label-caps text-label-caps cursor-pointer">Network: Mainnet</span>
+<span class="text-on-surface-variant/70 font-label-caps text-label-caps hover:text-secondary transition-colors cursor-pointer">Block: 1849201</span>
+<span class="text-on-surface-variant/70 font-label-caps text-label-caps hover:text-secondary transition-colors cursor-pointer">Status: Healthy</span>
+<a class="text-on-surface-variant/70 font-label-caps text-label-caps hover:text-secondary transition-colors cursor-pointer" href="#">Documentation</a>
+<a class="text-on-surface-variant/70 font-label-caps text-label-caps hover:text-secondary transition-colors cursor-pointer" href="#">API</a>
+</div>
+</div>
+</footer>
+</body></html>
