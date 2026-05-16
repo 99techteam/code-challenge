@@ -1,27 +1,140 @@
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
-
-  <!-- You may add more stuff here -->
-  <link href="style.css" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A polished currency swap form for the Switcheo code challenge." />
+  <title>Switcheo Swap</title>
+  <link rel="preconnect" href="https://raw.githubusercontent.com" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
+  <main class="app-shell">
+    <section class="market-panel" aria-label="Market overview">
+      <div class="brand-mark" aria-hidden="true">
+        <span></span>
+      </div>
+      <p class="eyebrow">Switcheo Exchange</p>
+      <h1>Move between assets with a clear quote before you swap.</h1>
+      <p class="hero-copy">Live token pricing, instant validation, route preview, and a deliberately calm interface for confident currency conversion.</p>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+      <dl class="market-stats">
+        <div>
+          <dt>Available pairs</dt>
+          <dd id="pair-count">--</dd>
+        </div>
+        <div>
+          <dt>Network fee</dt>
+          <dd>0.15%</dd>
+        </div>
+        <div>
+          <dt>Quote source</dt>
+          <dd id="price-source">Loading</dd>
+        </div>
+      </dl>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+      <div class="asset-strip" id="asset-strip" aria-label="Featured assets"></div>
+    </section>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
+    <section class="swap-card" aria-label="Currency swap form">
+      <div class="card-heading">
+        <div>
+          <p class="eyebrow">Asset Swap</p>
+          <h2>Exchange</h2>
+        </div>
+        <span class="status-pill" id="price-status">Fetching prices</span>
+      </div>
+
+      <form id="swap-form" novalidate>
+        <div class="amount-box" data-field="from">
+          <div class="field-row">
+            <label for="from-amount">You pay</label>
+            <span id="from-balance">Balance --</span>
+          </div>
+          <div class="token-row">
+            <input id="from-amount" name="fromAmount" inputmode="decimal" autocomplete="off" placeholder="0.00" />
+            <button class="token-button" type="button" data-picker="from" aria-haspopup="listbox" aria-expanded="false">
+              <img alt="" id="from-icon" />
+              <span id="from-symbol">ETH</span>
+              <span class="chevron" aria-hidden="true">v</span>
+            </button>
+          </div>
+          <div class="field-row subtle">
+            <span id="from-value">$0.00</span>
+            <button class="ghost-button" type="button" id="max-button">Max</button>
+          </div>
+        </div>
+
+        <button class="switch-button" type="button" id="switch-button" aria-label="Switch currencies">
+          <span aria-hidden="true">&#8645;</span>
+        </button>
+
+        <div class="amount-box" data-field="to">
+          <div class="field-row">
+            <label for="to-amount">You receive</label>
+            <span id="to-balance">Balance --</span>
+          </div>
+          <div class="token-row">
+            <input id="to-amount" name="toAmount" inputmode="decimal" autocomplete="off" placeholder="0.00" readonly />
+            <button class="token-button" type="button" data-picker="to" aria-haspopup="listbox" aria-expanded="false">
+              <img alt="" id="to-icon" />
+              <span id="to-symbol">USDC</span>
+              <span class="chevron" aria-hidden="true">v</span>
+            </button>
+          </div>
+          <div class="field-row subtle">
+            <span id="to-value">$0.00</span>
+            <span>Est. after fee</span>
+          </div>
+        </div>
+
+        <p class="form-error" id="form-error" role="alert"></p>
+
+        <div class="quote-panel" aria-label="Quote details">
+          <div>
+            <span>Rate</span>
+            <strong id="rate-line">--</strong>
+          </div>
+          <div>
+            <span>Minimum received</span>
+            <strong id="minimum-line">--</strong>
+          </div>
+          <div>
+            <span>Route</span>
+            <strong id="route-line">--</strong>
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <label for="slippage">Slippage tolerance</label>
+          <select id="slippage" name="slippage">
+            <option value="0.1">0.1%</option>
+            <option value="0.5" selected>0.5%</option>
+            <option value="1">1.0%</option>
+          </select>
+        </div>
+
+        <button class="submit-button" id="submit-button" type="submit">Review swap</button>
+      </form>
+    </section>
+  </main>
+
+  <div class="token-popover" id="token-popover" hidden>
+    <div class="popover-panel">
+      <div class="popover-header">
+        <h3>Select token</h3>
+        <button type="button" id="close-picker" aria-label="Close token picker">&times;</button>
+      </div>
+      <input id="token-search" class="token-search" type="search" placeholder="Search symbol" autocomplete="off" />
+      <div class="token-list" id="token-list" role="listbox"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./script.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,24 @@
+{
+  "name": "code-challenge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interview code challenge solutions",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node --test dist/problem4/index.test.js dist/problem5/index.test.js",
+    "dev:problem2": "vite src/problem2 --host 0.0.0.0",
+    "build:problem2": "vite build src/problem2 --outDir ../../dist/problem2 --emptyOutDir",
+    "test:problem4": "npm run build && node --test dist/problem4/index.test.js",
+    "start:problem5": "npm run build && node dist/problem5/index.js",
+    "test:problem5": "npm run build && node --test dist/problem5/index.test.js"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.0",
+    "vite": "^8.0.13"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
