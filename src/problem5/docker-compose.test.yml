@@ -1,0 +1,11 @@
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    image: problem5-test
+    container_name: problem5-test
+    environment:
+      NODE_ENV: test
+      CI: "true"
+    command: ["bun", "test"]

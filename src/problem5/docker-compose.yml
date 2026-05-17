@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    image: problem5
+    container_name: problem5-api
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: "8000"
+      HOST: "0.0.0.0"
+      DB_PATH: "/app/data/app.db"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

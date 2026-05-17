@@ -1,0 +1,15 @@
+FROM oven/bun:1.3.11-alpine
+
+WORKDIR /app
+
+COPY package.json bun.lock* ./
+RUN bun install --frozen-lockfile || bun install
+
+COPY tsconfig.json bunfig.toml ./
+COPY src ./src
+COPY tests ./tests
+
+ENV NODE_ENV=test
+ENV CI=true
+
+CMD ["bun", "test"]
