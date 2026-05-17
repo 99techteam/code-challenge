@@ -1,5 +1,36 @@
-body {
-  margin: 0;
-  background: #0a0b1e;
-  font-family: ui-sans-serif, system-ui, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    min-height: 100%;
+  }
+  body {
+    @apply font-sans text-ink-primary bg-page-radial bg-fixed antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  /* Subtle dark scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-accent-mid focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0b1e];
+  }
 }
