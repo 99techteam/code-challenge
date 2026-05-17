@@ -11,7 +11,7 @@ export function iconUrlFor(symbol: string): string {
  * round-tripped through parseFloat).
  */
 export function formatAmount(n: number): string {
-  if (!Number.isFinite(n) || n === 0) return "0";
+  if (!Number.isFinite(n) || n <= 0) return "0";
   const fixed = n.toFixed(8);
   return fixed.replace(/\.?0+$/, "") || "0";
 }
@@ -43,19 +43,29 @@ export function formatDisplayNumber(n: number): string {
  * - rewrite a leading "." to "0."
  */
 export function sanitizeAmount(raw: string): string {
-  let s = raw.replace(/[^0-9.]/g, "");
+  // Strip thousands separators (commas) — common when pasting from Excel/etc.
+  const stripped = raw.replace(/,/g, "");
+  // Take only the leading run of digits and dots; truncate at first other char.
+  // This rejects negatives ("-5"), exponentials ("1e5"), and other surprises
+  // rather than silently mutating them.
+  const match = stripped.match(/^[0-9.]*/);
+  let s = match ? match[0] : "";
+  // Keep only the first decimal point
   const firstDot = s.indexOf(".");
   if (firstDot !== -1) {
     s = s.slice(0, firstDot + 1) + s.slice(firstDot + 1).replace(/\./g, "");
   }
+  // Cap to 8 decimal places
   const dot = s.indexOf(".");
   if (dot !== -1 && s.length - dot - 1 > 8) {
     s = s.slice(0, dot + 1 + 8);
   }
+  // Collapse leading zeros: "0005" -> "5", but keep "0.5" and "0"
   if (s.length > 1 && s[0] === "0" && s[1] !== ".") {
     s = s.replace(/^0+/, "");
     if (s === "" || s.startsWith(".")) s = "0" + s;
   }
+  // Rewrite leading "." to "0."
   if (s.startsWith(".")) s = "0" + s;
   return s;
 }
