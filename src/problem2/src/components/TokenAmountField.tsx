@@ -46,7 +46,7 @@ export const TokenAmountField = forwardRef<HTMLInputElement, Props>(
     return (
       <div
         className={`
-          rounded-2xl border bg-surface-input p-4
+          rounded-2xl border bg-surface-input focus-within:bg-surface-input-focus p-4
           transition-colors
           ${error ? "border-error/60" : "border-border-card focus-within:border-accent-mid/50"}
           ${disabled ? "opacity-60" : ""}

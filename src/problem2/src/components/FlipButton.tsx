@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 type Props = {
   onClick: () => void;
@@ -6,14 +7,22 @@ type Props = {
 };
 
 export function FlipButton({ onClick, disabled }: Props) {
+  const [turns, setTurns] = useState(0);
+
+  function handleClick() {
+    if (disabled) return;
+    setTurns((t) => t + 1);
+    onClick();
+  }
+
   return (
     <motion.button
       type="button"
-      onClick={onClick}
+      onClick={handleClick}
       disabled={disabled}
       aria-label="Swap direction"
       whileTap={{ scale: 0.92 }}
-      whileHover={{ rotate: 180 }}
+      animate={{ rotate: turns * 180 }}
       transition={{ type: "spring", stiffness: 260, damping: 18 }}
       className="
         focus-ring grid h-11 w-11 place-items-center rounded-2xl
