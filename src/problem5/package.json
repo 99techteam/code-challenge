@@ -1,0 +1,42 @@
+{
+  "name": "problem5",
+  "version": "1.0.0",
+  "description": "Solution to the problem 5 which is assigned for coding challenge.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node dist/main.js",
+    "dev": "nodemon --watch src --ext ts --exec \"node -r ts-node/register\" src/main.ts",
+    "prisma:generate": "prisma generate",
+    "compile": "tsc",
+    "build": "npm run prisma:generate && npm run compile",
+    "build:clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\" && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kikijake/code-challenge.git"
+  },
+  "author": "Ye Htet San",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kikijake/code-challenge/issues"
+  },
+  "homepage": "https://github.com/Kikijake/code-challenge#readme",
+  "dependencies": {
+    "@prisma/client": "^6.8.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "morgan": "^1.10.0",
+    "prisma": "^6.8.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.15.21",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "problem4",
+  "version": "1.0.0",
+  "description": "Solution to the problem 4 which is assigned for coding challenge.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node dist/main.js",
+    "dev": "ts-node src/main.ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kikijake/code-challenge.git"
+  },
+  "author": "Ye Htet San",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kikijake/code-challenge/issues"
+  },
+  "homepage": "https://github.com/Kikijake/code-challenge#readme",
+  "devDependencies": {
+    "@types/node": "^25.8.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
