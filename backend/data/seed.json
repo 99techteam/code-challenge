@@ -1,0 +1,151 @@
+{
+  "coins": [
+    {
+      "currency": "ETH",
+      "blockchain": "Ethereum",
+      "price": 1645.9337373737374,
+      "date": "2023-08-29T07:10:52.000Z",
+      "iconFilename": "Ethereum-filled.svg"
+    },
+    {
+      "currency": "WBTC",
+      "blockchain": "Bitcoin",
+      "price": 26002.82202020202,
+      "date": "2023-08-29T07:10:52.000Z",
+      "iconFilename": "Bitcoin-filled.svg"
+    },
+    {
+      "currency": "ATOM",
+      "blockchain": "Cosmos Hub",
+      "price": 7.186657333333334,
+      "date": "2023-08-29T07:10:50.000Z",
+      "iconFilename": "Cosmos-Hub-filled.svg"
+    },
+    {
+      "currency": "OSMO",
+      "blockchain": "Osmosis",
+      "price": 0.3772974333333333,
+      "date": "2023-08-29T07:10:50.000Z",
+      "iconFilename": "Osmosis-filled.svg"
+    },
+    {
+      "currency": "LUNA",
+      "blockchain": "Terra",
+      "price": 0.40955638983050846,
+      "date": "2023-08-29T07:10:40.000Z",
+      "iconFilename": "Terra-filled.svg"
+    },
+    {
+      "currency": "USDC",
+      "blockchain": "Ethereum",
+      "price": 0.989832,
+      "date": "2023-08-29T07:10:40.000Z",
+      "iconFilename": "Ethereum-filled.svg"
+    },
+    {
+      "currency": "ZIL",
+      "blockchain": "Zilliqa",
+      "price": 0.01651813559322034,
+      "date": "2023-08-29T07:10:50.000Z",
+      "iconFilename": "Zilliqa-filled.svg"
+    },
+    {
+      "currency": "EVMOS",
+      "blockchain": "Evmos",
+      "price": 0.06246181355932203,
+      "date": "2023-08-29T07:10:40.000Z",
+      "iconFilename": "Evmos-filled.svg"
+    },
+    {
+      "currency": "KUJI",
+      "blockchain": "Kujira",
+      "price": 0.675,
+      "date": "2023-08-29T07:10:45.000Z",
+      "iconFilename": "Kujira-filled.svg"
+    },
+    {
+      "currency": "SWTH",
+      "blockchain": "Carbon",
+      "price": 0.004039850455012084,
+      "date": "2023-08-29T07:10:45.000Z",
+      "iconFilename": "Carbon-filled.svg"
+    },
+    {
+      "currency": "bNEO",
+      "blockchain": "Neo",
+      "price": 7.1282679,
+      "date": "2023-08-29T07:10:50.000Z",
+      "iconFilename": "Neo-filled.svg"
+    },
+    {
+      "currency": "OKB",
+      "blockchain": "OKC",
+      "price": 42.97562059322034,
+      "date": "2023-08-29T07:10:40.000Z",
+      "iconFilename": "OKC-filled.svg"
+    },
+    {
+      "currency": "IRIS",
+      "blockchain": "Iris Hub",
+      "price": 0.0177095593220339,
+      "date": "2023-08-29T07:10:40.000Z",
+      "iconFilename": "Iris-Hub-filled.svg"
+    },
+    {
+      "currency": "STRD",
+      "blockchain": "Stride",
+      "price": 0.7386553389830508,
+      "date": "2023-08-29T07:10:40.000Z",
+      "iconFilename": "Stride-filled.svg"
+    },
+    {
+      "currency": "wstETH",
+      "blockchain": "Ethereum",
+      "price": 1872.2579742372882,
+      "date": "2023-08-29T07:10:40.000Z",
+      "iconFilename": "Ethereum-filled.svg"
+    }
+  ],
+  "scores": [
+    {
+      "username": "CryptoKing",
+      "score": 142
+    },
+    {
+      "username": "SwapMaster",
+      "score": 128
+    },
+    {
+      "username": "DeFiWhale",
+      "score": 115
+    },
+    {
+      "username": "TokenTrader",
+      "score": 98
+    },
+    {
+      "username": "BlockchainBoss",
+      "score": 87
+    },
+    {
+      "username": "CoinHunter",
+      "score": 76
+    },
+    {
+      "username": "Web3Wizard",
+      "score": 65
+    },
+    {
+      "username": "AltcoinAce",
+      "score": 54
+    },
+    {
+      "username": "SatoshiFan",
+      "score": 43
+    },
+    {
+      "username": "EtherEagle",
+      "score": 31
+    }
+  ]
+}
