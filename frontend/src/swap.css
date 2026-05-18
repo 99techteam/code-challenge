@@ -1,0 +1,238 @@
+/* d:\Test\99tech\frontend\src\swap.css */
+
+/* Light Mode Defaults */
+.swap-card {
+    width: 100%;
+    max-width: 460px;
+    background-color: #f6f7f9;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    position: relative;
+    transition: all 0.3s ease;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.card-title {
+    color: #1a1e29;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.input-section {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 16px 20px;
+    transition: all 0.3s ease;
+}
+
+.you-pay { margin-bottom: 6px; }
+.you-receive { margin-top: 6px; }
+
+.input-header {
+    color: #8c909a;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.amount-input {
+    background: transparent;
+    border: none;
+    color: #1a1e29;
+    font-size: 32px;
+    font-weight: 500;
+    width: 60%;
+    outline: none;
+}
+
+.amount-input::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.token-selector {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #1a1e29;
+    border-radius: 30px;
+    padding: 8px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.token-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.token-symbol {
+    margin-right: 12px;
+}
+
+.dropdown-icon {
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.swap-icon-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: calc(50% - 24px); 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.swap-icon-button {
+    width: 48px;
+    height: 48px;
+    background: #e9ebee;
+    border: 3px solid #f6f7f9;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1a1e29;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background 0.3s;
+}
+.swap-icon-button:hover {
+    transform: rotate(180deg);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 24px;
+    padding: 0 4px;
+    font-size: 14px;
+    color: #8c909a;
+}
+.info-value { color: #1a1e29; font-weight: 500; }
+
+/* Dark Mode Overrides */
+.theme-dark .swap-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.theme-dark .card-title { color: #ffffff; }
+.theme-dark .input-section {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.theme-dark .input-header { color: rgba(255, 255, 255, 0.6); }
+.theme-dark .amount-input { color: #ffffff; }
+.theme-dark .amount-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+.theme-dark .token-selector {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+.theme-dark .token-selector:hover { background: rgba(255, 255, 255, 0.15); }
+.theme-dark .dropdown-icon { color: rgba(255, 255, 255, 0.5); }
+.theme-dark .swap-icon-button {
+    background: #1a1e27;
+    border: 3px solid #0d1117;
+    color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+.theme-dark .info-row { color: rgba(255, 255, 255, 0.6); }
+.theme-dark .info-value { color: #ffffff; }
+
+/* Confirm swap btn styles */
+.confirm-swap-btn {
+    width: 100%;
+    height: 56px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #37d3e4 0%, #1c8bff 100%);
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(23, 196, 229, 0.25);
+}
+.confirm-swap-btn:hover {
+    opacity: 0.95;
+    box-shadow: 0 6px 20px rgba(23, 196, 229, 0.35);
+}
+.confirm-swap-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 10px rgba(23, 196, 229, 0.2);
+}
+.confirm-swap-btn::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: -20px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+.confirm-swap-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    pointer-events: none;
+    box-shadow: inset 2px 2px 5px rgba(11, 89, 102, 0.2), inset -1px -1px 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Theme Toggle */
+.theme-toggle-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -15px;
+    position: relative;
+    z-index: 20;
+}
+
+.theme-toggle-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1e29;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle-btn .icon-moon { display: none; }
+.theme-toggle-btn .icon-sun { display: block; }
+
+.theme-dark .theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+.theme-dark .theme-toggle-btn .icon-sun { display: none; }
+.theme-dark .theme-toggle-btn .icon-moon { display: block; }
