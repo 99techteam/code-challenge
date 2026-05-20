@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+}
+
+.bg {
+  background-image: var(--gradient-primary-vertical);
+  background-size:
+    200px 200px,
+    100%;
+  background-position: 0 0;
+}
+
+:root {
+  --grain-15-url: url(./assets/media/15percent@1x.png);
+  --gradient-primary-vertical: var(--grain-15-url),
+    linear-gradient(2deg,
+      color(display-p3 0.0666666667 0 0.4784313725) 2.71%,
+      color(display-p3 0.3882352941 0.1568627451 0.7647058824) 48.51%,
+      color(display-p3 0.8901960784 0.4196078431 1) 91.53%);
+}
