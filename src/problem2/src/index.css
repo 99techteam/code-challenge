@@ -31,12 +31,10 @@ button {
 }
 
 :root {
-  --grain-15-url: url(/media/15percent@1x.png);
+  --grain-15-url: url(./assets/media/15percent@1x.png);
   --gradient-primary-vertical: var(--grain-15-url),
-  linear-gradient(
-    2deg,
-    color(display-p3 0.0666666667 0 0.4784313725) 2.71%,
-    color(display-p3 0.3882352941 0.1568627451 0.7647058824) 48.51%,
-    color(display-p3 0.8901960784 0.4196078431 1) 91.53%
-  );
+    linear-gradient(2deg,
+      color(display-p3 0.0666666667 0 0.4784313725) 2.71%,
+      color(display-p3 0.3882352941 0.1568627451 0.7647058824) 48.51%,
+      color(display-p3 0.8901960784 0.4196078431 1) 91.53%);
 }
