@@ -31,7 +31,7 @@ button {
 }
 
 :root {
-  --grain-15-url: url(./assets/media/15percent@1x.png);
+  --grain-15-url: url(assets/media/15percent@1x.png);
   --gradient-primary-vertical: var(--grain-15-url),
     linear-gradient(2deg,
       color(display-p3 0.0666666667 0 0.4784313725) 2.71%,

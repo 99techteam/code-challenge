@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
-    "deploy": "bun run build && gh-pages -d dist"
+    "deploy": "bun run build"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
@@ -22,6 +22,5 @@
     "vite": "^8.0.12"
   },
   "dependencies": {
-    "vite-plugin-compression": "^0.5.1"
   }
 }
