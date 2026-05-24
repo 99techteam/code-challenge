@@ -1,0 +1,160 @@
+openapi: 3.0.1
+info:
+  title: Real-Time Scoreboard API
+  version: 1.0.0
+paths:
+  /api/v1/scores/increment:
+    post:
+      summary: Submit a completed action to calculate and increment score
+      security:
+        - cognitoJwt: []
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                actionType:
+                  type: string
+                  example: COMPLETED_LEVEL_5
+                actionReferenceId:
+                  type: string
+                  description: Client-side unique transaction/action tracking reference.
+                clientTimestamp:
+                  type: string
+                  format: date-time
+              required:
+                - actionType
+      responses:
+        '202':
+          description: Action accepted. Leaderboard updates will stream asynchronously via SSE.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                  eventId:
+                    type: string
+                    format: uuid
+                  projectionStatus:
+                    type: string
+                    example: pending
+        '400':
+          description: Invalid request payload or unrecognized actionType
+        '401':
+          description: Unauthorized or missing JWT access token
+        '409':
+          description: Duplicate request detected via Idempotency-Key
+        '503':
+          description: Database or system unavailable
+
+  /api/v1/leaderboard:
+    get:
+      summary: Retrieve leaderboard entries with query-driven pagination
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: scope
+          schema:
+            type: string
+            default: global
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        userId:
+                          type: string
+                        score:
+                          type: integer
+                        rank:
+                          type: integer
+
+  /api/v1/leaderboard/me:
+    get:
+      summary: Get authenticated user's individual score, rank, and relative neighbors
+      security:
+        - cognitoJwt: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                  score:
+                    type: integer
+                  rank:
+                    type: integer
+                  neighbors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        userId:
+                          type: string
+                        score:
+                          type: integer
+                        rank:
+                          type: integer
+        '401':
+          description: Unauthorized
+  
+  /api/v1/leaderboard/stream:
+    get:
+      summary: Open a persistent Server-Sent Events stream for real-time leaderboard updates
+      security:
+        - cognitoJwt: []
+      responses:
+        '200':
+          description: Event stream established. Pushes 'leaderboard.initial' and 'leaderboard.updated' events.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+
+
+components:
+  securitySchemes:
+    cognitoJwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
