@@ -1,0 +1,20 @@
+{
+  "name": "code-challenge",
+  "version": "1.0.0",
+  "description": "Note that if you fork this repository, your responses may be publicly linked to this repo.   Please submit your application along with the solutions attached or linked.",
+  "homepage": "https://github.com/thphucle/code-challenge#readme",
+  "bugs": {
+    "url": "https://github.com/thphucle/code-challenge/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thphucle/code-challenge.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
