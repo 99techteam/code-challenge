@@ -1,0 +1,292 @@
+/* Problem 3 — Messy React */
+
+.p3 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.p3-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.p3-section-head h2 {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 16px;
+  color: var(--text-strong);
+  margin: 0 0 4px;
+}
+
+.p3-section-blurb {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.p3-section-blurb code {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 11.5px;
+  color: var(--text);
+}
+
+/* ---------------- filter ---------------- */
+
+.p3-filter,
+.p3-layout-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--panel-2);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.p3-filter-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.p3-filter-btn:hover {
+  color: var(--text);
+}
+
+.p3-filter-btn.active {
+  background: var(--accent-bg);
+  color: var(--text-strong);
+}
+
+/* ---------------- issues list ---------------- */
+
+.p3-issue-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 12px;
+}
+
+.p3-issue {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p3-issue.sev-bug {
+  border-left-color: var(--fail);
+}
+.p3-issue.sev-perf {
+  border-left-color: var(--warn);
+}
+.p3-issue.sev-anti-pattern {
+  border-left-color: var(--accent);
+}
+.p3-issue.sev-style {
+  border-left-color: var(--muted);
+}
+
+.p3-issue-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.p3-issue-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.p3-sev-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: var(--code-bg);
+  color: var(--muted);
+}
+
+.p3-sev-badge.sev-bug {
+  background: rgba(255, 104, 104, 0.16);
+  color: var(--fail);
+}
+.p3-sev-badge.sev-perf {
+  background: rgba(240, 182, 87, 0.16);
+  color: var(--warn);
+}
+.p3-sev-badge.sev-anti-pattern {
+  background: var(--accent-bg);
+  color: var(--accent-strong);
+}
+
+.p3-issue-title {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-strong);
+  flex: 1;
+  min-width: 200px;
+}
+
+.p3-issue-body {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* ---------------- code grid ---------------- */
+
+.p3-code-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.p3-code-grid.split {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.p3-code-grid.stacked {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 1080px) {
+  .p3-code-grid.split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.p3-code-block {
+  display: flex;
+  flex-direction: column;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.p3-code-block.original {
+  border-color: rgba(255, 104, 104, 0.3);
+}
+
+.p3-code-block.refactored {
+  border-color: rgba(68, 196, 102, 0.3);
+}
+
+.p3-code-label {
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--code-border);
+  background: var(--panel-2);
+}
+
+.p3-code-block.original .p3-code-label {
+  color: var(--fail);
+}
+
+.p3-code-block.refactored .p3-code-label {
+  color: var(--pass);
+}
+
+.p3-code {
+  margin: 0;
+  padding: 14px 16px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.55;
+  max-height: 520px;
+}
+
+/* ---------------- demo ---------------- */
+
+.p3-demo {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.p3-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  gap: 16px;
+}
+
+.p3-row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.p3-row-symbol {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.p3-row-chain {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.p3-row-numbers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.p3-row-amount {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.p3-row-amount-raw {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.p3-row-usd {
+  font-size: 12px;
+  color: var(--muted);
+}
