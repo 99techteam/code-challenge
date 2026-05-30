@@ -1,8 +1,459 @@
-body {
+/* Problem 2 — Fancy Currency Swap */
+
+.p2-wrap {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  padding: 16px 0 48px;
+}
+
+.p2-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: var(--shadow-2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.p2-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.p2-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+/* ---------------- slippage ---------------- */
+
+.p2-slip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--panel-2);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.p2-slip-label {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 0 6px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.p2-slip-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 9px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.p2-slip-btn:hover {
+  color: var(--text);
+}
+
+.p2-slip-btn.active {
+  background: var(--accent-bg);
+  color: var(--text-strong);
+}
+
+.p2-slip-input {
+  width: 60px;
+  background: var(--code-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 12px;
+  text-align: right;
+}
+
+.p2-slip-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.p2-slip-input::-webkit-outer-spin-button,
+.p2-slip-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ---------------- leg (from / to) ---------------- */
+
+.p2-leg {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.1s ease;
+}
+
+.p2-leg:focus-within {
+  border-color: var(--accent);
+}
+
+.p2-leg-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.p2-balance {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.p2-max {
+  background: var(--accent-bg);
+  color: var(--accent-strong);
+  border: none;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.p2-max:hover {
+  background: var(--accent);
+  color: #0a0f1a;
+}
+
+.p2-max:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.p2-leg-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.p2-amount {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-strong);
+  font-size: 26px;
+  font-weight: 500;
+  padding: 4px 0;
+  letter-spacing: -0.02em;
+}
+
+.p2-amount:focus {
+  outline: none;
+}
+
+.p2-amount.readonly {
+  cursor: default;
+}
+
+.p2-amount::placeholder {
+  color: var(--muted);
+  opacity: 0.4;
+}
+
+.p2-leg-foot {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ---------------- flip button ---------------- */
+
+.p2-flip-row {
+  display: flex;
+  justify-content: center;
+  margin: -10px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.p2-flip {
+  background: var(--panel);
+  border: 3px solid var(--bg);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 360px;
-  font-family: Arial, Helvetica, sans-serif;
+  transition: all 0.15s ease;
+}
+
+.p2-flip:hover:not(:disabled) {
+  background: var(--accent-bg);
+  color: var(--accent-strong);
+  transform: rotate(180deg);
+}
+
+.p2-flip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------------- summary ---------------- */
+
+.p2-summary {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.p2-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.p2-summary-value {
+  color: var(--text);
+}
+
+/* ---------------- validation ---------------- */
+
+.p2-validation {
+  color: var(--warn);
+  font-size: 12.5px;
+  padding: 8px 12px;
+  background: rgba(240, 182, 87, 0.08);
+  border: 1px solid rgba(240, 182, 87, 0.3);
+  border-radius: 8px;
+}
+
+/* ---------------- submit ---------------- */
+
+.p2-submit {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  border-radius: 10px;
+  margin-top: 4px;
+}
+
+/* ---------------- token select ---------------- */
+
+.ts {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.ts-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text-strong);
+  padding: 6px 10px 6px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  transition: all 0.1s ease;
+}
+
+.ts-trigger:hover {
+  border-color: var(--accent);
+}
+
+.ts-trigger.placeholder {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.ts-trigger-symbol {
+  font-size: 14px;
+}
+
+.ts-trigger-caret {
+  font-size: 9px;
+  color: var(--muted);
+  margin-left: 2px;
+}
+
+.ts-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 320px;
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  box-shadow: var(--shadow-2);
+  z-index: 10;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 380px;
+}
+
+.ts-search-row {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ts-search {
+  width: 100%;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.ts-search:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.ts-list {
+  list-style: none;
+  padding: 6px;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.ts-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+}
+
+.ts-option:hover:not(.disabled) {
+  background: var(--panel-2);
+}
+
+.ts-option.selected {
+  background: var(--accent-bg);
+}
+
+.ts-option.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ts-option-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.ts-option-symbol {
+  font-weight: 600;
+  color: var(--text-strong);
+  font-size: 13px;
+}
+
+.ts-option-balance {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.ts-option-price {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.ts-empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------------- token icon ---------------- */
+
+.token-icon {
+  border-radius: 50%;
+  background: var(--panel-2);
+}
+
+.token-fallback {
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+/* ---------------- load / error states ---------------- */
+
+.p2-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  gap: 12px;
+  color: var(--muted);
+}
+
+.p2-state .spinner {
+  color: var(--accent);
+}
+
+.p2-state.error code {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--fail);
+  max-width: 600px;
+  word-break: break-all;
 }
