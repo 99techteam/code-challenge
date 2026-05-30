@@ -1,5 +1,9 @@
 # 99Tech Code Challenge #1
 
+> **Live demo:** **https://code-challenge-lake.vercel.app/** — want a quick
+> look without cloning? Open the link, all three problems are reachable
+> from the tabs at the top (`#/problem1`, `#/problem2`, `#/problem3`).
+
 Solutions to the three problems, bundled as one React + Vite + TypeScript
 app with a tab per problem.
 
