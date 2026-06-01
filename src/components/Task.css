@@ -1,0 +1,64 @@
+.task-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  background: var(--accent-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.task-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-border);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.task-title {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text-h);
+}
+
+.task-body {
+  padding: 20px 24px;
+  line-height: 1.7;
+}
+
+.task-body p {
+  margin: 0 0 10px;
+}
+
+.task-body p:last-child {
+  margin-bottom: 0;
+}
+
+.task-body code {
+  font-size: 14px;
+}
+
+.task-body pre {
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 16px 20px;
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+.task-body pre code {
+  background: none;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
