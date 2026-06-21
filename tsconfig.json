@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "target": "es2022",
+    "types": ["jest", "node", "express"],
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types", "./src/problem5/src/types"]
+  },
+}
