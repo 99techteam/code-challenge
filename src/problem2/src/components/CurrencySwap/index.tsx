@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 
 // Store Imports
 import { useCurrencyStore } from "@stores/Currencies/currencies";
@@ -49,6 +55,15 @@ const CurrencySwap: React.FC = () => {
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
   const [fromSelectOpen, setFromSelectOpen] = useState(false);
   const [toSelectOpen, setToSelectOpen] = useState(false);
+  const swapTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (swapTimeoutRef.current) {
+        clearTimeout(swapTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Calculate exchange rate with proper validation
   const exchangeRate = useMemo(() => {
@@ -85,31 +100,44 @@ const CurrencySwap: React.FC = () => {
     }
   }, [error]);
 
+  const handleCurrencyImageError = useCallback((currency: string) => {
+    setImageErrors((prev) => {
+      if (prev.has(currency)) return prev;
+
+      const next = new Set(prev);
+      next.add(currency);
+      return next;
+    });
+  }, []);
+
+  const renderCurrencyLabel = useCallback(
+    (currency: string) => (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {!imageErrors.has(currency) && (
+          <img
+            src={getTokenIconUrl(currency)}
+            alt={`${currency} logo`}
+            style={{ width: "20px", height: "20px", marginRight: "8px" }}
+            onError={() => handleCurrencyImageError(currency)}
+          />
+        )}
+        {currency}
+      </div>
+    ),
+    [imageErrors, handleCurrencyImageError],
+  );
+
   // Generate currency options with memoization
   const currencyOptions = useMemo((): CurrencyOption[] => {
     if (!priceData || Object.keys(priceData).length === 0) return [];
 
     return Object.keys(priceData)
-      .sort()
+      .sort((a, b) => a.localeCompare(b))
       .map((currency) => ({
-        label: (
-          <div style={{ display: "flex", alignItems: "center" }}>
-            {!imageErrors.has(currency) && (
-              <img
-                src={getTokenIconUrl(currency)}
-                alt={`${currency} logo`}
-                style={{ width: "20px", height: "20px", marginRight: "8px" }}
-                onError={() => {
-                  setImageErrors((prev) => new Set(prev).add(currency));
-                }}
-              />
-            )}
-            {currency}
-          </div>
-        ),
+        label: renderCurrencyLabel(currency),
         value: currency,
       }));
-  }, [priceData, imageErrors]);
+  }, [priceData, renderCurrencyLabel]);
 
   const handleFromAmountChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -167,10 +195,12 @@ const CurrencySwap: React.FC = () => {
   );
 
   const handleSwap = useCallback(() => {
+    if (isSwapping) return;
+
     setIsSwapping(true);
 
     // Simulate loading for better UX
-    setTimeout(() => {
+    swapTimeoutRef.current = setTimeout(() => {
       setFromCurrency(toCurrency);
       setToCurrency(fromCurrency);
 
@@ -185,12 +215,14 @@ const CurrencySwap: React.FC = () => {
 
       setIsSwapping(false);
       setToast({ message: "Currencies swapped successfully", type: "success" });
+      swapTimeoutRef.current = null;
     }, 300);
   }, [
     fromCurrency,
     toCurrency,
     fromAmountInput,
     toAmountInput,
+    isSwapping,
     setFromCurrency,
     setToCurrency,
     setAmount,
@@ -281,6 +313,9 @@ const CurrencySwap: React.FC = () => {
           <input
             id="from-amount"
             type="number"
+            inputMode="decimal"
+            min="0"
+            step="any"
             value={fromAmountInput}
             onChange={handleFromAmountChange}
             className="field-currency-input"
@@ -328,6 +363,9 @@ const CurrencySwap: React.FC = () => {
           <input
             id="to-amount"
             type="number"
+            inputMode="decimal"
+            min="0"
+            step="any"
             value={toAmountInput}
             onChange={handleToAmountChange}
             className="field-currency-input"

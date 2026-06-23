@@ -3,6 +3,7 @@ import {
   useEffect,
   useRef,
   useCallback,
+  useId,
   ReactNode,
   FC,
   ChangeEvent,
@@ -49,7 +50,8 @@ const SearchableSelect: FC<SearchableSelectProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const optionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const dropdownId = useId();
 
   const filteredOptions = options.filter((option) =>
     option.value.toString().toLowerCase().includes(searchValue.toLowerCase()),
@@ -165,9 +167,6 @@ const SearchableSelect: FC<SearchableSelectProps> = ({
       ref={containerRef}
       className={`select-container ${isOpen ? "is-open" : ""}`}
       style={{ zIndex: isOpen ? 10000 : zIndex }}
-      role="combobox"
-      aria-expanded={isOpen}
-      aria-haspopup="listbox"
       aria-label={ariaLabel}
     >
       {isClearable && value && !disabled && (
@@ -186,17 +185,23 @@ const SearchableSelect: FC<SearchableSelectProps> = ({
           className="dropdown-btn"
           disabled={disabled}
           aria-label={ariaLabel || "Select option"}
+          aria-expanded={isOpen}
+          aria-controls={dropdownId}
           type="button"
         >
-          <span>{selectedLabel || placeholder}</span>
-          <span style={{ fontSize: "12px", opacity: 0.6 }}>▼</span>
+          <span className="dropdown-btn-label">
+            {selectedLabel || placeholder}
+          </span>
+          <span className="dropdown-btn-chevron" aria-hidden="true">
+            ▼
+          </span>
         </button>
 
         {isOpen && (
           <div
             ref={dropdownRef}
             className={`dropdown ${dropdownPlacement}`}
-            role="listbox"
+            id={dropdownId}
           >
             {isSearchable && (
               <input
@@ -216,16 +221,14 @@ const SearchableSelect: FC<SearchableSelectProps> = ({
                 <div className="no-options">No options found</div>
               ) : (
                 filteredOptions.map((option, index) => (
-                  <div
+                  <button
                     key={option.value}
                     ref={(el) => (optionRefs.current[index] = el)}
                     onClick={() => handleSelectChange(option.value)}
                     className={`option-item ${
                       value === option.value ? "selected" : ""
                     } ${highlightedIndex === index ? "highlighted" : ""}`}
-                    role="option"
-                    aria-selected={value === option.value}
-                    tabIndex={0}
+                    type="button"
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
@@ -234,7 +237,7 @@ const SearchableSelect: FC<SearchableSelectProps> = ({
                     }}
                   >
                     {option.label}
-                  </div>
+                  </button>
                 ))
               )}
             </div>

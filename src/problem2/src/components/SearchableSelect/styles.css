@@ -1,7 +1,9 @@
 .select-container {
   position: relative;
   min-width: 180px;
-  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  flex-shrink: 1;
   transition: z-index 0s;
 }
 
@@ -33,7 +35,7 @@
 
 .dropdown-btn {
   width: 100%;
-  min-width: 140px;
+  min-width: 0;
   padding: 16px;
   text-align: left;
   background-color: white;
@@ -49,15 +51,38 @@
   gap: 8px;
   color: #333;
   white-space: nowrap;
-  overflow: visible;
+  overflow: hidden;
 }
 
-.dropdown-btn span {
+.dropdown-btn-label {
   display: flex;
   align-items: center;
   gap: 8px;
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown-btn-chevron {
+  flex: 0 0 auto;
+  font-size: 12px;
+  opacity: 0.6;
+  line-height: 1;
+  margin-left: 6px;
+}
+
+.dropdown-btn-label > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dropdown-btn-label > *:first-child,
+.dropdown-btn-label > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .dropdown-btn:hover:not(:disabled) {
@@ -140,7 +165,11 @@
 }
 
 .option-item {
+  width: 100%;
   padding: 14px;
+  border: none;
+  background: transparent;
+  text-align: left;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -209,17 +238,16 @@
 /* Tablet (768px and below) */
 @media screen and (max-width: 768px) {
   .select-container {
-    min-width: 150px;
+    min-width: 0;
   }
 
   .dropdown-btn {
-    min-width: 120px;
     padding: 14px;
     font-size: 15px;
     border-radius: 10px;
   }
 
-  .dropdown-btn span {
+  .dropdown-btn-label {
     gap: 6px;
   }
 
@@ -263,18 +291,17 @@
 /* Mobile (480px and below) */
 @media screen and (max-width: 480px) {
   .select-container {
-    min-width: 120px;
+    min-width: 0;
   }
 
   .dropdown-btn {
-    min-width: 100px;
     padding: 12px;
     font-size: 14px;
     border-radius: 8px;
     gap: 6px;
   }
 
-  .dropdown-btn span {
+  .dropdown-btn-label {
     gap: 4px;
     font-size: 14px;
   }
@@ -331,16 +358,15 @@
 /* Small Mobile (360px and below) */
 @media screen and (max-width: 360px) {
   .select-container {
-    min-width: 100px;
+    min-width: 0;
   }
 
   .dropdown-btn {
-    min-width: 90px;
     padding: 10px;
     font-size: 13px;
   }
 
-  .dropdown-btn span {
+  .dropdown-btn-label {
     font-size: 13px;
   }
 
