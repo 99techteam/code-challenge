@@ -1,0 +1,56 @@
+<svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .box { fill: #f4f7ff; stroke: #3b6df8; stroke-width: 2; rx: 14; }
+    .text { font-family: Arial, sans-serif; font-size: 14px; fill: #102a43; }
+    .title { font-size: 18px; font-weight: bold; }
+    .arrow { fill: none; stroke: #334e68; stroke-width: 2; marker-end: url(#arrowhead); }
+    .note { font-size: 12px; fill: #334e68; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#334e68" />
+    </marker>
+  </defs>
+  <text x="50" y="40" class="text title">Scoreboard API Flow</text>
+
+  <rect x="50" y="90" width="220" height="100" class="box" />
+  <text x="70" y="120" class="text">1. Client Action</text>
+  <text x="70" y="140" class="text">performed on website</text>
+
+  <rect x="320" y="90" width="260" height="120" class="box" />
+  <text x="340" y="120" class="text">2. API Request</text>
+  <text x="340" y="140" class="text">POST /api/v1/scores/update</text>
+  <text x="340" y="160" class="text">Auth token + score delta</text>
+
+  <rect x="620" y="90" width="260" height="120" class="box" />
+  <text x="640" y="120" class="text">3. Auth + Validation</text>
+  <text x="640" y="140" class="text">verify token / action / rate limits</text>
+
+  <rect x="320" y="260" width="260" height="120" class="box" />
+  <text x="340" y="290" class="text">4. Score Update</text>
+  <text x="340" y="310" class="text">atomic DB write / user score</text>
+  <text x="340" y="330" class="text">update leaderboard cache</text>
+
+  <rect x="620" y="260" width="260" height="120" class="box" />
+  <text x="640" y="290" class="text">5. Live Update</text>
+  <text x="640" y="310" class="text">push top 10 to subscribed clients</text>
+  <text x="640" y="330" class="text">WebSocket / SSE / fallback poll</text>
+
+  <line x1="270" y1="140" x2="320" y2="140" class="arrow" />
+  <line x1="580" y1="140" x2="620" y2="140" class="arrow" />
+  <line x1="450" y1="210" x2="450" y2="260" class="arrow" />
+  <line x1="580" y1="320" x2="620" y2="320" class="arrow" />
+
+  <rect x="50" y="260" width="220" height="100" class="box" />
+  <text x="70" y="290" class="text">6. Leaderboard Query</text>
+  <text x="70" y="310" class="text">GET /api/v1/scores/top10</text>
+  <text x="70" y="330" class="text">fast cached result</text>
+
+  <line x1="170" y1="200" x2="170" y2="260" class="arrow" />
+
+  <rect x="50" y="420" width="220" height="100" class="box" />
+  <text x="70" y="450" class="text">7. Monitoring & Audit</text>
+  <text x="70" y="470" class="text">log update attempts, errors, abuse</text>
+
+  <line x1="170" y1="360" x2="170" y2="420" class="arrow" />
+</svg>

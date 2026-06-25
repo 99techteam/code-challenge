@@ -1,0 +1,28 @@
+@host = http://localhost:3001
+
+### Create resource
+POST {{host}}/resources
+Content-Type: application/json
+
+{
+  "name": "VS Code REST Client Resource",
+  "description": "Created with REST Client"
+}
+
+### List resources
+GET {{host}}/resources
+
+### Get resource details
+GET {{host}}/resources/1
+
+### Update resource details
+PUT {{host}}/resources/1
+Content-Type: application/json
+
+{
+  "name": "Updated via REST Client",
+  "description": "Updated description"
+}
+
+### Delete resource
+DELETE {{host}}/resources/1
