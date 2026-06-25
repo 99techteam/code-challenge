@@ -1,0 +1,27 @@
+{
+  "name": "hiepvo-code-challenge",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start:problem5": "node dist/problem5/index.js",
+    "test:problem4": "npm run build && node dist/problem4/sumToN.test.js",
+    "test:problem5": "npm run build && node dist/problem5/controller/resourceController.test.js",
+    "test": "npm run test:problem4 && npm run test:problem5"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "typeorm": "^0.3.18"
+  },
+  "devDependencies": {
+    "@types/assert": "^1.5.11",
+    "@types/body-parser": "^1.19.2",
+    "@types/express": "^4.17.17",
+    "@types/supertest": "^7.2.0",
+    "assert": "^2.0.0",
+    "supertest": "^7.2.2",
+    "typescript": "^5.6.2"
+  }
+}
