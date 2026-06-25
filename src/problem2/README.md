@@ -30,6 +30,15 @@ npm run preview
 - The **Confirm Swap** button simulates a backend call with a 1.5-second loading spinner,
   then shows a success confirmation before resetting the form.
 
+## Running tests
+
+```bash
+npm test
+```
+
+Uses [Vitest](https://vitest.dev/) to test the pure logic in `src/lib/` (exchange-rate
+math and the price-feed deduplication/filtering).
+
 ## Project layout
 
 ```
