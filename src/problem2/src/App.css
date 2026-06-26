@@ -1,0 +1,337 @@
+/* ── App shell ── */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.app__header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app__logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+.app__main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+/* ── Status screens (loading / error) ── */
+.app__status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.app__status--error {
+  color: var(--error);
+}
+
+.app__error-detail {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ── Token icon (shared by TokenSelect and dropdown items) ── */
+.token-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════
+   Swap form
+══════════════════════════════════════════ */
+.swap-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.swap-form__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+/* Each "side" (from / to) */
+.swap-form__panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color var(--transition);
+}
+
+.swap-form__panel:focus-within {
+  border-color: var(--accent);
+}
+
+/* Amount inputs — fill remaining space */
+.swap-form__amount {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  font-weight: 500;
+  text-align: right;
+  width: 0; /* lets flex do the sizing */
+  min-width: 0;
+}
+
+.swap-form__amount::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* Hide the browser's number-input arrows */
+.swap-form__amount::-webkit-inner-spin-button,
+.swap-form__amount::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.swap-form__amount--readonly {
+  cursor: default;
+  color: var(--text-secondary);
+}
+
+/* ── Flip direction button ── */
+.swap-form__flip-row {
+  display: flex;
+  justify-content: center;
+  margin: -4px 0;
+}
+
+.swap-form__flip {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition), transform var(--transition);
+}
+
+.swap-form__flip:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: rotate(180deg);
+}
+
+.swap-form__flip:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Exchange rate label ── */
+.swap-form__rate {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 2px 0;
+}
+
+/* ── Validation errors ── */
+.swap-form__error {
+  font-size: 0.82rem;
+  color: var(--error);
+  padding: 0 4px;
+}
+
+/* ── Submit button ── */
+.swap-form__submit {
+  margin-top: 4px;
+  padding: 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), opacity var(--transition);
+}
+
+.swap-form__submit:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.swap-form__submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.swap-form__submit--success {
+  background: var(--success);
+  opacity: 1 !important;
+}
+
+/* ══════════════════════════════════════════
+   Token select dropdown
+══════════════════════════════════════════ */
+.token-select {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.token-select__label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.token-select__trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  min-width: 130px;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.token-select__trigger:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--bg-hover);
+}
+
+.token-select__trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.token-select__symbol {
+  flex: 1;
+}
+
+.token-select__placeholder {
+  color: var(--text-placeholder);
+  flex: 1;
+}
+
+.token-select__arrow {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  margin-left: 2px;
+}
+
+/* Dropdown panel */
+.token-select__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 100;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  width: 200px;
+  overflow: hidden;
+}
+
+.token-select__search {
+  width: 100%;
+  background: var(--bg-input);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.token-select__search::placeholder {
+  color: var(--text-placeholder);
+}
+
+.token-select__list {
+  list-style: none;
+  max-height: 220px;
+  overflow-y: auto;
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.token-select__list::-webkit-scrollbar {
+  width: 4px;
+}
+.token-select__list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.token-select__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background var(--transition);
+}
+
+.token-select__item:hover {
+  background: var(--bg-hover);
+}
+
+.token-select__item--active {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.token-select__empty {
+  padding: 16px 14px;
+  font-size: 0.85rem;
+  color: var(--text-placeholder);
+  text-align: center;
+}

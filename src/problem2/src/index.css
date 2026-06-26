@@ -1,0 +1,68 @@
+/* ── Design tokens ── */
+:root {
+  --bg-page: #0d0f17;
+  --bg-card: #161926;
+  --bg-panel: #1e2235;
+  --bg-input: #252a3d;
+  --bg-hover: #2d3450;
+  --border: #2e3456;
+
+  --text-primary: #e8eaf6;
+  --text-secondary: #8b93b4;
+  --text-placeholder: #4e577a;
+
+  --accent: #7c5cfc;
+  --accent-hover: #9577fd;
+  --accent-dim: rgba(124, 92, 252, 0.15);
+
+  --success: #22c55e;
+  --error: #f87171;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --transition: 150ms ease;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Loading spinner ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.spinner--lg {
+  width: 36px;
+  height: 36px;
+  border-width: 3px;
+  margin-right: 0;
+  margin-bottom: 12px;
+}
