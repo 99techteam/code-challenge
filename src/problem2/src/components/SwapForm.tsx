@@ -340,7 +340,7 @@ function TokenButton({
     >
       {token ? (
         <>
-          <TokenIcon symbol={token.symbol} src={token.icon} size={24} priority />
+          <TokenIcon key={token.icon} symbol={token.symbol} src={token.icon} size={24} priority />
           <span>{token.symbol}</span>
         </>
       ) : (
