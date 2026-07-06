@@ -1,0 +1,24 @@
+{
+  "name": "problem4-sum-to-n",
+  "version": "1.0.0",
+  "description": "Three unique implementations of sum_to_n function in TypeScript",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "test": "tsx src/index.ts"
+  },
+  "keywords": [
+    "typescript",
+    "algorithm",
+    "sum"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
+

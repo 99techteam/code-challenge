@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Scoreboard</title>
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .wrap { max-width: 960px; margin: 0 auto; }
+        h1 { font-size: 1.75rem; margin-bottom: 24px; color: #38bdf8; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .panel {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .panel h2 {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: inherit;
+            font-size: 14px;
+        }
+        button {
+            background: #0284c7;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button:hover { background: #0369a1; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        button.secondary { background: #475569; }
+        .row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #334155;
+        }
+        .row:last-child { border-bottom: none; }
+        .rank { width: 32px; color: #38bdf8; font-weight: 700; }
+        .name { flex: 1; }
+        .pts { color: #fbbf24; font-weight: 600; }
+        .stats {
+            text-align: center;
+            padding: 16px;
+            background: #0f172a;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+        .stats .score { font-size: 2.5rem; font-weight: 700; color: #fbbf24; }
+        .toast {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .ws-badge {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #334155;
+        }
+        .ws-badge.on { background: #166534; }
+        .ws-badge.off { background: #991b1b; }
+        .msg { font-size: 13px; margin-top: 8px; color: #94a3b8; }
+        .msg.err { color: #f87171; }
+        .msg.ok { color: #4ade80; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>Live Scoreboard</h1>
+
+        <div class="grid">
+            <div class="panel" id="loginPanel">
+                <h2>Sign in</h2>
+                <select id="username">
+                    <option value="">Choose player...</option>
+                    <option value="Minh">Minh</option>
+                    <option value="Lan">Lan</option>
+                    <option value="Huy">Huy</option>
+                    <option value="Trang">Trang</option>
+                    <option value="Duc">Duc</option>
+                </select>
+                <input type="password" id="password" value="pass123" placeholder="Password">
+                <button onclick="login()">Sign in</button>
+            </div>
+
+            <div class="panel" id="actionPanel" style="display:none">
+                <h2>Actions</h2>
+                <div class="stats">
+                    <div class="score" id="myScore">0</div>
+                    <div>Rank #<span id="myRank">-</span></div>
+                </div>
+                <button onclick="runAction()" id="actionBtn">Finish level (+100)</button>
+                <button class="secondary" onclick="logout()">Sign out</button>
+                <div id="actionMsg" class="msg"></div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Top 10</h2>
+            <div id="board">Loading...</div>
+        </div>
+    </div>
+
+    <div class="ws-badge" id="wsBadge">connecting</div>
+
+    <script>
+        const API = 'http://localhost:3000';
+        let token = null;
+        let currentUser = null;
+        let socket = null;
+
+        function initSocket() {
+            socket = io(API);
+
+            socket.on('connect', () => setWs(true));
+            socket.on('disconnect', () => setWs(false));
+
+            socket.on('board:snapshot', (data) => renderBoard(data.leaderboard));
+            socket.on('board:changed', (data) => {
+                renderBoard(data.leaderboard);
+                toast('Leaderboard refreshed');
+            });
+            socket.on('player:scored', (data) => {
+                if (currentUser && data.userId === currentUser.id) {
+                    toast(`+${data.increment} pts`);
+                }
+            });
+        }
+
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (!username) return alert('Pick a player');
+
+            const res = await fetch(`${API}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const body = await res.json();
+
+            if (!body.success) return alert(body.error);
+
+            token = body.data.token;
+            currentUser = body.data.user;
+            document.getElementById('loginPanel').style.display = 'none';
+            document.getElementById('actionPanel').style.display = 'block';
+            await refreshScore();
+            toast('Signed in');
+        }
+
+        function logout() {
+            token = null;
+            currentUser = null;
+            document.getElementById('loginPanel').style.display = 'block';
+            document.getElementById('actionPanel').style.display = 'none';
+        }
+
+        async function runAction() {
+            const btn = document.getElementById('actionBtn');
+            btn.disabled = true;
+            setMsg('Working...');
+
+            try {
+                const req = await fetch(`${API}/api/actions/request`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ actionType: 'COMPLETE_LEVEL' })
+                });
+                const reqBody = await req.json();
+                if (!reqBody.success) throw new Error(reqBody.error);
+
+                await new Promise((r) => setTimeout(r, 2000));
+
+                const done = await fetch(`${API}/api/actions/complete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        actionToken: reqBody.data.actionToken,
+                        actionId: reqBody.data.actionId,
+                        proof: { completionTime: 2000 }
+                    })
+                });
+                const doneBody = await done.json();
+
+                if (doneBody.success) {
+                    setMsg(`+${doneBody.data.scoreIncrement} pts`, 'ok');
+                    await refreshScore();
+                } else {
+                    setMsg(doneBody.error, 'err');
+                }
+            } catch (e) {
+                setMsg(e.message, 'err');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function refreshScore() {
+            const res = await fetch(`${API}/api/users/me/score`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            const body = await res.json();
+            if (body.success) {
+                document.getElementById('myScore').textContent = body.data.score;
+                document.getElementById('myRank').textContent = body.data.rank;
+            }
+        }
+
+        function renderBoard(rows) {
+            document.getElementById('board').innerHTML = rows.map((r) => `
+                <div class="row">
+                    <span class="rank">${r.rank}</span>
+                    <span class="name">${r.username}</span>
+                    <span class="pts">${r.score}</span>
+                </div>
+            `).join('');
+        }
+
+        function setWs(on) {
+            const el = document.getElementById('wsBadge');
+            el.textContent = on ? 'live' : 'offline';
+            el.className = 'ws-badge ' + (on ? 'on' : 'off');
+        }
+
+        function setMsg(text, kind) {
+            const el = document.getElementById('actionMsg');
+            el.textContent = text;
+            el.className = 'msg' + (kind ? ' ' + kind : '');
+        }
+
+        function toast(text) {
+            const el = document.createElement('div');
+            el.className = 'toast';
+            el.textContent = text;
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 2500);
+        }
+
+        initSocket();
+        fetch(`${API}/api/leaderboard`)
+            .then((r) => r.json())
+            .then((d) => renderBoard(d.data.leaderboard));
+    </script>
+</body>
+</html>
