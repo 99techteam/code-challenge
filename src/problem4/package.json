@@ -1,0 +1,17 @@
+{
+  "name": "problem4-three-functions-audit",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node dist/index.test.js",
+    "start": "npm run build && node dist/run.js",
+    "audit:sample": "npm run build && node dist/audit-sample.js",
+    "audit:verify": "npm run build && node dist/verify-audit.js",
+    "stress": "npm run build && node dist/deep-stress.js",
+    "stress:quick": "npm run build && node dist/stress-test.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
