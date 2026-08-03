@@ -1,0 +1,60 @@
+@baseUrl = http://localhost:3000
+@taskId = replace-with-created-task-id
+
+### Health
+GET {{baseUrl}}/health
+
+### Create task
+POST {{baseUrl}}/api/v1/tasks
+Content-Type: application/json
+X-Request-Id: manual-create-001
+
+{
+  "title": "Build Problem 5",
+  "description": "ExpressJS CRUD API",
+  "status": "TODO",
+  "priority": "HIGH"
+}
+
+### List tasks
+GET {{baseUrl}}/api/v1/tasks?status=TODO&limit=20&offset=0
+
+### Task details
+GET {{baseUrl}}/api/v1/tasks/{{taskId}}
+
+### Update task
+PATCH {{baseUrl}}/api/v1/tasks/{{taskId}}
+Content-Type: application/json
+X-Request-Id: manual-update-001
+
+{
+  "status": "DONE"
+}
+
+### Delete task
+DELETE {{baseUrl}}/api/v1/tasks/{{taskId}}
+X-Request-Id: manual-delete-001
+
+### Audit logs
+GET {{baseUrl}}/api/v1/audit-logs?taskId={{taskId}}&limit=20&offset=0
+
+### Audit log details
+GET {{baseUrl}}/api/v1/audit-logs/1
+
+### Trouble logs
+GET {{baseUrl}}/api/v1/trouble-logs?limit=20&offset=0
+
+### Filter trouble logs
+GET {{baseUrl}}/api/v1/trouble-logs?errorCode=VALIDATION_ERROR&statusCode=400
+
+### Trouble log details
+GET {{baseUrl}}/api/v1/trouble-logs/1
+
+### Generate validation trouble log
+POST {{baseUrl}}/api/v1/tasks
+Content-Type: application/json
+X-Request-Id: manual-invalid-001
+
+{
+  "title": ""
+}
