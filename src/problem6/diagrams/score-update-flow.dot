@@ -1,0 +1,60 @@
+digraph ScoreboardFlow {
+  graph [
+    rankdir=LR,
+    bgcolor="white",
+    pad="0.3",
+    nodesep="0.45",
+    ranksep="0.7",
+    fontname="Arial",
+    fontsize=18,
+    label="Secure Real-Time Scoreboard — Execution Flow",
+    labelloc="t"
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fillcolor="#F7F9FC",
+    color="#40566F",
+    fontname="Arial",
+    fontsize=11,
+    margin="0.16,0.10"
+  ];
+
+  edge [
+    color="#40566F",
+    fontname="Arial",
+    fontsize=9,
+    arrowsize=0.75
+  ];
+
+  browser [label="Browser\nAuthenticated user"];
+  action [label="Trusted Action Service\nIssues signed receipt"];
+  api [label="API Controller\nPOST /score-events"];
+  auth [label="Auth + Receipt Validator\nSignature • exp • aud • sub • jti"];
+  command [label="Score Command Service\nServer-owned action → delta"];
+  tx [label="PostgreSQL Transaction\n1. score_event\n2. user_score\n3. outbox\n4. audit"];
+  response [label="Return updated score\nIdempotent response"];
+  outbox [label="Outbox Worker\nRetry until published"];
+  projection [label="Leaderboard Projection\nPostgreSQL or Redis"];
+  sse [label="SSE Hub\nleaderboard.updated"];
+  top10 [label="Browser Scoreboard\nLive top 10"];
+  trouble [label="Trouble Log\nRejected or failed request", fillcolor="#FFF4F2", color="#9B3D32"];
+
+  browser -> action [label="1. Complete action"];
+  action -> browser [label="2. Signed receipt"];
+  browser -> api [label="3. Bearer token + receipt\n+ Idempotency-Key"];
+  api -> auth [label="4. Validate"];
+  auth -> command [label="5. Authorised claims"];
+  command -> tx [label="6. Apply once"];
+  tx -> response [label="7. Commit"];
+  response -> browser [label="8. New score"];
+  tx -> outbox [label="9. Unpublished event"];
+  outbox -> projection [label="10. Update top scores"];
+  projection -> sse [label="11. Publish snapshot"];
+  sse -> top10 [label="12. Live update"];
+  browser -> top10 [style=invis];
+
+  auth -> trouble [label="Invalid / replay / expired", color="#9B3D32", fontcolor="#9B3D32"];
+  tx -> trouble [label="Failure", color="#9B3D32", fontcolor="#9B3D32"];
+}

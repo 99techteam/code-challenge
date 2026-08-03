@@ -1,0 +1,26 @@
+sequenceDiagram
+    autonumber
+    participant UI as Browser
+    participant AS as Trusted Action Service
+    participant API as API Service
+    participant DB as PostgreSQL
+    participant OW as Outbox Worker
+    participant LB as Leaderboard Projection
+    participant RT as SSE Hub
+
+    UI->>AS: Complete action
+    AS-->>UI: Signed completion receipt
+    UI->>API: POST /api/v1/score-events
+    API->>API: Authenticate user
+    API->>API: Verify signature, expiry, audience, user and nonce
+    API->>API: Resolve score delta from server rules
+    API->>DB: BEGIN transaction
+    API->>DB: Insert score event with unique receipt jti
+    API->>DB: Update current user score
+    API->>DB: Insert outbox event and audit log
+    API->>DB: COMMIT
+    API-->>UI: Return updated score
+    OW->>DB: Read unpublished outbox event
+    OW->>LB: Update leaderboard projection
+    OW->>RT: Publish leaderboard.updated
+    RT-->>UI: SSE top-10 snapshot

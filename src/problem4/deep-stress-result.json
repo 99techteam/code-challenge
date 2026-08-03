@@ -1,0 +1,85 @@
+{
+  "status": "STRESS_TEST_PASS",
+  "assertions": 1197832,
+  "maximumSafeN": 134217727,
+  "elapsedMs": 1307,
+  "suites": [
+    {
+      "name": "Fixed examples and signed edges",
+      "assertions": 36,
+      "elapsedMs": 1
+    },
+    {
+      "name": "Exhaustive all-functions range",
+      "assertions": 96004,
+      "elapsedMs": 96
+    },
+    {
+      "name": "Random moderate range for all functions",
+      "assertions": 32000,
+      "elapsedMs": 22
+    },
+    {
+      "name": "Full safe-domain random test for A and C",
+      "assertions": 600000,
+      "elapsedMs": 165
+    },
+    {
+      "name": "Safe-result boundary sweep",
+      "assertions": 49154,
+      "elapsedMs": 129
+    },
+    {
+      "name": "Result-overflow rejection",
+      "assertions": 3,
+      "elapsedMs": 111
+    },
+    {
+      "name": "Power-of-two neighborhoods",
+      "assertions": 672,
+      "elapsedMs": 2
+    },
+    {
+      "name": "Metamorphic identities for all functions",
+      "assertions": 18000,
+      "elapsedMs": 23
+    },
+    {
+      "name": "Full-domain metamorphic identities for A and C",
+      "assertions": 400000,
+      "elapsedMs": 144
+    },
+    {
+      "name": "Invalid runtime inputs",
+      "assertions": 18,
+      "elapsedMs": 1
+    },
+    {
+      "name": "Sequential success and failure audit chain",
+      "assertions": 733,
+      "elapsedMs": 112
+    },
+    {
+      "name": "Concurrent multi-process audit chain",
+      "assertions": 1203,
+      "elapsedMs": 497
+    },
+    {
+      "name": "Audit tamper and corruption detection",
+      "assertions": 9,
+      "elapsedMs": 4
+    }
+  ],
+  "coverage": {
+    "exhaustiveAllFunctions": "-12,000..12,000",
+    "randomAllFunctions": 8000,
+    "randomFullSafeDomainAandC": 200000,
+    "boundaryWindowEachSide": 8192,
+    "exactMaximumForB": true,
+    "overflowRejectionAllFunctions": true,
+    "sequentialAuditRecords": 315,
+    "concurrentAuditRecords": 600,
+    "tamperScenarios": 7,
+    "algorithmFieldInAudit": false
+  }
+}

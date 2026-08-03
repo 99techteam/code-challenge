@@ -1,0 +1,29 @@
+{
+  "name": "problem5-crude-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ExpressJS TypeScript CRUD server with SQLite, audit logs, and trouble logs",
+  "main": "dist/src/server.js",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/src/server.js",
+    "db:migrate": "npm run build && node dist/src/scripts/migrate.js",
+    "db:seed": "npm run build && node dist/src/scripts/seed.js",
+    "test": "npm run build && node --test dist/test/core.test.js dist/test/api.test.js",
+    "stress": "npm run build && node dist/test/stress.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.15.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

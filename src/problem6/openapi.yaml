@@ -1,0 +1,204 @@
+openapi: 3.1.0
+info:
+  title: Secure Real-Time Scoreboard API
+  version: 1.0.0
+  description: API contract proposed by the Problem 6 architecture specification.
+servers:
+  - url: /api/v1
+paths:
+  /score-events:
+    post:
+      summary: Apply one authorised action completion
+      operationId: createScoreEvent
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - actionReceipt
+              properties:
+                actionReceipt:
+                  type: string
+                  minLength: 1
+      responses:
+        "200":
+          description: Score applied or an idempotent prior response returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScoreEventResponse"
+        "400":
+          $ref: "#/components/responses/Error"
+        "401":
+          $ref: "#/components/responses/Error"
+        "403":
+          $ref: "#/components/responses/Error"
+        "409":
+          $ref: "#/components/responses/Error"
+        "429":
+          $ref: "#/components/responses/Error"
+        "500":
+          $ref: "#/components/responses/Error"
+        "503":
+          $ref: "#/components/responses/Error"
+
+  /leaderboard:
+    get:
+      summary: Return the current top 10
+      operationId: getLeaderboard
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+            default: 10
+      responses:
+        "200":
+          description: Current leaderboard snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeaderboardResponse"
+
+  /leaderboard/stream:
+    get:
+      summary: Subscribe to live leaderboard snapshots over SSE
+      operationId: streamLeaderboard
+      parameters:
+        - in: header
+          name: Last-Event-ID
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Server-Sent Events stream
+          content:
+            text/event-stream:
+              schema:
+                type: string
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    ScoreEventResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - eventId
+            - userId
+            - appliedDelta
+            - score
+            - leaderboardVersion
+            - applied
+          properties:
+            eventId:
+              type: string
+              format: uuid
+            userId:
+              type: string
+              format: uuid
+            appliedDelta:
+              type: integer
+              format: int64
+            score:
+              type: integer
+              format: int64
+            leaderboardVersion:
+              type: integer
+              format: int64
+            applied:
+              type: boolean
+
+    LeaderboardEntry:
+      type: object
+      required:
+        - rank
+        - userId
+        - displayName
+        - score
+      properties:
+        rank:
+          type: integer
+          minimum: 1
+        userId:
+          type: string
+        displayName:
+          type: string
+        score:
+          type: integer
+          format: int64
+
+    LeaderboardResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - version
+            - generatedAt
+            - entries
+          properties:
+            version:
+              type: integer
+              format: int64
+            generatedAt:
+              type: string
+              format: date-time
+            entries:
+              type: array
+              maxItems: 10
+              items:
+                $ref: "#/components/schemas/LeaderboardEntry"
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - code
+            - message
+            - requestId
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            requestId:
+              type: string
+
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
