@@ -1,27 +1,548 @@
-<html>
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="A polished, accessible currency swap experience for the 99Tech frontend challenge."
+    />
+    <meta name="theme-color" content="#080a12" />
+    <title>Orbit Swap — Currency Exchange</title>
+  </head>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
 
-  <!-- You may add more stuff here -->
-  <link href="style.css" rel="stylesheet" />
-</head>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Orbit Swap home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" role="img">
+            <path d="M16 3.5a12.5 12.5 0 1 0 0 25 12.5 12.5 0 0 0 0-25Z" />
+            <path d="M8.7 20.9c4.2 2.8 10.7 1.4 14.5-3.2 3.8-4.6 3.4-10.5-.8-13.3" />
+            <circle cx="23.2" cy="8.3" r="2.3" />
+          </svg>
+        </span>
+        <span>
+          <strong>Orbit</strong>
+          <small>SWAP</small>
+        </span>
+      </a>
 
-<body>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a class="active" href="#swap">Swap</a>
+        <a href="#markets">Markets</a>
+        <a href="#activity">Activity</a>
+      </nav>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+      <div class="header-actions">
+        <span class="network-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          Prices live
+        </span>
+        <button
+          class="icon-button"
+          id="theme-toggle"
+          type="button"
+          aria-label="Switch theme"
+          title="Switch theme"
+        >
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+    <main class="app-shell" id="swap">
+      <section class="hero-panel" aria-labelledby="hero-title">
+        <div class="eyebrow">
+          <span class="eyebrow-line"></span>
+          Smarter asset routing
+        </div>
+        <h1 id="hero-title">
+          Move value at the
+          <span>speed of intent.</span>
+        </h1>
+        <p class="hero-copy">
+          Set your intent, compare competing execution routes, and stress-test
+          the quote before committing to a simulated swap.
+        </p>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
-</body>
+        <div class="trust-row" aria-label="Service highlights">
+          <div>
+            <strong>$24.8M</strong>
+            <span>Mock volume routed</span>
+          </div>
+          <div>
+            <strong>0.10%</strong>
+            <span>Transparent service fee</span>
+          </div>
+          <div>
+            <strong>&lt; 2 sec</strong>
+            <span>Simulated settlement</span>
+          </div>
+        </div>
 
+        <div class="route-visual" aria-label="Example route">
+          <div class="route-header">
+            <span>Optimized route</span>
+            <span class="route-badge">AUTO</span>
+          </div>
+          <div class="route-track">
+            <div class="route-node">
+              <span class="mini-token eth-token">E</span>
+              <span>Source</span>
+            </div>
+            <div class="route-line">
+              <span></span>
+              <i></i>
+              <span></span>
+            </div>
+            <div class="route-node">
+              <span class="mini-token pool-token">◎</span>
+              <span>Best pool</span>
+            </div>
+            <div class="route-line">
+              <span></span>
+              <i></i>
+              <span></span>
+            </div>
+            <div class="route-node">
+              <span class="mini-token usdc-token">$</span>
+              <span>Destination</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="security-note">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3 5 6v5c0 4.7 2.9 8.5 7 10 4.1-1.5 7-5.3 7-10V6l-7-3Z"></path>
+            <path d="m9.4 12.1 1.7 1.7 3.6-3.8"></path>
+          </svg>
+          <p>
+            <strong>Demo-safe by design.</strong>
+            No wallet connection or real transaction is required.
+          </p>
+        </div>
+      </section>
+
+      <section class="swap-column" aria-labelledby="swap-title">
+        <div class="swap-card">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">Instant exchange</p>
+              <h2 id="swap-title">Swap assets</h2>
+            </div>
+            <div class="card-tools">
+              <button
+                class="icon-button"
+                id="refresh-prices"
+                type="button"
+                aria-label="Refresh token prices"
+                title="Refresh prices"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 11a8.1 8.1 0 0 0-14.9-4M4 5v5h5"></path>
+                  <path d="M4 13a8.1 8.1 0 0 0 14.9 4M20 19v-5h-5"></path>
+                </svg>
+              </button>
+              <details class="settings-menu">
+                <summary
+                  class="icon-button"
+                  aria-label="Open swap settings"
+                  title="Swap settings"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3A1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"></path>
+                  </svg>
+                </summary>
+                <div class="settings-popover">
+                  <div class="settings-title">
+                    <strong>Swap settings</strong>
+                    <span>Slippage tolerance</span>
+                  </div>
+                  <div class="slippage-options" role="radiogroup" aria-label="Slippage tolerance">
+                    <label>
+                      <input type="radio" name="slippage" value="0.1" />
+                      <span>0.1%</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="slippage" value="0.5" checked />
+                      <span>0.5%</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="slippage" value="1" />
+                      <span>1.0%</span>
+                    </label>
+                  </div>
+                  <p>Swap reverts if the rate moves beyond this threshold.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <div class="price-state" id="price-state" role="status" aria-live="polite">
+            <span class="price-state-dot"></span>
+            <span id="price-state-text">Loading market prices…</span>
+            <time id="price-updated-at"></time>
+          </div>
+
+          <form id="swap-form" novalidate>
+
+            <section class="intent-lab" aria-labelledby="intent-title">
+              <div class="intent-lab-heading">
+                <div>
+                  <span class="micro-label">Intent engine</span>
+                  <strong id="intent-title">What matters most?</strong>
+                </div>
+                <span class="intent-ai-badge">ADAPTIVE</span>
+              </div>
+
+              <div class="intent-options" role="radiogroup" aria-label="Swap intent">
+                <button class="intent-option" type="button" data-intent="maximize" role="radio" aria-checked="false">
+                  <span class="intent-icon">↗</span>
+                  <span><strong>Max return</strong><small>Best expected output</small></span>
+                </button>
+                <button class="intent-option active" type="button" data-intent="balanced" role="radio" aria-checked="true">
+                  <span class="intent-icon">◇</span>
+                  <span><strong>Balanced</strong><small>Return + reliability</small></span>
+                </button>
+                <button class="intent-option" type="button" data-intent="protect" role="radio" aria-checked="false">
+                  <span class="intent-icon">⌁</span>
+                  <span><strong>Protect</strong><small>Lowest route variance</small></span>
+                </button>
+              </div>
+
+              <p class="intent-description" id="intent-description">
+                Balances expected output, execution confidence, and settlement speed.
+              </p>
+            </section>
+
+            <div class="asset-field" id="from-field">
+              <div class="asset-field-header">
+                <label for="from-amount">You pay</label>
+                <span>
+                  Balance:
+                  <strong id="from-balance">—</strong>
+                </span>
+              </div>
+
+              <div class="asset-input-row">
+                <div class="amount-control">
+                  <input
+                    id="from-amount"
+                    name="fromAmount"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    placeholder="0.00"
+                    aria-describedby="amount-error from-usd-value"
+                  />
+                  <span id="from-usd-value">≈ $0.00</span>
+                </div>
+
+                <button
+                  class="token-trigger"
+                  id="from-token-trigger"
+                  type="button"
+                  aria-haspopup="dialog"
+                >
+                  <span class="token-avatar" id="from-token-avatar"></span>
+                  <span class="token-trigger-copy">
+                    <strong id="from-token-symbol">—</strong>
+                    <small id="from-token-name">Select token</small>
+                  </span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m8 10 4 4 4-4"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="asset-field-footer">
+                <button id="max-button" type="button">Use max</button>
+                <p id="amount-error" class="field-error" role="alert"></p>
+              </div>
+            </div>
+
+            <div class="swap-direction-wrap">
+              <span></span>
+              <button
+                id="reverse-button"
+                class="reverse-button"
+                type="button"
+                aria-label="Reverse swap direction"
+                title="Reverse swap direction"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m8 7 4-4 4 4M12 3v8"></path>
+                  <path d="m16 17-4 4-4-4M12 21v-8"></path>
+                </svg>
+              </button>
+              <span></span>
+            </div>
+
+            <div class="asset-field" id="to-field">
+              <div class="asset-field-header">
+                <label for="to-amount">You receive</label>
+                <span>Estimated</span>
+              </div>
+
+              <div class="asset-input-row">
+                <div class="amount-control">
+                  <input
+                    id="to-amount"
+                    type="text"
+                    placeholder="0.00"
+                    readonly
+                    tabindex="-1"
+                    aria-label="Estimated amount to receive"
+                  />
+                  <span id="to-usd-value">≈ $0.00</span>
+                </div>
+
+                <button
+                  class="token-trigger"
+                  id="to-token-trigger"
+                  type="button"
+                  aria-haspopup="dialog"
+                >
+                  <span class="token-avatar" id="to-token-avatar"></span>
+                  <span class="token-trigger-copy">
+                    <strong id="to-token-symbol">—</strong>
+                    <small id="to-token-name">Select token</small>
+                  </span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m8 10 4 4 4-4"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="quote-panel" id="quote-panel">
+              <button
+                class="rate-line"
+                id="rate-toggle"
+                type="button"
+                aria-label="Invert displayed exchange rate"
+              >
+                <span>Rate</span>
+                <strong id="exchange-rate">—</strong>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 7h11l-3-3M17 17H6l3 3"></path>
+                </svg>
+              </button>
+
+              <div class="quote-row">
+                <span>Route</span>
+                <strong id="route-value">Intent engine</strong>
+              </div>
+              <div class="quote-row">
+                <span>Service fee</span>
+                <strong id="fee-value">—</strong>
+              </div>
+              <div class="quote-row">
+                <span>Minimum received</span>
+                <strong id="minimum-value">—</strong>
+              </div>
+              <div class="quote-row">
+                <span>Price impact</span>
+                <strong class="positive" id="impact-value">—</strong>
+              </div>
+            </div>
+
+
+            <section class="intelligence-panel" id="intelligence-panel" aria-labelledby="intelligence-title">
+              <div class="intelligence-heading">
+                <div>
+                  <span class="micro-label">Quote intelligence</span>
+                  <strong id="intelligence-title">Three routes, one recommendation</strong>
+                </div>
+                <div class="quote-clock" title="Quote freshness">
+                  <span class="clock-pulse"></span>
+                  <span id="quote-countdown">15s</span>
+                </div>
+              </div>
+
+              <div class="confidence-summary">
+                <div class="confidence-ring" id="confidence-ring" style="--confidence: 94">
+                  <span><strong id="confidence-value">94%</strong><small>confidence</small></span>
+                </div>
+                <div class="confidence-copy">
+                  <strong id="route-reason-title">Balanced route selected</strong>
+                  <p id="route-reason">
+                    Optimized across expected output, route variance, and simulated settlement time.
+                  </p>
+                </div>
+              </div>
+
+              <div class="route-comparison" id="route-comparison" role="radiogroup" aria-label="Execution routes"></div>
+
+              <div class="allocation-block">
+                <div class="allocation-heading">
+                  <span>Order allocation</span>
+                  <strong id="allocation-label">—</strong>
+                </div>
+                <div class="allocation-track" id="allocation-track"></div>
+                <div class="allocation-legend" id="allocation-legend"></div>
+              </div>
+
+              <div class="scenario-lab">
+                <div class="scenario-heading">
+                  <div>
+                    <span class="micro-label">What-if simulator</span>
+                    <strong>Destination price movement</strong>
+                  </div>
+                  <output id="scenario-move">0.0%</output>
+                </div>
+                <input
+                  id="scenario-slider"
+                  type="range"
+                  min="-3"
+                  max="3"
+                  step="0.1"
+                  value="0"
+                  aria-label="Simulated destination-token price movement"
+                />
+                <div class="scenario-scale">
+                  <span>-3% cheaper</span>
+                  <span>Market now</span>
+                  <span>+3% costlier</span>
+                </div>
+                <div class="scenario-result">
+                  <span>Projected receive</span>
+                  <strong id="scenario-output">—</strong>
+                  <small id="scenario-delta">No simulated movement</small>
+                </div>
+              </div>
+            </section>
+
+            <button class="submit-button" id="submit-button" type="submit" disabled>
+              <span class="submit-label">Enter an amount</span>
+              <span class="spinner" aria-hidden="true"></span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M14 7l5 5-5 5"></path>
+              </svg>
+            </button>
+
+            <p class="form-disclaimer">
+              Simulated swap for assessment purposes. No real funds move.
+            </p>
+          </form>
+        </div>
+
+        <div class="market-strip" id="markets">
+          <div>
+            <span>Data source</span>
+            <strong id="data-source-label">Switcheo prices</strong>
+          </div>
+          <div>
+            <span>Available assets</span>
+            <strong id="asset-count">—</strong>
+          </div>
+          <div>
+            <span>Quote mode</span>
+            <strong id="quote-mode-label">Balanced</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Problem 2 · Fancy Form</span>
+      <span>Intent routing · Scenario simulation · Vite + TypeScript</span>
+    </footer>
+
+    <dialog class="token-dialog" id="token-dialog" aria-labelledby="token-dialog-title">
+      <div class="dialog-shell">
+        <div class="dialog-header">
+          <div>
+            <p class="section-kicker">Asset directory</p>
+            <h2 id="token-dialog-title">Select a token</h2>
+          </div>
+          <button
+            class="icon-button"
+            id="close-token-dialog"
+            type="button"
+            aria-label="Close token selector"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18"></path>
+            </svg>
+          </button>
+        </div>
+
+        <label class="search-control" for="token-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m20 20-4-4"></path>
+          </svg>
+          <input
+            id="token-search"
+            type="search"
+            autocomplete="off"
+            placeholder="Search symbol or token name"
+          />
+          <kbd>/</kbd>
+        </label>
+
+        <div class="popular-row" id="popular-tokens" aria-label="Popular tokens"></div>
+
+        <div class="token-list-heading">
+          <span>Asset</span>
+          <span>Price</span>
+        </div>
+        <div class="token-list" id="token-list"></div>
+        <p class="empty-token-state" id="empty-token-state" hidden>
+          No priced token matches your search.
+        </p>
+      </div>
+    </dialog>
+
+    <dialog class="success-dialog" id="success-dialog" aria-labelledby="success-title">
+      <div class="success-shell">
+        <div class="success-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="m6.5 12.4 3.4 3.4 7.6-8"></path>
+          </svg>
+        </div>
+        <p class="section-kicker">Simulation complete</p>
+        <h2 id="success-title">Swap confirmed</h2>
+        <p id="success-summary">Your simulated exchange was completed.</p>
+
+        <div class="receipt">
+          <div>
+            <span>You paid</span>
+            <strong id="receipt-paid">—</strong>
+          </div>
+          <div>
+            <span>You received</span>
+            <strong id="receipt-received">—</strong>
+          </div>
+          <div>
+            <span>Reference</span>
+            <strong id="receipt-reference">—</strong>
+          </div>
+        </div>
+
+        <button id="close-success-dialog" class="submit-button" type="button">
+          Done
+        </button>
+      </div>
+    </dialog>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
