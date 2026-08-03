@@ -1,18 +1,19 @@
 "use strict";
 
 /**
- * Separate mathematical audit runner.
+ * Separate audit layer for Problem 1.
+ *
+ * index.js contains only pure implementations. This file wraps those
+ * implementations, records what was called, builds an independent proof for
+ * each result, and writes tamper-evident logs.
  *
  * CLI:
  *   node audit.js 5 all
  *   node audit.js -4 a
  *
- * Environment:
- *   PROBLEM1_LOG_DIR=<directory>
- *
  * Output:
  *   *.log           Human-readable proof
- *   *.jsonl         Hash-chained raw evidence
+ *   *.jsonl         SHA-256 hash-chained evidence
  *   *.manifest.json Integrity manifest
  */
 
@@ -20,23 +21,468 @@ const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const defaultImplementations = require("./index");
+const {
+  MAX_SAFE_SUM_N,
+  sum_to_n_a,
+  sum_to_n_b,
+  sum_to_n_c,
+} = require("./index");
+
+function validateAuditInput(n) {
+  if (!Number.isSafeInteger(n)) {
+    throw new TypeError("n must be a safe integer");
+  }
+
+  if (Math.abs(n) > MAX_SAFE_SUM_N) {
+    throw new RangeError(
+      `|n| must be <= ${MAX_SAFE_SUM_N} so the result remains a safe integer`,
+    );
+  }
+}
+
+function signedResult(n, positiveValue) {
+  return n < 0 ? -positiveValue : positiveValue;
+}
+
+function identityMatrix3() {
+  return [
+    [1, 0, 0],
+    [0, 1, 0],
+    [0, 0, 1],
+  ];
+}
+
+function multiply3x3WithProof(left, right, emit, context) {
+  const result = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ];
+
+  emit({
+    algorithm: "B_LINEAR_ALGEBRA",
+    action: "MATRIX_MULTIPLICATION_STARTED",
+    data: {
+      ...context,
+      left,
+      right,
+    },
+  });
+
+  for (let row = 0; row < 3; row += 1) {
+    for (let column = 0; column < 3; column += 1) {
+      const terms = [];
+
+      for (let index = 0; index < 3; index += 1) {
+        const product = left[row][index] * right[index][column];
+        result[row][column] += product;
+        terms.push({
+          leftValue: left[row][index],
+          rightValue: right[index][column],
+          product,
+        });
+      }
+
+      emit({
+        algorithm: "B_LINEAR_ALGEBRA",
+        action: "MATRIX_CELL_CALCULATED",
+        data: {
+          ...context,
+          row,
+          column,
+          terms,
+          cellValue: result[row][column],
+        },
+      });
+    }
+  }
+
+  emit({
+    algorithm: "B_LINEAR_ALGEBRA",
+    action: "MATRIX_MULTIPLICATION_COMPLETED",
+    data: {
+      ...context,
+      result,
+    },
+  });
+
+  return result;
+}
+
+/**
+ * Independent proof for solution A.
+ *
+ * This calculation lives in audit.js, not index.js. The production function is
+ * called separately and its returned value is compared with this proof result.
+ */
+function proveCombinatorics(n, emit) {
+  const algorithm = "A_COMBINATORICS";
+  const magnitude = Math.abs(n);
+  let firstFactor = magnitude;
+  let secondFactor = magnitude + 1;
+
+  emit({ algorithm, action: "INPUT_RECEIVED", data: { n } });
+  emit({
+    algorithm,
+    action: "INPUT_VALIDATED",
+    data: {
+      n,
+      isSafeInteger: true,
+      isWithinSafeResultRange: true,
+    },
+  });
+  emit({
+    algorithm,
+    action: "MAGNITUDE_CALCULATED",
+    data: { expression: "|n|", magnitude },
+  });
+  emit({
+    algorithm,
+    action: "COMBINATION_IDENTITY_APPLIED",
+    data: {
+      identity: "S(n) = n(n + 1) / 2",
+      firstFactor,
+      secondFactor,
+      divisor: 2,
+    },
+  });
+
+  if (firstFactor % 2 === 0) {
+    const before = firstFactor;
+    firstFactor /= 2;
+    emit({
+      algorithm,
+      action: "EVEN_FACTOR_DIVIDED",
+      data: {
+        factor: "firstFactor",
+        before,
+        divisor: 2,
+        after: firstFactor,
+      },
+    });
+  } else {
+    const before = secondFactor;
+    secondFactor /= 2;
+    emit({
+      algorithm,
+      action: "EVEN_FACTOR_DIVIDED",
+      data: {
+        factor: "secondFactor",
+        before,
+        divisor: 2,
+        after: secondFactor,
+      },
+    });
+  }
+
+  const positiveValue = firstFactor * secondFactor;
+  const result = signedResult(n, positiveValue);
+
+  emit({
+    algorithm,
+    action: "FACTORS_MULTIPLIED",
+    data: { firstFactor, secondFactor, positiveValue },
+  });
+  emit({
+    algorithm,
+    action: "SIGN_RESTORED",
+    data: { originalInput: n, positiveValue, result },
+  });
+  emit({
+    algorithm,
+    action: "PROOF_COMPLETED",
+    data: {
+      result,
+      complexity: { time: "O(1)", space: "O(1)" },
+    },
+  });
+
+  return result;
+}
+
+/**
+ * Independent proof for solution B using the same mathematical state model,
+ * but implemented entirely in the audit layer so index.js remains uninstrumented.
+ */
+function proveLinearAlgebra(n, emit) {
+  const algorithm = "B_LINEAR_ALGEBRA";
+  const magnitude = Math.abs(n);
+  const transitionMatrix = [
+    [1, 1, 1],
+    [0, 1, 1],
+    [0, 0, 1],
+  ];
+
+  emit({ algorithm, action: "INPUT_RECEIVED", data: { n } });
+  emit({
+    algorithm,
+    action: "INPUT_VALIDATED",
+    data: {
+      n,
+      isSafeInteger: true,
+      isWithinSafeResultRange: true,
+    },
+  });
+  emit({
+    algorithm,
+    action: "MAGNITUDE_CALCULATED",
+    data: { expression: "|n|", magnitude },
+  });
+  emit({
+    algorithm,
+    action: "STATE_MODEL_DEFINED",
+    data: {
+      stateVector: ["sum_k", "k", "1"],
+      initialVector: [0, 0, 1],
+      transitionMatrix,
+    },
+  });
+
+  let exponent = magnitude;
+  let resultMatrix = identityMatrix3();
+  let baseMatrix = transitionMatrix;
+  let round = 0;
+
+  emit({
+    algorithm,
+    action: "MATRIX_POWER_INITIALIZED",
+    data: {
+      targetPower: magnitude,
+      exponent,
+      resultMatrix,
+      baseMatrix,
+    },
+  });
+
+  while (exponent > 0) {
+    round += 1;
+
+    emit({
+      algorithm,
+      action: "POWER_ROUND_STARTED",
+      data: {
+        round,
+        exponent,
+        isOdd: exponent % 2 === 1,
+      },
+    });
+
+    if (exponent % 2 === 1) {
+      resultMatrix = multiply3x3WithProof(
+        resultMatrix,
+        baseMatrix,
+        emit,
+        { round, purpose: "ACCUMULATE_RESULT" },
+      );
+
+      emit({
+        algorithm,
+        action: "RESULT_MATRIX_UPDATED",
+        data: { round, resultMatrix },
+      });
+    } else {
+      emit({
+        algorithm,
+        action: "RESULT_MULTIPLICATION_SKIPPED",
+        data: { round, reason: "Exponent is even" },
+      });
+    }
+
+    const previousExponent = exponent;
+    exponent = Math.floor(exponent / 2);
+
+    emit({
+      algorithm,
+      action: "EXPONENT_HALVED",
+      data: {
+        round,
+        before: previousExponent,
+        after: exponent,
+      },
+    });
+
+    if (exponent > 0) {
+      baseMatrix = multiply3x3WithProof(
+        baseMatrix,
+        baseMatrix,
+        emit,
+        { round, purpose: "SQUARE_BASE" },
+      );
+
+      emit({
+        algorithm,
+        action: "BASE_MATRIX_SQUARED",
+        data: { round, baseMatrix },
+      });
+    } else {
+      emit({
+        algorithm,
+        action: "FINAL_BASE_SQUARE_SKIPPED",
+        data: {
+          round,
+          reason: "No exponent bits remain",
+        },
+      });
+    }
+  }
+
+  const positiveValue = resultMatrix[0][2];
+  const result = signedResult(n, positiveValue);
+
+  emit({
+    algorithm,
+    action: "MATRIX_POWER_COMPLETED",
+    data: {
+      power: magnitude,
+      poweredMatrix: resultMatrix,
+    },
+  });
+  emit({
+    algorithm,
+    action: "INITIAL_VECTOR_APPLIED",
+    data: {
+      poweredMatrix: resultMatrix,
+      initialVector: [0, 0, 1],
+      resultingVector: [
+        resultMatrix[0][2],
+        resultMatrix[1][2],
+        resultMatrix[2][2],
+      ],
+      positiveValue,
+    },
+  });
+  emit({
+    algorithm,
+    action: "SIGN_RESTORED",
+    data: { originalInput: n, positiveValue, result },
+  });
+  emit({
+    algorithm,
+    action: "PROOF_COMPLETED",
+    data: {
+      result,
+      complexity: { time: "O(log |n|)", space: "O(1)" },
+    },
+  });
+
+  return result;
+}
+
+/**
+ * Independent O(1) proof for solution C.
+ *
+ * index.js executes the actual pairing loop. The audit proves the same result
+ * from pairCount × pairSum (+ middle value), avoiding a second large loop just
+ * for logging.
+ */
+function proveSymmetricPairing(n, emit) {
+  const algorithm = "C_PROBABILITY_SYMMETRY";
+  const magnitude = Math.abs(n);
+  const pairCount = Math.floor(magnitude / 2);
+  const constantPairSum = magnitude + 1;
+  const pairedTotal = pairCount * constantPairSum;
+  const middleValue = magnitude % 2 === 1
+    ? (magnitude + 1) / 2
+    : 0;
+  const positiveValue = pairedTotal + middleValue;
+  const result = signedResult(n, positiveValue);
+
+  emit({ algorithm, action: "INPUT_RECEIVED", data: { n } });
+  emit({
+    algorithm,
+    action: "INPUT_VALIDATED",
+    data: {
+      n,
+      isSafeInteger: true,
+      isWithinSafeResultRange: true,
+    },
+  });
+  emit({
+    algorithm,
+    action: "MAGNITUDE_CALCULATED",
+    data: { expression: "|n|", magnitude },
+  });
+  emit({
+    algorithm,
+    action: "ANTITHETIC_MODEL_DEFINED",
+    data: {
+      sampleSpace: `{1, 2, ..., ${magnitude}}`,
+      mapping: "x ↔ n + 1 - x",
+      pairCount,
+      constantPairSum,
+    },
+  });
+  emit({
+    algorithm,
+    action: "PAIRED_TOTAL_CALCULATED",
+    data: {
+      pairCount,
+      constantPairSum,
+      expression: `${pairCount} × ${constantPairSum}`,
+      pairedTotal,
+    },
+  });
+
+  if (middleValue > 0) {
+    emit({
+      algorithm,
+      action: "MIDDLE_VALUE_ADDED",
+      data: {
+        middleValue,
+        pairedTotal,
+        positiveValue,
+      },
+    });
+  } else {
+    emit({
+      algorithm,
+      action: "MIDDLE_VALUE_NOT_REQUIRED",
+      data: { reason: "The number of values is even" },
+    });
+  }
+
+  emit({
+    algorithm,
+    action: "SIGN_RESTORED",
+    data: { originalInput: n, positiveValue, result },
+  });
+  emit({
+    algorithm,
+    action: "PROOF_COMPLETED",
+    data: {
+      result,
+      implementationComplexity: {
+        time: "O(|n|)",
+        space: "O(1)",
+      },
+      auditProofComplexity: {
+        time: "O(1)",
+        space: "O(1)",
+      },
+    },
+  });
+
+  return result;
+}
 
 const DEFAULT_ALGORITHMS = {
   a: {
     name: "A_COMBINATORICS",
-    label: "Combinatorics",
-    run: defaultImplementations.sum_to_n_a,
+    label: "Closed-form arithmetic series",
+    run: sum_to_n_a,
+    prove: proveCombinatorics,
   },
   b: {
     name: "B_LINEAR_ALGEBRA",
-    label: "Linear algebra",
-    run: defaultImplementations.sum_to_n_b,
+    label: "Fast matrix exponentiation",
+    run: sum_to_n_b,
+    prove: proveLinearAlgebra,
   },
   c: {
     name: "C_PROBABILITY_SYMMETRY",
-    label: "Probability symmetry",
-    run: defaultImplementations.sum_to_n_c,
+    label: "Symmetric pairing",
+    run: sum_to_n_c,
+    prove: proveSymmetricPairing,
   },
 };
 
@@ -49,10 +495,7 @@ function parseArguments(argv) {
   }
 
   const n = Number(rawN);
-
-  if (!Number.isSafeInteger(n)) {
-    throw new TypeError("n must be a safe integer");
-  }
+  validateAuditInput(n);
 
   if (
     selectedAlgorithm !== "all" &&
@@ -92,7 +535,6 @@ function formatMatrix(matrix) {
       const cells = row.map((value, column) =>
         String(value).padStart(widths[column]),
       );
-
       return `│ ${cells.join("  ")} │`;
     })
     .join("\n");
@@ -116,197 +558,150 @@ function writeHeading(filepath, title) {
 function describeEvent(event) {
   const { algorithm, action, data } = event;
 
-  switch (`${algorithm}:${action}`) {
-    case "AUDIT_SESSION:SESSION_STARTED":
-      return [
-        `Input n = ${data.n}`,
-        `Selected algorithms = ${data.selectedAlgorithm}`,
-      ];
+  if (algorithm === "AUDIT_SESSION") {
+    switch (action) {
+      case "SESSION_STARTED":
+        return [
+          `Input n = ${data.n}`,
+          `Selected algorithms = ${data.selectedAlgorithm}`,
+        ];
+      case "ALGORITHM_STARTED":
+        return [`Start ${data.algorithm}`];
+      case "IMPLEMENTATION_CALLED":
+        return [`Call index.js export ${data.functionName}(${data.n})`];
+      case "IMPLEMENTATION_RETURNED":
+        return [`index.js returned ${data.result}`];
+      case "IMPLEMENTATION_VERIFIED":
+        return [
+          `Implementation result = ${data.implementationResult}`,
+          `Independent proof result = ${data.proofResult}`,
+          `Match = ${data.matches}`,
+        ];
+      case "ALGORITHM_COMPLETED":
+        return [`${data.algorithm} audit completed`];
+      case "RESULTS_CROSS_CHECKED":
+        return [
+          `Results = ${JSON.stringify(data.results)}`,
+          `All implementations agree = ${data.consistent}`,
+        ];
+      case "INDEPENDENT_REFERENCE_CALCULATED":
+        return [
+          `BigInt reference = ${data.reference}`,
+          `All results match reference = ${data.matches}`,
+        ];
+      case "SESSION_PASSED":
+        return ["Audit status = PASSED"];
+      case "SESSION_FAILED":
+        return ["Audit status = FAILED"];
+      case "SESSION_ERROR":
+        return [
+          "Audit status = ERROR",
+          `${data.error.name}: ${data.error.message}`,
+        ];
+      default:
+        return [JSON.stringify(data)];
+    }
+  }
 
-    case "AUDIT_SESSION:ALGORITHM_STARTED":
-      return [`Start ${data.algorithm}`];
-
-    case "AUDIT_SESSION:ALGORITHM_COMPLETED":
-      return [`${data.algorithm} returned ${data.result}`];
-
-    case "AUDIT_SESSION:RESULTS_CROSS_CHECKED":
-      return [
-        `Results = ${JSON.stringify(data.results)}`,
-        `Implementations agree = ${data.consistent}`,
-      ];
-
-    case "AUDIT_SESSION:INDEPENDENT_REFERENCE_CALCULATED":
-      return [
-        `Independent BigInt reference = ${data.reference}`,
-        `Every result matches reference = ${data.matches}`,
-      ];
-
-    case "AUDIT_SESSION:SESSION_PASSED":
-      return ["Audit status = PASSED"];
-
-    case "AUDIT_SESSION:SESSION_FAILED":
-      return ["Audit status = FAILED"];
-
-    case "AUDIT_SESSION:SESSION_ERROR":
-      return [
-        `Audit status = ERROR`,
-        `${data.error.name}: ${data.error.message}`,
-      ];
-
-    case "A_COMBINATORICS:INPUT_RECEIVED":
-    case "B_LINEAR_ALGEBRA:INPUT_RECEIVED":
-    case "C_PROBABILITY_SYMMETRY:INPUT_RECEIVED":
+  switch (action) {
+    case "INPUT_RECEIVED":
       return [`Receive n = ${data.n}`];
-
-    case "A_COMBINATORICS:INPUT_VALIDATED":
-    case "B_LINEAR_ALGEBRA:INPUT_VALIDATED":
-    case "C_PROBABILITY_SYMMETRY:INPUT_VALIDATED":
+    case "INPUT_VALIDATED":
       return [
         `Input is a safe integer = ${data.isSafeInteger}`,
         `Result range is safe = ${data.isWithinSafeResultRange}`,
       ];
-
-    case "A_COMBINATORICS:MAGNITUDE_CALCULATED":
-    case "B_LINEAR_ALGEBRA:MAGNITUDE_CALCULATED":
-    case "C_PROBABILITY_SYMMETRY:MAGNITUDE_CALCULATED":
+    case "MAGNITUDE_CALCULATED":
       return [`|n| = ${data.magnitude}`];
-
-    case "A_COMBINATORICS:COMBINATION_IDENTITY_APPLIED":
+    case "COMBINATION_IDENTITY_APPLIED":
       return [
-        `S(n) = C(n + 1, 2) = n(n + 1)/2`,
-        `Substitute: ${data.leftFactor} × ${data.rightFactor} ÷ ${data.divisor}`,
+        data.identity,
+        `${data.firstFactor} × ${data.secondFactor} ÷ ${data.divisor}`,
       ];
-
-    case "A_COMBINATORICS:EVEN_FACTOR_DIVIDED":
+    case "EVEN_FACTOR_DIVIDED":
       return [
         `${data.factor}: ${data.before} ÷ ${data.divisor} = ${data.after}`,
       ];
-
-    case "A_COMBINATORICS:FACTORS_MULTIPLIED":
+    case "FACTORS_MULTIPLIED":
       return [
-        `${data.leftFactor} × ${data.rightFactor} = ${data.positiveSum}`,
+        `${data.firstFactor} × ${data.secondFactor} = ${data.positiveValue}`,
       ];
-
-    case "A_COMBINATORICS:SIGN_RESTORED":
-    case "B_LINEAR_ALGEBRA:SIGN_RESTORED":
-    case "C_PROBABILITY_SYMMETRY:SIGN_RESTORED":
-      return [
-        `Restore sign: ${data.positiveValue} → ${data.result}`,
-      ];
-
-    case "A_COMBINATORICS:COMPLETED":
-    case "B_LINEAR_ALGEBRA:COMPLETED":
-    case "C_PROBABILITY_SYMMETRY:COMPLETED":
-      return [
-        `Result = ${data.result}`,
-        `Complexity: ${data.complexity.time} time, ${data.complexity.space} space`,
-      ];
-
-    case "B_LINEAR_ALGEBRA:STATE_MODEL_DEFINED":
+    case "STATE_MODEL_DEFINED":
       return [
         `State vector = ${formatVector(data.stateVector)}`,
         `Initial vector = ${formatVector(data.initialVector)}`,
-        `Transition matrix:`,
+        "Transition matrix:",
         formatMatrix(data.transitionMatrix),
       ];
-
-    case "B_LINEAR_ALGEBRA:MATRIX_POWER_INITIALIZED":
+    case "MATRIX_POWER_INITIALIZED":
       return [
-        `Compute M^${data.targetPower} using exponentiation by squaring`,
-        `Identity result matrix:`,
+        `Compute M^${data.targetPower} by exponentiation by squaring`,
+        "Initial result matrix:",
         formatMatrix(data.resultMatrix),
-        `Base matrix:`,
+        "Initial base matrix:",
         formatMatrix(data.baseMatrix),
       ];
-
-    case "B_LINEAR_ALGEBRA:POWER_ROUND_STARTED":
+    case "POWER_ROUND_STARTED":
       return [
         `Round ${data.round}: exponent ${data.exponent} is ${data.isOdd ? "odd" : "even"}`,
       ];
-
-    case "B_LINEAR_ALGEBRA:ODD_EXPONENT_BRANCH":
-      return [`${data.operation}`];
-
-    case "B_LINEAR_ALGEBRA:EVEN_EXPONENT_BRANCH":
-      return ["Skip result multiplication"];
-
-    case "B_LINEAR_ALGEBRA:MATRIX_MULTIPLICATION_STARTED":
+    case "MATRIX_MULTIPLICATION_STARTED":
       return [
         `${data.purpose}, round ${data.round}`,
-        `Left:`,
+        "Left:",
         formatMatrix(data.left),
-        `Right:`,
+        "Right:",
         formatMatrix(data.right),
       ];
-
-    case "B_LINEAR_ALGEBRA:MATRIX_CELL_CALCULATED": {
+    case "MATRIX_CELL_CALCULATED": {
       const expression = data.terms
         .map((term) => `${term.leftValue}×${term.rightValue}`)
         .join(" + ");
-
       return [
         `Cell [${data.row + 1},${data.column + 1}] = ${expression} = ${data.cellValue}`,
       ];
     }
-
-    case "B_LINEAR_ALGEBRA:MATRIX_MULTIPLICATION_COMPLETED":
-      return [
-        `${data.purpose} result:`,
-        formatMatrix(data.result),
-      ];
-
-    case "B_LINEAR_ALGEBRA:RESULT_MATRIX_UPDATED":
-      return [
-        `Accumulated result:`,
-        formatMatrix(data.resultMatrix),
-      ];
-
-    case "B_LINEAR_ALGEBRA:BASE_MATRIX_SQUARED":
-      return [
-        `Squared base:`,
-        formatMatrix(data.baseMatrix),
-      ];
-
-    case "B_LINEAR_ALGEBRA:EXPONENT_HALVED":
-      return [
-        `floor(${data.before}/2) = ${data.after}`,
-      ];
-
-    case "B_LINEAR_ALGEBRA:MATRIX_POWER_COMPLETED":
-      return [
-        `M^${data.power}:`,
-        formatMatrix(data.poweredMatrix),
-      ];
-
-    case "B_LINEAR_ALGEBRA:INITIAL_VECTOR_APPLIED":
+    case "MATRIX_MULTIPLICATION_COMPLETED":
+      return [`${data.purpose} result:`, formatMatrix(data.result)];
+    case "RESULT_MATRIX_UPDATED":
+      return ["Accumulated result:", formatMatrix(data.resultMatrix)];
+    case "RESULT_MULTIPLICATION_SKIPPED":
+    case "FINAL_BASE_SQUARE_SKIPPED":
+      return [data.reason];
+    case "EXPONENT_HALVED":
+      return [`floor(${data.before}/2) = ${data.after}`];
+    case "BASE_MATRIX_SQUARED":
+      return ["Squared base:", formatMatrix(data.baseMatrix)];
+    case "MATRIX_POWER_COMPLETED":
+      return [`M^${data.power}:`, formatMatrix(data.poweredMatrix)];
+    case "INITIAL_VECTOR_APPLIED":
       return [
         `${formatVector(data.initialVector)} → ${formatVector(data.resultingVector)}`,
-        `First component is the sum = ${data.positiveSum}`,
+        `First component = ${data.positiveValue}`,
       ];
-
-    case "C_PROBABILITY_SYMMETRY:ANTITHETIC_MODEL_DEFINED":
+    case "ANTITHETIC_MODEL_DEFINED":
       return [
         `Sample space ${data.sampleSpace}`,
         `Mapping ${data.mapping}`,
         `Pair count = ${data.pairCount}`,
-        `Every pair sums to ${data.constantPairSum}`,
+        `Each pair sums to ${data.constantPairSum}`,
       ];
-
-    case "C_PROBABILITY_SYMMETRY:PAIR_ACCUMULATED":
+    case "PAIRED_TOTAL_CALCULATED":
       return [
-        `Pair ${data.pairIndex}: ${data.left} + ${data.right} = ${data.pairSum}`,
-        `${data.totalBefore} + ${data.pairSum} = ${data.totalAfter}`,
+        `${data.expression} = ${data.pairedTotal}`,
       ];
-
-    case "C_PROBABILITY_SYMMETRY:MIDDLE_VALUE_ACCUMULATED":
+    case "MIDDLE_VALUE_ADDED":
       return [
-        `Middle value ${data.middleValue}`,
-        `${data.totalBefore} + ${data.middleValue} = ${data.totalAfter}`,
+        `${data.pairedTotal} + middle ${data.middleValue} = ${data.positiveValue}`,
       ];
-
-    case "C_PROBABILITY_SYMMETRY:MIDDLE_VALUE_NOT_REQUIRED":
+    case "MIDDLE_VALUE_NOT_REQUIRED":
       return [data.reason];
-
+    case "SIGN_RESTORED":
+      return [
+        `Restore sign: ${data.positiveValue} → ${data.result}`,
+      ];
+    case "PROOF_COMPLETED":
+      return [`Proof result = ${data.result}`];
     default:
       return [JSON.stringify(data)];
   }
@@ -330,7 +725,6 @@ function createOutputFiles(outputDirectory, n) {
   fs.mkdirSync(outputDirectory, { recursive: true });
 
   const stat = fs.statSync(outputDirectory);
-
   if (!stat.isDirectory()) {
     throw new Error(`Log path is not a directory: ${outputDirectory}`);
   }
@@ -366,21 +760,16 @@ function createWriter(files, auditId, consoleOutput) {
         data: event.data ?? {},
         previousHash,
       };
-
       const eventHash = sha256(JSON.stringify(unsignedEvent));
-      const completeEvent = {
-        ...unsignedEvent,
-        eventHash,
-      };
-
+      const completeEvent = { ...unsignedEvent, eventHash };
       const rawLine = JSON.stringify(completeEvent);
+
       rawLines.push(rawLine);
       append(files.raw, rawLine);
-
       append(
         files.human,
         `[${String(globalStep).padStart(4, "0")}] ` +
-        `${completeEvent.algorithm} :: ${completeEvent.action}`,
+          `${completeEvent.algorithm} :: ${completeEvent.action}`,
       );
 
       for (const line of describeEvent(completeEvent)) {
@@ -403,10 +792,9 @@ function createWriter(files, auditId, consoleOutput) {
     },
 
     snapshot() {
-      const rawText =
-        rawLines.length === 0
-          ? ""
-          : `${rawLines.join("\n")}\n`;
+      const rawText = rawLines.length === 0
+        ? ""
+        : `${rawLines.join("\n")}\n`;
 
       return {
         eventCount: globalStep,
@@ -434,20 +822,99 @@ function writeManifest(files, manifest) {
 }
 
 /**
- * Programmatic API used by stress-test.js.
+ * Audit one function exported by index.js.
+ *
+ * This is the separation requested by the challenge review:
+ *   1. call the pure implementation;
+ *   2. generate an independent proof in audit.js;
+ *   3. log and compare both values.
+ */
+function auditAlgorithm({ key, n, algorithm, writeEvent }) {
+  if (!algorithm || typeof algorithm.run !== "function") {
+    throw new TypeError(`Algorithm ${key} must provide a run function`);
+  }
+
+  if (typeof algorithm.prove !== "function") {
+    throw new TypeError(`Algorithm ${key} must provide a prove function`);
+  }
+
+  if (typeof writeEvent !== "function") {
+    throw new TypeError("writeEvent must be a function");
+  }
+
+  writeEvent({
+    algorithm: "AUDIT_SESSION",
+    action: "ALGORITHM_STARTED",
+    data: { key, algorithm: algorithm.name },
+  });
+  writeEvent({
+    algorithm: "AUDIT_SESSION",
+    action: "IMPLEMENTATION_CALLED",
+    data: {
+      key,
+      algorithm: algorithm.name,
+      functionName: algorithm.run.name || `sum_to_n_${key}`,
+      n,
+    },
+  });
+
+  const implementationResult = algorithm.run(n);
+
+  writeEvent({
+    algorithm: "AUDIT_SESSION",
+    action: "IMPLEMENTATION_RETURNED",
+    data: {
+      key,
+      algorithm: algorithm.name,
+      result: implementationResult,
+    },
+  });
+
+  const proofResult = algorithm.prove(n, writeEvent);
+  const matches = implementationResult === proofResult;
+
+  writeEvent({
+    algorithm: "AUDIT_SESSION",
+    action: "IMPLEMENTATION_VERIFIED",
+    data: {
+      key,
+      algorithm: algorithm.name,
+      implementationResult,
+      proofResult,
+      matches,
+    },
+  });
+  writeEvent({
+    algorithm: "AUDIT_SESSION",
+    action: "ALGORITHM_COMPLETED",
+    data: {
+      key,
+      algorithm: algorithm.name,
+      result: implementationResult,
+      proofResult,
+      matches,
+    },
+  });
+
+  return {
+    result: implementationResult,
+    proofResult,
+    matches,
+  };
+}
+
+/**
+ * Programmatic session API used by stress-test.js and the CLI.
  */
 function runAudit({
   n,
   selectedAlgorithm = "all",
   outputDirectory =
-    process.env.PROBLEM1_LOG_DIR ??
-    path.join(__dirname, "logs"),
+    process.env.PROBLEM1_LOG_DIR ?? path.join(__dirname, "logs"),
   algorithms = DEFAULT_ALGORITHMS,
   consoleOutput = true,
 } = {}) {
-  if (!Number.isSafeInteger(n)) {
-    throw new TypeError("n must be a safe integer");
-  }
+  validateAuditInput(n);
 
   if (
     selectedAlgorithm !== "all" &&
@@ -464,11 +931,13 @@ function runAudit({
     files.human,
     [
       "99TECH CODE CHALLENGE — PROBLEM 1",
-      "MATHEMATICAL PROOF AUDIT",
+      "SEPARATED IMPLEMENTATION AUDIT",
       `Audit ID: ${auditId}`,
       `Started: ${startedAt}`,
       `Input n: ${n}`,
       `Selection: ${selectedAlgorithm}`,
+      "index.js: pure implementations only",
+      "audit.js: wrapper, proof, logging, and integrity",
       "",
     ].join("\n"),
     "utf8",
@@ -477,16 +946,14 @@ function runAudit({
 
   const writer = createWriter(files, auditId, consoleOutput);
   const results = {};
+  const proofChecks = {};
   let status = "ERROR";
   let errorData = null;
 
   writer.write({
     algorithm: "AUDIT_SESSION",
     action: "SESSION_STARTED",
-    data: {
-      n,
-      selectedAlgorithm,
-    },
+    data: { n, selectedAlgorithm },
   });
 
   try {
@@ -499,47 +966,40 @@ function runAudit({
         `${key.toUpperCase()}. ${algorithm.label.toUpperCase()}`,
       );
 
-      writer.write({
-        algorithm: "AUDIT_SESSION",
-        action: "ALGORITHM_STARTED",
-        data: {
-          key,
-          algorithm: algorithm.name,
-        },
-      });
-
-      results[key] = algorithm.run(
+      const audited = auditAlgorithm({
+        key,
         n,
-        (event) => writer.write(event),
-      );
-
-      writer.write({
-        algorithm: "AUDIT_SESSION",
-        action: "ALGORITHM_COMPLETED",
-        data: {
-          key,
-          algorithm: algorithm.name,
-          result: results[key],
-        },
+        algorithm,
+        writeEvent: (event) => writer.write(event),
       });
+
+      results[key] = audited.result;
+      proofChecks[key] = {
+        proofResult: audited.proofResult,
+        matches: audited.matches,
+      };
     }
 
     const values = Object.values(results);
     const consistent =
       values.length <= 1 ||
       values.every((value) => value === values[0]);
+    const allProofsMatch = Object.values(proofChecks)
+      .every((check) => check.matches);
 
     writer.write({
       algorithm: "AUDIT_SESSION",
       action: "RESULTS_CROSS_CHECKED",
       data: {
         results,
+        proofChecks,
         consistent,
+        allProofsMatch,
       },
     });
 
     const reference = directBigIntReference(n);
-    const matches = values.every(
+    const matchesReference = values.every(
       (value) => BigInt(value) === reference,
     );
 
@@ -548,23 +1008,26 @@ function runAudit({
       action: "INDEPENDENT_REFERENCE_CALCULATED",
       data: {
         reference: reference.toString(),
-        matches,
+        matches: matchesReference,
       },
     });
 
-    status = consistent && matches ? "PASSED" : "FAILED";
+    status = consistent && allProofsMatch && matchesReference
+      ? "PASSED"
+      : "FAILED";
 
     writer.write({
       algorithm: "AUDIT_SESSION",
-      action:
-        status === "PASSED"
-          ? "SESSION_PASSED"
-          : "SESSION_FAILED",
+      action: status === "PASSED"
+        ? "SESSION_PASSED"
+        : "SESSION_FAILED",
       data: {
         status,
         results,
+        proofChecks,
         consistent,
-        matchesReference: matches,
+        allProofsMatch,
+        matchesReference,
       },
     });
   } catch (error) {
@@ -581,6 +1044,7 @@ function runAudit({
         status: "ERROR",
         error: errorData,
         partialResults: results,
+        partialProofChecks: proofChecks,
       },
     });
   }
@@ -591,15 +1055,17 @@ function runAudit({
   writeHeading(files.human, "AUDIT SUMMARY");
   append(files.human, `Status: ${status}`);
   append(files.human, `Results: ${JSON.stringify(results)}`);
+  append(files.human, `Proof checks: ${JSON.stringify(proofChecks)}`);
   append(files.human, `Events: ${integrity.eventCount}`);
   append(files.human, `Final event hash: ${integrity.finalEventHash}`);
   append(files.human, `Raw evidence SHA-256: ${integrity.rawSha256}`);
+
   if (errorData) {
     append(files.human, `Error: ${errorData.name}: ${errorData.message}`);
   }
 
   const manifest = writeManifest(files, {
-    schemaVersion: 1,
+    schemaVersion: 2,
     auditId,
     input: n,
     selectedAlgorithm,
@@ -607,6 +1073,7 @@ function runAudit({
     startedAt,
     completedAt,
     results,
+    proofChecks,
     error: errorData,
     eventCount: integrity.eventCount,
     finalEventHash: integrity.finalEventHash,
@@ -621,6 +1088,7 @@ function runAudit({
   return {
     status,
     results,
+    proofChecks,
     files,
     manifest,
   };
@@ -628,9 +1096,7 @@ function runAudit({
 
 function runCli() {
   try {
-    const { n, selectedAlgorithm } =
-      parseArguments(process.argv);
-
+    const { n, selectedAlgorithm } = parseArguments(process.argv);
     const report = runAudit({
       n,
       selectedAlgorithm,
@@ -658,7 +1124,11 @@ if (require.main === module) {
 
 module.exports = {
   DEFAULT_ALGORITHMS,
+  auditAlgorithm,
   parseArguments,
+  proveCombinatorics,
+  proveLinearAlgebra,
+  proveSymmetricPairing,
   runAudit,
   sha256,
 };

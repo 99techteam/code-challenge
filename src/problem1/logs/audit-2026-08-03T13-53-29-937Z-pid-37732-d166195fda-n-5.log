@@ -1,0 +1,519 @@
+99TECH CODE CHALLENGE — PROBLEM 1
+SEPARATED IMPLEMENTATION AUDIT
+Audit ID: bd12e062-3452-4783-8449-b9e8111d8807
+Started: 2026-08-03T13:53:29.936Z
+Input n: 5
+Selection: all
+index.js: pure implementations only
+audit.js: wrapper, proof, logging, and integrity
+[0001] AUDIT_SESSION :: SESSION_STARTED
+       Input n = 5
+       Selected algorithms = all
+       eventHash = 885394e565508c5b59a935d93bdc201a76a52f654a4f990829cb1aec8fef5f08
+
+
+====================================================================================================
+A. CLOSED-FORM ARITHMETIC SERIES
+====================================================================================================
+[0002] AUDIT_SESSION :: ALGORITHM_STARTED
+       Start A_COMBINATORICS
+       eventHash = b60ef86737457650a0c7c997b723afd79d66ca5b0e25815993e066cfda47e121
+
+[0003] AUDIT_SESSION :: IMPLEMENTATION_CALLED
+       Call index.js export sum_to_n_a(5)
+       eventHash = a0900e70b3d40b60be428b3727d25c2a0a00e31f52c23c94dd04448521ebce15
+
+[0004] AUDIT_SESSION :: IMPLEMENTATION_RETURNED
+       index.js returned 15
+       eventHash = a43e22e290872538d97bf6fa8229833656e442a5cf929071274f5d66143ef6ea
+
+[0005] A_COMBINATORICS :: INPUT_RECEIVED
+       Receive n = 5
+       eventHash = 0991fe7e3ed9c26c6fce6111b56dd2f51b6161eea948104c85858ebff6ae4c29
+
+[0006] A_COMBINATORICS :: INPUT_VALIDATED
+       Input is a safe integer = true
+       Result range is safe = true
+       eventHash = d0acd14d7418cd6809f16abc9491415e2030c08adc90f6707d4a113f90b112a9
+
+[0007] A_COMBINATORICS :: MAGNITUDE_CALCULATED
+       |n| = 5
+       eventHash = 490c01c79447f2fa8f4a96e640cb58fb178a1674355f6bdff9b51939aac9d0c0
+
+[0008] A_COMBINATORICS :: COMBINATION_IDENTITY_APPLIED
+       S(n) = n(n + 1) / 2
+       5 × 6 ÷ 2
+       eventHash = 32f3ddb3c4ced45e97a0fe0ed020798499a9859cf1612de679cd19a833c8793e
+
+[0009] A_COMBINATORICS :: EVEN_FACTOR_DIVIDED
+       secondFactor: 6 ÷ 2 = 3
+       eventHash = ea9ac48109331f82aedf381f890aadefe9f75b9d311f1f5d1d5ca6d8acd962d8
+
+[0010] A_COMBINATORICS :: FACTORS_MULTIPLIED
+       5 × 3 = 15
+       eventHash = 547b892c9388331fd3b3d71a27ef4708336b85c403584c83f90a2020fac87b52
+
+[0011] A_COMBINATORICS :: SIGN_RESTORED
+       Restore sign: 15 → 15
+       eventHash = 6de0bd5c19c1a15f0c9182184e72ace8548cb8677177999ee3bbb02d76e06f96
+
+[0012] A_COMBINATORICS :: PROOF_COMPLETED
+       Proof result = 15
+       eventHash = 59263edd1e3b9b9222ed6c7867fa132adb26dbd867f1b8cb701150f3631b3ad3
+
+[0013] AUDIT_SESSION :: IMPLEMENTATION_VERIFIED
+       Implementation result = 15
+       Independent proof result = 15
+       Match = true
+       eventHash = 3ba6b8d4e43ac2b9c72b30735a96285c098cd3efb7a359ff56d8fcb4a1b8dbf7
+
+[0014] AUDIT_SESSION :: ALGORITHM_COMPLETED
+       A_COMBINATORICS audit completed
+       eventHash = 74c8a2a461c5ef4cdde3a7ea9dc18cc8efe320722733a4a300394cb3829764f5
+
+
+====================================================================================================
+B. FAST MATRIX EXPONENTIATION
+====================================================================================================
+[0015] AUDIT_SESSION :: ALGORITHM_STARTED
+       Start B_LINEAR_ALGEBRA
+       eventHash = f8df30a87d0d088df05c68a77806b55d37baf9dd3b6c2206c6d22c88f7f75641
+
+[0016] AUDIT_SESSION :: IMPLEMENTATION_CALLED
+       Call index.js export sum_to_n_b(5)
+       eventHash = 9280b5ff9e2dfd9fc8e13d8e077505c6d810926cc8aa496fcc3dd040accee363
+
+[0017] AUDIT_SESSION :: IMPLEMENTATION_RETURNED
+       index.js returned 15
+       eventHash = 5883ec9607b25da5ef18bdf2b3634e35a40d6904120d32211fa770805412460c
+
+[0018] B_LINEAR_ALGEBRA :: INPUT_RECEIVED
+       Receive n = 5
+       eventHash = e50fe68ff7c623150d1dd50aeaf74d7938f4aef062d27e2379a44833de889237
+
+[0019] B_LINEAR_ALGEBRA :: INPUT_VALIDATED
+       Input is a safe integer = true
+       Result range is safe = true
+       eventHash = 428d84f1bfd0dee2bacfebc9180829216cd235484a1de89fe53dc34fdec8531b
+
+[0020] B_LINEAR_ALGEBRA :: MAGNITUDE_CALCULATED
+       |n| = 5
+       eventHash = b6e6108117171886d75f861366e3e3fd3567bbd76e3d4fef1937c4e8f3a5cadc
+
+[0021] B_LINEAR_ALGEBRA :: STATE_MODEL_DEFINED
+       State vector = [sum_k, k, 1]^T
+       Initial vector = [0, 0, 1]^T
+       Transition matrix:
+       │ 1  1  1 │
+       │ 0  1  1 │
+       │ 0  0  1 │
+       eventHash = c449dc900dca86f9d58df17f1d9778f3831cda1679cdf0dfcd05bf5768604da8
+
+[0022] B_LINEAR_ALGEBRA :: MATRIX_POWER_INITIALIZED
+       Compute M^5 by exponentiation by squaring
+       Initial result matrix:
+       │ 1  0  0 │
+       │ 0  1  0 │
+       │ 0  0  1 │
+       Initial base matrix:
+       │ 1  1  1 │
+       │ 0  1  1 │
+       │ 0  0  1 │
+       eventHash = 2f8a43d7789e0c9fad1175dc529f5aae1652d65786e2e7bb259900a65b954db9
+
+[0023] B_LINEAR_ALGEBRA :: POWER_ROUND_STARTED
+       Round 1: exponent 5 is odd
+       eventHash = c5134b3b9842c5cc18ffa3ae57a67be86ff437655ff457f4396fed2d96364eda
+
+[0024] B_LINEAR_ALGEBRA :: MATRIX_MULTIPLICATION_STARTED
+       ACCUMULATE_RESULT, round 1
+       Left:
+       │ 1  0  0 │
+       │ 0  1  0 │
+       │ 0  0  1 │
+       Right:
+       │ 1  1  1 │
+       │ 0  1  1 │
+       │ 0  0  1 │
+       eventHash = 8416bb21dad9195b93d5a5f192c03c5e09b496c121420b374cd8242490a5e840
+
+[0025] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,1] = 1×1 + 0×0 + 0×0 = 1
+       eventHash = 52b08f88d7e938a1944a161d675cbe0157e6400bae67926b763c8eb45344d1fd
+
+[0026] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,2] = 1×1 + 0×1 + 0×0 = 1
+       eventHash = aeebed7b2271713dd9c30c82603f527c889042ebcef1b6544bf5b6ea15eaa8e0
+
+[0027] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,3] = 1×1 + 0×1 + 0×1 = 1
+       eventHash = caf780b367a824d2f6ece1cc8f370e7e9b7694bdab8b2e1244a21713e6c1faa7
+
+[0028] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,1] = 0×1 + 1×0 + 0×0 = 0
+       eventHash = cb5f9c106fd2afe6b10be053b4e45d4cb59f793ef6cc365ff1622b6bf73e376a
+
+[0029] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,2] = 0×1 + 1×1 + 0×0 = 1
+       eventHash = 48a8b54e857a113e0019f0b6d96893f6f70d8e690b9d561a65a31bee8934e0ad
+
+[0030] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,3] = 0×1 + 1×1 + 0×1 = 1
+       eventHash = 7e8c30ee0912b415b0a44505aefac7c15e53b0c398939cd2eb5e44841ae23874
+
+[0031] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,1] = 0×1 + 0×0 + 1×0 = 0
+       eventHash = d72e6223afe9874e433e417e70330dc0e35ed0c513f97d3de2aee4a69fc21166
+
+[0032] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,2] = 0×1 + 0×1 + 1×0 = 0
+       eventHash = 317a0303aaefce315148d589c75edf272cb000a3c4affd09564b5a674b8ab265
+
+[0033] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,3] = 0×1 + 0×1 + 1×1 = 1
+       eventHash = 856484db19bde55cd695a31da782f25359c9517da6cf24f5bcb8c58bb83ca66a
+
+[0034] B_LINEAR_ALGEBRA :: MATRIX_MULTIPLICATION_COMPLETED
+       ACCUMULATE_RESULT result:
+       │ 1  1  1 │
+       │ 0  1  1 │
+       │ 0  0  1 │
+       eventHash = 9fb33ab3648c93aef1dc987bb3cea8153591087c14527988ea4ce0da2f80d0f6
+
+[0035] B_LINEAR_ALGEBRA :: RESULT_MATRIX_UPDATED
+       Accumulated result:
+       │ 1  1  1 │
+       │ 0  1  1 │
+       │ 0  0  1 │
+       eventHash = 4ada53af846e3e73d38ace887d4f0d51d1b17f969f028cdcf6d452ab74f56940
+
+[0036] B_LINEAR_ALGEBRA :: EXPONENT_HALVED
+       floor(5/2) = 2
+       eventHash = b91d882b5d4f311630e0051a59f3677dceaa7d787d0654eaba747e0fb1b709ff
+
+[0037] B_LINEAR_ALGEBRA :: MATRIX_MULTIPLICATION_STARTED
+       SQUARE_BASE, round 1
+       Left:
+       │ 1  1  1 │
+       │ 0  1  1 │
+       │ 0  0  1 │
+       Right:
+       │ 1  1  1 │
+       │ 0  1  1 │
+       │ 0  0  1 │
+       eventHash = 3b1d54fdce434a1a1ebc2f23d578f7105a2e5d536f747aa0a3b7076892bf49ae
+
+[0038] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,1] = 1×1 + 1×0 + 1×0 = 1
+       eventHash = eb9035743bfab344e2453549f1f05c32fc1ba65958dd1a6d459a114307b20567
+
+[0039] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,2] = 1×1 + 1×1 + 1×0 = 2
+       eventHash = 5b6b9d3b3d982bf7747242cbda950a6d7bfda10ad411306b444e88dfadf8c1c0
+
+[0040] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,3] = 1×1 + 1×1 + 1×1 = 3
+       eventHash = 99846e32da073c1fe7fb80be6616c1a207b95978599e42f66614b74e237d839b
+
+[0041] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,1] = 0×1 + 1×0 + 1×0 = 0
+       eventHash = 62c5f1d040b9e6c22be4b3825ee6572ce13b82107437b4690356f2c9054c25fb
+
+[0042] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,2] = 0×1 + 1×1 + 1×0 = 1
+       eventHash = 2d7793df7188ffc546c567907917393f006357fe1fa72cb20a3801836e241c84
+
+[0043] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,3] = 0×1 + 1×1 + 1×1 = 2
+       eventHash = 5bd9dcc08e02ac18b97c8fb2d6ead4d57eb95ec6f5ed51be0732edb74c688df2
+
+[0044] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,1] = 0×1 + 0×0 + 1×0 = 0
+       eventHash = 839365b1d4c0045f9529a9eeba11cce0ca2172414b12d2027c20a6ddd2c0c792
+
+[0045] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,2] = 0×1 + 0×1 + 1×0 = 0
+       eventHash = f2597fb6af4631e31c3e108b6f93d5ed5d5c45fbc13b3ca727a57375746ea50e
+
+[0046] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,3] = 0×1 + 0×1 + 1×1 = 1
+       eventHash = cd78801f7e2fbda00a728f4dce9982520f6d4158d5dda122145bea1aebb00ced
+
+[0047] B_LINEAR_ALGEBRA :: MATRIX_MULTIPLICATION_COMPLETED
+       SQUARE_BASE result:
+       │ 1  2  3 │
+       │ 0  1  2 │
+       │ 0  0  1 │
+       eventHash = d3b963872020b4f1918a24727d566b0a3e0fc701a4868f54cb481735991e446f
+
+[0048] B_LINEAR_ALGEBRA :: BASE_MATRIX_SQUARED
+       Squared base:
+       │ 1  2  3 │
+       │ 0  1  2 │
+       │ 0  0  1 │
+       eventHash = 0689195a5f02a18a8e4282da4db7f366b753e627df7492b964712b978b3ddafd
+
+[0049] B_LINEAR_ALGEBRA :: POWER_ROUND_STARTED
+       Round 2: exponent 2 is even
+       eventHash = c385a4378b90ccffd61000740794d7e6fe15627bc9dfc60cb8dad78f4e419a4b
+
+[0050] B_LINEAR_ALGEBRA :: RESULT_MULTIPLICATION_SKIPPED
+       Exponent is even
+       eventHash = e3e15306969e749353dcd1022869323a04e304bcbb3b79a0bca3a6de5c2d508b
+
+[0051] B_LINEAR_ALGEBRA :: EXPONENT_HALVED
+       floor(2/2) = 1
+       eventHash = d7088b43608b1baf0c575e85d37d080d325f37fcc4990cbd862af51814eb12b7
+
+[0052] B_LINEAR_ALGEBRA :: MATRIX_MULTIPLICATION_STARTED
+       SQUARE_BASE, round 2
+       Left:
+       │ 1  2  3 │
+       │ 0  1  2 │
+       │ 0  0  1 │
+       Right:
+       │ 1  2  3 │
+       │ 0  1  2 │
+       │ 0  0  1 │
+       eventHash = 1d18aeaf594b6732d9a850ef8da0b28e9cfc0aa7af423f3f7c8b181336bce888
+
+[0053] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,1] = 1×1 + 2×0 + 3×0 = 1
+       eventHash = 2d825571f6f72da8f121ca782ca6864055c92b488c53e89d1bafc48e2948632e
+
+[0054] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,2] = 1×2 + 2×1 + 3×0 = 4
+       eventHash = 763a2bdc8ec4b7760a86f2d1ded0c363de642c01f6f1d74d8cd77e18abb9cff2
+
+[0055] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,3] = 1×3 + 2×2 + 3×1 = 10
+       eventHash = 7689478fba94cefe76123337fc86c62fc4ab73b5fdb99243a6424bdfdfbf969c
+
+[0056] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,1] = 0×1 + 1×0 + 2×0 = 0
+       eventHash = 8474bdf99a6484957601be5b7d1002bc7d261622d82284278bbe1d375327321d
+
+[0057] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,2] = 0×2 + 1×1 + 2×0 = 1
+       eventHash = 4c9058c42186c6369a4685842e54fc7b3f9a2e2f0f5b516540e1830e45811698
+
+[0058] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,3] = 0×3 + 1×2 + 2×1 = 4
+       eventHash = 0b7077086e14e478e06aa4dd36cd6028ad3ab978d41c723eb0212e2046f8306e
+
+[0059] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,1] = 0×1 + 0×0 + 1×0 = 0
+       eventHash = 9fa266a6cd4c48ecd9510927cf48755fa26890faee72446e23e24797dcfb9dcd
+
+[0060] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,2] = 0×2 + 0×1 + 1×0 = 0
+       eventHash = e7089f64a9106283859a752965b5914a76b49a6215e592007e7a99af1e8b2053
+
+[0061] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,3] = 0×3 + 0×2 + 1×1 = 1
+       eventHash = 98109056d4d503a7c9d83ffaf9067ae32d0fb1c7c82b99c437d43a0c2ed193af
+
+[0062] B_LINEAR_ALGEBRA :: MATRIX_MULTIPLICATION_COMPLETED
+       SQUARE_BASE result:
+       │ 1  4  10 │
+       │ 0  1   4 │
+       │ 0  0   1 │
+       eventHash = fec068e8079982a8feb36e7114e153c87977d3b931100a204800316d2255cb1a
+
+[0063] B_LINEAR_ALGEBRA :: BASE_MATRIX_SQUARED
+       Squared base:
+       │ 1  4  10 │
+       │ 0  1   4 │
+       │ 0  0   1 │
+       eventHash = 28301aef3ce38cf6c5169c9584eb35491f7ccfc7129b3b139f23aace32fd3ca0
+
+[0064] B_LINEAR_ALGEBRA :: POWER_ROUND_STARTED
+       Round 3: exponent 1 is odd
+       eventHash = f76837b4362d9c2145a30985bcc33a85ffbafae2fe447411b1615bbb7d7484b3
+
+[0065] B_LINEAR_ALGEBRA :: MATRIX_MULTIPLICATION_STARTED
+       ACCUMULATE_RESULT, round 3
+       Left:
+       │ 1  1  1 │
+       │ 0  1  1 │
+       │ 0  0  1 │
+       Right:
+       │ 1  4  10 │
+       │ 0  1   4 │
+       │ 0  0   1 │
+       eventHash = 7f1e48d63e4350996066ee937a0e1aec8cae6c40ce1b85caa5704d1e235eddd8
+
+[0066] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,1] = 1×1 + 1×0 + 1×0 = 1
+       eventHash = 7ab4a371a97f92809d8e60bc0bd4059e7d4ecf70520dfb3b077c42e253bc90a8
+
+[0067] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,2] = 1×4 + 1×1 + 1×0 = 5
+       eventHash = a6b24825c3d4f37a3ffef473ec2bc89e0b23ef30cdfd2522335e76d4f680cf0f
+
+[0068] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [1,3] = 1×10 + 1×4 + 1×1 = 15
+       eventHash = dce3a97f2320c260a4a68871c4c4f30d2a19a19bafdf4fec7f195222ea385c7f
+
+[0069] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,1] = 0×1 + 1×0 + 1×0 = 0
+       eventHash = c83b86df35a481739e102aca4e41d5972e4ddeeceae0962823e6429a23b67593
+
+[0070] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,2] = 0×4 + 1×1 + 1×0 = 1
+       eventHash = 66f87202bc50b0ff3c7a8b5f8381c47569216ed7deeed5616f8a3870f6a4453d
+
+[0071] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [2,3] = 0×10 + 1×4 + 1×1 = 5
+       eventHash = ee95d060872d58326ee06ca7a3fcd8721c860b9312938ef3af1dad1b0b9c89c4
+
+[0072] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,1] = 0×1 + 0×0 + 1×0 = 0
+       eventHash = bc65394a7c5b803331a8d777265e738a41577808cd100839ff2f4716e80873ed
+
+[0073] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,2] = 0×4 + 0×1 + 1×0 = 0
+       eventHash = 41b3fdef749f260b26d6cbd430edf3ff3d67d564d4e652b5d6e6bd63b8a4871f
+
+[0074] B_LINEAR_ALGEBRA :: MATRIX_CELL_CALCULATED
+       Cell [3,3] = 0×10 + 0×4 + 1×1 = 1
+       eventHash = 5b07e4cf75430ce82b0d24c8d28d30dfdaa239b4a0b98db10d7edce2bfdf02d5
+
+[0075] B_LINEAR_ALGEBRA :: MATRIX_MULTIPLICATION_COMPLETED
+       ACCUMULATE_RESULT result:
+       │ 1  5  15 │
+       │ 0  1   5 │
+       │ 0  0   1 │
+       eventHash = ef791f6603877bce08bac953bc593a320a19ad3e7fc7f4df1758b17955fef5c8
+
+[0076] B_LINEAR_ALGEBRA :: RESULT_MATRIX_UPDATED
+       Accumulated result:
+       │ 1  5  15 │
+       │ 0  1   5 │
+       │ 0  0   1 │
+       eventHash = 3e85f7f6c54ce4364e96725498e1a80dde7a546858c548ac9a3f39b9e7e7327a
+
+[0077] B_LINEAR_ALGEBRA :: EXPONENT_HALVED
+       floor(1/2) = 0
+       eventHash = aee57155fcaedf179754033f841f79dc2e5d81e3752a91f2dd8047cb7dcc69e8
+
+[0078] B_LINEAR_ALGEBRA :: FINAL_BASE_SQUARE_SKIPPED
+       No exponent bits remain
+       eventHash = 7193561a5941ff6ab269a5a848749c895f065c161e5740bf29867d34d163abf4
+
+[0079] B_LINEAR_ALGEBRA :: MATRIX_POWER_COMPLETED
+       M^5:
+       │ 1  5  15 │
+       │ 0  1   5 │
+       │ 0  0   1 │
+       eventHash = 868d42c0037f625bec4a1da41a0f185674491e06cb1f5c96c28d5cc221e2b3b6
+
+[0080] B_LINEAR_ALGEBRA :: INITIAL_VECTOR_APPLIED
+       [0, 0, 1]^T → [15, 5, 1]^T
+       First component = 15
+       eventHash = 38de863ce4c24bf2910e96a713dde17d08339eb471b9fd131e1769ddbb4c9a17
+
+[0081] B_LINEAR_ALGEBRA :: SIGN_RESTORED
+       Restore sign: 15 → 15
+       eventHash = 665866ef2140d78af6212ab5264bd801a55fa4c21fbd7925dab257abd82aed87
+
+[0082] B_LINEAR_ALGEBRA :: PROOF_COMPLETED
+       Proof result = 15
+       eventHash = 86e803ad74caedfd85495439f687245ccb11360b6659750c1edaae9c4f049aff
+
+[0083] AUDIT_SESSION :: IMPLEMENTATION_VERIFIED
+       Implementation result = 15
+       Independent proof result = 15
+       Match = true
+       eventHash = f3b6ecf8ec3d06fbc09b8c8642c3b5ce6838a39c356433d15e2ba9fd1456332e
+
+[0084] AUDIT_SESSION :: ALGORITHM_COMPLETED
+       B_LINEAR_ALGEBRA audit completed
+       eventHash = 4812a60375341298e47a3d24c51115c20b905ede6750cb8bb5d8bc97bb95d1f1
+
+
+====================================================================================================
+C. SYMMETRIC PAIRING
+====================================================================================================
+[0085] AUDIT_SESSION :: ALGORITHM_STARTED
+       Start C_PROBABILITY_SYMMETRY
+       eventHash = d49cace64b1dd3f6be950621173803220cc22a31b92450b0675baa16c3ffb0e5
+
+[0086] AUDIT_SESSION :: IMPLEMENTATION_CALLED
+       Call index.js export sum_to_n_c(5)
+       eventHash = 0dafc19a3c669003c18ad39e923a3f76fdecc3a79e8a8c0b22d55243c6d66f99
+
+[0087] AUDIT_SESSION :: IMPLEMENTATION_RETURNED
+       index.js returned 15
+       eventHash = 346321b10307343a187d5f266b46b6a2b05ee24952a1509320efe977f23f0316
+
+[0088] C_PROBABILITY_SYMMETRY :: INPUT_RECEIVED
+       Receive n = 5
+       eventHash = f23d39a97dd15f84ba32d9856444aeae69d555016b03249a9103898c04bc433e
+
+[0089] C_PROBABILITY_SYMMETRY :: INPUT_VALIDATED
+       Input is a safe integer = true
+       Result range is safe = true
+       eventHash = 2f35ac2f4f28e5289478620e7333f99dbdeff8b9c583b98e69581c9ccd562182
+
+[0090] C_PROBABILITY_SYMMETRY :: MAGNITUDE_CALCULATED
+       |n| = 5
+       eventHash = e4781e716c4314c0736ffbbdba0c1726a73a07e6eb9423b4f355edea76198ec7
+
+[0091] C_PROBABILITY_SYMMETRY :: ANTITHETIC_MODEL_DEFINED
+       Sample space {1, 2, ..., 5}
+       Mapping x ↔ n + 1 - x
+       Pair count = 2
+       Each pair sums to 6
+       eventHash = 6d7f1e84d9021d380c8f57e190c4d3c8d1a166dfdb3d1b219db0718ccfd2709f
+
+[0092] C_PROBABILITY_SYMMETRY :: PAIRED_TOTAL_CALCULATED
+       2 × 6 = 12
+       eventHash = 04276840f7a686c591d7a6000490e241936ea61b33e83673b92e187df9e2e8f0
+
+[0093] C_PROBABILITY_SYMMETRY :: MIDDLE_VALUE_ADDED
+       12 + middle 3 = 15
+       eventHash = 25e4734c3e51ea182d3ee8451dde8e053318f6447be3a51bb4b6dc3430342536
+
+[0094] C_PROBABILITY_SYMMETRY :: SIGN_RESTORED
+       Restore sign: 15 → 15
+       eventHash = c78980b9365a9d2f97087ab22dfdfeea3e069dabf0ea665618aaada80dc56888
+
+[0095] C_PROBABILITY_SYMMETRY :: PROOF_COMPLETED
+       Proof result = 15
+       eventHash = 3ec24d81a3f26f568bc09f4753d1bf96025d7eb5de776707cef54eab001a3524
+
+[0096] AUDIT_SESSION :: IMPLEMENTATION_VERIFIED
+       Implementation result = 15
+       Independent proof result = 15
+       Match = true
+       eventHash = b6ab542703131c1839ff735b4c968be5dd824d62e4eca3d262c2ce4ca78842cf
+
+[0097] AUDIT_SESSION :: ALGORITHM_COMPLETED
+       C_PROBABILITY_SYMMETRY audit completed
+       eventHash = 55c4bac5dc320eb94f500defeed4cd9bc851a86076afbd78ba2cdfa6d09baecf
+
+[0098] AUDIT_SESSION :: RESULTS_CROSS_CHECKED
+       Results = {"a":15,"b":15,"c":15}
+       All implementations agree = true
+       eventHash = 9d108dd269190fd7ef22db3beef1b939d399af30f18fa5dd8e581e265183ee9a
+
+[0099] AUDIT_SESSION :: INDEPENDENT_REFERENCE_CALCULATED
+       BigInt reference = 15
+       All results match reference = true
+       eventHash = 2c5561e4c7f38509df9f1d361b6a24728d34ac793a32b446df348c18286830c3
+
+[0100] AUDIT_SESSION :: SESSION_PASSED
+       Audit status = PASSED
+       eventHash = b92a5d941a1eb3650f22ec4388ebcf9ef56425c685abd6b406e7b02eaeaee1c8
+
+
+====================================================================================================
+AUDIT SUMMARY
+====================================================================================================
+Status: PASSED
+Results: {"a":15,"b":15,"c":15}
+Proof checks: {"a":{"proofResult":15,"matches":true},"b":{"proofResult":15,"matches":true},"c":{"proofResult":15,"matches":true}}
+Events: 100
+Final event hash: b92a5d941a1eb3650f22ec4388ebcf9ef56425c685abd6b406e7b02eaeaee1c8
+Raw evidence SHA-256: 4d36a57597bdcfe01f923ff3471243a9f56d73c6afc398fc7b6034bbe45ef36b

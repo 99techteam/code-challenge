@@ -29,6 +29,7 @@ const {
 
 const {
   DEFAULT_ALGORITHMS,
+  auditAlgorithm,
   runAudit,
 } = require("./audit");
 
@@ -325,8 +326,8 @@ class Runner {
     );
 
     await this.suite(
-      "Audit callback schema and logger failure propagation",
-      () => this.auditCallbackContract(),
+      "Pure index functions and separate audit wrapper contract",
+      () => this.separatedAuditContract(),
     );
 
     await this.suite(
@@ -743,37 +744,71 @@ class Runner {
     };
   }
 
-  auditCallbackContract() {
-    for (const [label, algorithm, implementation] of [
-      ["A", "A_COMBINATORICS", sum_to_n_a],
-      ["B", "B_LINEAR_ALGEBRA", sum_to_n_b],
-      ["C", "C_PROBABILITY_SYMMETRY", sum_to_n_c],
+  separatedAuditContract() {
+    // index.js functions stay pure: they return a number and do not depend on
+    // an audit callback or any file-system/logger behavior.
+    for (const [label, implementation] of [
+      ["A", sum_to_n_a],
+      ["B", sum_to_n_b],
+      ["C", sum_to_n_c],
+    ]) {
+      this.assert(
+        implementation.length === 1,
+        `${label} should expose exactly one declared parameter`,
+        { declaredParameters: implementation.length },
+      );
+      this.assert(
+        implementation(5) === 15,
+        `${label} pure result mismatch`,
+      );
+    }
+
+    // audit.js owns instrumentation. auditAlgorithm wraps an index.js export,
+    // builds a separate proof, and emits structured events.
+    for (const [key, expectedAlgorithm] of [
+      ["a", "A_COMBINATORICS"],
+      ["b", "B_LINEAR_ALGEBRA"],
+      ["c", "C_PROBABILITY_SYMMETRY"],
     ]) {
       const events = [];
-      const result = implementation(
-        5,
-        (event) => events.push(event),
-      );
+      const audited = auditAlgorithm({
+        key,
+        n: 5,
+        algorithm: DEFAULT_ALGORITHMS[key],
+        writeEvent: (event) => events.push(event),
+      });
 
-      this.assert(result === 15, `${label} result mismatch`);
-      this.assert(events.length > 0, `${label} emitted no events`);
       this.assert(
-        events[0].action === "INPUT_RECEIVED",
-        `${label} first event mismatch`,
+        audited.result === 15,
+        `${key.toUpperCase()} audited result mismatch`,
       );
       this.assert(
-        events.at(-1).action === "COMPLETED",
-        `${label} terminal event mismatch`,
+        audited.proofResult === 15,
+        `${key.toUpperCase()} proof result mismatch`,
       );
       this.assert(
-        events.every(
+        audited.matches === true,
+        `${key.toUpperCase()} implementation/proof mismatch`,
+      );
+      this.assert(
+        events.length > 0,
+        `${key.toUpperCase()} audit emitted no events`,
+      );
+      this.assert(
+        events[0].action === "ALGORITHM_STARTED",
+        `${key.toUpperCase()} first audit event mismatch`,
+      );
+      this.assert(
+        events.at(-1).action === "ALGORITHM_COMPLETED",
+        `${key.toUpperCase()} terminal audit event mismatch`,
+      );
+      this.assert(
+        events.some(
           (event) =>
-            event.algorithm === algorithm &&
-            typeof event.action === "string" &&
-            event.data &&
-            typeof event.data === "object",
+            event.algorithm === expectedAlgorithm &&
+            event.action === "PROOF_COMPLETED",
         ),
-        `${label} event schema mismatch`,
+        `${key.toUpperCase()} proof events missing`,
       );
     }
 
@@ -781,8 +816,13 @@ class Runner {
     let propagated;
 
     try {
-      sum_to_n_a(5, () => {
-        throw sentinel;
+      auditAlgorithm({
+        key: "a",
+        n: 5,
+        algorithm: DEFAULT_ALGORITHMS.a,
+        writeEvent() {
+          throw sentinel;
+        },
       });
     } catch (error) {
       propagated = error;
@@ -790,12 +830,13 @@ class Runner {
 
     this.assert(
       propagated === sentinel,
-      "Audit callback failure was silently swallowed",
+      "Separate audit writer failure was silently swallowed",
     );
 
     return {
-      implementations: 3,
-      loggerFailurePropagates: true,
+      pureImplementations: 3,
+      auditedImplementations: 3,
+      writerFailurePropagates: true,
     };
   }
 
@@ -998,13 +1039,7 @@ class Runner {
       ...DEFAULT_ALGORITHMS,
       b: {
         ...DEFAULT_ALGORITHMS.b,
-        run(n, audit) {
-          audit({
-            algorithm: "B_LINEAR_ALGEBRA",
-            action: "FAULT_INJECTION_STARTED",
-            data: { n },
-          });
-
+        run() {
           throw new Error("Injected matrix failure");
         },
       },

@@ -3,20 +3,19 @@
 /**
  * 99Tech Code Challenge — Problem 1
  *
- * Three mathematically distinct implementations:
- *   A. Combinatorics
- *   B. Linear algebra
- *   C. Probability symmetry
- *
- * Normal calls use the required signature:
- *   sum_to_n_a(n)
- *
- * A second optional callback is used only by audit.js:
- *   sum_to_n_a(n, event => ...)
+ * This file contains only the three requested implementations.
+ * Audit and logging are intentionally kept in audit.js so these functions
+ * remain small, deterministic, and easy to review.
  */
 
 const MAX_SAFE_SUM_N = 134_217_727;
 
+/**
+ * Validate the shared contract for all three implementations.
+ *
+ * Negative input follows this convention:
+ *   sum_to_n(-4) = -1 + -2 + -3 + -4 = -10
+ */
 function validateInput(n) {
   if (!Number.isSafeInteger(n)) {
     throw new TypeError("n must be a safe integer");
@@ -29,394 +28,146 @@ function validateInput(n) {
   }
 }
 
-function emit(audit, algorithm, action, data = {}) {
-  if (typeof audit === "function") {
-    audit({ algorithm, action, data });
-  }
-}
-
-function restoreSign(n, positiveValue, audit, algorithm) {
-  const result = n < 0 ? -positiveValue : positiveValue;
-
-  emit(audit, algorithm, "SIGN_RESTORED", {
-    originalInput: n,
-    positiveValue,
-    result,
-  });
-
-  return result;
+/**
+ * Restore the sign after an implementation calculates the positive magnitude.
+ */
+function withOriginalSign(n, positiveSum) {
+  return n < 0 ? -positiveSum : positiveSum;
 }
 
 /**
- * A — Combinatorics
+ * Solution A — Closed-form arithmetic-series formula.
  *
- * S(n) = C(n + 1, 2)
+ * The values 1..n form an arithmetic progression, so:
+ *   S(n) = n(n + 1) / 2
+ *
+ * One of n and n + 1 is always even. Dividing that factor first avoids an
+ * unnecessarily large intermediate multiplication.
  *
  * Time:  O(1)
  * Space: O(1)
  */
-function sum_to_n_a(n, audit) {
-  const algorithm = "A_COMBINATORICS";
-
-  emit(audit, algorithm, "INPUT_RECEIVED", { n });
-
+function sum_to_n_a(n) {
   validateInput(n);
-  emit(audit, algorithm, "INPUT_VALIDATED", {
-    n,
-    isSafeInteger: true,
-    isWithinSafeResultRange: true,
-  });
 
   const magnitude = Math.abs(n);
-  emit(audit, algorithm, "MAGNITUDE_CALCULATED", {
-    expression: "|n|",
-    magnitude,
-  });
+  let firstFactor = magnitude;
+  let secondFactor = magnitude + 1;
 
-  let leftFactor = magnitude;
-  let rightFactor = magnitude + 1;
-
-  emit(audit, algorithm, "COMBINATION_IDENTITY_APPLIED", {
-    identity: "C(n + 1, 2) = n(n + 1) / 2",
-    leftFactor,
-    rightFactor,
-    divisor: 2,
-  });
-
-  if (leftFactor % 2 === 0) {
-    const before = leftFactor;
-    leftFactor /= 2;
-
-    emit(audit, algorithm, "EVEN_FACTOR_DIVIDED", {
-      factor: "leftFactor",
-      before,
-      divisor: 2,
-      after: leftFactor,
-    });
+  if (firstFactor % 2 === 0) {
+    firstFactor /= 2;
   } else {
-    const before = rightFactor;
-    rightFactor /= 2;
-
-    emit(audit, algorithm, "EVEN_FACTOR_DIVIDED", {
-      factor: "rightFactor",
-      before,
-      divisor: 2,
-      after: rightFactor,
-    });
+    secondFactor /= 2;
   }
 
-  const positiveSum = leftFactor * rightFactor;
-
-  emit(audit, algorithm, "FACTORS_MULTIPLIED", {
-    leftFactor,
-    rightFactor,
-    positiveSum,
-  });
-
-  const result = restoreSign(n, positiveSum, audit, algorithm);
-
-  emit(audit, algorithm, "COMPLETED", {
-    result,
-    complexity: {
-      time: "O(1)",
-      space: "O(1)",
-    },
-  });
-
-  return result;
+  const positiveSum = firstFactor * secondFactor;
+  return withOriginalSign(n, positiveSum);
 }
 
-function identityMatrix(size) {
-  return Array.from(
-    { length: size },
-    (_, row) =>
-      Array.from(
-        { length: size },
-        (_, column) => (row === column ? 1 : 0),
-      ),
-  );
-}
+/**
+ * Multiply two fixed 3 × 3 matrices.
+ */
+function multiply3x3(left, right) {
+  const result = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ];
 
-function multiplyMatrices(left, right, audit, context) {
-  const algorithm = "B_LINEAR_ALGEBRA";
-  const size = left.length;
-  const result = Array.from(
-    { length: size },
-    () => Array(size).fill(0),
-  );
-
-  emit(audit, algorithm, "MATRIX_MULTIPLICATION_STARTED", {
-    ...context,
-    left,
-    right,
-  });
-
-  for (let row = 0; row < size; row += 1) {
-    for (let column = 0; column < size; column += 1) {
-      const terms = [];
-
-      for (let k = 0; k < size; k += 1) {
-        const product = left[row][k] * right[k][column];
-
-        terms.push({
-          leftValue: left[row][k],
-          rightValue: right[k][column],
-          product,
-        });
-
-        result[row][column] += product;
+  for (let row = 0; row < 3; row += 1) {
+    for (let column = 0; column < 3; column += 1) {
+      for (let index = 0; index < 3; index += 1) {
+        result[row][column] +=
+          left[row][index] * right[index][column];
       }
-
-      emit(audit, algorithm, "MATRIX_CELL_CALCULATED", {
-        ...context,
-        row,
-        column,
-        terms,
-        cellValue: result[row][column],
-      });
     }
   }
-
-  emit(audit, algorithm, "MATRIX_MULTIPLICATION_COMPLETED", {
-    ...context,
-    result,
-  });
 
   return result;
 }
 
 /**
- * B — Linear algebra using fast matrix exponentiation.
+ * Solution B — Fast matrix exponentiation.
  *
- * State:
- *   [sum_k, k, 1]^T
+ * State vector:
+ *   [sum(k), k, 1]^T
  *
- * Transition:
+ * Transition matrix:
  *   [1 1 1]
  *   [0 1 1]
  *   [0 0 1]
  *
+ * Raising this matrix to |n| gives the triangular sum in entry [0][2].
+ * Exponentiation by squaring reduces the number of matrix multiplications.
+ *
  * Time:  O(log |n|)
- * Space: O(1), fixed 3 × 3 matrices
+ * Space: O(1), because every matrix is always 3 × 3
  */
-function sum_to_n_b(n, audit) {
-  const algorithm = "B_LINEAR_ALGEBRA";
-
-  emit(audit, algorithm, "INPUT_RECEIVED", { n });
-
+function sum_to_n_b(n) {
   validateInput(n);
-  emit(audit, algorithm, "INPUT_VALIDATED", {
-    n,
-    isSafeInteger: true,
-    isWithinSafeResultRange: true,
-  });
 
-  const magnitude = Math.abs(n);
-  emit(audit, algorithm, "MAGNITUDE_CALCULATED", {
-    expression: "|n|",
-    magnitude,
-  });
-
-  const transitionMatrix = [
+  let exponent = Math.abs(n);
+  let resultMatrix = [
+    [1, 0, 0],
+    [0, 1, 0],
+    [0, 0, 1],
+  ];
+  let baseMatrix = [
     [1, 1, 1],
     [0, 1, 1],
     [0, 0, 1],
   ];
 
-  emit(audit, algorithm, "STATE_MODEL_DEFINED", {
-    stateVector: ["sum_k", "k", "1"],
-    initialVector: [0, 0, 1],
-    transitionMatrix,
-  });
-
-  let resultMatrix = identityMatrix(3);
-  let baseMatrix = transitionMatrix;
-  let exponent = magnitude;
-  let round = 0;
-
-  emit(audit, algorithm, "MATRIX_POWER_INITIALIZED", {
-    targetPower: magnitude,
-    exponent,
-    resultMatrix,
-    baseMatrix,
-  });
-
   while (exponent > 0) {
-    round += 1;
-
-    emit(audit, algorithm, "POWER_ROUND_STARTED", {
-      round,
-      exponent,
-      isOdd: exponent % 2 === 1,
-    });
-
     if (exponent % 2 === 1) {
-      emit(audit, algorithm, "ODD_EXPONENT_BRANCH", {
-        round,
-        operation: "resultMatrix = resultMatrix × baseMatrix",
-      });
-
-      resultMatrix = multiplyMatrices(
-        resultMatrix,
-        baseMatrix,
-        audit,
-        {
-          round,
-          purpose: "ACCUMULATE_RESULT",
-        },
-      );
-
-      emit(audit, algorithm, "RESULT_MATRIX_UPDATED", {
-        round,
-        resultMatrix,
-      });
-    } else {
-      emit(audit, algorithm, "EVEN_EXPONENT_BRANCH", {
-        round,
-        operation: "result multiplication skipped",
-      });
+      resultMatrix = multiply3x3(resultMatrix, baseMatrix);
     }
 
-    baseMatrix = multiplyMatrices(
-      baseMatrix,
-      baseMatrix,
-      audit,
-      {
-        round,
-        purpose: "SQUARE_BASE",
-      },
-    );
-
-    emit(audit, algorithm, "BASE_MATRIX_SQUARED", {
-      round,
-      baseMatrix,
-    });
-
-    const previousExponent = exponent;
     exponent = Math.floor(exponent / 2);
 
-    emit(audit, algorithm, "EXPONENT_HALVED", {
-      round,
-      before: previousExponent,
-      after: exponent,
-    });
+    // Skip the final unnecessary square. Besides doing less work, this keeps
+    // every intermediate matrix within the safe range implied by the input.
+    if (exponent > 0) {
+      baseMatrix = multiply3x3(baseMatrix, baseMatrix);
+    }
   }
 
-  emit(audit, algorithm, "MATRIX_POWER_COMPLETED", {
-    power: magnitude,
-    poweredMatrix: resultMatrix,
-  });
-
   const positiveSum = resultMatrix[0][2];
-
-  emit(audit, algorithm, "INITIAL_VECTOR_APPLIED", {
-    poweredMatrix: resultMatrix,
-    initialVector: [0, 0, 1],
-    resultingVector: [
-      resultMatrix[0][2],
-      resultMatrix[1][2],
-      resultMatrix[2][2],
-    ],
-    positiveSum,
-  });
-
-  const result = restoreSign(n, positiveSum, audit, algorithm);
-
-  emit(audit, algorithm, "COMPLETED", {
-    result,
-    complexity: {
-      time: "O(log |n|)",
-      space: "O(1)",
-    },
-  });
-
-  return result;
+  return withOriginalSign(n, positiveSum);
 }
 
 /**
- * C — Probability symmetry / antithetic pairing.
+ * Solution C — Symmetric pairing.
  *
- * Pair x with n + 1 - x. Every pair totals n + 1.
+ * Pair the smallest and largest values:
+ *   1 + n
+ *   2 + (n - 1)
+ *   3 + (n - 2)
+ *
+ * Every pair has the same value, n + 1. For odd n, add the unpaired middle
+ * value once. This implementation deliberately performs the pairing loop so
+ * it is computationally different from the O(1) formula in solution A.
  *
  * Time:  O(|n|)
  * Space: O(1)
  */
-function sum_to_n_c(n, audit) {
-  const algorithm = "C_PROBABILITY_SYMMETRY";
-
-  emit(audit, algorithm, "INPUT_RECEIVED", { n });
-
+function sum_to_n_c(n) {
   validateInput(n);
-  emit(audit, algorithm, "INPUT_VALIDATED", {
-    n,
-    isSafeInteger: true,
-    isWithinSafeResultRange: true,
-  });
 
   const magnitude = Math.abs(n);
-  emit(audit, algorithm, "MAGNITUDE_CALCULATED", {
-    expression: "|n|",
-    magnitude,
-  });
-
   const pairCount = Math.floor(magnitude / 2);
-  const constantPairSum = magnitude + 1;
-
-  emit(audit, algorithm, "ANTITHETIC_MODEL_DEFINED", {
-    sampleSpace: `{1, 2, ..., ${magnitude}}`,
-    mapping: "x ↔ n + 1 - x",
-    pairCount,
-    constantPairSum,
-  });
-
   let positiveSum = 0;
 
-  for (let pairIndex = 1; pairIndex <= pairCount; pairIndex += 1) {
-    const left = pairIndex;
-    const right = magnitude + 1 - pairIndex;
-    const pairSum = left + right;
-    const totalBefore = positiveSum;
-
-    positiveSum += pairSum;
-
-    emit(audit, algorithm, "PAIR_ACCUMULATED", {
-      pairIndex,
-      left,
-      right,
-      pairSum,
-      totalBefore,
-      totalAfter: positiveSum,
-    });
+  for (let pair = 1; pair <= pairCount; pair += 1) {
+    const oppositeValue = magnitude + 1 - pair;
+    positiveSum += pair + oppositeValue;
   }
 
   if (magnitude % 2 === 1) {
-    const middleValue = (magnitude + 1) / 2;
-    const totalBefore = positiveSum;
-
-    positiveSum += middleValue;
-
-    emit(audit, algorithm, "MIDDLE_VALUE_ACCUMULATED", {
-      middleValue,
-      totalBefore,
-      totalAfter: positiveSum,
-    });
-  } else {
-    emit(audit, algorithm, "MIDDLE_VALUE_NOT_REQUIRED", {
-      reason: "The number of values is even",
-    });
+    positiveSum += (magnitude + 1) / 2;
   }
 
-  const result = restoreSign(n, positiveSum, audit, algorithm);
-
-  emit(audit, algorithm, "COMPLETED", {
-    result,
-    complexity: {
-      time: "O(|n|)",
-      space: "O(1)",
-    },
-  });
-
-  return result;
+  return withOriginalSign(n, positiveSum);
 }
 
 module.exports = {

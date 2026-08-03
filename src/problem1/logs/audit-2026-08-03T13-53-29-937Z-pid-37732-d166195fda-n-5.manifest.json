@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "auditId": "bd12e062-3452-4783-8449-b9e8111d8807",
+  "input": 5,
+  "selectedAlgorithm": "all",
+  "status": "PASSED",
+  "startedAt": "2026-08-03T13:53:29.936Z",
+  "completedAt": "2026-08-03T13:53:30.040Z",
+  "results": {
+    "a": 15,
+    "b": 15,
+    "c": 15
+  },
+  "proofChecks": {
+    "a": {
+      "proofResult": 15,
+      "matches": true
+    },
+    "b": {
+      "proofResult": 15,
+      "matches": true
+    },
+    "c": {
+      "proofResult": 15,
+      "matches": true
+    }
+  },
+  "error": null,
+  "eventCount": 100,
+  "finalEventHash": "b92a5d941a1eb3650f22ec4388ebcf9ef56425c685abd6b406e7b02eaeaee1c8",
+  "rawSha256": "4d36a57597bdcfe01f923ff3471243a9f56d73c6afc398fc7b6034bbe45ef36b",
+  "files": {
+    "human": "audit-2026-08-03T13-53-29-937Z-pid-37732-d166195fda-n-5.log",
+    "raw": "audit-2026-08-03T13-53-29-937Z-pid-37732-d166195fda-n-5.jsonl",
+    "manifest": "audit-2026-08-03T13-53-29-937Z-pid-37732-d166195fda-n-5.manifest.json"
+  },
+  "humanSha256": "39bd51c20b90936e42928bd25ad47647c8d747f4c84a33e43f37aab7f9ea6f99"
+}
