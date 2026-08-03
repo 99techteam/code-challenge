@@ -1,0 +1,64 @@
+99TECH Problem 1 — Complete quality suite
+Mode: standard
+Seed: 20260803
+Node: v22.23.2
+Temporary test root: C:\Users\TRONGP~1\AppData\Local\Temp\problem1-quality-naEJkC
+
+[RUN ] Valid edge cases and exact BigInt oracle
+[PASS] Valid edge cases and exact BigInt oracle | 8.65 ms | 116 assertions
+
+[RUN ] Exhaustive signed range
+[PASS] Exhaustive signed range | 18.64 ms | 4,001 assertions
+
+[RUN ] Deterministic randomized coverage
+[PASS] Deterministic randomized coverage | 36.68 ms | 5,500 assertions
+
+[RUN ] Safe-result boundary precision
+[PASS] Safe-result boundary precision | 2.13 ms | 66 assertions
+
+[RUN ] Invalid type and non-integer rejection
+[PASS] Invalid type and non-integer rejection | 1.41 ms | 45 assertions
+
+[RUN ] Out-of-contract safe-result overflow rejection
+[PASS] Out-of-contract safe-result overflow rejection | 0.83 ms | 12 assertions
+
+[RUN ] Mathematical invariants
+[PASS] Mathematical invariants | 38.26 ms | 4,500 assertions
+
+[RUN ] Pure index functions and separate audit wrapper contract
+[PASS] Pure index functions and separate audit wrapper contract | 2.17 ms | 28 assertions
+
+[RUN ] Audit CLI happy path and proof verification
+[PASS] Audit CLI happy path and proof verification | 302.69 ms | 6 assertions
+
+[RUN ] Audit CLI invalid argument paths
+[PASS] Audit CLI invalid argument paths | 314.21 ms | 10 assertions
+
+[RUN ] File-system failure path
+[PASS] File-system failure path | 64.99 ms | 2 assertions
+
+[RUN ] Injected algorithm failure with partial error audit
+[PASS] Injected algorithm failure with partial error audit | 26.01 ms | 4 assertions
+
+[RUN ] Mutation-test sensitivity
+[PASS] Mutation-test sensitivity | 0.61 ms | 4 assertions
+
+[RUN ] Tamper and truncation detection
+[PASS] Tamper and truncation detection | 109.46 ms | 4 assertions
+
+[RUN ] Concurrent audit isolation and filename uniqueness
+[PASS] Concurrent audit isolation and filename uniqueness | 703.60 ms | 10 assertions
+
+[RUN ] Subprocess timeout detection
+[PASS] Subprocess timeout detection | 121.20 ms | 1 assertions
+
+[RUN ] Performance and long-loop execution
+[PASS] Performance and long-loop execution | 240.75 ms | 3 assertions
+
+====================================================================================================
+QUALITY SUITE STATUS: PASSED
+Suites: 17/17 passed
+Assertions: 14,312
+Duration: 2.03 s
+Text report: D:\99\code-challenge\src\problem1\logs\stress-test-2026-08-03T13-54-01-915Z.log
+JSON report: D:\99\code-challenge\src\problem1\logs\stress-test-2026-08-03T13-54-01-915Z.json

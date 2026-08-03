@@ -1,0 +1,213 @@
+{
+  "status": "PASSED",
+  "mode": "standard",
+  "seed": 20260803,
+  "node": "v22.23.2",
+  "platform": "win32 x64",
+  "assertions": 14312,
+  "passedSuites": 17,
+  "totalSuites": 17,
+  "durationMs": 2032.4248,
+  "suites": [
+    {
+      "name": "Valid edge cases and exact BigInt oracle",
+      "status": "PASSED",
+      "durationMs": 8.654000000000003,
+      "assertions": 116,
+      "metadata": {
+        "cases": 20
+      }
+    },
+    {
+      "name": "Exhaustive signed range",
+      "status": "PASSED",
+      "durationMs": 18.640600000000006,
+      "assertions": 4001,
+      "metadata": {
+        "range": "[-2000, 2000]",
+        "cases": 4001
+      }
+    },
+    {
+      "name": "Deterministic randomized coverage",
+      "status": "PASSED",
+      "durationMs": 36.682199999999995,
+      "assertions": 5500,
+      "metadata": {
+        "allImplementationCases": 500,
+        "fastImplementationCases": 5000
+      }
+    },
+    {
+      "name": "Safe-result boundary precision",
+      "status": "PASSED",
+      "durationMs": 2.126499999999993,
+      "assertions": 66,
+      "metadata": {
+        "maximumInput": 134217727,
+        "maximumResult": "9007199187632128"
+      }
+    },
+    {
+      "name": "Invalid type and non-integer rejection",
+      "status": "PASSED",
+      "durationMs": 1.4111000000000047,
+      "assertions": 45,
+      "metadata": {
+        "invalidValues": 15,
+        "implementations": 3
+      }
+    },
+    {
+      "name": "Out-of-contract safe-result overflow rejection",
+      "status": "PASSED",
+      "durationMs": 0.8281999999999812,
+      "assertions": 12,
+      "metadata": {
+        "rejectedValues": [
+          134217728,
+          -134217728,
+          9007199254740991,
+          -9007199254740991
+        ]
+      }
+    },
+    {
+      "name": "Mathematical invariants",
+      "status": "PASSED",
+      "durationMs": 38.256699999999995,
+      "assertions": 4500,
+      "metadata": {
+        "cases": 500,
+        "properties": [
+          "S(-n) = -S(n)",
+          "S(n) - S(n - 1) = n",
+          "2S(n) = n(n + 1)"
+        ]
+      }
+    },
+    {
+      "name": "Pure index functions and separate audit wrapper contract",
+      "status": "PASSED",
+      "durationMs": 2.1657000000000153,
+      "assertions": 28,
+      "metadata": {
+        "pureImplementations": 3,
+        "auditedImplementations": 3,
+        "writerFailurePropagates": true
+      }
+    },
+    {
+      "name": "Audit CLI happy path and proof verification",
+      "status": "PASSED",
+      "durationMs": 302.6874,
+      "assertions": 6,
+      "metadata": {
+        "programmaticManifest": "C:\\Users\\TRONGP~1\\AppData\\Local\\Temp\\problem1-quality-naEJkC\\audit-happy\\audit-2026-08-03T13-54-02-060Z-pid-35960-ae0c0708a1-n-5.manifest.json",
+        "cliManifest": "C:\\Users\\TRONGP~1\\AppData\\Local\\Temp\\problem1-quality-naEJkC\\audit-cli\\audit-2026-08-03T13-54-02-230Z-pid-27940-92348ed637-n-5.manifest.json"
+      }
+    },
+    {
+      "name": "Audit CLI invalid argument paths",
+      "status": "PASSED",
+      "durationMs": 314.20699999999994,
+      "assertions": 10,
+      "metadata": {
+        "cases": 5
+      }
+    },
+    {
+      "name": "File-system failure path",
+      "status": "PASSED",
+      "durationMs": 64.98889999999994,
+      "assertions": 2,
+      "metadata": {
+        "invalidLogPath": "C:\\Users\\TRONGP~1\\AppData\\Local\\Temp\\problem1-quality-naEJkC\\not-a-directory"
+      }
+    },
+    {
+      "name": "Injected algorithm failure with partial error audit",
+      "status": "PASSED",
+      "durationMs": 26.01329999999996,
+      "assertions": 4,
+      "metadata": {
+        "manifest": "C:\\Users\\TRONGP~1\\AppData\\Local\\Temp\\problem1-quality-naEJkC\\injected-error\\audit-2026-08-03T13-54-02-742Z-pid-35960-0b4d420748-n-5.manifest.json",
+        "partialResults": {
+          "a": 15
+        }
+      }
+    },
+    {
+      "name": "Mutation-test sensitivity",
+      "status": "PASSED",
+      "durationMs": 0.6137999999999693,
+      "assertions": 4,
+      "metadata": {
+        "mutants": [
+          "off-by-one",
+          "wrong-negative-sign",
+          "skip-odd-middle",
+          "matrix-result-column-bug"
+        ],
+        "allDetected": true
+      }
+    },
+    {
+      "name": "Tamper and truncation detection",
+      "status": "PASSED",
+      "durationMs": 109.45609999999999,
+      "assertions": 4,
+      "metadata": {
+        "modifiedEventDetected": true,
+        "truncationDetected": true
+      }
+    },
+    {
+      "name": "Concurrent audit isolation and filename uniqueness",
+      "status": "PASSED",
+      "durationMs": 703.6011,
+      "assertions": 10,
+      "metadata": {
+        "processes": 6,
+        "uniqueAuditIds": 6,
+        "uniqueManifests": 6
+      }
+    },
+    {
+      "name": "Subprocess timeout detection",
+      "status": "PASSED",
+      "durationMs": 121.19709999999986,
+      "assertions": 1,
+      "metadata": {
+        "timeoutMilliseconds": 100,
+        "detected": true
+      }
+    },
+    {
+      "name": "Performance and long-loop execution",
+      "status": "PASSED",
+      "durationMs": 240.7496000000001,
+      "assertions": 3,
+      "metadata": {
+        "batchCases": 50000,
+        "A": {
+          "durationMs": 7.491200000000163,
+          "checksum": 546216287
+        },
+        "B": {
+          "durationMs": 225.5766000000001,
+          "checksum": 546216287
+        },
+        "C": {
+          "input": 1000000,
+          "durationMs": 0.4740999999999076
+        }
+      }
+    }
+  ],
+  "failures": [],
+  "reports": {
+    "text": "D:\\99\\code-challenge\\src\\problem1\\logs\\stress-test-2026-08-03T13-54-01-915Z.log",
+    "json": "D:\\99\\code-challenge\\src\\problem1\\logs\\stress-test-2026-08-03T13-54-01-915Z.json"
+  }
+}
