@@ -1,0 +1,34 @@
+:root {
+  color-scheme: light dark;
+  --bg-gradient-1: #eef1ff;
+  --bg-gradient-2: #f7f2ff;
+  --card-bg: #ffffff;
+  --field-bg: #f4f5fb;
+  --field-bg-hover: #ebedf7;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6b6f8d;
+  --accent: #6c5ce7;
+  --accent-hover: #5a48d6;
+  --error: #e5484d;
+  --success: #1b8a5a;
+  --border: #e3e5f0;
+  --shadow: 0 20px 60px -20px rgba(60, 60, 120, 0.35);
+
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(160deg, var(--bg-gradient-1), var(--bg-gradient-2));
+  color: var(--text-primary);
+}
