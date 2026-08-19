@@ -1,0 +1,255 @@
+.app-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(circle at top, #4338ca 0%, #1e1b4b 60%, #0b0a1f 100%);
+}
+
+.swap-card {
+  width: 100%;
+  max-width: 420px;
+  background: #17162e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  color: #f4f4f8;
+}
+
+.swap-card h1 {
+  margin: 0 0 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.swap-label {
+  display: block;
+  font-size: 12px;
+  color: #9490b8;
+  margin-bottom: 6px;
+}
+
+.swap-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #201f3c;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.swap-amount-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f4f4f8;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.swap-amount-input::-webkit-outer-spin-button,
+.swap-amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.swap-amount-input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.swap-amount-input::placeholder {
+  color: #55517c;
+}
+
+.swap-direction {
+  display: block;
+  margin: 14px auto 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #201f3c;
+  color: #f4f4f8;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.swap-direction:hover:not(:disabled) {
+  background: #2c2a52;
+  transform: rotate(180deg);
+}
+
+.swap-direction:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.swap-error {
+  color: #ff8a8a;
+  font-size: 13px;
+  margin: 10px 0 0;
+}
+
+.swap-success {
+  color: #b7f3c9;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.swap-submit {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.swap-submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.swap-submit:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.swap-card--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: #cfcbe8;
+}
+
+/* --- token select --- */
+
+.token-select {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.token-select__trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #2c2a52;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #f4f4f8;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.token-select__trigger:hover {
+  background: #37356a;
+}
+
+.token-select__placeholder {
+  color: #cfcbe8;
+  font-weight: 500;
+}
+
+.token-select__chevron {
+  font-size: 10px;
+  color: #9490b8;
+}
+
+.token-select__panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 260px;
+  max-height: 320px;
+  background: #201f3c;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.token-select__search {
+  margin: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #17162e;
+  color: #f4f4f8;
+  outline: none;
+  font-size: 13px;
+}
+
+.token-select__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 6px 6px;
+  overflow-y: auto;
+}
+
+.token-select__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #f4f4f8;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+}
+
+.token-select__option:hover {
+  background: #2c2a52;
+}
+
+.token-select__price {
+  margin-left: auto;
+  color: #9490b8;
+  font-size: 12px;
+}
+
+.token-select__empty {
+  padding: 12px;
+  text-align: center;
+  color: #9490b8;
+  font-size: 13px;
+}
+
+.token-icon,
+.token-icon--fallback {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.token-icon--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4338ca;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
