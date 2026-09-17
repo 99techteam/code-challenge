@@ -1,0 +1,15 @@
+{
+  "name": "problem2-currency-swap",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test src/logic.test.js"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

@@ -1,27 +1,145 @@
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swap · Currency Exchange</title>
+    <meta name="description" content="Swap one currency for another at live market rates." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <noscript>
+      <div class="noscript">
+        JavaScript is required. Run this app with <code>npm run dev</code> (Vite) — don't open
+        <code>index.html</code> directly from the filesystem.
+      </div>
+    </noscript>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
+    <main class="app">
+      <section class="card" aria-label="Currency swap">
+        <header class="card-header">
+          <h1 class="title">Swap</h1>
+          <span class="badge" id="rate-badge">Live rates</span>
+        </header>
 
-  <!-- You may add more stuff here -->
-  <link href="style.css" rel="stylesheet" />
-</head>
+        <p class="status" id="rate-status" role="status" aria-live="polite">
+          <span class="status-spinner" aria-hidden="true"></span>
+          <span id="rate-status-text">Loading prices…</span>
+        </p>
 
-<body>
+        <form id="swap-form" novalidate>
+          <!-- FROM -->
+          <div class="panel">
+            <div class="panel-top">
+              <label class="panel-label" for="amount-in">You pay</label>
+              <span class="usd-hint" id="usd-in">≈ $0.00</span>
+            </div>
+            <div class="panel-row">
+              <input
+                id="amount-in"
+                class="amount-input"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="0.0"
+                aria-label="Amount to send"
+              />
+              <button type="button" class="token-btn" id="from-token-btn" aria-haspopup="dialog">
+                <span class="token-avatar">
+                  <span class="token-fallback">ET</span>
+                </span>
+                <span class="token-symbol" id="from-token-symbol">ETH</span>
+                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+            </div>
+            <p class="field-error" id="amount-in-error" role="alert"></p>
+          </div>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+          <!-- DIRECTION -->
+          <button type="button" class="direction-btn" id="swap-direction-btn" aria-label="Swap direction">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 16V4M7 4L3 8M7 4l4 4" />
+              <path d="M17 8v12M17 20l4-4M17 20l-4-4" />
+            </svg>
+          </button>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+          <!-- TO -->
+          <div class="panel">
+            <div class="panel-top">
+              <label class="panel-label" for="amount-out">You receive</label>
+              <span class="usd-hint" id="usd-out">≈ $0.00</span>
+            </div>
+            <div class="panel-row">
+              <input
+                id="amount-out"
+                class="amount-input"
+                type="text"
+                readonly
+                placeholder="0.0"
+                aria-label="Amount to receive"
+              />
+              <button type="button" class="token-btn" id="to-token-btn" aria-haspopup="dialog">
+                <span class="token-avatar">
+                  <span class="token-fallback">US</span>
+                </span>
+                <span class="token-symbol" id="to-token-symbol">USDC</span>
+                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+            </div>
+            <p class="field-error" id="amount-out-error" role="alert"></p>
+          </div>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
-</body>
+          <!-- RATE -->
+          <div class="rate-line" id="rate-line" hidden>
+            <span class="rate-text" id="rate-text"></span>
+            <span class="rate-usd" id="rate-usd"></span>
+          </div>
 
+          <button type="submit" class="confirm-btn" id="confirm-btn">
+            <span class="btn-spinner" id="btn-spinner" aria-hidden="true" hidden></span>
+            <span class="btn-label" id="btn-label">Confirm swap</span>
+          </button>
+        </form>
+
+        <footer class="card-footer">
+          <span>Rates from Switcheo · Built with <a href="https://vitejs.dev" target="_blank" rel="noopener">Vite</a></span>
+        </footer>
+      </section>
+    </main>
+
+    <!-- TOKEN PICKER -->
+    <div class="modal-backdrop" id="token-modal" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modal-title">Select a token</h2>
+          <button type="button" class="modal-close" id="modal-close" aria-label="Close">×</button>
+        </div>
+        <input
+          class="token-search"
+          id="token-search"
+          type="text"
+          placeholder="Search by symbol"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Search tokens"
+        />
+        <ul class="token-list" id="token-list" role="listbox" aria-label="Available tokens"></ul>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
