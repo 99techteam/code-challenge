@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------------------
+   Nova design system tokens — shadcn/ui `radix-nova` style on the `neutral` base,
+   lifted from the Currency Swap design. The whole ramp is achromatic (OKLCH
+   chroma 0); `--primary` is the single chromatic accent the converter tints
+   itself with, and `--destructive` is the only other hue in the system.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* The one radius seed. Everything in the ladder below derives from it. */
+  --radius: 0.625rem;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.541 0.281 293.009);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.541 0.281 293.009);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.541 0.281 293.009);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.541 0.281 293.009);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans:
+    'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+
+  /* Nova's radius ladder: one seed, multiplicative steps. 6 / 8 / 10 / 14 / 18 / 22 / 26px. */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* The system defines surfaces with a hairline ring rather than a drop shadow. */
+  --shadow-ring-card: 0 0 0 1px color-mix(in oklch, var(--foreground) 10%, transparent);
+  --shadow-surface:
+    0 0 0 1px color-mix(in oklch, var(--foreground) 10%, transparent),
+    0 24px 60px -34px oklch(0 0 0 / 0.9);
+  --shadow-menu:
+    0 10px 15px -3px oklch(0 0 0 / 0.1), 0 4px 6px -4px oklch(0 0 0 / 0.06),
+    0 0 0 1px color-mix(in oklch, var(--foreground) 10%, transparent);
+  --shadow-lift: 0 12px 26px -16px oklch(0 0 0 / 0.55);
+  --shadow-pill: 0 6px 16px -8px oklch(0 0 0 / 0.45);
+
+  /* Focus on an amount panel: a hairline inside, the 3px ring outside. */
+  --shadow-field-focus:
+    inset 0 0 0 1px var(--ring), 0 0 0 3px color-mix(in oklab, var(--ring) 40%, transparent);
+  --shadow-field-invalid:
+    inset 0 0 0 1px var(--destructive),
+    0 0 0 3px color-mix(in oklab, var(--destructive) 35%, transparent);
+
+  /* Motion: restrained and quick — 120–320ms on a single standard easing. */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-settle: cubic-bezier(0.22, 0.8, 0.3, 1);
+  --ease-spin: cubic-bezier(0.34, 1.2, 0.44, 1);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* The converter is a dark surface by design; keep native controls in step. */
+  html.dark {
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  /* Thin, inset scrollbar for the asset menu, matching the design's popover. */
+  .nova-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-neutral-600) transparent;
+  }
+
+  .nova-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .nova-scroll::-webkit-scrollbar-thumb {
+    border: 2px solid var(--popover);
+    border-radius: 999px;
+    background: oklch(0.371 0 0);
+  }
+
+  .nova-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

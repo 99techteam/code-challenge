@@ -1,0 +1,2 @@
+# Keep the lockfile out of the PR diff — it buries real work in "Files changed"
+pnpm-lock.yaml linguist-generated=true -diff
