@@ -1,0 +1,35 @@
+-WalletBalance is missing the blockchain property
+The code accesses balance.blockchain, but the interface does not declare it. Add blockchain: string or use a union type for supported blockchains.
+
+-lhsPriority is undefined
+The variable declared in the filter is balancePriority, but the code checks lhsPriority. This causes a compile error. It likely should check balancePriority.
+
+-The filter condition appears to be reversed
+balance.amount <= 0 keeps zero or negative balances and excludes positive ones. If the intent is to show only positive balances, use balance.amount > 0.
+
+-The sort comparator does not return a value when priorities are equal
+It can return undefined. The comparator should return 0 when priorities match, for example:
+
+
+-formattedBalances is created but never used
+rows is built from sortedBalances, so those entries do not have the formatted property. However, the callback types each entry as FormattedWalletBalance and reads balance.formatted. Render from formattedBalances instead.
+
+-The array index is used as the React key
+When the list is sorted or changes, index-based keys can cause React to associate a row with the wrong item. Use a stable identifier, such as currency combined with blockchain if that pair is unique.
+
+Other improvements
+
+blockchain: any disables type checking. Use string or a union type for supported blockchains.
+
+prices is included in the useMemo dependency array but is not used inside the memoized callback. This causes the list to be filtered and sorted again whenever prices change.
+
+getPriority is recreated on every render. This is not a serious issue, but it could be moved outside the component or represented with a priority map.
+
+balance.amount.toFixed() rounds to an integer by default. Pass the desired number of decimal places or use Intl.NumberFormat if fractional amounts should be displayed.
+
+prices[balance.currency] may not contain a matching price. In that case, usdValue becomes NaN. Define a type for prices and handle missing prices.
+
+children is destructured from props but not rendered. Any child content passed to WalletPage is discarded.
+
+React.FC<Props> and props: Props are redundant together. You can write const WalletPage = (props: Props) => ....
+Props extends BoxProps {} adds no properties. It can be omitted unless you plan to add component-specific props.
