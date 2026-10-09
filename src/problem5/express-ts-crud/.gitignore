@@ -1,0 +1,8 @@
+node_modules
+dist
+prisma/dev.sqlite
+prisma/dev.sqlite-journal
+prisma/dev.sqlite-wal
+prisma/dev.sqlite-shm
+# Keep environment variables out of version control
+.env
