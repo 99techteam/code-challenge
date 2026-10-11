@@ -80,12 +80,12 @@ export default function App() {
   }
 
   return (
-    <main className="min-h-full flex items-center justify-center p-5">
+    <main className="min-h-full flex items-center justify-center p-3 sm:p-5">
       <ThemeToggle />
 
       <section
-        className="w-[min(620px,94vw)] rounded-2xl border border-[color:var(--border)]
-                   backdrop-blur-lg p-6 shadow-[var(--shadow)]
+        className="w-full max-w-[620px] rounded-2xl border border-[color:var(--border)]
+                   backdrop-blur-lg p-4 sm:p-6 shadow-[var(--shadow)]
                    [background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.06))]"
       >
         {/* Header */}
@@ -154,7 +154,7 @@ export default function App() {
 
           <p className="min-h-4 mt-0.5 text-xs text-[color:var(--danger)]">{trade.err}</p>
 
-          <div className="grid grid-cols-2 gap-3 text-sm">
+          <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
             <StatCard title="Protocol fee">{fmt(trade.fee || 0)} {from}</StatCard>
             <StatCard title="Price impact">{((trade.impactBps || 0) / 100).toFixed(2)}%</StatCard>
             <StatCard title="Network fee (est.)">~${NETWORK_FEE_USD.toFixed(2)}</StatCard>
