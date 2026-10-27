@@ -1,0 +1,1 @@
+{"name":"crude-server","private":true,"type":"module","scripts":{"dev":"tsx watch src/server.ts","start":"tsx src/server.ts","build":"tsc","test":"node --import tsx --test src/app.test.ts"},"engines":{"node":">=24"},"dependencies":{"express":"^5.1.0","zod":"^4.1.0"},"devDependencies":{"@types/express":"^5.0.0","@types/node":"^24.0.0","tsx":"^4.20.0","typescript":"^5.9.0"}}

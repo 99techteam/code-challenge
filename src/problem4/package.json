@@ -1,0 +1,1 @@
+{"name":"three-ways-to-sum","private":true,"type":"module","scripts":{"test":"node --import tsx --test sum.test.ts","typecheck":"tsc --noEmit"},"devDependencies":{"@types/node":"^24.0.0","tsx":"^4.20.0","typescript":"^5.9.0"}}
