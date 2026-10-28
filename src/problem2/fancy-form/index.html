@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swap · Currency Exchange</title>
+    <meta name="description" content="Swap one currency for another at live market rates." />
+    <meta name="theme-color" content="#172d38" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Linked (not imported from JS) so it blocks first paint: no flash of unstyled content in dev. -->
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Ambient scene: gives the glass something to blur and refract. -->
+    <div class="atmosphere" aria-hidden="true">
+      <span class="atmosphere__shafts"></span>
+      <span class="atmosphere__glow atmosphere__glow--a"></span>
+      <span class="atmosphere__glow atmosphere__glow--b"></span>
+      <span class="atmosphere__ring atmosphere__ring--outer"></span>
+      <span class="atmosphere__ring atmosphere__ring--inner"></span>
+    </div>
+
+    <noscript>
+      <div class="noscript">
+        JavaScript is required. Run this app with <code>npm run dev</code> (Vite) — don't open
+        <code>index.html</code> directly from the filesystem.
+      </div>
+    </noscript>
+
+    <main class="app">
+      <section class="card glass" aria-labelledby="swap-title">
+        <header class="card-header">
+          <h1 class="title" id="swap-title">Swap</h1>
+          <span class="badge glass--control" id="rate-badge" data-state="loading">Connecting</span>
+        </header>
+
+        <form id="swap-form" novalidate>
+          <!-- FROM -->
+          <div class="panel">
+            <div class="panel-top">
+              <label class="panel-label" for="amount-in">You pay</label>
+              <span class="usd-hint" id="usd-in">≈ $0.00</span>
+            </div>
+            <div class="panel-row">
+              <input
+                id="amount-in"
+                class="amount-input"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="0"
+                aria-describedby="amount-in-error"
+              />
+              <button
+                type="button"
+                class="token-btn glass--control glass-interactive"
+                id="from-token-btn"
+                aria-haspopup="dialog"
+              >
+                <span class="token-slot" id="from-token-avatar"><span class="token-avatar"></span></span>
+                <span class="token-symbol" id="from-token-symbol">ETH</span>
+                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+            </div>
+            <p class="field-error" id="amount-in-error" aria-live="polite"></p>
+          </div>
+
+          <!-- DIRECTION -->
+          <button
+            type="button"
+            class="direction-btn glass--control glass-interactive"
+            id="swap-direction-btn"
+            aria-label="Swap direction"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 16V4M7 4L3 8M7 4l4 4" />
+              <path d="M17 8v12M17 20l4-4M17 20l-4-4" />
+            </svg>
+          </button>
+
+          <!-- TO -->
+          <div class="panel">
+            <div class="panel-top">
+              <label class="panel-label" for="amount-out">You receive</label>
+              <span class="usd-hint" id="usd-out">≈ $0.00</span>
+            </div>
+            <div class="panel-row">
+              <input id="amount-out" class="amount-input" type="text" readonly placeholder="0" />
+              <button
+                type="button"
+                class="token-btn glass--control glass-interactive"
+                id="to-token-btn"
+                aria-haspopup="dialog"
+              >
+                <span class="token-slot" id="to-token-avatar"><span class="token-avatar"></span></span>
+                <span class="token-symbol" id="to-token-symbol">USDC</span>
+                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- RATE -->
+          <div class="rate-line is-empty" id="rate-line">
+            <span class="rate-text" id="rate-text"></span>
+            <span class="rate-usd" id="rate-usd"></span>
+          </div>
+
+          <button type="submit" class="confirm-btn glass--light glass-interactive" id="confirm-btn" disabled>
+            <span class="btn-spinner" id="btn-spinner" aria-hidden="true" hidden></span>
+            <span class="btn-label" id="btn-label">Confirm swap</span>
+          </button>
+        </form>
+
+        <footer class="card-footer">
+          <span>Rates from Switcheo · Built with <a href="https://vitejs.dev" target="_blank" rel="noopener">Vite</a></span>
+        </footer>
+      </section>
+    </main>
+
+    <!-- TOKEN PICKER -->
+    <div class="modal-backdrop" id="token-modal" hidden>
+      <div class="modal glass glass--dark" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modal-title">Select a token</h2>
+          <button type="button" class="modal-close glass--control glass-interactive" id="modal-close" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+        <input
+          class="token-search glass--control"
+          id="token-search"
+          type="text"
+          placeholder="Search by symbol"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Search tokens"
+          aria-controls="token-list"
+        />
+        <ul class="token-list" id="token-list" aria-label="Available tokens"></ul>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast glass" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
