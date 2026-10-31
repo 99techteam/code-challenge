@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2f5ff" />
+    <meta name="description" content="View your Orbit demo token balances." />
+    <title>Balances — Orbit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Orbit home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>orbit<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="/">Swap</a>
+        <a class="nav-active" href="/balances/" aria-current="page">Balances</a>
+        <a href="/#learn">Learn</a>
+      </nav>
+      <button class="wallet-button" id="wallet-button" type="button"><span class="wallet-dot"></span> Demo wallet <span class="chevron">⌄</span></button>
+    </header>
+
+    <main class="balances-main">
+      <section class="balances-intro">
+        <div class="eyebrow"><span class="eyebrow-spark">✳</span> YOUR PORTFOLIO</div>
+        <h1>Your balances,<br /><span>all in one place.</span></h1>
+        <p>A clear view of the tokens in your demo wallet.</p>
+      </section>
+
+      <section class="portfolio-card" aria-labelledby="portfolio-title">
+        <div class="portfolio-topline"><span class="card-kicker">TOTAL ESTIMATED VALUE</span><span class="demo-label"><span class="demo-label-dot"></span> DEMO WALLET</span></div>
+        <h2 id="portfolio-title" class="portfolio-value">—</h2>
+        <p class="portfolio-caption" id="portfolio-caption">Based on available indicative prices</p>
+        <div class="portfolio-decoration" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </section>
+
+      <section class="holdings-section" aria-labelledby="holdings-title">
+        <div class="holdings-heading"><div><span class="card-kicker">ASSETS</span><h2 id="holdings-title">Your tokens</h2></div><label class="holding-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="holding-filter" type="search" placeholder="Filter tokens" aria-label="Filter tokens" /></label></div>
+        <div class="holdings-list" id="holdings-list" aria-live="polite"><div class="holdings-loading"><span class="loading-spinner"></span> Loading balances…</div></div>
+        <div class="empty-holdings" id="empty-holdings" hidden>No tokens match your search.</div>
+      </section>
+
+      <div class="balances-note"><span class="status-pulse"></span><span id="balance-status">Loading token prices</span><span class="trust-divider">·</span><span>Balances are saved in this browser</span></div>
+      <div class="balances-cta"><span>Ready to make a move?</span><a href="/">Swap tokens <span aria-hidden="true">↗</span></a></div>
+      <footer><span>© 2025 Orbit Exchange</span><span>Balances are simulated for this demo.</span></footer>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/features/balances/route.ts"></script>
+  </body>
+</html>

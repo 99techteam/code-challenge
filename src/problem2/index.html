@@ -1,27 +1,114 @@
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2f5ff" />
+    <meta name="description" content="A simple token swap quote interface." />
+    <title>Orbit — Token swap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Orbit home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>orbit<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-active" href="#swap">Swap</a>
+        <a href="/balances/">Balances</a>
+        <a href="#learn">Learn</a>
+      </nav>
+      <button class="wallet-button" id="wallet-button" type="button"><span class="wallet-dot"></span> Demo wallet <span class="chevron">⌄</span></button>
+    </header>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
+    <main id="swap">
+      <section class="intro">
+        <div class="eyebrow"><span class="eyebrow-spark">✳</span> YOUR TOKENS, IN MOTION</div>
+        <h1>Make your next<br /><span>move count.</span></h1>
+        <p>Swap between tokens in a few clicks.<br />Clear rates, no guesswork.</p>
+      </section>
 
-  <!-- You may add more stuff here -->
-  <link href="style.css" rel="stylesheet" />
-</head>
+      <section class="swap-card" aria-labelledby="swap-title">
+        <div class="card-heading">
+          <div>
+            <div class="card-kicker">QUICK EXCHANGE</div>
+            <h2 id="swap-title">Swap tokens</h2>
+          </div>
+          <button class="icon-button settings-button" type="button" id="settings-button" aria-label="Quote settings" title="Quote settings">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.7a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6Z"/><path d="m19.4 13.5 1.1.8-1.5 2.6-1.3-.5a7.8 7.8 0 0 1-1.5.9l-.2 1.4h-3l-.3-1.4a7.8 7.8 0 0 1-1.5-.9l-1.3.5-1.5-2.6 1.1-.8a7.4 7.4 0 0 1 0-1.8l-1.1-.8 1.5-2.6 1.3.5a7.8 7.8 0 0 1 1.5-.9l.3-1.4h3l.2 1.4a7.8 7.8 0 0 1 1.5.9l1.3-.5 1.5 2.6-1.1.8a7.4 7.4 0 0 1 0 1.8Z"/></svg>
+          </button>
+        </div>
 
-<body>
+        <form id="swap-form" novalidate>
+          <div class="amount-panel" id="pay-panel">
+            <div class="panel-topline"><label for="pay-amount">You pay</label><span>Balance <strong id="pay-balance">—</strong></span></div>
+            <div class="amount-row">
+              <input id="pay-amount" name="payAmount" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="form-error" />
+              <button class="token-select" type="button" data-side="pay" aria-label="Choose token to pay">
+                <img class="token-icon" id="pay-icon" alt="" />
+                <span class="token-symbol" id="pay-symbol">Loading</span>
+                <span class="token-chevron">⌄</span>
+              </button>
+            </div>
+            <div class="panel-foot"><span id="pay-usd">≈ $0.00</span><button type="button" class="max-button" id="max-button">MAX</button></div>
+          </div>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+          <button class="flip-button" id="flip-button" type="button" aria-label="Swap token direction" title="Swap token direction">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11m0 0-3-3m3 3-3 3M17 17H6m0 0 3 3m-3-3 3-3"/></svg>
+          </button>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+          <div class="amount-panel receive-panel" id="receive-panel">
+            <div class="panel-topline"><label for="receive-amount">You receive</label><span>Balance <strong id="receive-balance">—</strong></span></div>
+            <div class="amount-row">
+              <input id="receive-amount" type="text" placeholder="0.00" readonly aria-label="Estimated amount to receive" />
+              <button class="token-select" type="button" data-side="receive" aria-label="Choose token to receive">
+                <img class="token-icon" id="receive-icon" alt="" />
+                <span class="token-symbol" id="receive-symbol">Loading</span>
+                <span class="token-chevron">⌄</span>
+              </button>
+            </div>
+            <div class="panel-foot"><span id="receive-usd">≈ $0.00</span><span class="estimate-label">ESTIMATED</span></div>
+          </div>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
-</body>
+          <div class="quote-box" id="quote-box" aria-live="polite">
+            <div class="quote-line"><span>Exchange rate</span><strong id="exchange-rate">Fetching market rates…</strong></div>
+            <div class="quote-line"><span>Network fee</span><strong>Free <span class="fee-tag">DEMO</span></strong></div>
+            <div class="quote-line"><span>Rate source</span><strong id="rate-source">Switcheo price feed</strong></div>
+          </div>
 
+          <p class="form-error" id="form-error" role="alert"></p>
+          <button class="submit-button" id="submit-button" type="submit" disabled>
+            <span class="button-label">Enter an amount</span><span class="button-arrow" aria-hidden="true">↗</span>
+          </button>
+          <p class="disclaimer">Quotes are indicative. This demo does not execute a real transaction.</p>
+        </form>
+      </section>
+
+      <div class="trust-note"><span class="status-pulse"></span><span id="feed-status">Connecting to market data</span><span class="trust-divider">·</span><span>Prices refresh automatically</span></div>
+      <footer><span>© 2025 Orbit Exchange</span><span>Designed for a smoother swap.</span></footer>
+    </main>
+
+    <dialog class="token-dialog" id="token-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-heading"><div><span class="card-kicker">SELECT ASSET</span><h2 id="dialog-title">Choose a token</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close token selector">×</button></div>
+      <label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="token-search" type="search" placeholder="Search name or ticker" autocomplete="off" /></label>
+      <div class="token-list" id="token-list" role="listbox" aria-label="Available tokens"></div>
+      <p class="dialog-footnote">Token prices are indicative and may be delayed.</p>
+    </dialog>
+
+    <dialog class="result-dialog" id="result-dialog" aria-labelledby="result-title">
+      <div class="result-orb" aria-hidden="true"><span>✓</span></div>
+      <div class="card-kicker">DEMO TRANSACTION</div>
+      <h2 id="result-title">Swap complete</h2>
+      <p id="result-copy">Your simulated swap is ready.</p>
+      <button class="submit-button result-close" id="result-close" type="button"><span class="button-label">Back to swap</span><span class="button-arrow">↗</span></button>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/features/swap/route.ts"></script>
+  </body>
 </html>

@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:3000
+@resourceId = 1
+
+### Health check
+GET {{baseUrl}}/health
+
+### Create a resource
+POST {{baseUrl}}/api/resources
+Content-Type: application/json
+
+{
+  "name": "Notebook",
+  "description": "A simple test resource",
+  "category": "office"
+}
+
+### List all resources
+GET {{baseUrl}}/api/resources
+
+### Filter resources by name
+GET {{baseUrl}}/api/resources?name=note
+
+### Filter resources by category
+GET {{baseUrl}}/api/resources?category=office
+
+### Get a resource by ID
+GET {{baseUrl}}/api/resources/{{resourceId}}
+
+### Update a resource
+PATCH {{baseUrl}}/api/resources/{{resourceId}}
+Content-Type: application/json
+
+{
+  "description": "Updated test description",
+  "category": "supplies"
+}
+
+### Delete a resource
+DELETE {{baseUrl}}/api/resources/{{resourceId}}
