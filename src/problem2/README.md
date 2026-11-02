@@ -6,7 +6,10 @@ Vite, React 18 and TypeScript. No UI libraries.
 cd src/problem2
 npm install
 npm run dev
+npm test
 ```
+
+`npm run dev` starts the app. `npm test` runs the unit tests for price selection and number formatting.
 
 Behavior
 

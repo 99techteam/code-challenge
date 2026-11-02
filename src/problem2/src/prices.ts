@@ -5,7 +5,7 @@ export interface Token {
   price: number;
 }
 
-interface PriceRow {
+export interface PriceRow {
   currency: string;
   date: string;
   price: number;
@@ -14,11 +14,7 @@ interface PriceRow {
 const PRICES_URL = "https://interview.switcheo.com/prices.json";
 
 // Keeps the newest quote per currency and drops tokens without a usable price.
-async function fetchTokens(signal: AbortSignal): Promise<Token[]> {
-  const res = await fetch(PRICES_URL, { signal });
-  if (!res.ok) throw new Error(`Price request failed with status ${res.status}`);
-  const rows: PriceRow[] = await res.json();
-
+export function pickTokens(rows: PriceRow[]): Token[] {
   const latest = new Map<string, { price: number; time: number }>();
   for (const { currency, date, price } of rows) {
     if (!(price > 0)) continue;
@@ -30,6 +26,12 @@ async function fetchTokens(signal: AbortSignal): Promise<Token[]> {
   const tokens: Token[] = [];
   for (const [symbol, { price }] of latest) tokens.push({ symbol, price });
   return tokens.sort((a, b) => a.symbol.localeCompare(b.symbol));
+}
+
+async function fetchTokens(signal: AbortSignal): Promise<Token[]> {
+  const res = await fetch(PRICES_URL, { signal });
+  if (!res.ok) throw new Error(`Price request failed with status ${res.status}`);
+  return pickTokens(await res.json());
 }
 
 export type TokensState =
