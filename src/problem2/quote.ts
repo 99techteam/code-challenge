@@ -1,12 +1,28 @@
 export const PRICE_URL = 'https://interview.switcheo.com/prices.json';
 
-export function normalizePrices(data) {
+export interface TokenPrice {
+  currency: string;
+  price: number;
+  date: string;
+}
+
+export type PriceFetcher = (url: string, options?: RequestInit) => Promise<Response>;
+
+function isTokenPrice(value: unknown): value is TokenPrice {
+  return typeof value === 'object' && value !== null
+    && 'currency' in value && typeof value.currency === 'string'
+    && /^[a-zA-Z0-9]+$/.test(value.currency)
+    && 'price' in value && typeof value.price === 'number'
+    && Number.isFinite(value.price) && value.price > 0
+    && 'date' in value && typeof value.date === 'string'
+    && Number.isFinite(Date.parse(value.date));
+}
+
+export function normalizePrices(data: unknown): TokenPrice[] {
   if (!Array.isArray(data)) throw new Error('Invalid price response.');
-  const latest = new Map();
+  const latest = new Map<string, TokenPrice>();
   for (const row of data) {
-    if (!row || typeof row.currency !== 'string' || !/^[a-zA-Z0-9]+$/.test(row.currency)
-      || typeof row.price !== 'number' || !Number.isFinite(row.price) || row.price <= 0
-      || typeof row.date !== 'string' || !Number.isFinite(Date.parse(row.date))) continue;
+    if (!isTokenPrice(row)) continue;
     const previous = latest.get(row.currency);
     // For equal timestamps, keep the last observation in source order.
     if (!previous || Date.parse(row.date) >= Date.parse(previous.date)) {
@@ -17,13 +33,16 @@ export function normalizePrices(data) {
   return [...latest.values()].sort((a, b) => a.currency.localeCompare(b.currency));
 }
 
-export async function loadPrices(fetcher = fetch) {
-  const response = await fetcher(PRICE_URL, { signal: AbortSignal.timeout(10000) });
+export async function loadPrices(fetcher: PriceFetcher = fetch, signal?: AbortSignal): Promise<TokenPrice[]> {
+  const timeout = AbortSignal.timeout(10000);
+  const response = await fetcher(PRICE_URL, {
+    signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
+  });
   if (!response.ok) throw new Error('Could not load prices.');
   return normalizePrices(await response.json());
 }
 
-export function quote(amount, from, to) {
+export function quote(amount: string, from: TokenPrice | undefined, to: TokenPrice | undefined): number {
   if (typeof amount !== 'string' || !/^(?:\d+\.?\d*|\.\d+)$/.test(amount.trim())) {
     throw new Error('Enter a positive decimal amount.');
   }
@@ -38,6 +57,6 @@ export function quote(amount, from, to) {
   return received;
 }
 
-export function formatAmount(value) {
+export function formatAmount(value: number): string {
   return new Intl.NumberFormat('en-US', { maximumSignificantDigits: 8 }).format(value);
 }

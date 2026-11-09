@@ -2,7 +2,8 @@
 
 :root { font-family: 'DM Sans', sans-serif; color: #232d29; background: #f5f6f1; font-synthesis: none; }
 * { box-sizing: border-box; }
-body { margin: 0; min-height: 100svh; display: flex; flex-direction: column; }
+body { margin: 0; }
+#root { min-height: 100svh; display: flex; flex-direction: column; }
 button, input, select { font: inherit; }
 button, select { cursor: pointer; }
 button { transition: background .15s, transform .15s; }

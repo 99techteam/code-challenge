@@ -6,48 +6,9 @@
     <meta name="description" content="A simple token swap preview built for the 99Tech frontend challenge." />
     <title>Current — Token swap</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="./" aria-label="Current home"><span class="brand-mark" aria-hidden="true">≈</span> current<span class="brand-dot">.</span></a>
-      <span class="demo-badge"><span aria-hidden="true">●</span> Demo environment</span>
-    </header>
-    <main>
-      <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow">LESS FRICTION. MORE FLOW.</p>
-        <h1 id="page-title">A simpler way<br /> to <em>swap.</em></h1>
-        <p class="intro-copy">Your assets, a new direction. Preview a token exchange in just a few clicks.</p>
-        <div class="intro-note"><span aria-hidden="true">↗</span><p>No wallet connection.<br /><strong>Just a little room to explore.</strong></p></div>
-      </section>
-      <section class="swap-card" aria-labelledby="swap-title">
-        <div class="card-heading"><div><p class="eyebrow">MAKE YOUR MOVE</p><h2 id="swap-title">Swap tokens</h2></div><span class="card-symbol" aria-hidden="true">↗</span></div>
-        <p id="price-status" class="price-status" role="status">Loading reference prices…</p>
-        <button id="retry" class="text-button" type="button" hidden>Retry loading prices</button>
-        <form id="swap-form" novalidate>
-          <fieldset id="swap-fields" disabled>
-            <legend class="sr-only">Swap details</legend>
-            <div class="amount-panel">
-              <label for="input-amount">You send</label>
-              <div class="amount-row"><input id="input-amount" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="amount-error" /><div class="token-picker"><img id="from-icon" alt="" width="24" height="24" hidden /><label class="sr-only" for="from-token">Send token</label><select id="from-token"></select></div></div>
-              <p class="panel-hint">Amount in your selected token</p>
-            </div>
-            <div class="direction"><button id="reverse" type="button" aria-label="Reverse token direction">↓↑</button></div>
-            <div class="amount-panel receive-panel">
-              <label for="output-amount">You receive <span class="estimate">ESTIMATED</span></label>
-              <div class="amount-row"><input id="output-amount" value="0.00" readonly /><div class="token-picker"><img id="to-icon" alt="" width="24" height="24" hidden /><label class="sr-only" for="to-token">Receive token</label><select id="to-token"></select></div></div>
-              <p class="panel-hint">Calculated using the reference exchange rate</p>
-            </div>
-            <p id="amount-error" class="error" role="alert"></p>
-            <div class="rate-line"><span>Exchange rate</span><strong id="exchange-rate">—</strong></div>
-            <button id="confirm" class="primary-button" type="submit" disabled>Enter an amount <span aria-hidden="true">↗</span></button>
-          </fieldset>
-        </form>
-        <p id="swap-status" class="swap-status" role="status" aria-live="polite"></p>
-        <p class="disclaimer"><span aria-hidden="true">ⓘ</span> A preview, not a real trade. No funds will move.</p>
-      </section>
-    </main>
-    <footer><span>BUILT TO KEEP THINGS MOVING.</span><span>99Tech frontend challenge · 01—03</span></footer>
-    <script type="module" src="script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="main.tsx"></script>
   </body>
 </html>

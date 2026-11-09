@@ -11,10 +11,14 @@ We're cool as long as we can view your solution without any pain.
 
 ## Frontend submission
 
+**Candidate:** [khanhlecavies](https://github.com/khanhlecavies)
+
+**Track:** Frontend — Problems 1, 2 and 3
+
 | Problem | Solution |
 | --- | --- |
 | 1 · Three ways to sum to n | [Implementations, complexity and assumptions](src/problem1/README.md) |
-| 2 · Fancy Form | [Token swap UI and running instructions](src/problem2/README.md) |
+| 2 · Fancy Form | [React + TypeScript token swap UI and running instructions](src/problem2/README.md) |
 | 3 · Messy React | [Issue-by-issue review and typed refactor](src/problem3/README.md) |
 
 ### Run locally

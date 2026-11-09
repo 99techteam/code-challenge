@@ -10,9 +10,10 @@ bun run build
 bun audit
 ```
 
-The test suite contains 21 tests covering all three summation implementations,
+The test suite contains 23 tests covering all three summation implementations,
 invalid inputs, exact arithmetic at the safe boundary, price validation and
-deduplication, conversion, sorting and filtering, missing prices, and React output.
+deduplication, request cancellation, conversion, sorting and filtering, missing
+prices, and React output (including the swap form's initial loading state).
 The GitHub credential used for submission does not have the `workflow` scope,
 so this submission does not add an Actions workflow. Run the commands above locally.
 
@@ -20,6 +21,7 @@ so this submission does not add an Actions workflow. Run the commands above loca
 
 Checked in Chromium against `bun run dev` at 1440 × 1000 and 375 × 812.
 These are browser smoke checks, not part of the Bun unit test suite.
+The same checks were repeated after moving problem 2 to React and TypeScript.
 
 - [x] Historical price feed loads and shows the dataset date, not a live-price claim.
 - [x] Entering 2.5 ETH gives approximately 4,115.3353 USDC with the supplied dataset.
@@ -32,6 +34,10 @@ These are browser smoke checks, not part of the Bun unit test suite.
 - [x] A simulated HTTP 503 shows the retry action and leaves trading controls disabled.
 - [x] Retrying after restoring the feed repopulates selectors and enables the form.
 - [x] The 375px layout has no horizontal overflow.
+- [x] Missing icons hide without blocking the form and recover when a different token is selected.
+- [x] A feed without ETH still initializes two distinct tokens and produces a valid quote.
+- [x] The restored live-feed page has no JavaScript exceptions or console errors.
+- [x] The production build served with `bun run preview` produces the same quote and successful simulated submission.
 
 The screenshots show the valid 1 ETH → USDC quote. Browser failure testing uses
 request interception rather than changing application code or shipping mock prices.

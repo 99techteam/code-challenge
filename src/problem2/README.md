@@ -1,5 +1,8 @@
 # Fancy Form
 
+Built with React, TypeScript and Vite, using Bun for development, tests and builds.
+The form remains a simulated token swap; there is no wallet SDK or on-chain execution.
+
 Run `bun install --frozen-lockfile --ignore-scripts`, then `bun run dev` from the
 repository root. Open the URL printed by Vite. `bun run build` creates `dist/`;
 `bun run preview` serves that build.
@@ -9,6 +12,18 @@ direction reversal, native keyboard-accessible selectors, input validation, load
 retry on feed failure, and a pending/success state for a simulated swap. Choosing
 the opposite token exchanges the pair rather than leaving two identical tokens.
 Controls are locked during submission to keep the preview consistent.
+
+## Structure
+
+- `main.tsx` mounts the app in React Strict Mode.
+- `App.tsx` contains the page layout; `SwapForm.tsx` owns controlled form state.
+- `TokenPicker.tsx` provides the shared selector and per-token icon fallback.
+- `usePrices.ts` owns loading/retry state and cancels requests on cleanup.
+- `quote.ts` validates unknown API data and computes quotes without React dependencies.
+
+Both pending price requests and the simulated submission timer are cleaned up on
+unmount. Changing a pair or amount clears the previous preview; quote amounts are
+derived from the current input and prices rather than duplicated in component state.
 
 ## Assumptions and limits
 
@@ -30,4 +45,6 @@ Missing icons hide without blocking the form; fonts have system fallbacks. Remot
 feed content is validated and rendered as text/options, not injected HTML or code.
 The price request has a 10-second timeout. No analytics, credentials or local storage.
 
-Run `bun test src/problem2` for feed validation, deduplication and conversion tests.
+Run `bun test src/problem2` for feed validation, deduplication, cancellation,
+conversion and initial React rendering tests. `bun run typecheck` covers the form,
+API boundary, components and tests under strict TypeScript checking.

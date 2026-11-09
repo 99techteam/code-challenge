@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
-import { formatAmount, loadPrices, normalizePrices, quote } from './quote.js';
+import { formatAmount, loadPrices, normalizePrices, quote, type TokenPrice } from './quote';
 
-const token = (currency, price, date = '2023-08-29T07:10:40Z') => ({ currency, price, date });
+const token = (currency: string, price: number, date = '2023-08-29T07:10:40Z'): TokenPrice => ({ currency, price, date });
 const eth = token('ETH', 1600);
 const usd = token('USD', 1);
 
@@ -23,6 +23,15 @@ describe('price feed', () => {
     await expect(loadPrices(async () => new Response('', { status: 503 }))).rejects.toThrow();
     await expect(loadPrices(async () => new Response('not json'))).rejects.toThrow();
     await expect(loadPrices(async () => { throw new Error('offline'); })).rejects.toThrow('offline');
+  });
+  test('passes lifecycle cancellation to the price request', async () => {
+    const controller = new AbortController();
+    controller.abort();
+    await expect(loadPrices(async (url, options) => {
+      expect(url).toBe('https://interview.switcheo.com/prices.json');
+      expect(options?.signal?.aborted).toBe(true);
+      throw new DOMException('Aborted', 'AbortError');
+    }, controller.signal)).rejects.toThrow('Aborted');
   });
 });
 
